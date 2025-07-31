@@ -1,106 +1,763 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Módulo 1: Cómo se desarrolla el lenguaje</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      padding: 2rem;
-      background: #f9f9f9;
-      color: #333;
-    }
-    h1, h2 {
-      color: #005bbb;
-    }
-    .contenido {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      max-width: 900px;
-      margin: auto;
-    }
-    ul, ol {
-      padding-left: 1.5rem;
-    }
-    li {
-      margin-bottom: 0.5rem;
-    }
-    .alerta {
-      background: #ffe4e1;
-      padding: 1rem;
-      border-left: 4px solid #ff4c4c;
-      margin: 1rem 0;
-    }
-    .descargas {
-      margin-top: 2rem;
-    }
-    .descargas a {
-      display: inline-block;
-      margin-right: 1rem;
-      margin-bottom: 1rem;
-      text-decoration: none;
-      background: #005bbb;
-      color: white;
-      padding: 0.6rem 1rem;
-      border-radius: 8px;
-    }
-    .descargas a:hover {
-      background: #004999;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 1: Fundamentos del Desarrollo del Lenguaje</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 100px 2rem 2rem;
+        }
+
+        /* Progress Bar */
+        .progress-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            transition: width 0.5s ease;
+        }
+
+        /* Module Header */
+        .module-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .module-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .module-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-icon {
+            font-size: 2rem;
+        }
+
+        /* Interactive Elements */
+        .interactive-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .interactive-box h3 {
+            margin-bottom: 1rem;
+        }
+
+        /* Age Calculator */
+        .age-calculator {
+            background: #e3f2fd;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .calculator-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .input-group select,
+        .input-group input {
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 1rem 0;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Results */
+        .result-box {
+            background: #d4edda;
+            border: 2px solid #c3e6cb;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Checklist */
+        .checklist {
+            display: grid;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checklist-item:hover {
+            background: #e9ecef;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-right: 1rem;
+            transform: scale(1.2);
+        }
+
+        .checklist-item.checked {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+
+        /* Warning Alerts */
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        /* Navigation */
+        .module-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .nav-btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .module-header h1 {
+                font-size: 2rem;
+            }
+            
+            .calculator-inputs {
+                grid-template-columns: 1fr;
+            }
+            
+            .module-navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            background: white;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+            margin-bottom: 0;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 1rem;
+            background: #f8f9fa;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-  <div class="contenido">
-    <h1>Módulo 1: Cómo se desarrolla el lenguaje</h1>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">🧠 Módulo 1: Fundamentos</div>
+            <div class="nav-links">
+                <a href="index.html">← Inicio</a>
+                <a href="#" onclick="showProgress()">Mi Progreso</a>
+                <a href="#" onclick="logout()">Salir</a>
+            </div>
+        </div>
+    </header>
 
-    <h2>¿Qué es el lenguaje?</h2>
-    <p>El lenguaje es la capacidad que tenemos los seres humanos para comunicarnos mediante palabras, gestos o signos. No es solo hablar: incluye entender, expresarse, gesticular, escuchar y relacionarse.</p>
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Progress Section -->
+        <div class="progress-section">
+            <h3>Tu Progreso en el Módulo 1</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+            <p><span id="progressText">0% completado</span> • <span id="completedSections">0 de 6 secciones</span></p>
+        </div>
 
-    <h2>Etapas del desarrollo del lenguaje (0 a 5 años)</h2>
-    <ul>
-      <li><strong>0 a 6 meses:</strong> Balbucea, responde a sonidos, reconoce la voz de mamá y papá.</li>
-      <li><strong>6 a 12 meses:</strong> Imita sonidos y gestos, usa "mamama", entiende su nombre.</li>
-      <li><strong>1 a 2 años:</strong> Dice entre 10 y 50 palabras, señala objetos, comprende órdenes simples.</li>
-      <li><strong>2 a 3 años:</strong> Usa frases de 2-3 palabras, aumenta vocabulario, hace preguntas.</li>
-      <li><strong>3 a 5 años:</strong> Mantiene conversaciones, usa pronombres, inventa historias.</li>
-    </ul>
+        <!-- Module Header -->
+        <div class="module-header">
+            <h1>🧠 Fundamentos del Desarrollo del Lenguaje</h1>
+            <p>Comprende cómo funciona el cerebro de tu hijo y las bases científicas de la comunicación infantil</p>
+        </div>
 
-    <div class="alerta">
-      <h3>🚩 Señales de alerta</h3>
-      <ul>
-        <li>No balbucea al año.</li>
-        <li>No dice palabras sueltas a los 18 meses.</li>
-        <li>No forma frases a los 2-3 años.</li>
-        <li>Parece no entender instrucciones.</li>
-        <li>No interactúa o se aísla.</li>
-      </ul>
+        <!-- Section 1: El Momento Crítico -->
+        <div class="content-section" data-section="1">
+            <h2 class="section-title">
+                <span class="section-icon">⏰</span>
+                El Momento Crítico: ¿Por qué 3-5 años es CRUCIAL?
+            </h2>
+            
+            <p>Los primeros años de vida son fundamentales para el desarrollo del lenguaje. Durante este período, el cerebro de tu hijo está creando millones de conexiones neurales que determinarán su capacidad comunicativa futura.</p>
+
+            <div class="interactive-box">
+                <h3>💡 Dato Científico Clave</h3>
+                <p>Entre los 3 y 5 años, el cerebro infantil procesa el lenguaje a una velocidad 3 veces mayor que el cerebro adulto. Es literalmente una "súper autopista" de aprendizaje que no volverá a repetirse.</p>
+            </div>
+
+            <h3>Las Ventanas Neurológicas Críticas</h3>
+            <p>Existen períodos específicos donde el cerebro está especialmente receptivo para diferentes aspectos del lenguaje:</p>
+            
+            <ul style="margin: 1rem 0; padding-left: 2rem;">
+                <li><strong>0-3 años:</strong> Desarrollo de la comprensión básica</li>
+                <li><strong>3-5 años:</strong> Explosión del vocabulario y estructuras gramaticales</li>
+                <li><strong>5-7 años:</strong> Refinamiento y habilidades pre-lectoras</li>
+            </ul>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ Importante:</strong> Aunque el aprendizaje continúa toda la vida, las conexiones neurales formadas en estos períodos críticos son las más fuertes y duraderas.
+            </div>
+
+            <button class="btn" onclick="completeSection(1)">✓ Completar Sección</button>
+        </div>
+
+        <!-- Section 2: Evaluador de Desarrollo -->
+        <div class="content-section" data-section="2">
+            <h2 class="section-title">
+                <span class="section-icon">📊</span>
+                Evaluador de Desarrollo: ¿Cómo está tu hijo?
+            </h2>
+
+            <div class="age-calculator">
+                <h3>🎯 Calculadora Inteligente de Desarrollo</h3>
+                <p>Ingresa los datos de tu hijo para obtener una evaluación personalizada:</p>
+                
+                <div class="calculator-inputs">
+                    <div class="input-group">
+                        <label>Edad actual:</label>
+                        <select id="childAge">
+                            <option value="">Selecciona edad</option>
+                            <option value="36">3 años (36 meses)</option>
+                            <option value="42">3.5 años (42 meses)</option>
+                            <option value="48">4 años (48 meses)</option>
+                            <option value="54">4.5 años (54 meses)</option>
+                            <option value="60">5 años (60 meses)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Género:</label>
+                        <select id="childGender">
+                            <option value="">Selecciona</option>
+                            <option value="male">Niño</option>
+                            <option value="female">Niña</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="btn" onclick="generateEvaluation()">🔍 Generar Evaluación Personalizada</button>
+
+                <div id="evaluationResult" class="result-box">
+                    <!-- Results will appear here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Checklist Interactivo -->
+        <div class="content-section" data-section="3">
+            <h2 class="section-title">
+                <span class="section-icon">✅</span>
+                Checklist: Habilidades de tu Hijo
+            </h2>
+
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('tab-3years')">3 años</button>
+                <button class="tab" onclick="showTab('tab-4years')">4 años</button>
+                <button class="tab" onclick="showTab('tab-5years')">5 años</button>
+            </div>
+
+            <div id="tab-3years" class="tab-content active">
+                <h3>Habilidades esperadas a los 3 años:</h3>
+                <div class="checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" onchange="updateProgress()">
+                        <span>Dice frases de 3-4 palabras ("Quiero más agua")</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" onchange="updateProgress()">
+                        <span>Hace preguntas simples ("¿Qué es eso?")</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" onchange="updateProgress()">
+                        <span>Cuenta hasta 3</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" onchange="updateProgress()">
+                        <span>Nombra colores básicos</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" onchange="updateProgress()">
+                        <span>Se entiende el 75% de lo que dice</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-4years" class="tab-content">
+                <h3>Habilidades esperadas a los 4 años:</h3>
+                <div class="checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" onchange="updateProgress()">
+                        <span>Forma oraciones de 5-6 palabras</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" onchange="updateProgress()">
+                        <span>Cuenta historias simples</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" onchange="updateProgress()">
+                        <span>Usa pasado y futuro correctamente</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" onchange="updateProgress()">
+                        <span>Hace preguntas complejas ("¿Por qué...?")</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" onchange="updateProgress()">
+                        <span>Se entiende completamente</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-5years" class="tab-content">
+                <h3>Habilidades esperadas a los 5 años:</h3>
+                <div class="checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" onchange="updateProgress()">
+                        <span>Usa oraciones complejas con conectores</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" onchange="updateProgress()">
+                        <span>Narra experiencias con detalles</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" onchange="updateProgress()">
+                        <span>Entiende conceptos abstractos</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" onchange="updateProgress()">
+                        <span>Reconoce letras y algunos sonidos</span>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" onchange="updateProgress()">
+                        <span>Sigue instrucciones de 3 pasos</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn" onclick="completeSection(3)">✓ Completar Evaluación</button>
+        </div>
+
+        <!-- Section 4: Las 4 Dimensiones -->
+        <div class="content-section" data-section="4">
+            <h2 class="section-title">
+                <span class="section-icon">🎯</span>
+                Las 4 Dimensiones del Lenguaje
+            </h2>
+
+            <p>Para estimular efectivamente a tu hijo, debes entender que el lenguaje tiene 4 componentes interconectados:</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 2rem 0;">
+                <div style="background: #e3f2fd; padding: 1.5rem; border-radius: 10px;">
+                    <h4>👂 1. COMPRENSIÓN</h4>
+                    <p>Lo que tu hijo entiende cuando le hablas</p>
+                    <small>Ejemplo: Entiende "Trae tus zapatos rojos"</small>
+                </div>
+                
+                <div style="background: #f3e5f5; padding: 1.5rem; border-radius: 10px;">
+                    <h4>🗣️ 2. EXPRESIÓN</h4>
+                    <p>Lo que tu hijo puede decir</p>
+                    <small>Ejemplo: "Mamá, quiero agua por favor"</small>
+                </div>
+                
+                <div style="background: #e8f5e8; padding: 1.5rem; border-radius: 10px;">
+                    <h4>🤝 3. PRAGMÁTICA</h4>
+                    <p>Cómo usa el lenguaje socialmente</p>
+                    <small>Ejemplo: Dice "por favor" y "gracias"</small>
+                </div>
+                
+                <div style="background: #fff3e0; padding: 1.5rem; border-radius: 10px;">
+                    <h4>🔤 4. FONOLOGÍA</h4>
+                    <p>Cómo pronuncia los sonidos</p>
+                    <small>Ejemplo: Pronuncia claramente la "r"</small>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>💡 Clave del Éxito:</strong> Un desarrollo equilibrado requiere trabajar las 4 dimensiones simultáneamente, no solo una.
+            </div>
+
+            <button class="btn" onclick="completeSection(4)">✓ Entendido</button>
+        </div>
+
+        <!-- Section 5: Señales de Alerta -->
+        <div class="content-section" data-section="5">
+            <h2 class="section-title">
+                <span class="section-icon">🚨</span>
+                Señales de Alerta: Cuándo Actuar
+            </h2>
+
+            <div class="alert alert-danger">
+                <strong>⚠️ Busca ayuda profesional SI tu hijo:</strong>
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li>A los 3 años no forma frases de 2-3 palabras</li>
+                    <li>A los 4 años no se le entiende a extraños</li>
+                    <li>A los 5 años no puede contar una historia simple</li>
+                    <li>Retrocede en habilidades ya adquiridas</li>
+                    <li>Muestra frustración extrema al comunicarse</li>
+                </ul>
+            </div>
+
+            <h3>🟡 Señales de Precaución (Observar y Estimular)</h3>
+            <ul style="margin: 1rem 0; padding-left: 2rem;">
+                <li>Vocabulario limitado para su edad</li>
+                <li>Dificultad para seguir instrucciones</li>
+                <li>Pronunciación poco clara</li>
+                <li>Timidez extrema para hablar</li>
+            </ul>
+
+            <div class="interactive-box">
+                <h3>🎯 Plan de Acción Inmediato</h3>
+                <p>Si identificaste señales de alerta, no esperes. Los próximos módulos te darán técnicas específicas para abordar cada problema, pero considera también:</p>
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li>Consulta con tu pediatra</li>
+                    <li>Solicita evaluación con fonoaudiólogo</li>
+                    <li>Implementa las estrategias de este curso inmediatamente</li>
+                </ul>
+            </div>
+
+            <button class="btn" onclick="completeSection(5)">✓ Revisado</button>
+        </div>
+
+        <!-- Section 6: Tu Plan Personalizado -->
+        <div class="content-section" data-section="6">
+            <h2 class="section-title">
+                <span class="section-icon">📋</span>
+                Tu Plan Personalizado de Acción
+            </h2>
+
+            <p>Basándome en lo que has aprendido, crea tu plan de estimulación personalizado:</p>
+
+            <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; margin: 1rem 0;">
+                <h4>📝 Resumen de mi hijo:</h4>
+                <textarea id="childSummary" placeholder="Escribe aquí las características actuales de tu hijo (edad, fortalezas, áreas a mejorar)..." style="width: 100%; height: 100px; padding: 1rem; border: 1px solid #ddd; border-radius: 5px; margin: 1rem 0;"></textarea>
+                
+                <h4>🎯 Mis objetivos para los próximos 30 días:</h4>
+                <textarea id="goals" placeholder="Ej: Que forme frases de 4 palabras, que pronuncie mejor la 'r', que sea menos tímido..." style="width: 100%; height: 100px; padding: 1rem; border: 1px solid #ddd; border-radius: 5px; margin: 1rem 0;"></textarea>
+                
+                <button class="btn" onclick="savePlan()">💾 Guardar Mi Plan</button>
+            </div>
+
+            <button class="btn" onclick="completeSection(6)">✓ Completar Módulo 1</button>
+        </div>
+
+        <!-- Module Navigation -->
+        <div class="module-navigation">
+            <a href="index.html" class="btn nav-btn-secondary">← Regresar al Inicio</a>
+            <div>
+                <button class="btn" onclick="generateCertificate()" id="certificateBtn" style="display: none;">🏆 Obtener Certificado</button>
+                <a href="modulo2.html" class="btn" id="nextModuleBtn" style="display: none;">Módulo 2: Técnicas →</a>
+            </div>
+        </div>
     </div>
 
-    <h2>Factores que influyen en el lenguaje</h2>
-    <ul>
-      <li>Estimulación del entorno.</li>
-      <li>Audición adecuada.</li>
-      <li>Vínculo afectivo seguro.</li>
-      <li>Interacción con otros niños.</li>
-      <li>Imitación de modelos cercanos.</li>
-    </ul>
+    <script>
+        let completedSections = new Set();
+        let totalSections = 6;
 
-    <h2>¿Qué pueden hacer los padres en casa?</h2>
-    <ul>
-      <li>Hablarle desde que nace, narrando lo que haces.</li>
-      <li>Responder a sus gestos, ruidos y palabras.</li>
-      <li>Leerle cuentos todos los días.</li>
-      <li>Cantar canciones con gestos.</li>
-      <li>Jugar con palabras simples y sonidos.</li>
-      <li>No corregirlo bruscamente ni presionarlo.</li>
-    </ul>
+        // Tab functionality
+        function showTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
 
-    <div class="descargas">
-      <a href="modulo1-desarrollo-lenguaje.pdf" target="_blank">📄 Descargar PDF del módulo</a>
-      <a href="infografia.png" target="_blank">🖼️ Ver infografía</a>
-    </div>
-  </div>
-</body>
-</html>
+        // Complete section
+        function completeSection(sectionNumber) {
+            completedSections.add(sectionNumber);
+            updateProgressBar();
+            
+            // Mark section as completed visually
+            const section = document.querySelector(`[data-section="${sectionNumber}"]`);
+            section.style.opacity = '0.8';
+            section.style.border = '2px solid #28a745';
+            
+            // Show completion message
+            alert(`✅ ¡Sección ${sectionNumber} completada! Excelente progreso.`);
+            
+            // Check if all sections completed
+            if (completedSections.size === totalSections) {
+                document.getElementById('certificateBtn').style.display = 'inline-block';
+                document.getElementById('nextModuleBtn').style.display = 'inline-block';
+                alert('🎉 ¡Felicitaciones! Has completado el Módulo 1. Ahora puedes obtener tu certificado y continuar al Módulo 2.');
+            }
+        }
+
+        // Update progress bar
+        function updateProgressBar() {
+            const progress = (completedSections.size / totalSections) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = Math.round(progress) + '% completado';
+            document.getElementById('completedSections').textContent = `${completedSections.size} de ${totalSections} secciones`;
+        }
+
+        // Generate evaluation
+        function generateEvaluation() {
+            const age = document.getElementById('childAge').value;
+            const gender = document.getElementById('childGender').value;
+            const resultBox = document.getElementById('evaluationResult');
+            
+            if (!age || !gender) {
+                alert('Por favor completa todos los campos');
+                return;
+            }
+            
+            let evaluation = '';
+            const genderText = gender === 'male' ? 'tu hijo' : 'tu hija';
+            const ageText = age + ' meses';
+            
+            // Generate personalized evaluation based on age
+            if (age <= 42) {
+                evaluation = `
+                    <h4>📊 Evaluación para ${genderText} de ${ageText}:</h4>
+                    <div class="alert alert-success">
+                        <strong>Enfoque Principal:</strong> Preparación escolar y habilidades complejas
+                    </div>
+                    <p><strong>Expectativas normales:</strong></p>
+                    <ul>
+                        <li>Oraciones complejas con conectores</li>
+                        <li>Narrativa detallada</li>
+                        <li>Comprensión de conceptos abstractos</li>
+                        <li>Reconocimiento de letras</li>
+                    </ul>
+                    <p><strong>Actividades recomendadas:</strong> Debates simples, escritura de letras, juegos de lógica verbal.</p>
+                `;
+                    <div class="alert alert-success">
+                        <strong>Enfoque Principal:</strong> Estimulación del vocabulario y primeras frases
+                    </div>
+                    <p><strong>Expectativas normales:</strong></p>
+                    <ul>
+                        <li>Vocabulario de 200-1000 palabras</li>
+                        <li>Frases de 2-3 palabras</li>
+                        <li>Comprende instrucciones simples</li>
+                    </ul>
+                    <p><strong>Actividades recomendadas:</strong> Lectura diaria, canciones, nombrar objetos constantemente.</p>
+                `;
+            } else if (age <= 54) {
+                evaluation = `
+                    <h4>📊 Evaluación para ${genderText} de ${ageText}:</h4>
+                    <div class="alert alert-success">
+                        <strong>Enfoque Principal:</strong> Desarrollo gramatical y narrativa
+                    </div>
+                    <p><strong>Expectativas normales:</strong></p>
+                    <ul>
+                        <li>Frases de 4-6 palabras</li>
+                        <li>Hace preguntas constantemente</li>
+                        <li>Cuenta experiencias simples</li>
+                    </ul>
+                    <p><strong>Actividades recomendadas:</strong> Conversaciones extendidas, juegos de roles, cuentos interactivos.</p>
+                `;
+            } else {
+                evaluation = `
+                    <h4>📊 Evaluación para ${genderText} de ${ageText}:</h4>
