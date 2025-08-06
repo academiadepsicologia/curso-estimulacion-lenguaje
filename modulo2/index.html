@@ -1,74 +1,1394 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Módulo 2 - Curso de Estimulación del Lenguaje</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      padding: 2rem;
-      background: #f2f2f2;
-      color: #333;
-    }
-    h1 {
-      color: #005bbb;
-    }
-    .contenido {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    ul {
-      line-height: 1.8;
-    }
-    a.boton {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      background-color: #005bbb;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-    }
-    a.boton:hover {
-      background-color: #003f88;
-    }
-    iframe {
-      width: 100%;
-      max-width: 560px;
-      height: 315px;
-      margin-top: 2rem;
-    }
-    .volver {
-      display: inline-block;
-      margin-top: 2rem;
-      color: #005bbb;
-      text-decoration: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 2: Técnicas Prácticas de Estimulación del Lenguaje</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .main-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 100px 2rem 2rem;
+        }
+
+        .progress-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            height: 100%;
+            transition: width 0.5s ease;
+        }
+
+        .module-header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .module-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .technique-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .technique-example {
+            background: #e3f2fd;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #2196f3;
+        }
+
+        .practice-box {
+            background: #fff3e0;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border: 2px solid #ff9800;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 1rem 0.5rem 1rem 0;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .btn-download {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        }
+
+        .demo-video {
+            background: #000;
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .play-button {
+            font-size: 4rem;
+            margin: 1rem 0;
+            transition: transform 0.3s ease;
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+        }
+
+        .technique-steps {
+            counter-reset: step-counter;
+        }
+
+        .step-item {
+            counter-increment: step-counter;
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            position: relative;
+            padding-left: 4rem;
+        }
+
+        .step-item::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+
+        .situation-tabs {
+            display: flex;
+            background: white;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+            margin-bottom: 0;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 1rem;
+            background: #f8f9fa;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .resource-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover {
+            border-color: #f093fb;
+            transform: translateY(-2px);
+        }
+
+        .resource-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .module-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .timer-box {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .practice-tracker {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .practice-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .practice-item:last-child {
+            border-bottom: none;
+        }
+
+        .practice-checkbox {
+            margin-right: 1rem;
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 768px) {
+            .module-header h1 {
+                font-size: 2rem;
+            }
+            
+            .situation-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .tab {
+                min-width: auto;
+                flex-basis: calc(50% - 1px);
+            }
+            
+            .module-navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="contenido">
-    <h1>Módulo 2: Actividades prácticas en casa</h1>
-    <p>En este módulo encontrarás ejercicios y recursos descargables para estimular el lenguaje de tu hijo desde casa.</p>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">🎯 Módulo 2: Técnicas</div>
+            <div class="nav-links">
+                <a href="../index.html">← Inicio</a>
+                <a href="../modulo1/index.html">Módulo 1</a>
+                <a href="#" onclick="showProgress()">Mi Progreso</a>
+                <a href="#" onclick="logout()">Salir</a>
+            </div>
+        </div>
+    </header>
 
-    <ul>
-      <li>PDF con ejercicios semanales</li>
-      <li>Videos con demostraciones prácticas</li>
-      <li>Juegos de pronunciación y vocabulario</li>
-    </ul>
+    <div class="main-content">
+        <div class="progress-section">
+            <h3>Tu Progreso en el Módulo 2</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+            <p><span id="progressText">0% completado</span> • <span id="completedSections">0 de 8 secciones</span></p>
+        </div>
 
-    <h2>📄 Recursos para descargar</h2>
-    <a class="boton" href="ejercicios.pdf" download>Descargar PDF de ejercicios</a>
-    <br>
-    <a class="boton" href="juego-lenguaje.pdf" download>Descargar juego de vocabulario</a>
+        <div class="module-header">
+            <h1>🎯 Técnicas Prácticas de Estimulación</h1>
+            <p>Aprende métodos profesionales que puedes aplicar inmediatamente en tu rutina diaria</p>
+        </div>
 
-    <h2>🎥 Video de ejemplo</h2>
-    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+        <!-- Sección 1: Las 5 Técnicas Fundamentales -->
+        <div class="content-section" data-section="1">
+            <h2 class="section-title">
+                <span>🔧</span>
+                Las 5 Técnicas Fundamentales
+            </h2>
+            
+            <p>Estas son las técnicas más efectivas utilizadas por terapeutas profesionales, adaptadas para que las uses en casa:</p>
 
-    <br>
-    <a class="volver" href="../index.html">⬅ Volver al inicio</a>
-  </div>
+            <div class="technique-card">
+                <h3>🗣️ 1. MODELADO LINGÜÍSTICO</h3>
+                <p>Muestra el lenguaje correcto sin corregir directamente.</p>
+                
+                <div class="technique-example">
+                    <strong>Ejemplo:</strong><br>
+                    👶 Niño: "Quelo agua"<br>
+                    👩 Madre: "Ah, quieres agua. Yo también quiero agua fresca."
+                </div>
+                
+                <div class="alert alert-success">
+                    <strong>💡 Clave:</strong> Repite correctamente lo que dice sin decir "no, así no se dice"
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <h3>⏱️ 2. TÉCNICA DE ESPERA EXPECTANTE</h3>
+                <p>Dale tiempo para procesar y responder antes de ayudarlo.</p>
+                
+                <div class="technique-example">
+                    <strong>Situación:</strong> Tu hijo quiere algo pero no lo pide<br>
+                    <strong>Haz esto:</strong> Míralo expectante, cuenta mentalmente hasta 10, luego ayúdalo a formar la palabra
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <h3>📈 3. EXPANSIÓN SEMÁNTICA</h3>
+                <p>Agrega información a lo que dice tu hijo.</p>
+                
+                <div class="technique-example">
+                    <strong>Ejemplo:</strong><br>
+                    👶 "Perro"<br>
+                    👩 "Sí, es un perro grande y café. El perro está corriendo."
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <h3>❓ 4. PREGUNTAS ABIERTAS</h3>
+                <p>Usa preguntas que requieren más que "sí" o "no".</p>
+                
+                <div class="technique-example">
+                    <strong>En lugar de:</strong> "¿Te gusta?"<br>
+                    <strong>Pregunta:</strong> "¿Qué te parece esto?" o "¿Cómo te sientes?"
+                </div>
+            </div>
+
+            <div class="technique-card">
+                <h3>🎭 5. AUTO-CONVERSACIÓN</h3>
+                <p>Narra lo que haces para que tu hijo escuche lenguaje constante.</p>
+                
+                <div class="technique-example">
+                    <strong>Mientras cocinas:</strong><br>
+                    "Ahora voy a cortar las zanahorias. Están muy naranjas y crujientes. Corto, corto, corto..."
+                </div>
+            </div>
+
+            <button class="btn" onclick="completeSection(1)">✓ Completar Técnicas Fundamentales</button>
+        </div>
+
+        <!-- Sección 2: Técnicas por Situación -->
+        <div class="content-section" data-section="2">
+            <h2 class="section-title">
+                <span>🏠</span>
+                Técnicas por Situación Diaria
+            </h2>
+
+            <div class="situation-tabs">
+                <button class="tab active" onclick="showSituationTab('comida')">🍽️ Comida</button>
+                <button class="tab" onclick="showSituationTab('bano')">🛁 Baño</button>
+                <button class="tab" onclick="showSituationTab('juego')">🧸 Juego</button>
+                <button class="tab" onclick="showSituationTab('paseo')">🚶 Paseos</button>
+            </div>
+
+            <div id="comida" class="tab-content active">
+                <h3>🍽️ Durante las Comidas</h3>
+                
+                <div class="technique-steps">
+                    <div class="step-item">
+                        <strong>Nombra Todo:</strong> "Vamos a comer arroz blanco, pollo dorado y brócoli verde"
+                    </div>
+                    <div class="step-item">
+                        <strong>Describe Sabores:</strong> "Esto está salado... esto está dulce... ¿cómo sabe esto?"
+                    </div>
+                    <div class="step-item">
+                        <strong>Cuenta y Compara:</strong> "Tengo 3 trozos, tú tienes 2. ¿Quién tiene más?"
+                    </div>
+                    <div class="step-item">
+                        <strong>Haz que Pida:</strong> No des automáticamente. Espera que pida "más" o "agua"
+                    </div>
+                </div>
+
+                <div class="practice-box">
+                    <h4>🎯 Práctica de 5 minutos:</h4>
+                    <p>En la próxima comida, narra cada acción durante 5 minutos completos. Ejemplo: "Ahora tomo la cuchara, la lleno de sopa, la llevo a mi boca, mastico..."</p>
+                </div>
+            </div>
+
+            <div id="bano" class="tab-content">
+                <h3>🛁 Durante el Baño</h3>
+                
+                <div class="technique-steps">
+                    <div class="step-item">
+                        <strong>Temperatura y Sensaciones:</strong> "El agua está caliente, tibia, fría"
+                    </div>
+                    <div class="step-item">
+                        <strong>Partes del Cuerpo:</strong> "Lavamos los brazos, las piernas, la barriga"
+                    </div>
+                    <div class="step-item">
+                        <strong>Acciones:</strong> "Froto, enjuago, seco, exprimo"
+                    </div>
+                    <div class="step-item">
+                        <strong>Juegos con Agua:</strong> "El agua cae, gotea, salpica, hace burbujas"
+                    </div>
+                </div>
+
+                <div class="practice-box">
+                    <h4>🎯 Actividad Especial:</h4>
+                    <p>Crea una "canción de baño" con las acciones. Ejemplo: "Lavo, lavo mi cabeza, lavo, lavo con destreza"</p>
+                </div>
+            </div>
+
+            <div id="juego" class="tab-content">
+                <h3>🧸 Durante el Juego</h3>
+                
+                <div class="technique-steps">
+                    <div class="step-item">
+                        <strong>Sigue su Interés:</strong> Si le gustan los carros, habla de carros, colores, velocidades
+                    </div>
+                    <div class="step-item">
+                        <strong>Crea Escenarios:</strong> "El oso tiene hambre, ¿qué le damos de comer?"
+                    </div>
+                    <div class="step-item">
+                        <strong>Problemas Simples:</strong> "Oh no, la torre se cayó, ¿cómo la arreglamos?"
+                    </div>
+                    <div class="step-item">
+                        <strong>Turnos Verbales:</strong> "Ahora yo, ahora tú" y espera su respuesta
+                    </div>
+                </div>
+
+                <div class="practice-box">
+                    <h4>🎯 Juego de Roles:</h4>
+                    <p>Jueguen a ser doctor/paciente, chef/cliente, maestro/estudiante. Cada rol requiere vocabulario específico.</p>
+                </div>
+            </div>
+
+            <div id="paseo" class="tab-content">
+                <h3>🚶 Durante Paseos</h3>
+                
+                <div class="technique-steps">
+                    <div class="step-item">
+                        <strong>Observa y Nombra:</strong> "Veo un árbol alto, un perro pequeño, un carro rojo"
+                    </div>
+                    <div class="step-item">
+                        <strong>Sonidos del Ambiente:</strong> "Escucha: pájaros cantando, carros pasando, viento soplando"
+                    </div>
+                    <div class="step-item">
+                        <strong>Direcciones:</strong> "Vamos hacia allá, doblamos a la derecha, subimos la colina"
+                    </div>
+                    <div class="step-item">
+                        <strong>Predicciones:</strong> "¿Qué crees que veremos después de esta esquina?"
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn" onclick="completeSection(2)">✓ Dominar Técnicas Situacionales</button>
+        </div>
+
+        <!-- Sección 3: Videos Demostrativos -->
+        <div class="content-section" data-section="3">
+            <h2 class="section-title">
+                <span>🎥</span>
+                Videos Demostrativos
+            </h2>
+
+            <p>Mira cómo aplicar cada técnica con ejemplos reales:</p>
+
+            <div class="demo-video" onclick="playVideo('modelado')">
+                <div class="play-button">▶️</div>
+                <h3>Técnica de Modelado Lingüístico</h3>
+                <p>Aprende cómo corregir sin criticar - 8 minutos</p>
+            </div>
+
+            <div class="demo-video" onclick="playVideo('expansion')">
+                <div class="play-button">▶️</div>
+                <h3>Expansión Semántica en Acción</h3>
+                <p>De palabras sueltas a oraciones completas - 6 minutos</p>
+            </div>
+
+            <div class="demo-video" onclick="playVideo('preguntas')">
+                <div class="play-button">▶️</div>
+                <h3>El Arte de Hacer Preguntas</h3>
+                <p>Estimula el pensamiento y la respuesta - 7 minutos</p>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>📱 Consejo:</strong> Mira los videos varias veces. La repetición te ayudará a automatizar las técnicas.
+            </div>
+
+            <button class="btn" onclick="completeSection(3)">✓ Videos Vistos</button>
+        </div>
+        <!-- Sección 4: Recursos Descargables -->
+        <div class="content-section" data-section="4">
+            <h2 class="section-title">
+                <span>📄</span>
+                Recursos Descargables
+            </h2>
+
+            <p>Material profesional listo para imprimir y usar inmediatamente:</p>
+
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">📋</div>
+                    <h3>Guía de Ejercicios Semanales</h3>
+                    <p>14 días de actividades estructuradas, 15 minutos diarios</p>
+                    <button class="btn btn-download" onclick="downloadResource('ejercicios-semanales')">
+                        💾 Descargar PDF
+                    </button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">🎲</div>
+                    <h3>Juegos de Vocabulario</h3>
+                    <p>12 juegos imprimibles por categorías (animales, colores, acciones)</p>
+                    <button class="btn btn-download" onclick="downloadResource('juegos-vocabulario')">
+                        💾 Descargar PDF
+                    </button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">📊</div>
+                    <h3>Registro de Progreso</h3>
+                    <p>Plantillas para seguir el desarrollo diario de tu hijo</p>
+                    <button class="btn btn-download" onclick="downloadResource('registro-progreso')">
+                        💾 Descargar PDF
+                    </button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">🎵</div>
+                    <h3>Canciones y Rimas</h3>
+                    <p>15 canciones con movimientos para estimular el lenguaje</p>
+                    <button class="btn btn-download" onclick="downloadResource('canciones-rimas')">
+                        💾 Descargar PDF
+                    </button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">🍎</div>
+                    <h3>Tarjetas de Vocabulario</h3>
+                    <p>200 tarjetas ilustradas listas para recortar</p>
+                    <button class="btn btn-download" onclick="downloadResource('tarjetas-vocabulario')">
+                        💾 Descargar PDF
+                    </button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">📝</div>
+                    <h3>Lista de Verificación</h3>
+                    <p>Checklist mensual de habilidades por edad</p>
+                    <button class="btn btn-download" onclick="downloadResource('checklist-habilidades')">
+                        💾 Descargar PDF
+                    </button>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>✅ Todos los recursos están optimizados para impresión casera</strong> y no requieren materiales especiales.
+            </div>
+
+            <button class="btn" onclick="completeSection(4)">✓ Recursos Descargados</button>
+        </div>
+
+        <!-- Sección 5: Rutinas de 15 Minutos -->
+        <div class="content-section" data-section="5">
+            <h2 class="section-title">
+                <span>⏰</span>
+                Rutinas Intensivas de 15 Minutos
+            </h2>
+
+            <p>Sesiones estructuradas para máximo impacto en poco tiempo:</p>
+
+            <div class="timer-box">
+                <h3>⏱️ Cronómetro Integrado</h3>
+                <div id="timer-display">15:00</div>
+                <button class="btn btn-secondary" onclick="startTimer()" id="timer-btn">▶️ Iniciar Sesión</button>
+            </div>
+
+            <div class="practice-box">
+                <h4>🌅 Rutina Matutina (15 min)</h4>
+                <div class="technique-steps">
+                    <div class="step-item">
+                        <strong>0-3 min:</strong> Saludo y conversación sobre el día
+                    </div>
+                    <div class="step-item">
+                        <strong>3-8 min:</strong> Lectura interactiva con preguntas
+                    </div>
+                    <div class="step-item">
+                        <strong>8-12 min:</strong> Juego con vocabulario nuevo
+                    </div>
+                    <div class="step-item">
+                        <strong>12-15 min:</strong> Canción y despedida motivadora
+                    </div>
+                </div>
+                <button class="btn" onclick="startRoutine('morning')">🌅 Iniciar Rutina Matutina</button>
+            </div>
+
+            <div class="practice-box">
+                <h4>🌆 Rutina Vespertina (15 min)</h4>
+                <div class="technique-steps">
+                    <div class="step-item">
+                        <strong>0-4 min:</strong> Conversación sobre el día
+                    </div>
+                    <div class="step-item">
+                        <strong>4-10 min:</strong> Actividad de expresión creativa
+                    </div>
+                    <div class="step-item">
+                        <strong>10-15 min:</strong> Relajación con cuentos
+                    </div>
+                </div>
+                <button class="btn" onclick="startRoutine('evening')">🌆 Iniciar Rutina Vespertina</button>
+            </div>
+
+            <button class="btn" onclick="completeSection(5)">✓ Rutinas Practicadas</button>
+        </div>
+
+        <!-- Sección 6: Ejercicios Interactivos -->
+        <div class="content-section" data-section="6">
+            <h2 class="section-title">
+                <span>🎮</span>
+                Ejercicios Interactivos
+            </h2>
+
+            <div class="practice-box">
+                <h4>🗣️ Simulador de Conversación</h4>
+                <p>Practica las técnicas con situaciones virtuales:</p>
+                
+                <div id="conversation-simulator" style="background: #f8f9fa; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                    <div style="margin-bottom: 1rem;">
+                        <strong>Situación:</strong> <span id="situation-text">Tu hijo dice "Quelo agua"</span>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <strong>¿Cuál es la mejor respuesta?</strong>
+                    </div>
+                    <div style="display: grid; gap: 0.5rem;">
+                        <button class="btn btn-secondary" onclick="checkAnswer(1, false)" style="text-align: left; padding: 0.8rem;">
+                            A) "No, se dice 'quiero agua'"
+                        </button>
+                        <button class="btn btn-secondary" onclick="checkAnswer(2, true)" style="text-align: left; padding: 0.8rem;">
+                            B) "Ah, quieres agua fresca. Yo también quiero agua."
+                        </button>
+                        <button class="btn btn-secondary" onclick="checkAnswer(3, false)" style="text-align: left; padding: 0.8rem;">
+                            C) Darle agua sin decir nada
+                        </button>
+                    </div>
+                    <div id="answer-feedback" style="margin-top: 1rem; display: none;"></div>
+                </div>
+
+                <button class="btn" onclick="nextScenario()">➡️ Siguiente Escenario</button>
+            </div>
+
+            <button class="btn" onclick="completeSection(6)">✓ Ejercicios Completados</button>
+        </div>
+
+        <!-- Sección 7: Tracker de Progreso Semanal -->
+        <div class="content-section" data-section="7">
+            <h2 class="section-title">
+                <span>📊</span>
+                Tracker de Progreso Semanal
+            </h2>
+
+            <div class="practice-tracker">
+                <h4>✅ Mis Prácticas esta Semana</h4>
+                <p>Marca cada técnica que practiques:</p>
+
+                <div style="display: grid; gap: 0.5rem; margin: 1rem 0;">
+                    <div class="practice-item">
+                        <input type="checkbox" class="practice-checkbox" onchange="updateWeeklyProgress()">
+                        <span>Lunes: Modelado lingüístico durante la comida</span>
+                    </div>
+                    <div class="practice-item">
+                        <input type="checkbox" class="practice-checkbox" onchange="updateWeeklyProgress()">
+                        <span>Martes: Expansión semántica durante el juego</span>
+                    </div>
+                    <div class="practice-item">
+                        <input type="checkbox" class="practice-checkbox" onchange="updateWeeklyProgress()">
+                        <span>Miércoles: Preguntas abiertas en el paseo</span>
+                    </div>
+                    <div class="practice-item">
+                        <input type="checkbox" class="practice-checkbox" onchange="updateWeeklyProgress()">
+                        <span>Jueves: Auto-conversación durante el baño</span>
+                    </div>
+                    <div class="practice-item">
+                        <input type="checkbox" class="practice-checkbox" onchange="updateWeeklyProgress()">
+                        <span>Viernes: Rutina de 15 minutos</span>
+                    </div>
+                    <div class="practice-item">
+                        <input type="checkbox" class="practice-checkbox" onchange="updateWeeklyProgress()">
+                        <span>Sábado: Juegos de vocabulario</span>
+                    </div>
+                    <div class="practice-item">
+                        <input type="checkbox" class="practice-checkbox" onchange="updateWeeklyProgress()">
+                        <span>Domingo: Sesión de lectura interactiva</span>
+                    </div>
+                </div>
+
+                <div id="weekly-progress" class="alert alert-info">
+                    <strong>📈 Progreso semanal:</strong> <span id="weekly-percentage">0%</span> completado
+                </div>
+            </div>
+
+            <button class="btn" onclick="completeSection(7)">✓ Tracker Configurado</button>
+        </div>
+
+        <!-- Sección 8: Plan de Acción Personal -->
+        <div class="content-section" data-section="8">
+            <h2 class="section-title">
+                <span>🎯</span>
+                Tu Plan de Acción Personal
+            </h2>
+
+            <p>Basado en todo lo aprendido, crea tu estrategia personalizada:</p>
+
+            <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                <h4>🔥 Mis 3 Técnicas Favoritas:</h4>
+                <div style="display: grid; gap: 1rem; margin: 1rem 0;">
+                    <div>
+                        <label style="font-weight: 600;">Técnica #1:</label>
+                        <select id="technique1" style="width: 100%; padding: 0.5rem; margin-top: 0.5rem; border: 1px solid #ddd; border-radius: 5px;">
+                            <option value="">Selecciona una técnica</option>
+                            <option value="modelado">Modelado Lingüístico</option>
+                            <option value="expansion">Expansión Semántica</option>
+                            <option value="preguntas">Preguntas Abiertas</option>
+                            <option value="espera">Técnica de Espera</option>
+                            <option value="autoconversacion">Auto-conversación</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="font-weight: 600;">Técnica #2:</label>
+                        <select id="technique2" style="width: 100%; padding: 0.5rem; margin-top: 0.5rem; border: 1px solid #ddd; border-radius: 5px;">
+                            <option value="">Selecciona una técnica</option>
+                            <option value="modelado">Modelado Lingüístico</option>
+                            <option value="expansion">Expansión Semántica</option>
+                            <option value="preguntas">Preguntas Abiertas</option>
+                            <option value="espera">Técnica de Espera</option>
+                            <option value="autoconversacion">Auto-conversación</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="font-weight: 600;">Técnica #3:</label>
+                        <select id="technique3" style="width: 100%; padding: 0.5rem; margin-top: 0.5rem; border: 1px solid #ddd; border-radius: 5px;">
+                            <option value="">Selecciona una técnica</option>
+                            <option value="modelado">Modelado Lingüístico</option>
+                            <option value="expansion">Expansión Semántica</option>
+                            <option value="preguntas">Preguntas Abiertas</option>
+                            <option value="espera">Técnica de Espera</option>
+                            <option value="autoconversacion">Auto-conversación</option>
+                        </select>
+                    </div>
+                </div>
+
+                <h4>📅 Mi Horario de Práctica:</h4>
+                <textarea id="practice-schedule" placeholder="Ej: Lunes y miércoles: 15 min rutina matutina. Martes y jueves: técnicas durante la comida..." style="width: 100%; height: 80px; padding: 1rem; border: 1px solid #ddd; border-radius: 5px; margin: 1rem 0;"></textarea>
+
+                <button class="btn" onclick="savePersonalPlan()">💾 Guardar Mi Plan</button>
+                
+                <div id="planSavedMessage" class="alert alert-success" style="display: none; margin-top: 1rem;">
+                    <strong>✅ ¡Plan guardado exitosamente!</strong> Ahora tienes tu hoja de ruta personalizada.
+                </div>
+            </div>
+
+            <button class="btn" onclick="completeSection(8)">✓ Completar Módulo 2</button>
+        </div>
+
+        <!-- Navigation -->
+        <div class="module-navigation">
+            <a href="../modulo1/index.html" class="btn btn-secondary">← Módulo 1</a>
+            <div>
+                <button class="btn" onclick="generateCertificate()" id="certificateBtn" style="display: none;">🏆 Obtener Certificado</button>
+                <a href="../modulo3/index.html" class="btn" id="nextModuleBtn" style="display: none;">Módulo 3: Soluciones →</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        let completedSections = new Set();
+        let totalSections = 8;
+        let timerInterval;
+        let timeLeft = 15 * 60;
+        let currentScenario = 0;
+
+        const scenarios = [
+            {
+                situation: 'Tu hijo dice "Quelo agua"',
+                explanation: 'La opción B usa modelado lingüístico: repite correctamente sin criticar.'
+            },
+            {
+                situation: 'Tu hijo señala un perro y dice "Guau"',
+                explanation: 'La expansión semántica agrega información valiosa al vocabulario básico.'
+            },
+            {
+                situation: 'Tu hijo está jugando callado con bloques',
+                explanation: 'La auto-conversación proporciona modelo de lenguaje constante.'
+            }
+        ];
+
+        function showSituationTab(situation) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.getElementById(situation).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function completeSection(sectionNumber) {
+            completedSections.add(sectionNumber);
+            updateProgressBar();
+            
+            const section = document.querySelector(`[data-section="${sectionNumber}"]`);
+            section.style.opacity = '0.8';
+            section.style.border = '2px solid #28a745';
+            section.style.borderRadius = '15px';
+            
+            alert(`✅ ¡Sección ${sectionNumber} completada! Excelente progreso.`);
+            
+            if (completedSections.size === totalSections) {
+                document.getElementById('certificateBtn').style.display = 'inline-block';
+                document.getElementById('nextModuleBtn').style.display = 'inline-block';
+                setTimeout(() => {
+                    alert('🎉 ¡FELICITACIONES! Has completado el Módulo 2.\n\n✅ Dominas las 5 técnicas fundamentales\n✅ Conoces estrategias por situación\n✅ Tienes recursos descargables\n✅ Creaste tu plan personalizado\n\n¡Continúa al Módulo 3!');
+                }, 1000);
+            }
+        }
+
+        function updateProgressBar() {
+            const progress = (completedSections.size / totalSections) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = Math.round(progress) + '% completado';
+            document.getElementById('completedSections').textContent = `${completedSections.size} de ${totalSections} secciones`;
+        }
+
+        function downloadResource(resource) {
+            const resources = {
+                'ejercicios-semanales': `GUÍA DE EJERCICIOS SEMANALES - MÓDULO 2
+
+🎯 SEMANA 1: Estableciendo Rutinas
+
+DÍA 1-2: Técnica de Modelado
+- Durante desayuno: modela 3 frases correctas
+- Durante juego: expande lo que dice tu hijo
+- Objetivo: 10 modelados por día
+
+DÍA 3-4: Preguntas Abiertas  
+- Reemplaza "¿sí?" por "¿qué piensas?"
+- Durante paseos: "¿qué ves?" en lugar de "¿ves el perro?"
+- Objetivo: 5 preguntas abiertas por día
+
+DÍA 5-7: Auto-conversación
+- Narra tus acciones durante 15 minutos
+- Incluye emociones: "me siento feliz cuando..."
+- Objetivo: 3 sesiones de 15 min
+
+🎯 SEMANA 2: Intensificando Práctica
+DÍA 8-10: Combinando Técnicas
+- Modelado + expansión en la misma situación
+- Espera + preguntas abiertas
+- Objetivo: usar 2 técnicas simultáneamente
+
+DÍA 11-14: Evaluación y Ajuste
+- Observa cambios en tu hijo
+- Ajusta técnicas según su respuesta
+- Celebra los logros pequeños
+
+📊 REGISTRO DIARIO:
+Fecha: ____
+Técnica usada: ____
+Respuesta del niño: ____
+Observaciones: ____
+
+¡Imprime y usa diariamente!`,
+
+                'juegos-vocabulario': `🎲 JUEGOS DE VOCABULARIO - 12 ACTIVIDADES
+
+🐾 CATEGORÍA: ANIMALES
+Juego 1: "¿Quién soy?"
+- Describe animal sin nombrarlo
+- Tu hijo adivina
+- Luego intercambien roles
+
+Juego 2: "Sonidos de animales"
+- Haz el sonido, hijo dice el animal
+- Agrega características: "El gato negro dice miau"
+
+🌈 CATEGORÍA: COLORES
+Juego 3: "Cazadores de colores"
+- "Encuentra algo rojo"
+- Describe: "rojo como la manzana"
+
+Juego 4: "Mezcla mágica"
+- "¿Qué pasa si mezclo rojo + amarillo?"
+- Experimenten con pintura
+
+🏃 CATEGORÍA: ACCIONES
+Juego 5: "Simón dice"
+- "Simón dice: camina como robot"
+- "Simón dice: salta como conejo"
+
+Juego 6: "Adivina la acción"
+- Representa acción sin hablar
+- Hijo adivina y dice la palabra
+
+🏠 CATEGORÍA: CASA
+Juego 7: "Tours de casa"
+- "En la cocina hay..." (3 cosas)
+- "En mi cuarto tengo..." (5 cosas)
+
+🍎 CATEGORÍA: COMIDA
+Juego 8: "Chef imaginario"
+- "Voy a cocinar..." (ingredientes inventados)
+- "Sabe a..." (descripciones creativas)
+
+¡Imprime y recorta para usar inmediatamente!`,
+
+                'registro-progreso': `📊 REGISTRO SEMANAL DE PROGRESO
+
+SEMANA DEL: _____ AL _____
+
+👶 INFORMACIÓN DEL NIÑO:
+Nombre: ________________
+Edad: _____ años _____ meses
+
+📈 HABILIDADES OBSERVADAS:
+
+LUNES:
+□ Palabras nuevas escuchadas: ________
+□ Frases más largas: ________
+□ Interacciones espontáneas: ________
+□ Técnica usada: ________
+
+MARTES:
+□ Palabras nuevas escuchadas: ________
+□ Frases más largas: ________
+□ Interacciones espontáneas: ________
+□ Técnica usada: ________
+
+MIÉRCOLES:
+□ Palabras nuevas escuchadas: ________
+□ Frases más largas: ________
+□ Interacciones espontáneas: ________
+□ Técnica usada: ________
+
+JUEVES:
+□ Palabras nuevas escuchadas: ________
+□ Frases más largas: ________
+□ Interacciones espontáneas: ________
+□ Técnica usada: ________
+
+VIERNES:
+□ Palabras nuevas escuchadas: ________
+□ Frases más largas: ________
+□ Interacciones espontáneas: ________
+□ Técnica usada: ________
+
+🎯 OBJETIVOS SEMANALES:
+1. ________________________
+2. ________________________
+3. ________________________
+
+📝 OBSERVACIONES GENERALES:
+_________________________________
+_________________________________
+
+🌟 LOGROS DE LA SEMANA:
+_________________________________
+_________________________________
+
+📋 PLAN PARA PRÓXIMA SEMANA:
+_________________________________
+_________________________________
+
+¡Úsalo para ver el progreso real!`
+            };
+
+            const resourceData = resources[resource];
+            if (resourceData) {
+                const blob = new Blob([resourceData], { type: 'text/plain;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = resource + '.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                alert(`📄 ¡Recurso descargado! Revisa tu carpeta de descargas.`);
+            }
+        }
+
+        function startTimer() {
+            const btn = document.getElementById('timer-btn');
+            const display = document.getElementById('timer-display');
+            
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                btn.textContent = '▶️ Iniciar Sesión';
+                timeLeft = 15 * 60;
+                display.textContent = '15:00';
+                return;
+            }
+            
+            btn.textContent = '⏸️ Pausar';
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                display.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    btn.textContent = '▶️ Iniciar Sesión';
+                    timeLeft = 15 * 60;
+                    alert('🎉 ¡Sesión completada! ¡Excelente trabajo!');
+                }
+            }, 1000);
+        }
+
+        function startRoutine(type) {
+            const routines = {
+                morning: {
+                    title: 'Rutina Matutina',
+                    steps: [
+                        '0-3 min: "¡Buenos días! ¿Cómo dormiste? Hoy vamos a..."',
+                        '3-8 min: Leer libro con preguntas: "¿Qué crees que pasará?"',
+                        '8-12 min: Juego de vocabulario nuevo del día',
+                        '12-15 min: Canción energizante: "¡Listos para el día!"'
+                    ]
+                },
+                evening: {
+                    title: 'Rutina Vespertina',
+                    steps: [
+                        '0-4 min: "Cuéntame lo mejor de tu día"',
+                        '4-10 min: Dibujo libre mientras conversan',
+                        '10-15 min: Cuento relajante con voz suave'
+                    ]
+                }
+            };
+            
+            const routine = routines[type];
+            let instructions = `🌟 ${routine.title} - ¡Comenzando!\n\n`;
+            routine.steps.forEach((step, index) => {
+                instructions += `${index + 1}. ${step}\n`;
+            });
+            instructions += '\n⏱️ ¡Recuerda usar el cronómetro!';
+            
+            alert(instructions);
+            startTimer();
+        }
+
+        function playVideo(type) {
+            const videos = {
+                modelado: 'Técnica de Modelado Lingüístico: Aprende a corregir sin criticar',
+                expansion: 'Expansión Semántica: Transforma palabras en oraciones',
+                preguntas: 'El Arte de las Preguntas Abiertas: Estimula el pensamiento'
+            };
+            
+            alert(`🎥 Reproduciendo: "${videos[type]}"\n\n(En la versión completa, aquí se reproduciría el video real)\n\nPuntos clave que aprenderás:\n• Técnica paso a paso\n• Ejemplos reales\n• Errores comunes a evitar\n• Variaciones por edad`);
+        }
+      function checkAnswer(optionNumber, isCorrect) {
+            const feedback = document.getElementById('answer-feedback');
+            const currentScenarioData = scenarios[currentScenario];
+            
+            if (isCorrect) {
+                feedback.innerHTML = `
+                    <div class="alert alert-success">
+                        ✅ ¡Correcto! ${currentScenarioData.explanation}
+                    </div>
+                `;
+            } else {
+                feedback.innerHTML = `
+                    <div class="alert alert-warning">
+                        ❌ No es la mejor opción. ${currentScenarioData.explanation}
+                    </div>
+                `;
+            }
+            
+            feedback.style.display = 'block';
+        }
+
+        function nextScenario() {
+            currentScenario = (currentScenario + 1) % scenarios.length;
+            const scenario = scenarios[currentScenario];
+            
+            document.getElementById('situation-text').textContent = scenario.situation;
+            
+            const buttons = document.querySelectorAll('#conversation-simulator button.btn-secondary');
+            if (buttons.length >= 3) {
+                buttons[0].onclick = () => checkAnswer(1, false);
+                buttons[1].onclick = () => checkAnswer(2, true);
+                buttons[2].onclick = () => checkAnswer(3, false);
+            }
+            
+            document.getElementById('answer-feedback').style.display = 'none';
+        }
+
+        function updateWeeklyProgress() {
+            const checkboxes = document.querySelectorAll('.practice-checkbox');
+            const checkedBoxes = document.querySelectorAll('.practice-checkbox:checked');
+            const percentage = Math.round((checkedBoxes.length / checkboxes.length) * 100);
+            
+            document.getElementById('weekly-percentage').textContent = percentage + '%';
+            
+            if (percentage >= 70) {
+                document.getElementById('weekly-progress').className = 'alert alert-success';
+            } else if (percentage >= 40) {
+                document.getElementById('weekly-progress').className = 'alert alert-warning';
+            } else {
+                document.getElementById('weekly-progress').className = 'alert alert-info';
+            }
+        }
+
+        function savePersonalPlan() {
+            const technique1 = document.getElementById('technique1').value;
+            const technique2 = document.getElementById('technique2').value;
+            const technique3 = document.getElementById('technique3').value;
+            const schedule = document.getElementById('practice-schedule').value;
+            
+            if (!technique1 || !technique2 || !technique3 || !schedule.trim()) {
+                alert('Por favor completa todos los campos antes de guardar.');
+                return;
+            }
+            
+            const plan = {
+                techniques: [technique1, technique2, technique3],
+                schedule: schedule,
+                dateCreated: new Date().toLocaleDateString(),
+                module: 'Módulo 2'
+            };
+            
+            localStorage.setItem('module2PersonalPlan', JSON.stringify(plan));
+            document.getElementById('planSavedMessage').style.display = 'block';
+            
+            setTimeout(() => {
+                document.getElementById('planSavedMessage').scrollIntoView({ behavior: 'smooth' });
+            }, 300);
+        }
+
+        function generateCertificate() {
+            const plan = JSON.parse(localStorage.getItem('module2PersonalPlan') || '{}');
+            const techniques = plan.techniques ? plan.techniques.join(', ') : 'técnicas seleccionadas';
+            
+            const certificate = `🏆 CERTIFICADO DE COMPLETACIÓN 🏆
+
+Felicitaciones por completar el MÓDULO 2:
+"Técnicas Prácticas de Estimulación del Lenguaje"
+
+✅ Dominas las 5 técnicas fundamentales de estimulación
+✅ Conoces estrategias específicas por situación diaria
+✅ Tienes recursos descargables profesionales
+✅ Creaste tu plan personalizado con: ${techniques}
+✅ Completaste ejercicios interactivos y simulaciones
+
+Fecha: ${new Date().toLocaleDateString()}
+Curso: Estimulación del Lenguaje en Casa
+Academia de Psicología
+
+¡Estás preparado/a para el Módulo 3: Soluciones Específicas!
+
+Firma digital: ${Date.now()}`;
+            
+            const blob = new Blob([certificate], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Certificado_Modulo2_TecnicasEstimulacion.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            alert('🎉 ¡Certificado descargado! Has demostrado dominio de las técnicas profesionales de estimulación del lenguaje.');
+        }
+
+        function showProgress() {
+            const progress = (completedSections.size / totalSections) * 100;
+            const completedList = Array.from(completedSections).sort().join(', ');
+            
+            alert(`📊 TU PROGRESO EN MÓDULO 2:
+            
+✅ Progreso: ${Math.round(progress)}% completado
+📚 Secciones completadas: ${completedSections.size} de ${totalSections}
+🎯 Secciones completadas: ${completedList || 'Ninguna aún'}
+
+${progress === 100 ? '🎉 ¡MÓDULO COMPLETADO! Obtén tu certificado.' : '💪 ¡Sigue adelante, vas muy bien!'}`);
+        }
+
+        function logout() {
+            if (confirm('¿Estás seguro que quieres salir? Tu progreso se guardará automáticamente.')) {
+                localStorage.setItem('module2Progress', JSON.stringify({
+                    completedSections: Array.from(completedSections),
+                    lastAccess: new Date().toISOString()
+                }));
+                window.location.href = '../index.html';
+            }
+        }
+
+        // Load saved progress on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedProgress = localStorage.getItem('module2Progress');
+            if (savedProgress) {
+                const progress = JSON.parse(savedProgress);
+                progress.completedSections.forEach(section => {
+                    completedSections.add(section);
+                    const sectionElement = document.querySelector(`[data-section="${section}"]`);
+                    if (sectionElement) {
+                        sectionElement.style.opacity = '0.8';
+                        sectionElement.style.border = '2px solid #28a745';
+                        sectionElement.style.borderRadius = '15px';
+                    }
+                });
+                updateProgressBar();
+                
+                if (completedSections.size === totalSections) {
+                    document.getElementById('certificateBtn').style.display = 'inline-block';
+                    document.getElementById('nextModuleBtn').style.display = 'inline-block';
+                }
+            }
+            
+            // Load saved personal plan if exists
+            const savedPlan = localStorage.getItem('module2PersonalPlan');
+            if (savedPlan) {
+                const plan = JSON.parse(savedPlan);
+                if (plan.techniques) {
+                    document.getElementById('technique1').value = plan.techniques[0] || '';
+                    document.getElementById('technique2').value = plan.techniques[1] || '';
+                    document.getElementById('technique3').value = plan.techniques[2] || '';
+                }
+                document.getElementById('practice-schedule').value = plan.schedule || '';
+                
+                if (plan.techniques && plan.schedule) {
+                    document.getElementById('planSavedMessage').style.display = 'block';
+                }
+            }
+        });
+
+        // Auto-save plan while typing
+        let saveTimeout;
+        document.getElementById('practice-schedule').addEventListener('input', function() {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(() => {
+                const schedule = this.value;
+                if (schedule.trim()) {
+                    const plan = JSON.parse(localStorage.getItem('module2PersonalPlan') || '{}');
+                    plan.schedule = schedule;
+                    localStorage.setItem('module2PersonalPlan', JSON.stringify(plan));
+                }
+            }, 2000);
+        });
+
+        // Auto-save technique selections
+        ['technique1', 'technique2', 'technique3'].forEach(id => {
+            document.getElementById(id).addEventListener('change', function() {
+                const plan = JSON.parse(localStorage.getItem('module2PersonalPlan') || '{}');
+                if (!plan.techniques) plan.techniques = ['', '', ''];
+                
+                const index = parseInt(id.replace('technique', '')) - 1;
+                plan.techniques[index] = this.value;
+                plan.lastUpdated = new Date().toISOString();
+                
+                localStorage.setItem('module2PersonalPlan', JSON.stringify(plan));
+            });
+        });
+
+        console.log('🎯 Módulo 2: Técnicas Prácticas cargado correctamente');
+        console.log('📚 Funciones disponibles: completar secciones, descargar recursos, usar cronómetro, simulador de conversación');
+    </script>
 </body>
 </html>
