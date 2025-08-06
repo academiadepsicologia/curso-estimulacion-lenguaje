@@ -19,7 +19,6 @@
             background: #f8f9fa;
         }
 
-        /* Header */
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -60,14 +59,12 @@
             opacity: 0.8;
         }
 
-        /* Main Content */
         .main-content {
             max-width: 1000px;
             margin: 0 auto;
             padding: 100px 2rem 2rem;
         }
 
-        /* Progress Bar */
         .progress-section {
             background: white;
             padding: 1.5rem;
@@ -90,7 +87,6 @@
             transition: width 0.5s ease;
         }
 
-        /* Module Header */
         .module-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -110,7 +106,6 @@
             opacity: 0.9;
         }
 
-        /* Content Sections */
         .content-section {
             background: white;
             padding: 2rem;
@@ -132,7 +127,6 @@
             font-size: 2rem;
         }
 
-        /* Interactive Elements */
         .interactive-box {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
@@ -145,7 +139,6 @@
             margin-bottom: 1rem;
         }
 
-        /* Age Calculator */
         .age-calculator {
             background: #e3f2fd;
             padding: 2rem;
@@ -189,6 +182,8 @@
             font-weight: 600;
             transition: all 0.3s ease;
             margin: 1rem 0;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .btn:hover {
@@ -196,7 +191,6 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
-        /* Results */
         .result-box {
             background: #d4edda;
             border: 2px solid #c3e6cb;
@@ -216,7 +210,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Checklist */
         .checklist {
             display: grid;
             gap: 1rem;
@@ -247,7 +240,6 @@
             border-left: 4px solid #28a745;
         }
 
-        /* Warning Alerts */
         .alert {
             padding: 1rem;
             border-radius: 8px;
@@ -272,7 +264,6 @@
             color: #155724;
         }
 
-        /* Navigation */
         .module-navigation {
             display: flex;
             justify-content: space-between;
@@ -288,23 +279,6 @@
             color: white;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .module-header h1 {
-                font-size: 2rem;
-            }
-            
-            .calculator-inputs {
-                grid-template-columns: 1fr;
-            }
-            
-            .module-navigation {
-                flex-direction: column;
-                gap: 1rem;
-            }
-        }
-
-        /* Tabs */
         .tabs {
             display: flex;
             background: white;
@@ -339,24 +313,36 @@
         .tab-content.active {
             display: block;
         }
+
+        @media (max-width: 768px) {
+            .module-header h1 {
+                font-size: 2rem;
+            }
+            
+            .calculator-inputs {
+                grid-template-columns: 1fr;
+            }
+            
+            .module-navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="nav-container">
             <div class="logo">🧠 Módulo 1: Fundamentos</div>
             <div class="nav-links">
-                <a href="index.html">← Inicio</a>
+                <a href="../index.html">← Inicio</a>
                 <a href="#" onclick="showProgress()">Mi Progreso</a>
                 <a href="#" onclick="logout()">Salir</a>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
     <div class="main-content">
-        <!-- Progress Section -->
         <div class="progress-section">
             <h3>Tu Progreso en el Módulo 1</h3>
             <div class="progress-bar">
@@ -365,13 +351,11 @@
             <p><span id="progressText">0% completado</span> • <span id="completedSections">0 de 6 secciones</span></p>
         </div>
 
-        <!-- Module Header -->
         <div class="module-header">
             <h1>🧠 Fundamentos del Desarrollo del Lenguaje</h1>
             <p>Comprende cómo funciona el cerebro de tu hijo y las bases científicas de la comunicación infantil</p>
         </div>
 
-        <!-- Section 1: El Momento Crítico -->
         <div class="content-section" data-section="1">
             <h2 class="section-title">
                 <span class="section-icon">⏰</span>
@@ -401,7 +385,6 @@
             <button class="btn" onclick="completeSection(1)">✓ Completar Sección</button>
         </div>
 
-        <!-- Section 2: Evaluador de Desarrollo -->
         <div class="content-section" data-section="2">
             <h2 class="section-title">
                 <span class="section-icon">📊</span>
@@ -437,13 +420,10 @@
 
                 <button class="btn" onclick="generateEvaluation()">🔍 Generar Evaluación Personalizada</button>
 
-                <div id="evaluationResult" class="result-box">
-                    <!-- Results will appear here -->
-                </div>
+                <div id="evaluationResult" class="result-box"></div>
             </div>
         </div>
 
-        <!-- Section 3: Checklist Interactivo -->
         <div class="content-section" data-section="3">
             <h2 class="section-title">
                 <span class="section-icon">✅</span>
@@ -460,23 +440,23 @@
                 <h3>Habilidades esperadas a los 3 años:</h3>
                 <div class="checklist">
                     <div class="checklist-item">
-                        <input type="checkbox" onchange="updateProgress()">
+                        <input type="checkbox" onchange="updateChecklistProgress()">
                         <span>Dice frases de 3-4 palabras ("Quiero más agua")</span>
                     </div>
                     <div class="checklist-item">
-                        <input type="checkbox" onchange="updateProgress()">
+                        <input type="checkbox" onchange="updateChecklistProgress()">
                         <span>Hace preguntas simples ("¿Qué es eso?")</span>
                     </div>
                     <div class="checklist-item">
-                        <input type="checkbox" onchange="updateProgress()">
+                        <input type="checkbox" onchange="updateChecklistProgress()">
                         <span>Cuenta hasta 3</span>
                     </div>
                     <div class="checklist-item">
-                        <input type="checkbox" onchange="updateProgress()">
+                        <input type="checkbox" onchange="updateChecklistProgress()">
                         <span>Nombra colores básicos</span>
                     </div>
                     <div class="checklist-item">
-                        <input type="checkbox" onchange="updateProgress()">
+                        <input type="checkbox" onchange="updateChecklistProgress()">
                         <span>Se entiende el 75% de lo que dice</span>
                     </div>
                 </div>
@@ -486,23 +466,23 @@
                 <h3>Habilidades esperadas a los 4 años:</h3>
                 <div class="checklist">
                     <div class="checklist-item">
-                        <input type="checkbox" onchange="updateProgress()">
+                        <input type="checkbox" onchange="updateChecklistProgress()">
                         <span>Forma oraciones de 5-6 palabras</span>
                     </div>
                     <div class="checklist-item">
-                        <input type="checkbox" onchange="updateProgress()">
+                        <input type="checkbox" onchange="updateChecklistProgress()">
                         <span>Cuenta historias simples</span>
                     </div>
                     <div class="checklist-item">
-                        <input type="checkbox" onchange="updateProgress()">
+                        <input type="checkbox" onchange="updateChecklistProgress()">
                         <span>Usa pasado y futuro correctamente</span>
                     </div>
                     <div class="checklist-item">
-                        <input type="checkbox" onchange="updateProgress()">
+                        <input type="checkbox" onchange="updateChecklistProgress()">
                         <span>Hace preguntas complejas ("¿Por qué...?")</span>
                     </div>
                     <div class="checklist-item">
-                        <input type="checkbox" onchange="updateProgress()">
+                        <input type="checkbox" onchange="updateChecklistProgress()">
                         <span>Se entiende completamente</span>
                     </div>
                 </div>
@@ -512,23 +492,23 @@
                 <h3>Habilidades esperadas a los 5 años:</h3>
                 <div class="checklist">
                     <div class="checklist-item">
-                        <input type="checkbox" onchange="updateProgress()">
+                        <input type="checkbox" onchange="updateChecklistProgress()">
                         <span>Usa oraciones complejas con conectores</span>
                     </div>
                     <div class="checklist-item">
-                        <input type="checkbox" onchange="updateProgress()">
+                        <input type="checkbox" onchange="updateChecklistProgress()">
                         <span>Narra experiencias con detalles</span>
                     </div>
                     <div class="checklist-item">
-                        <input type="checkbox" onchange="updateProgress()">
+                        <input type="checkbox" onchange="updateChecklistProgress()">
                         <span>Entiende conceptos abstractos</span>
                     </div>
                     <div class="checklist-item">
-                        <input type="checkbox" onchange="updateProgress()">
+                        <input type="checkbox" onchange="updateChecklistProgress()">
                         <span>Reconoce letras y algunos sonidos</span>
                     </div>
                     <div class="checklist-item">
-                        <input type="checkbox" onchange="updateProgress()">
+                        <input type="checkbox" onchange="updateChecklistProgress()">
                         <span>Sigue instrucciones de 3 pasos</span>
                     </div>
                 </div>
@@ -536,8 +516,6 @@
 
             <button class="btn" onclick="completeSection(3)">✓ Completar Evaluación</button>
         </div>
-
-        <!-- Section 4: Las 4 Dimensiones -->
         <div class="content-section" data-section="4">
             <h2 class="section-title">
                 <span class="section-icon">🎯</span>
@@ -579,7 +557,6 @@
             <button class="btn" onclick="completeSection(4)">✓ Entendido</button>
         </div>
 
-        <!-- Section 5: Señales de Alerta -->
         <div class="content-section" data-section="5">
             <h2 class="section-title">
                 <span class="section-icon">🚨</span>
@@ -618,7 +595,6 @@
             <button class="btn" onclick="completeSection(5)">✓ Revisado</button>
         </div>
 
-        <!-- Section 6: Tu Plan Personalizado -->
         <div class="content-section" data-section="6">
             <h2 class="section-title">
                 <span class="section-icon">📋</span>
@@ -635,17 +611,20 @@
                 <textarea id="goals" placeholder="Ej: Que forme frases de 4 palabras, que pronuncie mejor la 'r', que sea menos tímido..." style="width: 100%; height: 100px; padding: 1rem; border: 1px solid #ddd; border-radius: 5px; margin: 1rem 0;"></textarea>
                 
                 <button class="btn" onclick="savePlan()">💾 Guardar Mi Plan</button>
+                
+                <div id="planSaved" class="alert alert-success" style="display: none; margin-top: 1rem;">
+                    <strong>✅ Plan guardado exitosamente!</strong> Puedes revisarlo en cualquier momento.
+                </div>
             </div>
 
             <button class="btn" onclick="completeSection(6)">✓ Completar Módulo 1</button>
         </div>
 
-        <!-- Module Navigation -->
         <div class="module-navigation">
-            <a href="index.html" class="btn nav-btn-secondary">← Regresar al Inicio</a>
+            <a href="../index.html" class="btn nav-btn-secondary">← Regresar al Inicio</a>
             <div>
                 <button class="btn" onclick="generateCertificate()" id="certificateBtn" style="display: none;">🏆 Obtener Certificado</button>
-                <a href="modulo2.html" class="btn" id="nextModuleBtn" style="display: none;">Módulo 2: Técnicas →</a>
+                <a href="../modulo2/index.html" class="btn" id="nextModuleBtn" style="display: none;">Módulo 2: Técnicas →</a>
             </div>
         </div>
     </div>
@@ -654,47 +633,39 @@
         let completedSections = new Set();
         let totalSections = 6;
 
-        // Tab functionality
         function showTab(tabId) {
-            // Hide all tab contents
             document.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.remove('active');
             });
             
-            // Remove active class from all tabs
             document.querySelectorAll('.tab').forEach(tab => {
                 tab.classList.remove('active');
             });
             
-            // Show selected tab content
             document.getElementById(tabId).classList.add('active');
-            
-            // Add active class to clicked tab
             event.target.classList.add('active');
         }
 
-        // Complete section
         function completeSection(sectionNumber) {
             completedSections.add(sectionNumber);
             updateProgressBar();
             
-            // Mark section as completed visually
             const section = document.querySelector(`[data-section="${sectionNumber}"]`);
             section.style.opacity = '0.8';
             section.style.border = '2px solid #28a745';
+            section.style.borderRadius = '15px';
             
-            // Show completion message
             alert(`✅ ¡Sección ${sectionNumber} completada! Excelente progreso.`);
             
-            // Check if all sections completed
             if (completedSections.size === totalSections) {
                 document.getElementById('certificateBtn').style.display = 'inline-block';
                 document.getElementById('nextModuleBtn').style.display = 'inline-block';
-                alert('🎉 ¡Felicitaciones! Has completado el Módulo 1. Ahora puedes obtener tu certificado y continuar al Módulo 2.');
+                setTimeout(() => {
+                    alert('🎉 ¡FELICITACIONES! Has completado el Módulo 1.\n\n✅ Ahora entiendes los fundamentos del desarrollo del lenguaje\n✅ Conoces las señales de alerta\n✅ Tienes tu plan personalizado\n\n¡Continúa al Módulo 2 para aprender las técnicas prácticas!');
+                }, 1000);
             }
         }
 
-        // Update progress bar
         function updateProgressBar() {
             const progress = (completedSections.size / totalSections) * 100;
             document.getElementById('progressFill').style.width = progress + '%';
@@ -702,7 +673,22 @@
             document.getElementById('completedSections').textContent = `${completedSections.size} de ${totalSections} secciones`;
         }
 
-        // Generate evaluation
+        function updateChecklistProgress() {
+            const activeTab = document.querySelector('.tab-content.active');
+            const checkboxes = activeTab.querySelectorAll('input[type="checkbox"]');
+            const checkedItems = activeTab.querySelectorAll('input[type="checkbox"]:checked');
+            
+            checkedItems.forEach(checkbox => {
+                checkbox.closest('.checklist-item').classList.add('checked');
+            });
+            
+            checkboxes.forEach(checkbox => {
+                if (!checkbox.checked) {
+                    checkbox.closest('.checklist-item').classList.remove('checked');
+                }
+            });
+        }
+
         function generateEvaluation() {
             const age = document.getElementById('childAge').value;
             const gender = document.getElementById('childGender').value;
@@ -715,49 +701,219 @@
             
             let evaluation = '';
             const genderText = gender === 'male' ? 'tu hijo' : 'tu hija';
-            const ageText = age + ' meses';
+            const ageMonths = parseInt(age);
             
-            // Generate personalized evaluation based on age
-            if (age <= 42) {
+            if (ageMonths <= 42) {
                 evaluation = `
-                    <h4>📊 Evaluación para ${genderText} de ${ageText}:</h4>
+                    <h4>📊 Evaluación para ${genderText} de ${ageMonths} meses:</h4>
                     <div class="alert alert-success">
-                        <strong>Enfoque Principal:</strong> Preparación escolar y habilidades complejas
-                    </div>
-                    <p><strong>Expectativas normales:</strong></p>
-                    <ul>
-                        <li>Oraciones complejas con conectores</li>
-                        <li>Narrativa detallada</li>
-                        <li>Comprensión de conceptos abstractos</li>
-                        <li>Reconocimiento de letras</li>
-                    </ul>
-                    <p><strong>Actividades recomendadas:</strong> Debates simples, escritura de letras, juegos de lógica verbal.</p>
-                `;
-                    <div class="alert alert-success">
-                        <strong>Enfoque Principal:</strong> Estimulación del vocabulario y primeras frases
+                        <strong>Enfoque Principal:</strong> Estimulación del vocabulario y primeras estructuras
                     </div>
                     <p><strong>Expectativas normales:</strong></p>
                     <ul>
                         <li>Vocabulario de 200-1000 palabras</li>
                         <li>Frases de 2-3 palabras</li>
                         <li>Comprende instrucciones simples</li>
+                        <li>Usa "no" frecuentemente</li>
                     </ul>
-                    <p><strong>Actividades recomendadas:</strong> Lectura diaria, canciones, nombrar objetos constantemente.</p>
+                    <p><strong>Actividades recomendadas:</strong> Lectura diaria, canciones, nombrar objetos constantemente, juegos de imitación.</p>
+                    <div class="alert alert-warning">
+                        <strong>📝 Nota:</strong> Esta es una edad de grandes cambios. Sé paciente y consistente.
+                    </div>
                 `;
-            } else if (age <= 54) {
+            } else if (ageMonths <= 54) {
                 evaluation = `
-                    <h4>📊 Evaluación para ${genderText} de ${ageText}:</h4>
+                    <h4>📊 Evaluación para ${genderText} de ${ageMonths} meses:</h4>
                     <div class="alert alert-success">
-                        <strong>Enfoque Principal:</strong> Desarrollo gramatical y narrativa
+                        <strong>Enfoque Principal:</strong> Desarrollo gramatical y narrativa simple
                     </div>
                     <p><strong>Expectativas normales:</strong></p>
                     <ul>
                         <li>Frases de 4-6 palabras</li>
                         <li>Hace preguntas constantemente</li>
                         <li>Cuenta experiencias simples</li>
+                        <li>Usa plural y pasado básico</li>
                     </ul>
-                    <p><strong>Actividades recomendadas:</strong> Conversaciones extendidas, juegos de roles, cuentos interactivos.</p>
+                    <p><strong>Actividades recomendadas:</strong> Conversaciones extendidas, juegos de roles, cuentos interactivos, canciones con acciones.</p>
+                    <div class="alert alert-success">
+                        <strong>🌟 Oportunidad:</strong> Edad perfecta para establecer rutinas de comunicación.
+                    </div>
                 `;
             } else {
                 evaluation = `
-                    <h4>📊 Evaluación para ${genderText} de ${ageText}:</h4>
+                    <h4>📊 Evaluación para ${genderText} de ${ageMonths} meses:</h4>
+                    <div class="alert alert-success">
+                        <strong>Enfoque Principal:</strong> Preparación escolar y habilidades complejas
+                    </div>
+                    <p><strong>Expectativas normales:</strong></p>
+                    <ul>
+                        <li>Oraciones complejas con conectores</li>
+                        <li>Narrativa detallada de eventos</li>
+                        <li>Comprensión de conceptos abstractos</li>
+                        <li>Reconocimiento de letras y sonidos</li>
+                    </ul>
+                    <p><strong>Actividades recomendadas:</strong> Debates simples, escritura de letras, juegos de lógica verbal, lectura compartida avanzada.</p>
+                    <div class="alert alert-success">
+                        <strong>🎓 Preparación:</strong> Momento crucial para habilidades pre-académicas.
+                    </div>
+                `;
+            }
+            
+            resultBox.innerHTML = evaluation;
+            resultBox.classList.add('show');
+            
+            setTimeout(() => {
+                resultBox.scrollIntoView({ behavior: 'smooth' });
+            }, 300);
+        }
+
+        function savePlan() {
+            const summary = document.getElementById('childSummary').value;
+            const goals = document.getElementById('goals').value;
+            
+            if (!summary.trim() || !goals.trim()) {
+                alert('Por favor completa ambos campos antes de guardar.');
+                return;
+            }
+            
+            // Simulate saving to localStorage (in a real app, this would go to a database)
+            const plan = {
+                childSummary: summary,
+                goals: goals,
+                dateCreated: new Date().toLocaleDateString(),
+                module: 'Módulo 1'
+            };
+            
+            localStorage.setItem('childLanguagePlan', JSON.stringify(plan));
+            
+            document.getElementById('planSaved').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('planSaved').scrollIntoView({ behavior: 'smooth' });
+            }, 300);
+        }
+
+        function generateCertificate() {
+            const plan = JSON.parse(localStorage.getItem('childLanguagePlan') || '{}');
+            const childName = plan.childSummary ? plan.childSummary.split(' ')[0] : 'tu hijo';
+            
+            const certificate = `
+🏆 CERTIFICADO DE COMPLETACIÓN 🏆
+
+Felicitaciones por completar el MÓDULO 1:
+"Fundamentos del Desarrollo del Lenguaje"
+
+✅ Has aprendido los períodos críticos del desarrollo
+✅ Conoces las 4 dimensiones del lenguaje  
+✅ Identificas señales de alerta y normalidad
+✅ Tienes un plan personalizado para ${childName}
+
+Fecha: ${new Date().toLocaleDateString()}
+Curso: Estimulación del Lenguaje en Casa
+Academia de Psicología
+
+¡Continúa al Módulo 2 para técnicas prácticas!
+            `;
+            
+            // Create downloadable certificate
+            const blob = new Blob([certificate], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Certificado_Modulo1.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            alert('🎉 ¡Certificado descargado! Revisa tu carpeta de descargas.');
+        }
+
+        function showProgress() {
+            const progress = (completedSections.size / totalSections) * 100;
+            const completedList = Array.from(completedSections).sort().join(', ');
+            
+            alert(`📊 TU PROGRESO EN MÓDULO 1:
+            
+✅ Progreso: ${Math.round(progress)}% completado
+📚 Secciones completadas: ${completedSections.size} de ${totalSections}
+🎯 Secciones: ${completedList || 'Ninguna aún'}
+
+${progress === 100 ? '🎉 ¡MÓDULO COMPLETADO!' : '💪 ¡Sigue adelante!'}`);
+        }
+
+        function logout() {
+            if (confirm('¿Estás seguro que quieres salir? Tu progreso se guardará automáticamente.')) {
+                // Save progress before leaving
+                localStorage.setItem('module1Progress', JSON.stringify({
+                    completedSections: Array.from(completedSections),
+                    lastAccess: new Date().toISOString()
+                }));
+                window.location.href = '../index.html';
+            }
+        }
+
+        // Load saved progress on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedProgress = localStorage.getItem('module1Progress');
+            if (savedProgress) {
+                const progress = JSON.parse(savedProgress);
+                progress.completedSections.forEach(section => {
+                    completedSections.add(section);
+                    const sectionElement = document.querySelector(`[data-section="${section}"]`);
+                    if (sectionElement) {
+                        sectionElement.style.opacity = '0.8';
+                        sectionElement.style.border = '2px solid #28a745';
+                        sectionElement.style.borderRadius = '15px';
+                    }
+                });
+                updateProgressBar();
+                
+                if (completedSections.size === totalSections) {
+                    document.getElementById('certificateBtn').style.display = 'inline-block';
+                    document.getElementById('nextModuleBtn').style.display = 'inline-block';
+                }
+            }
+            
+            // Load saved plan if exists
+            const savedPlan = localStorage.getItem('childLanguagePlan');
+            if (savedPlan) {
+                const plan = JSON.parse(savedPlan);
+                document.getElementById('childSummary').value = plan.childSummary || '';
+                document.getElementById('goals').value = plan.goals || '';
+            }
+        });
+
+        // Auto-save plan while typing
+        let saveTimeout;
+        document.getElementById('childSummary').addEventListener('input', function() {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(() => {
+                const summary = this.value;
+                const goals = document.getElementById('goals').value;
+                if (summary.trim()) {
+                    const plan = JSON.parse(localStorage.getItem('childLanguagePlan') || '{}');
+                    plan.childSummary = summary;
+                    plan.goals = goals;
+                    localStorage.setItem('childLanguagePlan', JSON.stringify(plan));
+                }
+            }, 2000);
+        });
+
+        document.getElementById('goals').addEventListener('input', function() {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(() => {
+                const goals = this.value;
+                const summary = document.getElementById('childSummary').value;
+                if (goals.trim()) {
+                    const plan = JSON.parse(localStorage.getItem('childLanguagePlan') || '{}');
+                    plan.childSummary = summary;
+                    plan.goals = goals;
+                    localStorage.setItem('childLanguagePlan', JSON.stringify(plan));
+                }
+            }, 2000);
+        });
+
+        console.log('🧠 Módulo 1: Fundamentos del Desarrollo cargado correctamente');
+    </script>
+</body>
+</html>
