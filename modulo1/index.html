@@ -335,7 +335,7 @@
         <div class="nav-container">
             <div class="logo">🧠 Módulo 1: Fundamentos</div>
             <div class="nav-links">
-                <a href="../index.html#courseDashboard">← Dashboard</a>
+                <a href="../index.html">← Dashboard</a>
                 <a href="#" onclick="showProgress()">Mi Progreso</a>
                 <a href="#" onclick="logout()">Salir</a>
             </div>
@@ -382,12 +382,7 @@
                 <strong>⚠️ Importante:</strong> Aunque el aprendizaje continúa toda la vida, las conexiones neurales formadas en estos períodos críticos son las más fuertes y duraderas.
             </div>
 
-           <button class="btn" onclick="completeSection(3)">✓ Completar Evaluación</button>
-        </div>
-        <!-- NUEVO: Resultado del Checklist -->
-        <div id="checklistResults" class="result-box" style="background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%); margin-top: 2rem;">
-            <h3>📊 Diagnóstico del Desarrollo del Lenguaje</h3>
-            <div id="diagnosticContent"></div>
+            <button class="btn" onclick="completeSection(1)">✓ Completar Sección</button>
         </div>
 
         <div class="content-section" data-section="2">
@@ -427,8 +422,9 @@
 
                 <div id="evaluationResult" class="result-box"></div>
             </div>
-        </div>
 
+            <button class="btn" onclick="completeSection(2)">✓ Completar Sección</button>
+        </div>
         <div class="content-section" data-section="3">
             <h2 class="section-title">
                 <span class="section-icon">✅</span>
@@ -521,6 +517,13 @@
 
             <button class="btn" onclick="completeSection(3)">✓ Completar Evaluación</button>
         </div>
+
+        <!-- Resultado del Checklist -->
+        <div id="checklistResults" class="result-box" style="background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%); margin-top: 2rem;">
+            <h3>📊 Diagnóstico del Desarrollo del Lenguaje</h3>
+            <div id="diagnosticContent"></div>
+        </div>
+
         <div class="content-section" data-section="4">
             <h2 class="section-title">
                 <span class="section-icon">🎯</span>
@@ -600,7 +603,7 @@
             <button class="btn" onclick="completeSection(5)">✓ Revisado</button>
         </div>
 
-       <div class="content-section" data-section="6">
+        <div class="content-section" data-section="6">
             <h2 class="section-title">
                 <span class="section-icon">📋</span>
                 Tu Plan Personalizado de Acción
@@ -634,6 +637,14 @@
             <button class="btn" onclick="completeSection(6)">✓ Completar Módulo 1</button>
         </div>
 
+        <div class="module-navigation">
+            <a href="../index.html" class="btn nav-btn-secondary">← Regresar al Dashboard</a>
+            <div>
+                <button class="btn" onclick="generateCertificate()" id="certificateBtn" style="display: none;">🏆 Obtener Certificado</button>
+                <a href="../modulo2/index.html" class="btn" id="nextModuleBtn" style="display: none;">Módulo 2: Técnicas →</a>
+            </div>
+        </div>
+    </div>
     <script>
     // Variables globales
     let completedSections = new Set();
@@ -649,6 +660,11 @@
         
         // Inicializar eventos de los checkboxes
         initializeCheckboxes();
+        
+        // Cargar estado del checklist
+        setTimeout(() => {
+            loadChecklistState();
+        }, 500);
     });
 
     // Función para cargar progreso guardado
@@ -676,15 +692,15 @@
 
     // Función para cargar plan guardado
     function loadSavedPlan() {
-        const savedPlan = localStorage.getItem('childLanguagePlan');
+        const savedPlan = localStorage.getItem('childCompletePlan');
         if (savedPlan) {
             try {
                 const plan = JSON.parse(savedPlan);
-                if (plan.childSummary) {
-                    document.getElementById('childSummary').value = plan.childSummary;
-                }
-                if (plan.goals) {
-                    document.getElementById('goals').value = plan.goals;
+                if (plan.personalNotes) {
+                    const notesField = document.getElementById('personalNotes');
+                    if (notesField) {
+                        notesField.value = plan.personalNotes;
+                    }
                 }
             } catch (e) {
                 console.error('Error loading plan:', e);
@@ -1079,7 +1095,7 @@
         }, 300);
     }
 
-    // NUEVA FUNCIÓN: Guardar diagnóstico
+    // Función para guardar diagnóstico
     function saveDiagnostic() {
         const diagnostic = localStorage.getItem('lastDiagnostic');
         if (diagnostic) {
@@ -1097,7 +1113,7 @@
         }
     }
 
-    // NUEVA FUNCIÓN: Imprimir plan
+    // Función para imprimir plan
     function printPlan() {
         const planContent = document.getElementById('planContent').innerHTML;
         const printWindow = window.open('', '', 'height=600,width=800');
@@ -1110,7 +1126,7 @@
         printWindow.print();
     }
 
-    // NUEVA FUNCIÓN: Descargar plan
+    // Función para descargar plan
     function downloadPlan() {
         const planData = localStorage.getItem('generatedPlan');
         if (planData) {
@@ -1130,7 +1146,7 @@
         }
     }
 
-    // FUNCIÓN ACTUALIZADA: Guardar plan con notas personales
+    // Función para guardar plan con notas personales
     function savePlan() {
         const notes = document.getElementById('personalNotes').value.trim();
         const generatedPlan = localStorage.getItem('generatedPlan');
@@ -1155,16 +1171,6 @@
         setTimeout(() => {
             document.getElementById('planSaved').scrollIntoView({ behavior: 'smooth' });
         }, 300);
-    }
-        
-        // Guardar estado de checkboxes
-        saveChecklistState();
-        
-        // Verificar si todos están marcados
-        const allChecked = Array.from(checkboxes).every(cb => cb.checked);
-        if (allChecked) {
-            showSuccessMessage('¡Excelente! Has completado toda la evaluación de esta edad');
-        }
     }
 
     // Función para guardar estado del checklist
@@ -1224,7 +1230,7 @@
                 <div class="alert alert-success">
                     <strong>Enfoque Principal:</strong> Estimulación del vocabulario y primeras estructuras
                 </div>
-                <p><strong>Expectativas normales:</strong></p>
+                <p><strong>Lo esperado a esta edad:</strong></p>
                 <ul>
                     <li>Vocabulario de 200-1000 palabras</li>
                     <li>Frases de 2-3 palabras</li>
@@ -1248,7 +1254,7 @@
                 <div class="alert alert-success">
                     <strong>Enfoque Principal:</strong> Desarrollo gramatical y narrativa simple
                 </div>
-                <p><strong>Expectativas normales:</strong></p>
+                <p><strong>Lo esperado a esta edad:</strong></p>
                 <ul>
                     <li>Frases de 4-6 palabras</li>
                     <li>Hace preguntas constantemente</li>
@@ -1272,7 +1278,7 @@
                 <div class="alert alert-success">
                     <strong>Enfoque Principal:</strong> Preparación escolar y habilidades complejas
                 </div>
-                <p><strong>Expectativas normales:</strong></p>
+                <p><strong>Lo esperado a esta edad:</strong></p>
                 <ul>
                     <li>Oraciones complejas con conectores</li>
                     <li>Narrativa detallada de eventos</li>
@@ -1304,34 +1310,6 @@
         
         setTimeout(() => {
             resultBox.scrollIntoView({ behavior: 'smooth' });
-        }, 300);
-    }
-
-    // Función para guardar plan personalizado
-    function savePlan() {
-        const summary = document.getElementById('childSummary').value.trim();
-        const goals = document.getElementById('goals').value.trim();
-        
-        if (!summary || !goals) {
-            showWarningMessage('Por favor completa ambos campos antes de guardar');
-            return;
-        }
-        
-        const plan = {
-            childSummary: summary,
-            goals: goals,
-            dateCreated: new Date().toLocaleDateString('es-ES'),
-            module: 'Módulo 1',
-            lastModified: new Date().toISOString()
-        };
-        
-        localStorage.setItem('childLanguagePlan', JSON.stringify(plan));
-        
-        document.getElementById('planSaved').style.display = 'block';
-        showSuccessMessage('¡Plan guardado exitosamente!');
-        
-        setTimeout(() => {
-            document.getElementById('planSaved').scrollIntoView({ behavior: 'smooth' });
         }, 300);
     }
 
@@ -1376,7 +1354,6 @@
 
     // Función para generar certificado
     function generateCertificate() {
-        const plan = JSON.parse(localStorage.getItem('childLanguagePlan') || '{}');
         const userName = prompt('¿Cuál es tu nombre para el certificado?') || 'Estudiante';
         
         const certificate = `
@@ -1447,21 +1424,13 @@
         }
     }
 
-    // Función para guardar y regresar
-    function saveAndReturn(event) {
-        event.preventDefault();
-        saveProgress();
-        saveChecklistState();
-        window.location.href = '../index.html';
-    }
-
     // Funciones de mensajes
     function showSuccessMessage(message) {
         console.log('✅', message);
-        // Aquí podrías agregar una notificación visual más elegante
+        // Notificación visual
         const notification = document.createElement('div');
         notification.className = 'alert alert-success';
-        notification.style.cssText = 'position:fixed;top:80px;right:20px;z-index:9999;animation:slideIn 0.5s';
+        notification.style.cssText = 'position:fixed;top:80px;right:20px;z-index:9999;animation:slideIn 0.5s;padding:1rem 2rem;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,0.2)';
         notification.innerHTML = `✅ ${message}`;
         document.body.appendChild(notification);
         setTimeout(() => notification.remove(), 3000);
@@ -1477,44 +1446,26 @@
         alert('ℹ️ ' + message);
     }
 
-    // Auto-guardado mientras escribe
+    // Auto-guardado de notas mientras escribe
     let saveTimeout;
-    document.getElementById('childSummary').addEventListener('input', function() {
-        clearTimeout(saveTimeout);
-        saveTimeout = setTimeout(() => {
-            const goals = document.getElementById('goals').value;
-            if (this.value.trim() || goals.trim()) {
-                const plan = {
-                    childSummary: this.value,
-                    goals: goals,
-                    lastModified: new Date().toISOString()
-                };
-                localStorage.setItem('childLanguagePlan_draft', JSON.stringify(plan));
-            }
-        }, 2000);
-    });
+    const personalNotesField = document.getElementById('personalNotes');
+    if (personalNotesField) {
+        personalNotesField.addEventListener('input', function() {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(() => {
+                if (this.value.trim()) {
+                    const draft = {
+                        personalNotes: this.value,
+                        lastModified: new Date().toISOString()
+                    };
+                    localStorage.setItem('childPlanDraft', JSON.stringify(draft));
+                    console.log('Auto-guardado de notas');
+                }
+            }, 2000);
+        });
+    }
 
-    document.getElementById('goals').addEventListener('input', function() {
-        clearTimeout(saveTimeout);
-        saveTimeout = setTimeout(() => {
-            const summary = document.getElementById('childSummary').value;
-            if (this.value.trim() || summary.trim()) {
-                const plan = {
-                    childSummary: summary,
-                    goals: this.value,
-                    lastModified: new Date().toISOString()
-                };
-                localStorage.setItem('childLanguagePlan_draft', JSON.stringify(plan));
-            }
-        }, 2000);
-    });
-
-    // Cargar estado del checklist al inicio
-    setTimeout(() => {
-        loadChecklistState();
-    }, 500);
-
-    console.log('🧠 Módulo 1: Sistema de progreso y funciones cargado correctamente');
-</script>
+    console.log('🧠 Módulo 1: Sistema completo cargado correctamente');
+    </script>
 </body>
 </html>
