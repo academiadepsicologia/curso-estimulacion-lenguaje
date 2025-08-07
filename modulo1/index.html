@@ -335,7 +335,7 @@
         <div class="nav-container">
             <div class="logo">🧠 Módulo 1: Fundamentos</div>
             <div class="nav-links">
-                <a href="../index.html">← Inicio</a>
+                <a href="../index.html#courseDashboard">← Dashboard</a>
                 <a href="#" onclick="showProgress()">Mi Progreso</a>
                 <a href="#" onclick="logout()">Salir</a>
             </div>
@@ -620,8 +620,8 @@
             <button class="btn" onclick="completeSection(6)">✓ Completar Módulo 1</button>
         </div>
 
-        <div class="module-navigation">
-            <a href="../index.html" class="btn nav-btn-secondary">← Regresar al Inicio</a>
+       <div class="module-navigation">
+    <a href="../index.html#courseDashboard" class="btn nav-btn-secondary">← Regresar al Dashboard</a>
             <div>
                 <button class="btn" onclick="generateCertificate()" id="certificateBtn" style="display: none;">🏆 Obtener Certificado</button>
                 <a href="../modulo2/index.html" class="btn" id="nextModuleBtn" style="display: none;">Módulo 2: Técnicas →</a>
@@ -667,7 +667,7 @@
         }
 
         function updateProgressBar() {
-            const progress = (completedSections.size / totalSections) * 100;
+            <a href="../modulo2/index.html" class="btn" id="nextModuleBtn" style="display: none;" onclick="unlockNextModule()">Módulo 2: Técnicas →</a>
             document.getElementById('progressFill').style.width = progress + '%';
             document.getElementById('progressText').textContent = Math.round(progress) + '% completado';
             document.getElementById('completedSections').textContent = `${completedSections.size} de ${totalSections} secciones`;
@@ -681,6 +681,14 @@
             checkedItems.forEach(checkbox => {
                 checkbox.closest('.checklist-item').classList.add('checked');
             });
+            // Check if user is logged in
+document.addEventListener('DOMContentLoaded', function() {
+    const currentSession = localStorage.getItem('currentSession');
+    if (!currentSession) {
+        alert('⚠️ No has iniciado sesión. Redirigiendo al inicio...');
+        window.location.href = '../index.html';
+    }
+});
             
             checkboxes.forEach(checkbox => {
                 if (!checkbox.checked) {
@@ -734,6 +742,15 @@
                         <li>Cuenta experiencias simples</li>
                         <li>Usa plural y pasado básico</li>
                     </ul>
+                    function unlockNextModule() {
+    // Update course progress to unlock Module 2
+    let courseProgress = JSON.parse(localStorage.getItem('courseProgress') || '[false,false,false,false,false]');
+    courseProgress[0] = true; // Mark Module 1 as completed
+    localStorage.setItem('courseProgress', JSON.stringify(courseProgress));
+    
+    // Show success message
+    alert('🎉 ¡Has desbloqueado el Módulo 2: Técnicas de Estimulación!');
+}
                     <p><strong>Actividades recomendadas:</strong> Conversaciones extendidas, juegos de roles, cuentos interactivos, canciones con acciones.</p>
                     <div class="alert alert-success">
                         <strong>🌟 Oportunidad:</strong> Edad perfecta para establecer rutinas de comunicación.
@@ -842,15 +859,25 @@ ${progress === 100 ? '🎉 ¡MÓDULO COMPLETADO!' : '💪 ¡Sigue adelante!'}`);
         }
 
         function logout() {
-            if (confirm('¿Estás seguro que quieres salir? Tu progreso se guardará automáticamente.')) {
-                // Save progress before leaving
-                localStorage.setItem('module1Progress', JSON.stringify({
-                    completedSections: Array.from(completedSections),
-                    lastAccess: new Date().toISOString()
-                }));
-                window.location.href = '../index.html';
-            }
+    if (confirm('¿Estás seguro que quieres salir? Tu progreso se guardará automáticamente.')) {
+        // Save module progress
+        localStorage.setItem('module1Progress', JSON.stringify({
+            completedSections: Array.from(completedSections),
+            lastAccess: new Date().toISOString()
+        }));
+        
+        // Update overall course progress
+        let courseProgress = JSON.parse(localStorage.getItem('courseProgress') || '[false,false,false,false,false]');
+        if (completedSections.size === totalSections) {
+            courseProgress[0] = true; // Module 1 completed
+            localStorage.setItem('courseProgress', JSON.stringify(courseProgress));
         }
+        
+        // Clear session and redirect
+        localStorage.removeItem('currentSession');
+        window.location.href = '../index.html';
+    }
+}
 
         // Load saved progress on page load
         document.addEventListener('DOMContentLoaded', function() {
