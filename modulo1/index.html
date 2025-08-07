@@ -382,7 +382,12 @@
                 <strong>⚠️ Importante:</strong> Aunque el aprendizaje continúa toda la vida, las conexiones neurales formadas en estos períodos críticos son las más fuertes y duraderas.
             </div>
 
-            <button class="btn" onclick="completeSection(1)">✓ Completar Sección</button>
+           <button class="btn" onclick="completeSection(3)">✓ Completar Evaluación</button>
+        </div>
+        <!-- NUEVO: Resultado del Checklist -->
+        <div id="checklistResults" class="result-box" style="background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%); margin-top: 2rem;">
+            <h3>📊 Diagnóstico del Desarrollo del Lenguaje</h3>
+            <div id="diagnosticContent"></div>
         </div>
 
         <div class="content-section" data-section="2">
@@ -595,22 +600,31 @@
             <button class="btn" onclick="completeSection(5)">✓ Revisado</button>
         </div>
 
-        <div class="content-section" data-section="6">
+       <div class="content-section" data-section="6">
             <h2 class="section-title">
                 <span class="section-icon">📋</span>
                 Tu Plan Personalizado de Acción
             </h2>
 
-            <p>Basándome en lo que has aprendido, crea tu plan de estimulación personalizado:</p>
+            <p>Basándome en la evaluación de tu hijo, aquí está tu plan personalizado:</p>
 
-            <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; margin: 1rem 0;">
-                <h4>📝 Resumen de mi hijo:</h4>
-                <textarea id="childSummary" placeholder="Escribe aquí las características actuales de tu hijo (edad, fortalezas, áreas a mejorar)..." style="width: 100%; height: 100px; padding: 1rem; border: 1px solid #ddd; border-radius: 5px; margin: 1rem 0;"></textarea>
+            <!-- Botón para generar plan automático -->
+            <button class="btn" onclick="generatePersonalizedPlan()" style="background: linear-gradient(135deg, #ff6b6b 0%, #ffd93d 100%);">
+                🎯 Generar Mi Plan Personalizado
+            </button>
+
+            <!-- Contenedor del plan generado -->
+            <div id="generatedPlan" class="result-box" style="background: #f8f9fa; padding: 2rem; border-radius: 10px; margin: 2rem 0; display: none;">
+                <div id="planContent"></div>
+            </div>
+
+            <!-- Área de notas personales -->
+            <div style="background: #fff; padding: 2rem; border-radius: 10px; margin: 1rem 0; border: 2px solid #e9ecef;">
+                <h4>📝 Mis Notas y Observaciones:</h4>
+                <textarea id="personalNotes" placeholder="Agrega aquí observaciones específicas sobre tu hijo que quieras recordar..." 
+                    style="width: 100%; height: 100px; padding: 1rem; border: 1px solid #ddd; border-radius: 5px; margin: 1rem 0;"></textarea>
                 
-                <h4>🎯 Mis objetivos para los próximos 30 días:</h4>
-                <textarea id="goals" placeholder="Ej: Que forme frases de 4 palabras, que pronuncie mejor la 'r', que sea menos tímido..." style="width: 100%; height: 100px; padding: 1rem; border: 1px solid #ddd; border-radius: 5px; margin: 1rem 0;"></textarea>
-                
-                <button class="btn" onclick="savePlan()">💾 Guardar Mi Plan</button>
+                <button class="btn" onclick="savePlan()">💾 Guardar Mi Plan Completo</button>
                 
                 <div id="planSaved" class="alert alert-success" style="display: none; margin-top: 1rem;">
                     <strong>✅ Plan guardado exitosamente!</strong> Puedes revisarlo en cualquier momento.
@@ -619,15 +633,6 @@
 
             <button class="btn" onclick="completeSection(6)">✓ Completar Módulo 1</button>
         </div>
-
-       <div class="module-navigation">
-    <a href="../index.html#courseDashboard" class="btn nav-btn-secondary">← Regresar al Dashboard</a>
-            <div>
-                <button class="btn" onclick="generateCertificate()" id="certificateBtn" style="display: none;">🏆 Obtener Certificado</button>
-                <a href="../modulo2/index.html" class="btn" id="nextModuleBtn" style="display: none;">Módulo 2: Técnicas →</a>
-            </div>
-        </div>
-    </div>
 
     <script>
     // Variables globales
@@ -769,7 +774,7 @@
         }
     }
 
-    // Función para actualizar progreso del checklist
+    // Función mejorada para actualizar progreso del checklist
     function updateChecklistProgress() {
         const activeTab = document.querySelector('.tab-content.active');
         if (!activeTab) return;
@@ -784,6 +789,373 @@
                 item.classList.remove('checked');
             }
         });
+        
+        // Guardar estado de checkboxes
+        saveChecklistState();
+        
+        // Generar diagnóstico automático
+        generateDiagnostic();
+    }
+
+    // NUEVA FUNCIÓN: Generar diagnóstico basado en checklist
+    function generateDiagnostic() {
+        const activeTab = document.querySelector('.tab-content.active');
+        if (!activeTab) return;
+        
+        const checkboxes = activeTab.querySelectorAll('input[type="checkbox"]');
+        const total = checkboxes.length;
+        const checked = activeTab.querySelectorAll('input[type="checkbox"]:checked').length;
+        const percentage = (checked / total) * 100;
+        
+        // Determinar edad del tab activo
+        let ageGroup = '3 años';
+        if (activeTab.id.includes('4years')) ageGroup = '4 años';
+        if (activeTab.id.includes('5years')) ageGroup = '5 años';
+        
+        // Generar diagnóstico
+        let nivel, color, mensaje, recomendaciones;
+        
+        if (percentage >= 80) {
+            nivel = "DESARROLLO ESPERADO";
+            color = "#28a745";
+            mensaje = "¡Excelente! El desarrollo del lenguaje está dentro de lo esperado para la edad.";
+            recomendaciones = [
+                "Continúa con las actividades actuales",
+                "Introduce gradualmente retos más complejos",
+                "Fomenta la creatividad verbal con cuentos inventados",
+                "Practica conversaciones más largas"
+            ];
+        } else if (percentage >= 60) {
+            nivel = "DESARROLLO EN PROGRESO";
+            color = "#ffc107";
+            mensaje = "El desarrollo muestra algunas áreas que necesitan refuerzo.";
+            recomendaciones = [
+                "Dedica 20 minutos diarios a actividades de lenguaje",
+                "Enfócate en las habilidades no marcadas",
+                "Lee cuentos interactivos diariamente",
+                "Practica las áreas débiles con juegos"
+            ];
+        } else if (percentage >= 40) {
+            nivel = "NECESITA APOYO ADICIONAL";
+            color = "#ff9800";
+            mensaje = "Se recomienda implementar estrategias de estimulación más intensivas.";
+            recomendaciones = [
+                "Implementa rutinas diarias de estimulación",
+                "Considera una evaluación profesional",
+                "Trabaja una habilidad a la vez",
+                "Usa refuerzo positivo constantemente"
+            ];
+        } else {
+            nivel = "REQUIERE ATENCIÓN ESPECIALIZADA";
+            color = "#f44336";
+            mensaje = "Es importante buscar orientación profesional para un plan específico.";
+            recomendaciones = [
+                "Consulta con un especialista en lenguaje",
+                "Mantén un registro diario de avances",
+                "Implementa las actividades del curso inmediatamente",
+                "Busca apoyo adicional si es necesario"
+            ];
+        }
+        
+        // Identificar áreas específicas
+        const uncheckedItems = [];
+        activeTab.querySelectorAll('input[type="checkbox"]:not(:checked)').forEach(cb => {
+            uncheckedItems.push(cb.parentElement.textContent.trim());
+        });
+        
+        // Mostrar resultados
+        const resultsDiv = document.getElementById('checklistResults');
+        const diagnosticContent = document.getElementById('diagnosticContent');
+        
+        diagnosticContent.innerHTML = `
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <div style="font-size: 3rem; font-weight: bold; color: ${color};">
+                    ${Math.round(percentage)}%
+                </div>
+                <div style="font-size: 1.2rem; color: ${color}; font-weight: bold;">
+                    ${nivel}
+                </div>
+                <p style="margin-top: 1rem;">${mensaje}</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 2rem 0;">
+                <div style="background: white; padding: 1.5rem; border-radius: 10px;">
+                    <h4 style="color: #28a745;">✅ Habilidades Logradas</h4>
+                    <p style="font-size: 2rem; font-weight: bold; color: #28a745;">${checked}/${total}</p>
+                </div>
+                <div style="background: white; padding: 1.5rem; border-radius: 10px;">
+                    <h4 style="color: #ff9800;">🎯 Áreas a Trabajar</h4>
+                    <p style="font-size: 2rem; font-weight: bold; color: #ff9800;">${total - checked}</p>
+                </div>
+            </div>
+            
+            <div style="background: white; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <h4>📌 Recomendaciones Específicas:</h4>
+                <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                    ${recomendaciones.map(r => `<li style="margin: 0.5rem 0;">${r}</li>`).join('')}
+                </ul>
+            </div>
+            
+            ${uncheckedItems.length > 0 ? `
+            <div style="background: #fff3cd; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <h4 style="color: #856404;">⚠️ Habilidades a Desarrollar:</h4>
+                <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                    ${uncheckedItems.slice(0, 3).map(item => `<li style="margin: 0.5rem 0;">${item}</li>`).join('')}
+                    ${uncheckedItems.length > 3 ? `<li style="margin: 0.5rem 0;">... y ${uncheckedItems.length - 3} más</li>` : ''}
+                </ul>
+            </div>
+            ` : ''}
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="btn" onclick="saveDiagnostic()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    💾 Guardar Este Diagnóstico
+                </button>
+            </div>
+        `;
+        
+        resultsDiv.style.display = 'block';
+        
+        // Guardar diagnóstico en localStorage
+        localStorage.setItem('lastDiagnostic', JSON.stringify({
+            ageGroup: ageGroup,
+            percentage: percentage,
+            nivel: nivel,
+            date: new Date().toISOString()
+        }));
+        
+        setTimeout(() => {
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        }, 300);
+    }
+
+    // NUEVA FUNCIÓN: Generar plan personalizado automático
+    function generatePersonalizedPlan() {
+        // Obtener datos guardados
+        const diagnostic = JSON.parse(localStorage.getItem('lastDiagnostic') || '{}');
+        const evaluation = JSON.parse(localStorage.getItem('lastEvaluation') || '{}');
+        
+        if (!diagnostic.percentage && !evaluation.age) {
+            showWarningMessage('Por favor completa primero la evaluación y el checklist');
+            return;
+        }
+        
+        const age = evaluation.age || 48;
+        const percentage = diagnostic.percentage || 50;
+        const nivel = diagnostic.nivel || 'DESARROLLO EN PROGRESO';
+        
+        // Generar plan basado en los resultados
+        let planHTML = `
+            <h3>🎯 Tu Plan Personalizado - ${new Date().toLocaleDateString('es-ES')}</h3>
+            
+            <div style="background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%); padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <h4>📊 Resumen de Evaluación:</h4>
+                <p>• Edad: ${age} meses</p>
+                <p>• Nivel de desarrollo: ${nivel}</p>
+                <p>• Progreso actual: ${Math.round(percentage)}%</p>
+            </div>
+        `;
+        
+        // Plan semanal según nivel
+        if (percentage >= 80) {
+            planHTML += `
+                <div style="background: #d4edda; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                    <h4>✅ Plan de Mantenimiento y Avance</h4>
+                    <p><strong>Objetivo:</strong> Mantener el excelente progreso y agregar complejidad</p>
+                    
+                    <h5 style="margin-top: 1rem;">📅 Rutina Diaria (15-20 minutos):</h5>
+                    <ul>
+                        <li><strong>Lunes:</strong> Inventar cuentos juntos (10 min) + Describir emociones (10 min)</li>
+                        <li><strong>Martes:</strong> Juegos de palabras y rimas (15 min)</li>
+                        <li><strong>Miércoles:</strong> Teatro de títeres con diálogos (20 min)</li>
+                        <li><strong>Jueves:</strong> Contar experiencias del día con detalles (15 min)</li>
+                        <li><strong>Viernes:</strong> Lectura interactiva avanzada (20 min)</li>
+                        <li><strong>Fin de semana:</strong> Actividades creativas libres</li>
+                    </ul>
+                </div>
+            `;
+        } else if (percentage >= 60) {
+            planHTML += `
+                <div style="background: #fff3cd; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                    <h4>🎯 Plan de Estimulación Progresiva</h4>
+                    <p><strong>Objetivo:</strong> Fortalecer áreas débiles y consolidar habilidades</p>
+                    
+                    <h5 style="margin-top: 1rem;">📅 Rutina Diaria (25-30 minutos):</h5>
+                    <ul>
+                        <li><strong>Mañana (10 min):</strong> Nombrar objetos y sus características durante el desayuno</li>
+                        <li><strong>Medio día (10 min):</strong> Cantar canciones con movimientos</li>
+                        <li><strong>Tarde (10 min):</strong> Lectura de cuentos con preguntas</li>
+                    </ul>
+                    
+                    <h5 style="margin-top: 1rem;">🎮 Actividades Semanales Específicas:</h5>
+                    <ul>
+                        <li><strong>Lunes y Miércoles:</strong> Juegos de imitación y roles (doctor, cocinero)</li>
+                        <li><strong>Martes y Jueves:</strong> Describir imágenes y contar historias</li>
+                        <li><strong>Viernes:</strong> Repaso jugando con lo aprendido</li>
+                    </ul>
+                </div>
+            `;
+        } else {
+            planHTML += `
+                <div style="background: #f8d7da; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                    <h4>🚀 Plan Intensivo de Estimulación</h4>
+                    <p><strong>Objetivo:</strong> Estimulación diaria estructurada para acelerar el desarrollo</p>
+                    
+                    <h5 style="margin-top: 1rem;">📅 Rutina Diaria OBLIGATORIA (45 minutos):</h5>
+                    <div style="background: white; padding: 1rem; border-radius: 5px; margin: 1rem 0;">
+                        <p><strong>🌅 Mañana (15 min):</strong></p>
+                        <ul>
+                            <li>5 min: Nombrar todo lo que ve</li>
+                            <li>5 min: Repetir palabras nuevas</li>
+                            <li>5 min: Formar frases simples</li>
+                        </ul>
+                        
+                        <p><strong>☀️ Medio día (15 min):</strong></p>
+                        <ul>
+                            <li>10 min: Canciones infantiles con gestos</li>
+                            <li>5 min: Identificar sonidos y palabras</li>
+                        </ul>
+                        
+                        <p><strong>🌙 Noche (15 min):</strong></p>
+                        <ul>
+                            <li>10 min: Cuento interactivo</li>
+                            <li>5 min: Resumen del día</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: #ffeaa7; padding: 1rem; border-radius: 5px; margin: 1rem 0;">
+                        <p><strong>⚠️ IMPORTANTE:</strong> Considera consultar con un especialista mientras implementas este plan.</p>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Agregar recursos y materiales
+        planHTML += `
+            <div style="background: white; padding: 1.5rem; border-radius: 10px; margin: 1rem 0; border: 2px solid #667eea;">
+                <h4>📚 Materiales Necesarios (todos en casa):</h4>
+                <ul>
+                    <li>Libros de cuentos con imágenes</li>
+                    <li>Juguetes para juego simbólico</li>
+                    <li>Música infantil</li>
+                    <li>Papel y colores para dibujar</li>
+                    <li>Objetos cotidianos para nombrar</li>
+                </ul>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                <h4>🎯 Metas para los próximos 30 días:</h4>
+                <ol>
+                    <li>Implementar la rutina diaria sin fallar</li>
+                    <li>Documentar 3 nuevas palabras/frases por semana</li>
+                    <li>Celebrar cada pequeño avance</li>
+                    <li>Evaluar progreso cada domingo</li>
+                </ol>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="btn" onclick="printPlan()" style="background: #28a745;">
+                    🖨️ Imprimir Plan
+                </button>
+                <button class="btn" onclick="downloadPlan()" style="background: #ff6b6b;">
+                    📥 Descargar Plan
+                </button>
+            </div>
+        `;
+        
+        // Mostrar el plan
+        document.getElementById('planContent').innerHTML = planHTML;
+        document.getElementById('generatedPlan').style.display = 'block';
+        
+        // Guardar plan generado
+        localStorage.setItem('generatedPlan', JSON.stringify({
+            html: planHTML,
+            date: new Date().toISOString(),
+            diagnostic: diagnostic,
+            evaluation: evaluation
+        }));
+        
+        setTimeout(() => {
+            document.getElementById('generatedPlan').scrollIntoView({ behavior: 'smooth' });
+        }, 300);
+    }
+
+    // NUEVA FUNCIÓN: Guardar diagnóstico
+    function saveDiagnostic() {
+        const diagnostic = localStorage.getItem('lastDiagnostic');
+        if (diagnostic) {
+            const blob = new Blob([JSON.stringify(JSON.parse(diagnostic), null, 2)], { type: 'application/json' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Diagnostico_${new Date().toLocaleDateString('es-ES').replace(/\//g, '-')}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            showSuccessMessage('Diagnóstico guardado en tu dispositivo');
+        }
+    }
+
+    // NUEVA FUNCIÓN: Imprimir plan
+    function printPlan() {
+        const planContent = document.getElementById('planContent').innerHTML;
+        const printWindow = window.open('', '', 'height=600,width=800');
+        printWindow.document.write('<html><head><title>Mi Plan Personalizado</title>');
+        printWindow.document.write('<style>body{font-family: Arial, sans-serif; padding: 20px;}</style>');
+        printWindow.document.write('</head><body>');
+        printWindow.document.write(planContent);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    }
+
+    // NUEVA FUNCIÓN: Descargar plan
+    function downloadPlan() {
+        const planData = localStorage.getItem('generatedPlan');
+        if (planData) {
+            const plan = JSON.parse(planData);
+            const textContent = document.getElementById('planContent').innerText;
+            const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Plan_Personalizado_${new Date().toLocaleDateString('es-ES').replace(/\//g, '-')}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            showSuccessMessage('Plan descargado exitosamente');
+        }
+    }
+
+    // FUNCIÓN ACTUALIZADA: Guardar plan con notas personales
+    function savePlan() {
+        const notes = document.getElementById('personalNotes').value.trim();
+        const generatedPlan = localStorage.getItem('generatedPlan');
+        
+        if (!notes && !generatedPlan) {
+            showWarningMessage('Genera primero tu plan personalizado y/o agrega notas');
+            return;
+        }
+        
+        const fullPlan = {
+            generated: generatedPlan ? JSON.parse(generatedPlan) : null,
+            personalNotes: notes,
+            dateCreated: new Date().toLocaleDateString('es-ES'),
+            lastModified: new Date().toISOString()
+        };
+        
+        localStorage.setItem('childCompletePlan', JSON.stringify(fullPlan));
+        
+        document.getElementById('planSaved').style.display = 'block';
+        showSuccessMessage('¡Plan completo guardado exitosamente!');
+        
+        setTimeout(() => {
+            document.getElementById('planSaved').scrollIntoView({ behavior: 'smooth' });
+        }, 300);
+    }
         
         // Guardar estado de checkboxes
         saveChecklistState();
