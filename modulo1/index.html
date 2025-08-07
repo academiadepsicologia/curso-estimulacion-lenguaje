@@ -823,15 +823,42 @@
         const checked = activeTab.querySelectorAll('input[type="checkbox"]:checked').length;
         const percentage = (checked / total) * 100;
         
-        // Determinar edad del tab activo
-        let ageGroup = '3 años';
-        if (activeTab.id.includes('4years')) ageGroup = '4 años';
-        if (activeTab.id.includes('5years')) ageGroup = '5 años';
+        // Obtener la edad REAL del niño del evaluador
+        const evaluation = JSON.parse(localStorage.getItem('lastEvaluation') || '{}');
+        const realAge = evaluation.age || 0;
         
-        // Generar diagnóstico
+        // Determinar edad del tab activo
+        let checklistAge = 36; // Por defecto 3 años
+        if (activeTab.id.includes('3years')) checklistAge = 36;
+        if (activeTab.id.includes('4years')) checklistAge = 48;
+        if (activeTab.id.includes('5years')) checklistAge = 60;
+        
+        // NUEVO: Ajustar el diagnóstico según la edad real vs checklist evaluado
+        let ageAdjustment = 0;
+        let ageMessage = '';
+        
+        if (realAge > 0) {
+            if (realAge > checklistAge) {
+                // El niño es MAYOR que el checklist evaluado - PROBLEMA
+                ageAdjustment = -20; // Penalización
+                ageMessage = `⚠️ IMPORTANTE: Tu hijo tiene ${realAge} meses pero estás evaluando habilidades de ${checklistAge} meses. Esto indica un retraso que requiere atención.`;
+            } else if (realAge < checklistAge) {
+                // El niño es MENOR que el checklist evaluado - ADELANTADO
+                ageAdjustment = 20; // Bonus
+                ageMessage = `🌟 EXCELENTE: Tu hijo tiene ${realAge} meses y estás evaluando habilidades de ${checklistAge} meses. ¡Está adelantado!`;
+            } else {
+                // Edad correcta
+                ageMessage = `✅ Evaluando las habilidades correspondientes a la edad actual (${realAge} meses).`;
+            }
+        }
+        
+        // Ajustar porcentaje final
+        const adjustedPercentage = Math.max(0, Math.min(100, percentage + ageAdjustment));
+        
+        // Generar diagnóstico basado en porcentaje ajustado
         let nivel, color, mensaje, recomendaciones;
         
-        if (percentage >= 80) {
+        if (adjustedPercentage >= 80) {
             nivel = "DESARROLLO ESPERADO";
             color = "#28a745";
             mensaje = "¡Excelente! El desarrollo del lenguaje está dentro de lo esperado para la edad.";
@@ -841,7 +868,7 @@
                 "Fomenta la creatividad verbal con cuentos inventados",
                 "Practica conversaciones más largas"
             ];
-        } else if (percentage >= 60) {
+        } else if (adjustedPercentage >= 60) {
             nivel = "DESARROLLO EN PROGRESO";
             color = "#ffc107";
             mensaje = "El desarrollo muestra algunas áreas que necesitan refuerzo.";
@@ -851,7 +878,7 @@
                 "Lee cuentos interactivos diariamente",
                 "Practica las áreas débiles con juegos"
             ];
-        } else if (percentage >= 40) {
+        } else if (adjustedPercentage >= 40) {
             nivel = "NECESITA APOYO ADICIONAL";
             color = "#ff9800";
             mensaje = "Se recomienda implementar estrategias de estimulación más intensivas.";
@@ -866,11 +893,17 @@
             color = "#f44336";
             mensaje = "Es importante buscar orientación profesional para un plan específico.";
             recomendaciones = [
-                "Consulta con un especialista en lenguaje",
+                "Consulta con un especialista en lenguaje urgentemente",
                 "Mantén un registro diario de avances",
                 "Implementa las actividades del curso inmediatamente",
-                "Busca apoyo adicional si es necesario"
+                "Busca apoyo adicional profesional"
             ];
+        }
+        
+        // Si hay desajuste de edad, modificar el nivel
+        if (realAge > checklistAge && percentage < 80) {
+            nivel = "REQUIERE ATENCIÓN - DESFASE DE EDAD";
+            color = "#f44336";
         }
         
         // Identificar áreas específicas
@@ -884,9 +917,17 @@
         const diagnosticContent = document.getElementById('diagnosticContent');
         
         diagnosticContent.innerHTML = `
+            ${ageMessage ? `
+            <div style="background: ${realAge > checklistAge ? '#f8d7da' : realAge < checklistAge ? '#d4edda' : '#d1ecf1'}; 
+                        padding: 1rem; border-radius: 10px; margin-bottom: 1rem; 
+                        border: 2px solid ${realAge > checklistAge ? '#f5c6cb' : realAge < checklistAge ? '#c3e6cb' : '#bee5eb'};">
+                ${ageMessage}
+            </div>
+            ` : ''}
+            
             <div style="text-align: center; margin-bottom: 2rem;">
                 <div style="font-size: 3rem; font-weight: bold; color: ${color};">
-                    ${Math.round(percentage)}%
+                    ${Math.round(adjustedPercentage)}%
                 </div>
                 <div style="font-size: 1.2rem; color: ${color}; font-weight: bold;">
                     ${nivel}
@@ -931,10 +972,11 @@
         
         resultsDiv.style.display = 'block';
         
-        // Guardar diagnóstico en localStorage
+        // Guardar diagnóstico en localStorage con el porcentaje ajustado
         localStorage.setItem('lastDiagnostic', JSON.stringify({
-            ageGroup: ageGroup,
-            percentage: percentage,
+            ageGroup: checklistAge,
+            realAge: realAge,
+            percentage: adjustedPercentage,
             nivel: nivel,
             date: new Date().toISOString()
         }));
@@ -1307,7 +1349,17 @@
             gender: gender,
             date: new Date().toISOString()
         }));
+        // AUTO-SELECCIONAR el tab correcto del checklist según la edad
+        if (ageMonths <= 42) {
+            document.querySelector('.tab[onclick*="3years"]').click();
+        } else if (ageMonths <= 54) {
+            document.querySelector('.tab[onclick*="4years"]').click();
+        } else {
+            document.querySelector('.tab[onclick*="5years"]').click();
+        }
         
+        // Mostrar mensaje
+        showInfoMessage(`Se ha seleccionado automáticamente el checklist de ${ageMonths <= 42 ? '3 años' : ageMonths <= 54 ? '4 años' : '5 años'} según la edad ingresada.`);
         setTimeout(() => {
             resultBox.scrollIntoView({ behavior: 'smooth' });
         }, 300);
