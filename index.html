@@ -763,32 +763,17 @@
                 Un sistema paso a paso diseñado por especialistas en desarrollo infantil
             </p>
             
-           <div class="modules-grid" style="margin-top: 2rem;">
-    <div class="module-card" onclick="goToModule(1)" style="cursor: pointer; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 15px; text-align: center;">
-        <div style="font-size: 3rem; font-weight: bold; opacity: 0.7; margin-bottom: 0.5rem;">01</div>
-        <div style="font-size: 1.3rem; font-weight: bold; margin-bottom: 1rem;">Fundamentos del Desarrollo</div>
-        <p>Comenzar tu viaje →</p>
-    </div>
-    
-    <div class="module-card" style="opacity: 0.5; cursor: not-allowed; background: #6c757d; color: white; padding: 2rem; border-radius: 15px; text-align: center;">
-        <div style="font-size: 3rem; font-weight: bold; opacity: 0.7; margin-bottom: 0.5rem;">02</div>
-        <div style="font-size: 1.3rem; font-weight: bold; margin-bottom: 1rem;">Técnicas de Estimulación</div>
-        <p>🔒 Se desbloquea al completar el módulo 1</p>
-    </div>
-    
-    <div class="module-card" style="opacity: 0.5; cursor: not-allowed; background: #6c757d; color: white; padding: 2rem; border-radius: 15px; text-align: center;">
-        <div style="font-size: 3rem; font-weight: bold; opacity: 0.7; margin-bottom: 0.5rem;">03</div>
-        <div style="font-size: 1.3rem; font-weight: bold; margin-bottom: 1rem;">Soluciones por Problema</div>
-        <p>🔒 Se desbloquea al completar el módulo 2</p>
-    </div>
-    
-    <div class="module-card" style="opacity: 0.5; cursor: not-allowed; background: #6c757d; color: white; padding: 2rem; border-radius: 15px; text-align: center;">
-        <div style="font-size: 3rem; font-weight: bold; opacity: 0.7; margin-bottom: 0.5rem;">04</div>
-        <div style="font-size: 1.3rem; font-weight: bold; margin-bottom: 1rem;">Actividades Diarias</div>
-        <p>🔒 Se desbloquea al completar el módulo 3</p>
-    </div>
-</div>
-                
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="module-number">01</div>
+                    <div class="module-title">Fundamentos del Desarrollo</div>
+                    <p>Comprende las etapas normales del desarrollo del lenguaje, identifica retrasos y aprende cuándo es crucial actuar.</p>
+                    <div class="module-details">
+                        • Hitos del desarrollo por edad<br>
+                        • Señales de alerta temprana<br>
+                        • Evaluación inicial en casa
+                    </div>
+                </div>
                 <div class="module-card">
                     <div class="module-number">02</div>
                     <div class="module-title">Técnicas de Estimulación</div>
@@ -1021,7 +1006,6 @@
             </p>
         </div>
     </div>
-
     <!-- Course Dashboard (Hidden initially) -->
     <div id="courseDashboard" class="access-granted">
         <div class="container" style="padding-top: 100px;">
@@ -1034,29 +1018,35 @@
                 <p><span id="progressText">0% completado</span> - ¡Comencemos!</p>
                 
                 <div class="modules-grid" style="margin-top: 2rem;">
-                    <div class="module-card" onclick="goToModule(1)">
+                    <a href="modulo1/index.html" class="module-card" style="text-decoration: none;">
                         <div class="module-number">01</div>
                         <div class="module-title">Fundamentos del Desarrollo</div>
                         <p>Comenzar tu viaje →</p>
-                    </div>
+                    </a>
                     
-                    <div class="module-card" style="opacity: 0.5;">
+                    <a href="modulo2/index.html" class="module-card" style="opacity: 0.5; pointer-events: none; text-decoration: none;">
                         <div class="module-number">02</div>
                         <div class="module-title">Técnicas de Estimulación</div>
                         <p>🔒 Se desbloquea al completar el módulo 1</p>
-                    </div>
+                    </a>
                     
-                    <div class="module-card" style="opacity: 0.5;">
+                    <a href="modulo3/index.html" class="module-card" style="opacity: 0.5; pointer-events: none; text-decoration: none;">
                         <div class="module-number">03</div>
                         <div class="module-title">Soluciones por Problema</div>
                         <p>🔒 Se desbloquea al completar el módulo 2</p>
-                    </div>
+                    </a>
                     
-                    <div class="module-card" style="opacity: 0.5;">
+                    <a href="modulo4/index.html" class="module-card" style="opacity: 0.5; pointer-events: none; text-decoration: none;">
                         <div class="module-number">04</div>
                         <div class="module-title">Actividades Diarias</div>
                         <p>🔒 Se desbloquea al completar el módulo 3</p>
-                    </div>
+                    </a>
+                    
+                    <a href="modulo5/index.html" class="module-card" style="opacity: 0.5; pointer-events: none; text-decoration: none;">
+                        <div class="module-number">05</div>
+                        <div class="module-title">Preparación Escolar</div>
+                        <p>🔒 Se desbloquea al completar el módulo 4</p>
+                    </a>
                 </div>
             </div>
         </div>
@@ -1081,6 +1071,7 @@
             </div>
         </div>
     </footer>
+
     <script>
         // Modal functionality
         function openModal() {
@@ -1131,6 +1122,13 @@
                     <button class="btn btn-secondary" onclick="logout()">Salir</button>
                 `;
                 
+                // Check if we have progress saved
+                const savedProgress = localStorage.getItem('courseProgress');
+                if (savedProgress) {
+                    const modules = JSON.parse(savedProgress);
+                    updateModuleAccess(modules);
+                }
+                
                 // Success message
                 setTimeout(() => {
                     alert('¡Bienvenido/a al curso! Puedes comenzar con el Módulo 1.');
@@ -1140,6 +1138,24 @@
                 alert('Código de acceso incorrecto. \n\nPara probar el curso usa: CURSO2025\n\nSi compraste el curso y tienes problemas, contacta con soporte.');
             }
         });
+
+        // Update module access based on progress
+        function updateModuleAccess(completedModules) {
+            const moduleCards = document.querySelectorAll('#courseDashboard .module-card');
+            
+            completedModules.forEach((completed, index) => {
+                if (completed && index < moduleCards.length - 1) {
+                    // Unlock next module
+                    moduleCards[index + 1].style.opacity = '1';
+                    moduleCards[index + 1].style.pointerEvents = 'auto';
+                    moduleCards[index + 1].querySelector('p').innerHTML = 'Continuar →';
+                }
+            });
+            
+            // Update progress bar
+            const progress = (completedModules.filter(m => m).length / 5) * 100;
+            updateProgress(progress);
+        }
 
         // FAQ functionality
         document.addEventListener('DOMContentLoaded', function() {
@@ -1180,17 +1196,28 @@
             }
         }
 
-        // Go to module
-        function goToModule(moduleNumber) {
-            if (moduleNumber === 1) {
-                // Simulate going to module 1
-                if (confirm(`¿Ir al Módulo ${moduleNumber}: Fundamentos del Desarrollo?\n\n(Esta es una demostración - los módulos están en desarrollo)`)) {
-                    // Here you would redirect to modulo1/index.html
-                    alert(`Redirigiendo al Módulo ${moduleNumber}...\n\nEn la versión real, esto te llevaría a: modulo${moduleNumber}/index.html`);
-                }
-            } else {
-                alert('Este módulo se desbloquea al completar el módulo anterior.');
+        // Progress update function
+        function updateProgress(percentage) {
+            const progressFill = document.querySelector('.progress-fill');
+            const progressText = document.getElementById('progressText');
+            
+            if (progressFill && progressText) {
+                progressFill.style.width = percentage + '%';
+                progressText.textContent = Math.round(percentage) + '% completado';
             }
+        }
+
+        // Save progress to localStorage
+        function saveProgress(moduleNumber) {
+            let progress = localStorage.getItem('courseProgress');
+            if (!progress) {
+                progress = [false, false, false, false, false];
+            } else {
+                progress = JSON.parse(progress);
+            }
+            
+            progress[moduleNumber - 1] = true;
+            localStorage.setItem('courseProgress', JSON.stringify(progress));
         }
 
         // Smooth scrolling for anchor links
@@ -1230,44 +1257,6 @@
 
         // Initialize animations when page loads
         document.addEventListener('DOMContentLoaded', animateOnScroll);
-
-        // Progress simulation (for demo purposes)
-        function updateProgress(percentage) {
-            const progressFill = document.querySelector('.progress-fill');
-            const progressText = document.getElementById('progressText');
-            
-            if (progressFill && progressText) {
-                progressFill.style.width = percentage + '%';
-                progressText.textContent = percentage + '% completado';
-            }
-        }
-
-        // Demo progress update
-        function simulateProgress() {
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += 5;
-                updateProgress(progress);
-                
-                if (progress >= 25) {
-                    clearInterval(interval);
-                }
-            }, 200);
-        }
-
-        // Easter egg - konami code
-        let konamiCode = [];
-        const targetCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // ↑↑↓↓←→←→BA
-        
-        document.addEventListener('keydown', function(e) {
-            konamiCode.push(e.keyCode);
-            konamiCode = konamiCode.slice(-10);
-            
-            if (konamiCode.join('') === targetCode.join('')) {
-                alert('🎉 ¡Código secreto activado! \n\nAcceso de desarrollador habilitado.\nCódigo especial: DEV2025');
-                konamiCode = [];
-            }
-        });
 
         // Console welcome message
         console.log(`
