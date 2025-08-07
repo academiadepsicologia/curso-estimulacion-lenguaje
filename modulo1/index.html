@@ -1487,34 +1487,7 @@
 
     // Auto-guardado mientras escribe
     let saveTimeout;
-    document.getElementById('childSummary').addEventListener('input', function() {
-        clearTimeout(saveTimeout);
-        saveTimeout = setTimeout(() => {
-            const goals = document.getElementById('goals').value;
-            if (this.value.trim() || goals.trim()) {
-                const plan = {
-                    childSummary: this.value,
-                    goals: goals,
-                    lastModified: new Date().toISOString()
-                };
-                localStorage.setItem('childLanguagePlan_draft', JSON.stringify(plan));
-            }
-        }, 2000);
-    });
 
-    document.getElementById('goals').addEventListener('input', function() {
-        clearTimeout(saveTimeout);
-        saveTimeout = setTimeout(() => {
-            const summary = document.getElementById('childSummary').value;
-            if (this.value.trim() || summary.trim()) {
-                const plan = {
-                    childSummary: summary,
-                    goals: this.value,
-                    lastModified: new Date().toISOString()
-                };
-                localStorage.setItem('childLanguagePlan_draft', JSON.stringify(plan));
-            }
-        }, 2000);
     });
 
     // Cargar estado del checklist al inicio
