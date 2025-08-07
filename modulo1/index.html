@@ -381,8 +381,7 @@
             <div class="alert alert-warning">
                 <strong>⚠️ Importante:</strong> Aunque el aprendizaje continúa toda la vida, las conexiones neurales formadas en estos períodos críticos son las más fuertes y duraderas.
             </div>
-
-           <button class="btn" onclick="completeSection(3)">✓ Completar Evaluación</button>
+            <button class="btn" onclick="completeSection(1)">✓ Completar Sección</button>
         </div>
         <!-- NUEVO: Resultado del Checklist -->
         <div id="checklistResults" class="result-box" style="background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%); margin-top: 2rem;">
@@ -633,6 +632,14 @@
 
             <button class="btn" onclick="completeSection(6)">✓ Completar Módulo 1</button>
         </div>
+        <div class="module-navigation">
+            <a href="../index.html" class="btn nav-btn-secondary">← Regresar al Dashboard</a>
+            <div>
+                <button class="btn" onclick="generateCertificate()" id="certificateBtn" style="display: none;">🏆 Obtener Certificado</button>
+                <a href="../modulo2/index.html" class="btn" id="nextModuleBtn" style="display: none;">Módulo 2: Técnicas →</a>
+            </div>
+        </div>
+    </div>
 
     <script>
     // Variables globales
@@ -680,11 +687,12 @@
         if (savedPlan) {
             try {
                 const plan = JSON.parse(savedPlan);
-                if (plan.childSummary) {
-                    document.getElementById('childSummary').value = plan.childSummary;
-                }
-                if (plan.goals) {
-                    document.getElementById('goals').value = plan.goals;
+               // Los campos childSummary y goals ya no existen, usar personalNotes
+                if (plan.personalNotes) {
+                    const notesField = document.getElementById('personalNotes');
+                    if (notesField) {
+                        notesField.value = plan.personalNotes;
+                    }
                 }
             } catch (e) {
                 console.error('Error loading plan:', e);
