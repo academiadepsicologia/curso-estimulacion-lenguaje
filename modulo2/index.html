@@ -574,61 +574,173 @@
                 </div>
             </div>
 
-            <!-- Test Interactivo de Modelado -->
-            <div class="practice-test">
-                <h3>🎮 Practica el Modelado - Test Interactivo</h3>
-                <p>Selecciona la mejor respuesta usando la técnica del modelado:</p>
-                
-                <div class="test-question" id="modelado-test-age-3" style="display: none;">
-                    <p><strong>Tu hijo de 3 años dice: "Mi tete"</strong></p>
-                    <p>¿Cuál es la mejor respuesta usando modelado?</p>
-                    <div class="test-options">
-                        <div class="test-option" onclick="checkAnswer('modelado', 1, 'a')">
-                            a) "No se dice tete, se dice leche"
-                        </div>
-                        <div class="test-option" onclick="checkAnswer('modelado', 1, 'b')">
-                            b) "¿Quieres tu leche? Aquí está tu leche"
-                        </div>
-                        <div class="test-option" onclick="checkAnswer('modelado', 1, 'c')">
-                            c) "Tete, tete, tete"
-                        </div>
-                    </div>
-                    <div class="feedback-box" id="modelado-feedback-1"></div>
+           <!-- Test Interactivo de Modelado MEJORADO -->
+<div class="practice-test">
+    <h3>🎮 Practica el Modelado - Test Interactivo</h3>
+    <p>Completa los ejercicios para dominar la técnica:</p>
+    <div id="modelado-progress" class="alert alert-info" style="margin: 1rem 0;">
+        Pregunta <span id="current-question">1</span> de <span id="total-questions">3</span>
+    </div>
+    
+    <!-- Test para edad 3 -->
+    <div class="test-question" id="modelado-test-age-3" style="display: none;">
+        <div id="question-3-1" class="question-content">
+            <p><strong>Tu hijo de 3 años dice: "Mi tete"</strong></p>
+            <p>¿Cuál es la mejor respuesta usando modelado?</p>
+            <div class="test-options">
+                <div class="test-option" onclick="checkModeladoAnswer(3, 1, 'a')">
+                    a) "No se dice tete, se dice leche"
                 </div>
+                <div class="test-option" onclick="checkModeladoAnswer(3, 1, 'b')">
+                    b) "¿Quieres tu leche? Aquí está tu leche"
+                </div>
+                <div class="test-option" onclick="checkModeladoAnswer(3, 1, 'c')">
+                    c) "Tete, tete, tete"
+                </div>
+            </div>
+        </div>
+        
+        <div id="question-3-2" class="question-content" style="display: none;">
+            <p><strong>Tu hijo dice: "Ota vez"</strong></p>
+            <p>¿Cuál es la mejor respuesta usando modelado?</p>
+            <div class="test-options">
+                <div class="test-option" onclick="checkModeladoAnswer(3, 2, 'a')">
+                    a) "Se dice otra vez, no ota"
+                </div>
+                <div class="test-option" onclick="checkModeladoAnswer(3, 2, 'b')">
+                    b) "¿Quieres hacerlo otra vez? Vamos otra vez"
+                </div>
+                <div class="test-option" onclick="checkModeladoAnswer(3, 2, 'c')">
+                    c) "Repite: otra vez"
+                </div>
+            </div>
+        </div>
+        
+        <div id="question-3-3" class="question-content" style="display: none;">
+            <p><strong>Tu hijo dice: "Yo solo puedo"</strong></p>
+            <p>¿Cuál es la mejor respuesta usando modelado?</p>
+            <div class="test-options">
+                <div class="test-option" onclick="checkModeladoAnswer(3, 3, 'a')">
+                    a) "¡Muy bien! Tú puedes solo, eres muy capaz"
+                </div>
+                <div class="test-option" onclick="checkModeladoAnswer(3, 3, 'b')">
+                    b) "No es 'yo solo puedo', es 'yo puedo solo'"
+                </div>
+                <div class="test-option" onclick="checkModeladoAnswer(3, 3, 'c')">
+                    c) "Di: yo puedo hacerlo solo"
+                </div>
+            </div>
+        </div>
+        <div class="feedback-box" id="modelado-feedback-3"></div>
+    </div>
 
-                <div class="test-question" id="modelado-test-age-4" style="display: none;">
-                    <p><strong>Tu hijo de 4 años dice: "Yo sabo nadar"</strong></p>
-                    <p>¿Cuál es la mejor respuesta usando modelado?</p>
-                    <div class="test-options">
-                        <div class="test-option" onclick="checkAnswer('modelado', 2, 'a')">
-                            a) "¡Qué bien! Tú sabes nadar muy bien"
-                        </div>
-                        <div class="test-option" onclick="checkAnswer('modelado', 2, 'b')">
-                            b) "No es sabo, es sé"
-                        </div>
-                        <div class="test-option" onclick="checkAnswer('modelado', 2, 'c')">
-                            c) "Repite: yo sé nadar"
-                        </div>
-                    </div>
-                    <div class="feedback-box" id="modelado-feedback-2"></div>
+    <!-- Test para edad 4 -->
+    <div class="test-question" id="modelado-test-age-4" style="display: none;">
+        <div id="question-4-1" class="question-content">
+            <p><strong>Tu hijo de 4 años dice: "Yo sabo nadar"</strong></p>
+            <p>¿Cuál es la mejor respuesta usando modelado?</p>
+            <div class="test-options">
+                <div class="test-option" onclick="checkModeladoAnswer(4, 1, 'a')">
+                    a) "¡Qué bien! Tú sabes nadar muy bien"
                 </div>
+                <div class="test-option" onclick="checkModeladoAnswer(4, 1, 'b')">
+                    b) "No es sabo, es sé"
+                </div>
+                <div class="test-option" onclick="checkModeladoAnswer(4, 1, 'c')">
+                    c) "Repite: yo sé nadar"
+                </div>
+            </div>
+        </div>
+        
+        <div id="question-4-2" class="question-content" style="display: none;">
+            <p><strong>Tu hijo dice: "Se me ha rompido"</strong></p>
+            <p>¿Cuál es la mejor respuesta usando modelado?</p>
+            <div class="test-options">
+                <div class="test-option" onclick="checkModeladoAnswer(4, 2, 'a')">
+                    a) "No es 'se me ha rompido', es 'se me rompió'"
+                </div>
+                <div class="test-option" onclick="checkModeladoAnswer(4, 2, 'b')">
+                    b) "Oh, se te rompió. ¿Qué se te rompió?"
+                </div>
+                <div class="test-option" onclick="checkModeladoAnswer(4, 2, 'c')">
+                    c) "Mal dicho"
+                </div>
+            </div>
+        </div>
+        
+        <div id="question-4-3" class="question-content" style="display: none;">
+            <p><strong>Tu hijo dice: "Yo no cabo aquí"</strong></p>
+            <p>¿Cuál es la mejor respuesta usando modelado?</p>
+            <div class="test-options">
+                <div class="test-option" onclick="checkModeladoAnswer(4, 3, 'a')">
+                    a) "Es quepo, no cabo"
+                </div>
+                <div class="test-option" onclick="checkModeladoAnswer(4, 3, 'b')">
+                    b) "No cabes aquí. Busquemos un lugar más grande donde sí quepas"
+                </div>
+                <div class="test-option" onclick="checkModeladoAnswer(4, 3, 'c')">
+                    c) "Di correctamente: no quepo"
+                </div>
+            </div>
+        </div>
+        <div class="feedback-box" id="modelado-feedback-4"></div>
+    </div>
 
-                <div class="test-question" id="modelado-test-age-5" style="display: none;">
-                    <p><strong>Tu hijo de 5 años dice: "Ayer comí mucho dulces"</strong></p>
-                    <p>¿Cuál es la mejor respuesta usando modelado?</p>
-                    <div class="test-options">
-                        <div class="test-option" onclick="checkAnswer('modelado', 3, 'a')">
-                            a) "Se dice muchos dulces, no mucho dulces"
-                        </div>
-                        <div class="test-option" onclick="checkAnswer('modelado', 3, 'b')">
-                            b) "¿Ayer comiste muchos dulces? ¿Cuáles te gustaron más?"
-                        </div>
-                        <div class="test-option" onclick="checkAnswer('modelado', 3, 'c')">
-                            c) "Mal dicho"
-                        </div>
-                    </div>
-                    <div class="feedback-box" id="modelado-feedback-3"></div>
+    <!-- Test para edad 5 -->
+    <div class="test-question" id="modelado-test-age-5" style="display: none;">
+        <div id="question-5-1" class="question-content">
+            <p><strong>Tu hijo de 5 años dice: "Ayer comí mucho dulces"</strong></p>
+            <p>¿Cuál es la mejor respuesta usando modelado?</p>
+            <div class="test-options">
+                <div class="test-option" onclick="checkModeladoAnswer(5, 1, 'a')">
+                    a) "Se dice muchos dulces, no mucho dulces"
                 </div>
+                <div class="test-option" onclick="checkModeladoAnswer(5, 1, 'b')">
+                    b) "¿Ayer comiste muchos dulces? ¿Cuáles te gustaron más?"
+                </div>
+                <div class="test-option" onclick="checkModeladoAnswer(5, 1, 'c')">
+                    c) "Mal dicho"
+                </div>
+            </div>
+        </div>
+        
+        <div id="question-5-2" class="question-content" style="display: none;">
+            <p><strong>Tu hijo dice: "Hubieron muchos niños"</strong></p>
+            <p>¿Cuál es la mejor respuesta usando modelado?</p>
+            <div class="test-options">
+                <div class="test-option" onclick="checkModeladoAnswer(5, 2, 'a')">
+                    a) "Había muchos niños en el parque, ¿verdad?"
+                </div>
+                <div class="test-option" onclick="checkModeladoAnswer(5, 2, 'b')">
+                    b) "No es hubieron, es hubo"
+                </div>
+                <div class="test-option" onclick="checkModeladoAnswer(5, 2, 'c')">
+                    c) "Repite bien: hubo muchos niños"
+                </div>
+            </div>
+        </div>
+        
+        <div id="question-5-3" class="question-content" style="display: none;">
+            <p><strong>Tu hijo dice: "Me dijistes que sí"</strong></p>
+            <p>¿Cuál es la mejor respuesta usando modelado?</p>
+            <div class="test-options">
+                <div class="test-option" onclick="checkModeladoAnswer(5, 3, 'a')">
+                    a) "No se dice dijistes"
+                </div>
+                <div class="test-option" onclick="checkModeladoAnswer(5, 3, 'b')">
+                    b) "Sí, te dije que sí podías hacerlo"
+                </div>
+                <div class="test-option" onclick="checkModeladoAnswer(5, 3, 'c')">
+                    c) "Es dijiste, no dijistes"
+                </div>
+            </div>
+        </div>
+        <div class="feedback-box" id="modelado-feedback-5"></div>
+    </div>
+
+    <button class="btn btn-warning" onclick="nextModeladoQuestion()" id="nextQuestionBtn">Siguiente Pregunta →</button>
+    <button class="btn btn-success" onclick="resetModeladoTest()" id="resetTestBtn" style="display: none;">Reiniciar Test</button>
+</div>
 
                 <button class="btn btn-warning" onclick="nextModeladoQuestion()">Siguiente Pregunta →</button>
             </div>
@@ -1034,116 +1146,351 @@
                 Tu Plan Personal y Recursos
             </h2>
 
+           <div class="resource-box">
+    <h3>📝 Guía Rápida de Referencia</h3>
+    <button class="btn btn-warning" onclick="showQuickGuide()">Ver Guía Rápida</button>
+    <div id="quickGuide" style="display: none;">
+        <div class="resource-content">
+📚 GUÍA RÁPIDA DE REFERENCIA - TÉCNICAS DE ESTIMULACIÓN
+
+═══════════════════════════════════════════════════════
+
+🗣️ TÉCNICA 1: MODELADO (Corregir sin corregir)
+────────────────────────────────────────────
+Qué es: Repetir correctamente sin decir "está mal"
+Cuándo: Cada vez que tu hijo dice algo incorrectamente
+
+EJEMPLOS POR EDAD:
+- 3 años: "Yo quelo" → "Ah, tú quieres esto"
+- 4 años: "Yo sabo" → "Sí, tú sabes hacerlo"  
+- 5 años: "Hubieron" → "Había muchos niños"
+
+CLAVE: Nunca digas "no", "mal" o "así no se dice"
+
+═══════════════════════════════════════════════════════
+
+📈 TÉCNICA 2: EXPANSIÓN (Agregar información)
+────────────────────────────────────────────
+Qué es: Tomar lo que dice y agregar más palabras
+Cuándo: Cuando dice frases muy cortas
+
+EJEMPLOS POR EDAD:
+- 3 años: "Agua" → "Agua fría en tu vaso azul"
+- 4 años: "El perro" → "El perro café corre en el parque"
+- 5 años: "Fui" → "Fuiste con la abuela al supermercado"
+
+CLAVE: Agrega colores, tamaños, lugares, acciones
+
+═══════════════════════════════════════════════════════
+
+❓ TÉCNICA 3: PREGUNTAS ABIERTAS
+────────────────────────────────────────────
+Qué es: Preguntas que no se responden con sí/no
+Cuándo: Para iniciar conversaciones
+
+MALO vs BUENO:
+❌ "¿Te gustó?" → ✅ "¿Qué te gustó más?"
+❌ "¿Tienes hambre?" → ✅ "¿Qué quieres comer?"
+❌ "¿Está bien?" → ✅ "¿Cómo te sientes?"
+
+POR EDAD:
+- 3 años: ¿Qué...? ¿Dónde...? ¿Quién...?
+- 4 años: ¿Cómo...? ¿Para qué...? ¿Cuándo...?
+- 5 años: ¿Por qué...? ¿Qué pasaría si...?
+
+═══════════════════════════════════════════════════════
+
+🎭 TÉCNICA 4: NARRACIÓN
+────────────────────────────────────────────
+Qué es: Narrar como locutor de radio lo que pasa
+Cuándo: Durante cualquier actividad
+
+HABLA PARALELA (lo que hace el niño):
+"Estás construyendo una torre muy alta con bloques rojos"
+
+AUTO-CONVERSACIÓN (lo que haces tú):
+"Mamá está cortando las zanahorias para la sopa"
+
+MOMENTOS IDEALES:
+- Bañándose • Vistiéndose • Cocinando • Jugando
+
+═══════════════════════════════════════════════════════
+
+⏰ MOMENTOS CLAVE DEL DÍA
+────────────────────────────────────────────
+MAÑANA: Modelado durante el desayuno (5 min)
+MEDIO DÍA: Expansión durante el almuerzo (5 min)
+TARDE: Preguntas durante el juego (10 min)
+NOCHE: Narración durante el baño (5 min)
+
+Total: Solo 25 minutos al día para cambiar su lenguaje
+
+═══════════════════════════════════════════════════════
+
+🚫 ERRORES COMUNES A EVITAR
+────────────────────────────────────────────
+❌ Corregir directamente: "No se dice así"
+❌ Presionar: "Di esta palabra"
+❌ Comparar: "Tu primo habla mejor"
+❌ Interrumpir cuando intenta hablar
+❌ Completar sus frases muy rápido
+❌ Hacer solo preguntas de sí/no
+
+═══════════════════════════════════════════════════════
+
+✅ SEÑALES DE PROGRESO
+────────────────────────────────────────────
+- Usa palabras nuevas espontáneamente
+- Sus frases son más largas
+- Inicia conversaciones
+- Cuenta experiencias
+- Hace preguntas
+- Se autocorrige a veces
+
+═══════════════════════════════════════════════════════
+
+💡 REGLA DE ORO
+────────────────────────────────────────────
+La PACIENCIA y la CONSTANCIA son más importantes
+que la perfección. Celebra cada pequeño avance.
+
+Recuerda: Tu hijo aprende mejor cuando se divierte
+y se siente seguro, no cuando se siente evaluado.
+        </div>
+    </div>
+</div>
+
             <div class="resource-box">
-                <h3>📝 Guía Rápida de Referencia</h3>
-                <button class="btn btn-warning" onclick="showQuickGuide()">Ver Guía Rápida</button>
-                <div id="quickGuide" style="display: none;">
-                    <div class="resource-content">
-GUÍA RÁPIDA - TÉCNICAS DE ESTIMULACIÓN
+    <h3>🎯 Registro de Práctica Diaria</h3>
+    <p>Marca cada día que practiques alguna técnica con tu hijo (meta: crear el hábito en 21 días)</p>
 
-1. MODELADO (Corregir sin corregir)
-   Niño: "Yo quelo agua"
-   Tú: "Ah, quieres agua fría"
+    <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem; margin: 1.5rem 0;">
+        <div style="text-align: center; padding: 0.5rem; background: #f8f9fa; border-radius: 5px;">
+            <strong>L</strong><br>
+            <input type="checkbox" id="dia1" onchange="updatePracticeStreak()">
+        </div>
+        <div style="text-align: center; padding: 0.5rem; background: #f8f9fa; border-radius: 5px;">
+            <strong>M</strong><br>
+            <input type="checkbox" id="dia2" onchange="updatePracticeStreak()">
+        </div>
+        <div style="text-align: center; padding: 0.5rem; background: #f8f9fa; border-radius: 5px;">
+            <strong>M</strong><br>
+            <input type="checkbox" id="dia3" onchange="updatePracticeStreak()">
+        </div>
+        <div style="text-align: center; padding: 0.5rem; background: #f8f9fa; border-radius: 5px;">
+            <strong>J</strong><br>
+            <input type="checkbox" id="dia4" onchange="updatePracticeStreak()">
+        </div>
+        <div style="text-align: center; padding: 0.5rem; background: #f8f9fa; border-radius: 5px;">
+            <strong>V</strong><br>
+            <input type="checkbox" id="dia5" onchange="updatePracticeStreak()">
+        </div>
+        <div style="text-align: center; padding: 0.5rem; background: #f8f9fa; border-radius: 5px;">
+            <strong>S</strong><br>
+            <input type="checkbox" id="dia6" onchange="updatePracticeStreak()">
+        </div>
+        <div style="text-align: center; padding: 0.5rem; background: #f8f9fa; border-radius: 5px;">
+            <strong>D</strong><br>
+            <input type="checkbox" id="dia7" onchange="updatePracticeStreak()">
+        </div>
+    </div>
 
-2. EXPANSIÓN (Agregar información)
-   Niño: "Perro"
-   Tú: "El perro café está corriendo"
+    <div id="practiceStreak" class="alert alert-info">
+        <strong>Racha actual:</strong> <span id="streakCount">0</span> días consecutivos
+        <div id="streakMessage" style="margin-top: 0.5rem;"></div>
+    </div>
 
-3. PREGUNTAS ABIERTAS
-   NO: "¿Te gustó?"
-   SÍ: "¿Qué fue lo que más te gustó?"
+    <div class="alert alert-success" style="margin-top: 1rem;">
+        <strong>💡 Tip:</strong> Practicar 5 minutos diarios es mejor que 30 minutos una vez por semana
+    </div>
+</div>
 
-4. NARRACIÓN
-   "Estás construyendo una torre alta"
-   "Mamá está cocinando la cena"
+            🎵 CANCIONES Y RIMAS PARA ESTIMULAR EL LENGUAJE
 
-RECORDATORIOS:
-✓ No corrijas directamente
-✓ Sé paciente, espera respuesta
-✓ Celebra cada intento
-✓ 10 minutos diarios marcan la diferencia
-                    </div>
-                </div>
-            </div>
+═══════════════════════════════════════════════════════
 
-            <div class="resource-box">
-                <h3>🎯 Mi Plan Semanal</h3>
-                <p>Marca tu compromiso de práctica:</p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 1rem; margin: 1rem 0;">
-                    <div style="text-align: center;">
-                        <input type="checkbox" id="lunes" onchange="updateWeeklyPlan()">
-                        <label for="lunes">Lunes</label>
-                    </div>
-                    <div style="text-align: center;">
-                        <input type="checkbox" id="martes" onchange="updateWeeklyPlan()">
-                        <label for="martes">Martes</label>
-                    </div>
-                    <div style="text-align: center;">
-                        <input type="checkbox" id="miercoles" onchange="updateWeeklyPlan()">
-                        <label for="miercoles">Miércoles</label>
-                    </div>
-                    <div style="text-align: center;">
-                        <input type="checkbox" id="jueves" onchange="updateWeeklyPlan()">
-                        <label for="jueves">Jueves</label>
-                    </div>
-                    <div style="text-align: center;">
-                        <input type="checkbox" id="viernes" onchange="updateWeeklyPlan()">
-                        <label for="viernes">Viernes</label>
-                    </div>
-                    <div style="text-align: center;">
-                        <input type="checkbox" id="sabado" onchange="updateWeeklyPlan()">
-                        <label for="sabado">Sábado</label>
-                    </div>
-                    <div style="text-align: center;">
-                        <input type="checkbox" id="domingo" onchange="updateWeeklyPlan()">
-                        <label for="domingo">Domingo</label>
-                    </div>
-                </div>
-                
-                <div id="weeklyCommitment" class="alert alert-info" style="display: none;">
-                    Te comprometes a practicar <span id="daysCount">0</span> días a la semana
-                </div>
-            </div>
+👶 PARA 3 AÑOS - VOCABULARIO BÁSICO
+────────────────────────────────────────────
 
-            <div class="resource-box">
-                <h3>📊 Lista de Canciones y Rimas</h3>
-                <button class="btn btn-warning" onclick="showSongs()">Ver Canciones</button>
-                <div id="songsResources" style="display: none;">
-                    <div class="resource-content">
-CANCIONES PARA ESTIMULAR EL LENGUAJE
+🐥 "LOS POLLITOS DICEN"
+Objetivo: Sonidos, necesidades, emociones
+Vocabulario: pío, hambre, frío, abrigo, comida, mamá
 
-🎵 Para 3 años:
-"Los pollitos dicen"
-- Vocabulario: pío, hambre, frío, abrigo, comida
-- Práctica: sonidos, necesidades básicas
+Los pollitos dicen, pío pío pío
+Cuando tienen hambre, cuando tienen frío
+La gallina busca el maíz y el trigo
+Les da la comida y les presta abrigo
 
-"Pin pon es un muñeco"
-- Vocabulario: cara, limpia, jabón, peine
-- Práctica: partes del cuerpo, rutinas
+ACTIVIDAD: Pregunta "¿Cómo hacen los pollitos?"
+"¿Qué necesitan cuando dicen pío?"
 
-🎵 Para 4 años:
-"La vaca lechera"
-- Vocabulario: vaca, leche, tolón, campana
-- Práctica: rimas, sonidos finales
+────────────────────────────────────────────
 
-"Soy una taza"
-- Vocabulario: utensilios de cocina
-- Práctica: movimientos y objetos
+🧼 "PIN PON ES UN MUÑECO"
+Objetivo: Rutinas diarias, partes del cuerpo
+Vocabulario: cara, limpia, jabón, peine, manos
 
-🎵 Para 5 años:
-"Debajo de un botón"
-- Vocabulario: botón, ratón, Martín
-- Práctica: secuencias, memoria
+Pin Pon es un muñeco muy guapo de cartón
+Se lava la carita con agua y con jabón
+Se desenreda el pelo con peine de marfil
+Y aunque se dé tirones no llora ni hace así
 
-RIMAS PARA PRACTICAR:
-- Sol - caracol
-- Luna - cuna
-- Gato - pato
-- Casa - pasa
-                    </div>
-                </div>
-            </div>
+ACTIVIDAD: Mientras cantan, toquen cada parte
+"¿Dónde está tu cara?" "¿Con qué te lavas?"
+
+────────────────────────────────────────────
+
+🚌 "LAS RUEDAS DEL AUTOBÚS"
+Objetivo: Sonidos, acciones, personas
+Vocabulario: ruedas, puertas, bebés, mamás
+
+Las ruedas del autobús dan vueltas y vueltas
+Los bebés del autobús hacen guá guá guá
+Las mamás del autobús hacen shh shh shh
+El conductor dice "pasen para atrás"
+
+ACTIVIDAD: Imitar cada sonido y acción
+"¿Cómo hacen las ruedas?" "¿Qué dice el conductor?"
+
+═══════════════════════════════════════════════════════
+
+👦 PARA 4 AÑOS - FRASES Y SECUENCIAS
+────────────────────────────────────────────
+
+🐄 "LA VACA LECHERA"
+Objetivo: Rimas, descripción, cualidades
+Vocabulario: vaca, lechera, tolón, campana, leche
+
+Tengo una vaca lechera, no es una vaca cualquiera
+Me da leche merengada, ay que vaca tan salada
+Tolón tolón, tolón tolón
+
+ACTIVIDAD: "¿Cómo es tu vaca?" 
+"¿Qué otras cosas puede darnos una vaca?"
+
+────────────────────────────────────────────
+
+🍽️ "SOY UNA TAZA"
+Objetivo: Objetos de cocina, transformación
+Vocabulario: taza, tetera, cuchara, cucharón
+
+Soy una taza, una tetera
+Una cuchara, un cucharón
+Un plato hondo, un plato llano
+Un cuchillito, un tenedor
+
+ACTIVIDAD: Buscar cada objeto en la cocina
+"¿Para qué sirve la taza?" "¿Cuál es más grande?"
+
+────────────────────────────────────────────
+
+🐸 "CU CÚ CANTABA LA RANA"
+Objetivo: Secuencia narrativa, causa-efecto
+Vocabulario: rana, caballero, capa, sombrero
+
+Cu cú cantaba la rana
+Cu cú debajo del agua
+Cu cú pasó un caballero
+Cu cú con capa y sombrero
+
+ACTIVIDAD: Ordenar la historia
+"¿Dónde estaba la rana?" "¿Quién pasó después?"
+
+═══════════════════════════════════════════════════════
+
+👧 PARA 5 AÑOS - NARRATIVA Y MEMORIA
+────────────────────────────────────────────
+
+🐭 "DEBAJO DE UN BOTÓN"
+Objetivo: Memoria, secuencia, tamaños
+Vocabulario: botón, ratón, Martín, chiquitín
+
+Debajo de un botón, ton ton
+Que encontró Martín, tin tin
+Había un ratón, ton ton
+Muy muy chiquitín, tin tin
+
+ACTIVIDAD: Memorizar y cambiar palabras
+"¿Qué había debajo del botón?"
+"Inventa: Debajo de una mesa..."
+
+────────────────────────────────────────────
+
+🏠 "YO TENGO UNA CASITA"
+Objetivo: Comparación, descripción espacial
+Vocabulario: casita, pequeña, chimenea, ventana
+
+Yo tengo una casita que es así y así
+Que por la chimenea sale el humo así y así
+Que cuando quiero entrar yo golpeo así y así
+Me lustro los zapatos así así así
+
+ACTIVIDAD: Describir su propia casa
+"¿Cómo es tu casa?" "¿Qué tiene tu casa?"
+
+────────────────────────────────────────────
+
+🌙 "ESTRELLITA DÓNDE ESTÁS"
+Objetivo: Preguntas, ubicación, descripción
+Vocabulario: estrellita, brillas, cielo, diamante
+
+Estrellita dónde estás, me pregunto qué serás
+En el cielo o en el mar, un diamante de verdad
+Estrellita dónde estás, me pregunto qué serás
+
+ACTIVIDAD: Crear preguntas similares
+"¿Dónde más puede estar?" "¿A qué se parece?"
+
+═══════════════════════════════════════════════════════
+
+🎯 RIMAS PARA PRACTICAR SONIDOS
+────────────────────────────────────────────
+
+RIMAS FÁCILES (3 años):
+- Sol - caracol - girasol
+- Luna - cuna - una
+- Gato - pato - zapato
+- Pera - espera - escalera
+
+RIMAS MEDIAS (4 años):
+- Pelota - rebota - flota - gota
+- Camión - avión - león - melón
+- Ventana - manzana - campana - mañana
+
+RIMAS COMPLEJAS (5 años):
+- Mariposa - rosa - hermosa - cosa
+- Elefante - gigante - importante - elegante
+- Cocodrilo - tranquilo - amarillo - castillo
+
+═══════════════════════════════════════════════════════
+
+💡 TIPS PARA USAR LAS CANCIONES
+────────────────────────────────────────────
+
+1. CANTA DESPACIO al principio
+2. HAZ GESTOS para cada palabra importante
+3. PARA en palabras clave y deja que complete
+4. CAMBIA palabras para hacerlo divertido
+5. GRABA a tu hijo cantando para que se escuche
+6. USA objetos reales mientras cantan
+7. REPITE la favorita (la repetición es clave)
+
+═══════════════════════════════════════════════════════
+
+🎪 JUEGOS CON CANCIONES
+────────────────────────────────────────────
+
+"COMPLETA LA CANCIÓN": Paras y el niño continúa
+"CAMBIA LA PALABRA": Pin Pon es un... (robot)
+"INVENTA EL FINAL": Crea nuevas estrofas
+"CANTA RÁPIDO/LENTO": Varía la velocidad
+"VOZ DE PERSONAJES": Canta como oso, ratón, etc.
+
+Recuerda: No importa si desafinas, 
+¡lo importante es la interacción y diversión!
+        </div>
+    </div>
+</div>
 
             <button class="btn btn-success" onclick="completeSection(6)">✓ Tengo Mi Plan Personal</button>
         </div>
