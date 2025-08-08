@@ -1157,485 +1157,639 @@ RIMAS PARA PRACTICAR:
             </div>
         </div>
     </div>
-    <script>
-        // Variables globales
-        let completedSections = new Set();
-        let totalSections = 6;
-        let selectedAge = null;
-        let currentModeladoQuestion = 0;
-        let currentExpansionExercise = 0;
-        let techniquesCompleted = new Set();
-        let situationsCompleted = new Set();
+  <script>
+    // Variables globales
+    let completedSections = new Set();
+    let totalSections = 6;
+    let selectedAge = null;
+    let currentModeladoQuestion = 1;
+    let currentExpansionExercise = 0;
+    let techniquesCompleted = new Set();
+    let situationsCompleted = new Set();
 
-        // Arrays de ejercicios
-        const expansionExercises = {
-            3: [
-                { phrase: "Agua", hint: "Agrega temperatura o cantidad" },
-                { phrase: "Mamá fue", hint: "Agrega lugar" },
-                { phrase: "Quiero jugar", hint: "Agrega con qué o con quién" },
-                { phrase: "Mi carro", hint: "Agrega color o tamaño" },
-                { phrase: "Tengo hambre", hint: "Agrega qué quiere comer" }
-            ],
-            4: [
-                { phrase: "El gato duerme", hint: "Agrega dónde y cómo" },
-                { phrase: "Estoy feliz", hint: "Agrega por qué" },
-                { phrase: "Vamos al parque", hint: "Agrega con quién y cuándo" },
-                { phrase: "Mi juguete", hint: "Agrega cuál y descripción" },
-                { phrase: "Comí pizza", hint: "Agrega cuándo y con qué" }
-            ],
-            5: [
-                { phrase: "Ayer fuimos", hint: "Agrega lugar, con quién y qué hicieron" },
-                { phrase: "Mi amigo está triste", hint: "Agrega quién es y por qué" },
-                { phrase: "Cuando sea grande", hint: "Agrega qué quiere ser y por qué" },
-                { phrase: "En la escuela", hint: "Agrega qué hace y con quién juega" },
-                { phrase: "Me gusta leer", hint: "Agrega qué tipo de libros y cuándo" }
-            ]
-        };
+    // Arrays de ejercicios
+    const expansionExercises = {
+        3: [
+            { phrase: "Agua", hint: "Agrega temperatura o cantidad", example: "Agua fría" },
+            { phrase: "Mamá fue", hint: "Agrega lugar", example: "Mamá fue al trabajo" },
+            { phrase: "Quiero jugar", hint: "Agrega con qué o con quién", example: "Quiero jugar con los bloques" }
+        ],
+        4: [
+            { phrase: "El gato duerme", hint: "Agrega dónde y cómo", example: "El gato duerme en el sofá tranquilo" },
+            { phrase: "Estoy feliz", hint: "Agrega por qué", example: "Estoy feliz porque vino la abuela" },
+            { phrase: "Vamos al parque", hint: "Agrega con quién y cuándo", example: "Vamos al parque con papá ahora" }
+        ],
+        5: [
+            { phrase: "Ayer fuimos", hint: "Agrega lugar, con quién y qué hicieron", example: "Ayer fuimos al zoológico con los primos y vimos leones" },
+            { phrase: "Mi amigo está triste", hint: "Agrega quién es y por qué", example: "Mi amigo Juan está triste porque perdió su juguete" },
+            { phrase: "Me gusta leer", hint: "Agrega qué tipo de libros y cuándo", example: "Me gusta leer cuentos de aventuras antes de dormir" }
+        ]
+    };
 
-        // Respuestas correctas para el test de modelado
-        const modeladoAnswers = {
-            1: 'b', // 3 años
-            2: 'a', // 4 años
-            3: 'b'  // 5 años
-        };
+    // Respuestas correctas para el test de modelado
+    const modeladoAnswers = {
+        1: 'b', // 3 años
+        2: 'a', // 4 años
+        3: 'b'  // 5 años
+    };
 
-        // Inicialización
-        document.addEventListener('DOMContentLoaded', function() {
-            checkModuleAccess();
-            loadSavedProgress();
+    // Inicialización cuando carga la página
+    window.addEventListener('DOMContentLoaded', function() {
+        checkModuleAccess();
+        loadSavedProgress();
+        
+        // Mostrar mensaje inicial
+        if (!selectedAge) {
+            const ageMessage = document.createElement('div');
+            ageMessage.className = 'alert alert-warning';
+            ageMessage.style.margin = '1rem 0';
+            ageMessage.innerHTML = '👆 <strong>Importante:</strong> Selecciona primero la edad de tu hijo para ver el contenido adaptado';
             
-            // Mensaje inicial
-            if (!selectedAge) {
-                showNotification('👆 Primero selecciona la edad de tu hijo en la parte superior', 'info');
+            const firstSection = document.querySelector('.content-section');
+            if (firstSection) {
+                firstSection.insertBefore(ageMessage, firstSection.firstChild);
+            }
+        }
+    });
+
+    // Verificar acceso al módulo
+    function checkModuleAccess() {
+        const courseProgress = JSON.parse(localStorage.getItem('courseProgress') || '[false,false,false,false,false]');
+        // Comentado temporalmente para pruebas
+        // if (!courseProgress[0]) {
+        //     alert('⚠️ Debes completar el Módulo 1 primero');
+        //     window.location.href = '../modulo1/index.html';
+        // }
+    }
+
+    // Función principal: Selección de edad
+    function selectAge(age) {
+        selectedAge = age;
+        
+        // Actualizar botones de edad
+        document.querySelectorAll('.age-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // Encontrar y activar el botón correcto
+        document.querySelectorAll('.age-btn').forEach(btn => {
+            if (btn.onclick && btn.onclick.toString().includes(age)) {
+                btn.classList.add('active');
             }
         });
-
-        // Verificar acceso al módulo
-        function checkModuleAccess() {
-            const courseProgress = JSON.parse(localStorage.getItem('courseProgress') || '[false,false,false,false,false]');
-            if (!courseProgress[0]) {
-                alert('⚠️ Debes completar el Módulo 1 primero');
-                window.location.href = '../modulo1/index.html';
+        
+        // Mostrar mensaje de edad seleccionada
+        const ageMessage = document.getElementById('ageMessage');
+        if (ageMessage) {
+            ageMessage.style.display = 'block';
+            const selectedAgeSpan = document.getElementById('selectedAge');
+            if (selectedAgeSpan) {
+                selectedAgeSpan.textContent = age;
             }
         }
-
-        // Selección de edad
-        function selectAge(age) {
-            selectedAge = age;
-            
-            // Actualizar botones de edad
-            document.querySelectorAll('.age-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Mostrar mensaje
-            document.getElementById('ageMessage').style.display = 'block';
-            document.getElementById('selectedAge').textContent = age;
-            
-            // Actualizar todos los ejemplos según la edad
-            updateAgeContent();
-            
-            // Guardar edad seleccionada
-            localStorage.setItem('module2SelectedAge', age);
-            
-            showNotification(`✅ Contenido adaptado para ${age} años`, 'success');
+        
+        // Actualizar todo el contenido según la edad
+        updateAgeContent();
+        
+        // Guardar edad seleccionada
+        localStorage.setItem('module2SelectedAge', age);
+        
+        // Mostrar notificación
+        showNotification(`✅ Contenido adaptado para ${age} años`, 'success');
+        
+        // Remover mensaje de advertencia si existe
+        const warningMessage = document.querySelector('.alert-warning');
+        if (warningMessage && warningMessage.innerHTML.includes('Selecciona primero')) {
+            warningMessage.remove();
         }
+    }
 
-        // Actualizar contenido según edad
-        function updateAgeContent() {
-            if (!selectedAge) return;
-            
-            // Ocultar todos los ejemplos
-            document.querySelectorAll('.age-specific-examples').forEach(elem => {
-                elem.style.display = 'none';
-            });
-            
-            // Mostrar ejemplos de la edad seleccionada
-            document.querySelectorAll(`[id$="-age-${selectedAge}"]`).forEach(elem => {
-                elem.style.display = 'block';
-                elem.classList.add('active');
-            });
-            
-            // Actualizar tests según edad
-            updateTests();
+    // Actualizar contenido según edad seleccionada
+    function updateAgeContent() {
+        if (!selectedAge) return;
+        
+        // Primero ocultar TODOS los ejemplos de todas las edades
+        document.querySelectorAll('.age-specific-examples').forEach(elem => {
+            elem.style.display = 'none';
+            elem.classList.remove('active');
+        });
+        
+        // Luego mostrar solo los de la edad seleccionada
+        const ageElements = document.querySelectorAll(`[id*="-age-${selectedAge}"]`);
+        ageElements.forEach(elem => {
+            elem.style.display = 'block';
+            elem.classList.add('active');
+        });
+        
+        // Actualizar tests
+        updateTests();
+        
+        console.log(`Contenido actualizado para edad: ${selectedAge}`);
+    }
+
+    // Actualizar tests según edad
+    function updateTests() {
+        if (!selectedAge) return;
+        
+        // Ocultar todos los tests de modelado
+        document.querySelectorAll('[id^="modelado-test-age-"]').forEach(elem => {
+            elem.style.display = 'none';
+        });
+        
+        // Mostrar test de la edad seleccionada
+        const testId = `modelado-test-age-${selectedAge}`;
+        const ageTest = document.getElementById(testId);
+        if (ageTest) {
+            ageTest.style.display = 'block';
         }
-
-        // Actualizar tests según edad
-        function updateTests() {
-            // Ocultar todos los tests
-            document.querySelectorAll('[id^="modelado-test-age-"]').forEach(elem => {
-                elem.style.display = 'none';
-            });
-            
-            // Mostrar test de la edad seleccionada
-            const ageTest = document.getElementById(`modelado-test-age-${selectedAge}`);
-            if (ageTest) {
-                ageTest.style.display = 'block';
-            }
-            
-            // Actualizar ejercicio de expansión
-            const exerciseDiv = document.getElementById('expansion-exercise');
-            if (exerciseDiv && selectedAge) {
-                exerciseDiv.style.display = 'block';
-                loadExpansionExercise();
-            }
+        
+        // Actualizar ejercicio de expansión
+        const exerciseDiv = document.getElementById('expansion-exercise');
+        if (exerciseDiv) {
+            exerciseDiv.style.display = 'block';
+            loadExpansionExercise();
         }
+    }
 
-        // Check respuesta del test de modelado
-        function checkAnswer(technique, questionNum, answer) {
-            if (!selectedAge) {
-                showNotification('Primero selecciona la edad de tu hijo', 'warning');
-                return;
-            }
-            
-            const feedbackDiv = document.getElementById(`${technique}-feedback-${questionNum}`);
-            const options = event.target.parentElement.querySelectorAll('.test-option');
-            
-            // Limpiar selecciones previas
-            options.forEach(opt => {
-                opt.classList.remove('selected', 'correct', 'incorrect');
-            });
-            
-            // Marcar la opción seleccionada
-            event.target.classList.add('selected');
-            
-            if (answer === modeladoAnswers[questionNum]) {
-                event.target.classList.add('correct');
-                feedbackDiv.className = 'feedback-box feedback-correct show';
-                feedbackDiv.innerHTML = '✅ ¡Correcto! Usaste el modelado perfectamente. No corregiste directamente, sino que repetiste la forma correcta de manera natural.';
-                
-                // Marcar técnica como completada
-                techniquesCompleted.add('modelado');
-                updateAchievements();
-            } else {
-                event.target.classList.add('incorrect');
-                feedbackDiv.className = 'feedback-box feedback-incorrect show';
-                
-                if (answer === 'a' && questionNum === 1) {
-                    feedbackDiv.innerHTML = '❌ Esta respuesta corrige directamente al niño. El modelado consiste en repetir correctamente sin decir "no se dice así".';
-                } else if (answer === 'c') {
-                    feedbackDiv.innerHTML = '❌ Repetir el error no ayuda. Debes modelar la forma correcta.';
-                } else {
-                    feedbackDiv.innerHTML = '❌ Recuerda: el modelado repite correctamente sin corregir directamente.';
-                }
-            }
+    // Verificar respuesta del test
+    function checkAnswer(technique, questionNum, answer) {
+        if (!selectedAge) {
+            showNotification('⚠️ Primero selecciona la edad de tu hijo', 'warning');
+            return;
         }
-
-        // Siguiente pregunta de modelado
-        function nextModeladoQuestion() {
-            if (!selectedAge) {
-                showNotification('Primero selecciona la edad de tu hijo', 'warning');
-                return;
-            }
-            
-            currentModeladoQuestion++;
-            if (currentModeladoQuestion > 2) {
-                showNotification('¡Has completado todos los ejercicios de modelado!', 'success');
-                currentModeladoQuestion = 0;
-            }
-            
-            // Aquí podrías rotar entre diferentes preguntas
-            updateTests();
-        }
-
-        // Cargar ejercicio de expansión
-        function loadExpansionExercise() {
-            if (!selectedAge) return;
-            
-            const exercises = expansionExercises[selectedAge];
-            if (!exercises) return;
-            
-            const exercise = exercises[currentExpansionExercise % exercises.length];
-            document.getElementById('expansion-child-phrase').textContent = exercise.phrase;
-            document.getElementById('expansion-answer').value = '';
-            document.getElementById('expansion-answer').placeholder = `Pista: ${exercise.hint}`;
-            document.getElementById('expansion-feedback').style.display = 'none';
-        }
-
-        // Verificar expansión
-        function checkExpansion() {
-            const answer = document.getElementById('expansion-answer').value.trim();
-            const feedbackDiv = document.getElementById('expansion-feedback');
-            
-            if (!answer) {
-                showNotification('Escribe tu expansión primero', 'warning');
-                return;
-            }
-            
-            const exercise = expansionExercises[selectedAge][currentExpansionExercise % expansionExercises[selectedAge].length];
-            const originalWords = exercise.phrase.split(' ').length;
-            const expandedWords = answer.split(' ').length;
-            
+        
+        const feedbackDiv = document.getElementById(`${technique}-feedback-${questionNum}`);
+        if (!feedbackDiv) return;
+        
+        const correctAnswer = modeladoAnswers[questionNum];
+        
+        if (answer === correctAnswer) {
+            feedbackDiv.className = 'feedback-box feedback-correct show';
+            feedbackDiv.innerHTML = '✅ ¡Correcto! Usaste el modelado perfectamente. No corregiste directamente, sino que repetiste la forma correcta de manera natural.';
             feedbackDiv.style.display = 'block';
-            feedbackDiv.className = 'feedback-box show';
             
-            if (expandedWords > originalWords + 1) {
-                feedbackDiv.className += ' feedback-correct';
-                feedbackDiv.innerHTML = `✅ ¡Excelente expansión! Agregaste ${expandedWords - originalWords} palabras más. Tu respuesta: "${answer}" enriquece significativamente la frase original.`;
+            techniquesCompleted.add('modelado');
+            updateAchievements();
+        } else {
+            feedbackDiv.className = 'feedback-box feedback-incorrect show';
+            feedbackDiv.style.display = 'block';
+            
+            if (answer === 'a' && correctAnswer === 'b') {
+                feedbackDiv.innerHTML = '❌ Esta respuesta corrige directamente. El modelado repite correctamente sin decir "no se dice así".';
+            } else if (answer === 'c') {
+                feedbackDiv.innerHTML = '❌ Repetir el error no ayuda. Debes modelar la forma correcta.';
+            } else {
+                feedbackDiv.innerHTML = '❌ Intenta otra opción. Recuerda: modela la forma correcta sin corregir.';
+            }
+        }
+    }
+
+    // Siguiente pregunta de modelado
+    function nextModeladoQuestion() {
+        if (!selectedAge) {
+            showNotification('⚠️ Primero selecciona la edad de tu hijo', 'warning');
+            return;
+        }
+        
+        // Rotar entre las preguntas disponibles
+        currentModeladoQuestion++;
+        if (currentModeladoQuestion > 3) {
+            currentModeladoQuestion = 1;
+        }
+        
+        // Limpiar respuestas anteriores
+        document.querySelectorAll('.feedback-box').forEach(box => {
+            box.style.display = 'none';
+        });
+        
+        showNotification('Nueva pregunta cargada', 'info');
+    }
+
+    // Cargar ejercicio de expansión
+    function loadExpansionExercise() {
+        if (!selectedAge) return;
+        
+        const exercises = expansionExercises[selectedAge];
+        if (!exercises || exercises.length === 0) return;
+        
+        const exercise = exercises[currentExpansionExercise % exercises.length];
+        
+        const phraseElement = document.getElementById('expansion-child-phrase');
+        const answerElement = document.getElementById('expansion-answer');
+        
+        if (phraseElement) {
+            phraseElement.textContent = exercise.phrase;
+        }
+        
+        if (answerElement) {
+            answerElement.value = '';
+            answerElement.placeholder = `Pista: ${exercise.hint}`;
+        }
+        
+        // Ocultar feedback anterior
+        const feedbackDiv = document.getElementById('expansion-feedback');
+        if (feedbackDiv) {
+            feedbackDiv.style.display = 'none';
+        }
+    }
+
+    // Verificar expansión
+    function checkExpansion() {
+        if (!selectedAge) {
+            showNotification('⚠️ Primero selecciona la edad de tu hijo', 'warning');
+            return;
+        }
+        
+        const answerElement = document.getElementById('expansion-answer');
+        if (!answerElement) return;
+        
+        const answer = answerElement.value.trim();
+        const feedbackDiv = document.getElementById('expansion-feedback');
+        
+        if (!answer) {
+            showNotification('Escribe tu expansión primero', 'warning');
+            return;
+        }
+        
+        const exercises = expansionExercises[selectedAge];
+        const exercise = exercises[currentExpansionExercise % exercises.length];
+        
+        const originalWords = exercise.phrase.split(' ').length;
+        const expandedWords = answer.split(' ').length;
+        
+        if (feedbackDiv) {
+            feedbackDiv.style.display = 'block';
+            
+            if (expandedWords > originalWords) {
+                feedbackDiv.className = 'feedback-box feedback-correct show';
+                feedbackDiv.innerHTML = `✅ ¡Excelente! Agregaste ${expandedWords - originalWords} palabras. Tu expansión "${answer}" enriquece la frase original. Ejemplo modelo: "${exercise.example}"`;
                 
                 techniquesCompleted.add('expansion');
                 updateAchievements();
             } else {
-                feedbackDiv.className += ' feedback-incorrect';
-                feedbackDiv.innerHTML = `⚠️ Intenta agregar más información. La expansión debe enriquecer la frase original. ${exercise.hint}`;
+                feedbackDiv.className = 'feedback-box feedback-incorrect show';
+                feedbackDiv.innerHTML = `⚠️ Intenta agregar más información. ${exercise.hint}. Ejemplo: "${exercise.example}"`;
             }
         }
+    }
 
-        // Siguiente ejercicio de expansión
-        function nextExpansionExercise() {
-            currentExpansionExercise++;
-            loadExpansionExercise();
-            showNotification('Nuevo ejercicio cargado', 'info');
+    // Siguiente ejercicio de expansión
+    function nextExpansionExercise() {
+        if (!selectedAge) {
+            showNotification('⚠️ Primero selecciona la edad de tu hijo', 'warning');
+            return;
         }
+        
+        currentExpansionExercise++;
+        loadExpansionExercise();
+        showNotification('Nuevo ejercicio de expansión', 'info');
+    }
 
-        // Mostrar/ocultar tabs
-        function showTab(tabName) {
-            // Ocultar todos los contenidos
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            // Desactivar todos los tabs
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Activar el tab seleccionado
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
+    // Mostrar tab
+    function showTab(tabName) {
+        // Ocultar todos los tabs
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.remove('active');
+        });
+        
+        // Desactivar todos los botones de tab
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        
+        // Activar el tab seleccionado
+        const selectedTab = document.getElementById(tabName);
+        if (selectedTab) {
+            selectedTab.classList.add('active');
         }
+        
+        // Activar el botón correspondiente
+        document.querySelectorAll('.tab').forEach(tab => {
+            if (tab.onclick && tab.onclick.toString().includes(tabName)) {
+                tab.classList.add('active');
+            }
+        });
+    }
 
-        // Toggle situación completada
-        function toggleComplete(card) {
-            card.classList.toggle('completed');
-            
+    // Toggle situación completada
+    function toggleComplete(card) {
+        if (!card) return;
+        
+        card.classList.toggle('completed');
+        
+        const title = card.querySelector('h4');
+        if (title) {
             if (card.classList.contains('completed')) {
-                situationsCompleted.add(card.querySelector('h4').textContent);
+                situationsCompleted.add(title.textContent);
                 showNotification('✅ Situación practicada', 'success');
             } else {
-                situationsCompleted.delete(card.querySelector('h4').textContent);
-            }
-            
-            updateAchievements();
-        }
-
-        // Mostrar más juegos
-        function showMoreGames() {
-            const moreGames = document.getElementById('moreGames');
-            if (moreGames.style.display === 'none') {
-                moreGames.style.display = 'block';
-                event.target.textContent = 'Ocultar Juegos';
-            } else {
-                moreGames.style.display = 'none';
-                event.target.textContent = 'Ver Más Juegos';
+                situationsCompleted.delete(title.textContent);
             }
         }
+        
+        updateAchievements();
+    }
+      // Mostrar más juegos
+    function showMoreGames() {
+        const moreGames = document.getElementById('moreGames');
+        if (!moreGames) return;
+        
+        const button = event.target;
+        
+        if (moreGames.style.display === 'none' || moreGames.style.display === '') {
+            moreGames.style.display = 'block';
+            if (button) button.textContent = 'Ocultar Juegos';
+        } else {
+            moreGames.style.display = 'none';
+            if (button) button.textContent = 'Ver Más Juegos';
+        }
+    }
 
-        // Mostrar guía rápida
-        function showQuickGuide() {
-            const guide = document.getElementById('quickGuide');
-            if (guide.style.display === 'none') {
-                guide.style.display = 'block';
-                event.target.textContent = 'Ocultar Guía';
-            } else {
-                guide.style.display = 'none';
-                event.target.textContent = 'Ver Guía Rápida';
+    // Mostrar guía rápida
+    function showQuickGuide() {
+        const guide = document.getElementById('quickGuide');
+        if (!guide) return;
+        
+        const button = event.target;
+        
+        if (guide.style.display === 'none' || guide.style.display === '') {
+            guide.style.display = 'block';
+            if (button) button.textContent = 'Ocultar Guía';
+        } else {
+            guide.style.display = 'none';
+            if (button) button.textContent = 'Ver Guía Rápida';
+        }
+    }
+
+    // Mostrar canciones
+    function showSongs() {
+        const songs = document.getElementById('songsResources');
+        if (!songs) return;
+        
+        const button = event.target;
+        
+        if (songs.style.display === 'none' || songs.style.display === '') {
+            songs.style.display = 'block';
+            if (button) button.textContent = 'Ocultar Canciones';
+        } else {
+            songs.style.display = 'none';
+            if (button) button.textContent = 'Ver Canciones';
+        }
+    }
+
+    // Actualizar plan semanal
+    function updateWeeklyPlan() {
+        const days = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'];
+        let checkedDays = 0;
+        
+        days.forEach(day => {
+            const checkbox = document.getElementById(day);
+            if (checkbox && checkbox.checked) {
+                checkedDays++;
+            }
+        });
+        
+        const commitmentDiv = document.getElementById('weeklyCommitment');
+        const daysCountSpan = document.getElementById('daysCount');
+        
+        if (checkedDays > 0) {
+            if (commitmentDiv) {
+                commitmentDiv.style.display = 'block';
+            }
+            if (daysCountSpan) {
+                daysCountSpan.textContent = checkedDays;
+            }
+            
+            if (checkedDays >= 5) {
+                showNotification('🌟 ¡Excelente compromiso! Practicar 5+ días acelera el progreso', 'success');
+            }
+        } else {
+            if (commitmentDiv) {
+                commitmentDiv.style.display = 'none';
             }
         }
+        
+        // Guardar plan
+        const weeklyPlan = {
+            days: checkedDays,
+            selected: days.filter(day => {
+                const cb = document.getElementById(day);
+                return cb && cb.checked;
+            })
+        };
+        localStorage.setItem('module2WeeklyPlan', JSON.stringify(weeklyPlan));
+    }
 
-        // Mostrar canciones
-        function showSongs() {
-            const songs = document.getElementById('songsResources');
-            if (songs.style.display === 'none') {
-                songs.style.display = 'block';
-                event.target.textContent = 'Ocultar Canciones';
-            } else {
-                songs.style.display = 'none';
-                event.target.textContent = 'Ver Canciones';
-            }
+    // Completar sección
+    function completeSection(sectionNumber) {
+        if (!selectedAge && sectionNumber !== 6) {
+            showNotification('⚠️ Primero selecciona la edad de tu hijo', 'warning');
+            return;
         }
-
-        // Actualizar plan semanal
-        function updateWeeklyPlan() {
-            const days = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo'];
-            let checkedDays = 0;
-            
-            days.forEach(day => {
-                if (document.getElementById(day).checked) {
-                    checkedDays++;
-                }
-            });
-            
-            if (checkedDays > 0) {
-                document.getElementById('weeklyCommitment').style.display = 'block';
-                document.getElementById('daysCount').textContent = checkedDays;
-                
-                if (checkedDays >= 5) {
-                    showNotification('🌟 ¡Excelente compromiso! Practicar 5+ días a la semana acelera el progreso', 'success');
-                }
-            } else {
-                document.getElementById('weeklyCommitment').style.display = 'none';
-            }
-            
-            // Guardar plan
-            const weeklyPlan = {
-                days: checkedDays,
-                selected: days.filter(day => document.getElementById(day).checked)
-            };
-            localStorage.setItem('module2WeeklyPlan', JSON.stringify(weeklyPlan));
+        
+        completedSections.add(sectionNumber);
+        updateProgressBar();
+        saveProgress();
+        
+        // Marcar visualmente la sección como completada
+        const section = document.querySelector(`[data-section="${sectionNumber}"]`);
+        if (section) {
+            section.style.border = '3px solid #28a745';
+            section.style.background = 'linear-gradient(to right, #d4edda 0%, white 5%)';
+            section.style.transition = 'all 0.3s ease';
         }
-
-        // Completar sección
-        function completeSection(sectionNumber) {
-            if (!selectedAge) {
-                showNotification('⚠️ Primero selecciona la edad de tu hijo', 'warning');
-                return;
-            }
-            
-            completedSections.add(sectionNumber);
-            updateProgressBar();
-            saveProgress();
-            
-            // Marcar visualmente
-            const section = document.querySelector(`[data-section="${sectionNumber}"]`);
-            if (section) {
-                section.style.border = '3px solid #28a745';
-                section.style.background = 'linear-gradient(to right, #d4edda 0%, white 5%)';
-            }
-            
-            showNotification(`✅ Sección ${sectionNumber} completada`, 'success');
-            
-            if (completedSections.size === totalSections) {
-                completeModule();
-            }
+        
+        showNotification(`✅ Sección ${sectionNumber} completada`, 'success');
+        
+        // Verificar si se completó todo el módulo
+        if (completedSections.size === totalSections) {
+            completeModule();
         }
+    }
 
-        // Actualizar barra de progreso
-        function updateProgressBar() {
-            const progress = (completedSections.size / totalSections) * 100;
-            document.getElementById('progressFill').style.width = progress + '%';
-            document.getElementById('progressText').textContent = Math.round(progress) + '% completado';
-            document.getElementById('completedSections').textContent = `${completedSections.size} de ${totalSections} secciones`;
+    // Actualizar barra de progreso
+    function updateProgressBar() {
+        const progress = (completedSections.size / totalSections) * 100;
+        
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const completedSectionsText = document.getElementById('completedSections');
+        
+        if (progressFill) {
+            progressFill.style.width = progress + '%';
         }
-
-        // Actualizar achievements
-        function updateAchievements() {
-            if (techniquesCompleted.size >= 1) {
-                document.getElementById('badge1').classList.add('unlocked');
-            }
-            if (techniquesCompleted.size >= 3) {
-                document.getElementById('badge2').classList.add('unlocked');
-            }
-            if (techniquesCompleted.size >= 4) {
-                document.getElementById('badge3').classList.add('unlocked');
-            }
-            if (completedSections.size === totalSections) {
-                document.getElementById('badge4').classList.add('unlocked');
-            }
+        if (progressText) {
+            progressText.textContent = Math.round(progress) + '% completado';
         }
-
-        // Completar módulo
-        function completeModule() {
-            // Mostrar botones de navegación
-            document.getElementById('certificateBtn').style.display = 'inline-block';
-            document.getElementById('nextModuleBtn').style.display = 'inline-block';
-            
-            // Actualizar progreso del curso
-            let courseProgress = JSON.parse(localStorage.getItem('courseProgress') || '[false,false,false,false,false]');
-            courseProgress[1] = true;
-            localStorage.setItem('courseProgress', JSON.stringify(courseProgress));
-            
-            showNotification('🎉 ¡FELICITACIONES! Has completado el Módulo 2', 'success');
-            
-            setTimeout(() => {
-                alert('🏆 ¡Módulo 2 Completado!\n\n' +
-                      '✅ Dominas 4 técnicas fundamentales\n' +
-                      '✅ Sabes aplicarlas en situaciones diarias\n' +
-                      '✅ Tienes tu plan personal\n\n' +
-                      '¡Continúa al Módulo 3!');
-            }, 1000);
+        if (completedSectionsText) {
+            completedSectionsText.textContent = `${completedSections.size} de ${totalSections} secciones`;
         }
+    }
 
-        // Generar certificado
-        function generateCertificate() {
-            const userName = prompt('¿Cuál es tu nombre para el certificado?') || 'Estudiante';
-            
-            const certificate = `
+    // Actualizar achievements/logros
+    function updateAchievements() {
+        // Badge 1: Primera técnica
+        if (techniquesCompleted.size >= 1) {
+            const badge1 = document.getElementById('badge1');
+            if (badge1) badge1.classList.add('unlocked');
+        }
+        
+        // Badge 2: 3 técnicas
+        if (techniquesCompleted.size >= 3) {
+            const badge2 = document.getElementById('badge2');
+            if (badge2) badge2.classList.add('unlocked');
+        }
+        
+        // Badge 3: Todas las técnicas
+        if (techniquesCompleted.size >= 4) {
+            const badge3 = document.getElementById('badge3');
+            if (badge3) badge3.classList.add('unlocked');
+        }
+        
+        // Badge 4: Módulo completo
+        if (completedSections.size === totalSections) {
+            const badge4 = document.getElementById('badge4');
+            if (badge4) badge4.classList.add('unlocked');
+        }
+    }
+
+    // Completar módulo
+    function completeModule() {
+        // Mostrar botones de navegación
+        const certificateBtn = document.getElementById('certificateBtn');
+        const nextModuleBtn = document.getElementById('nextModuleBtn');
+        
+        if (certificateBtn) {
+            certificateBtn.style.display = 'inline-block';
+        }
+        if (nextModuleBtn) {
+            nextModuleBtn.style.display = 'inline-block';
+        }
+        
+        // Actualizar progreso del curso
+        let courseProgress = JSON.parse(localStorage.getItem('courseProgress') || '[false,false,false,false,false]');
+        courseProgress[1] = true;
+        localStorage.setItem('courseProgress', JSON.stringify(courseProgress));
+        
+        showNotification('🎉 ¡FELICITACIONES! Has completado el Módulo 2', 'success');
+        
+        setTimeout(() => {
+            alert('🏆 ¡Módulo 2 Completado!\n\n' +
+                  '✅ Dominas 4 técnicas fundamentales\n' +
+                  '✅ Sabes aplicarlas en situaciones diarias\n' +
+                  '✅ Tienes tu plan personal\n\n' +
+                  '¡Continúa al Módulo 3 para aprender soluciones específicas!');
+        }, 1000);
+    }
+
+    // Generar certificado
+    function generateCertificate() {
+        const userName = prompt('¿Cuál es tu nombre para el certificado?') || 'Estudiante';
+        
+        const certificate = `
 ╔════════════════════════════════════════════════════╗
 ║                                                    ║
 ║         🏆 CERTIFICADO DE COMPLETACIÓN 🏆          ║
 ║                                                    ║
-║         Academia de Psicología Infantil           ║
+║      ESTIMULACIÓN DEL LENGUAJE INFANTIL           ║
 ║                                                    ║
 ╠════════════════════════════════════════════════════╣
 ║                                                    ║
 ║  Certificamos que:                                 ║
 ║                                                    ║
-║            ${userName.toUpperCase()}               ║
+║            ${userName.toUpperCase().padEnd(40, ' ')}║
 ║                                                    ║
 ║  Ha completado exitosamente el MÓDULO 2:          ║
 ║                                                    ║
-║      "Técnicas Prácticas de Estimulación"         ║
+║      "TÉCNICAS PRÁCTICAS PARA PADRES"             ║
 ║                                                    ║
 ║  Competencias Adquiridas:                         ║
-║  ✅ Modelado lingüístico                          ║
-║  ✅ Expansión del lenguaje                        ║
-║  ✅ Preguntas abiertas                            ║
-║  ✅ Narración paralela                            ║
-║  ✅ Aplicación en vida diaria                     ║
+║  ✅ Modelado lingüístico sin corrección directa   ║
+║  ✅ Expansión del lenguaje con ejemplos           ║
+║  ✅ Preguntas abiertas para estimular             ║
+║  ✅ Narración paralela y auto-conversación        ║
+║  ✅ Aplicación práctica en vida diaria            ║
 ║                                                    ║
-║  Edad de aplicación: ${selectedAge || 'No especificada'} años     ║
+║  Edad de aplicación: ${(selectedAge || 'General').padEnd(26, ' ')}║
+║  Técnicas dominadas: ${techniquesCompleted.size}/4                     ║
+║  Situaciones practicadas: ${situationsCompleted.size}                  ║
 ║                                                    ║
-║  Fecha: ${new Date().toLocaleDateString('es-ES')} ║
+║  Fecha: ${new Date().toLocaleDateString('es-ES').padEnd(43, ' ')}║
+║                                                    ║
+║  ID Certificado: MOD2-${Date.now()}      ║
 ║                                                    ║
 ╚════════════════════════════════════════════════════╝
-            `;
-            
-            const blob = new Blob([certificate], { type: 'text/plain;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `Certificado_Modulo2_${userName.replace(/\s/g, '_')}.txt`;
-            a.click();
-            URL.revokeObjectURL(url);
-            
-            showNotification('🎉 Certificado descargado', 'success');
-        }
 
-        // Mostrar progreso
-        function showProgress() {
-            const progress = (completedSections.size / totalSections) * 100;
-            
-            alert(`📊 TU PROGRESO EN MÓDULO 2:\n\n` +
-                  `📈 Progreso: ${Math.round(progress)}%\n` +
-                  `📚 Secciones: ${completedSections.size} de ${totalSections}\n` +
-                  `🎯 Técnicas practicadas: ${techniquesCompleted.size} de 4\n` +
-                  `🏠 Situaciones practicadas: ${situationsCompleted.size}\n` +
-                  `👶 Edad seleccionada: ${selectedAge || 'No seleccionada'} años\n\n` +
-                  `${progress === 100 ? '🎉 ¡MÓDULO COMPLETADO!' : '💪 ¡Sigue practicando!'}`);
-        }
+¡Felicitaciones! Ahora tienes las herramientas para
+estimular efectivamente el lenguaje de tu hijo.
 
-        // Guardar progreso
-        function saveProgress() {
-            const progress = {
-                completedSections: Array.from(completedSections),
-                selectedAge: selectedAge,
-                techniquesCompleted: Array.from(techniquesCompleted),
-                situationsCompleted: Array.from(situationsCompleted),
-                lastAccess: new Date().toISOString()
-            };
-            localStorage.setItem('module2Progress', JSON.stringify(progress));
-        }
+Continúa al Módulo 3 para aprender soluciones
+específicas para desafíos comunes.
+        `;
+        
+        // Crear y descargar el archivo
+        const blob = new Blob([certificate], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Certificado_Modulo2_${userName.replace(/\s/g, '_')}.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        showNotification('🎉 Certificado descargado exitosamente', 'success');
+    }
 
-        // Cargar progreso guardado
-        function loadSavedProgress() {
+    // Mostrar progreso detallado
+    function showProgress() {
+        const progress = (completedSections.size / totalSections) * 100;
+        
+        let techniquesList = Array.from(techniquesCompleted).join(', ') || 'Ninguna aún';
+        let situationsList = situationsCompleted.size > 0 ? 
+            `${situationsCompleted.size} situaciones` : 'Ninguna aún';
+        
+        const progressMessage = `
+📊 TU PROGRESO EN MÓDULO 2:
+
+📈 Progreso general: ${Math.round(progress)}%
+📚 Secciones completadas: ${completedSections.size} de ${totalSections}
+👶 Edad seleccionada: ${selectedAge ? selectedAge + ' años' : 'No seleccionada'}
+
+🎯 Técnicas practicadas: ${techniquesCompleted.size} de 4
+   ${techniquesList}
+
+🏠 Situaciones practicadas: ${situationsList}
+
+${progress === 100 ? '🎉 ¡MÓDULO COMPLETADO! Descarga tu certificado.' : '💪 ¡Sigue practicando! Cada día cuenta.'}
+        `;
+        
+        alert(progressMessage);
+    }
+
+    // Guardar progreso
+    function saveProgress() {
+        const progress = {
+            completedSections: Array.from(completedSections),
+            selectedAge: selectedAge,
+            techniquesCompleted: Array.from(techniquesCompleted),
+            situationsCompleted: Array.from(situationsCompleted),
+            currentExpansionExercise: currentExpansionExercise,
+            lastAccess: new Date().toISOString()
+        };
+        
+        localStorage.setItem('module2Progress', JSON.stringify(progress));
+    }
+
+    // Cargar progreso guardado
+    function loadSavedProgress() {
+        try {
             const saved = localStorage.getItem('module2Progress');
             if (saved) {
                 const progress = JSON.parse(saved);
                 
                 // Restaurar secciones completadas
-                if (progress.completedSections) {
+                if (progress.completedSections && Array.isArray(progress.completedSections)) {
                     progress.completedSections.forEach(section => {
                         completedSections.add(section);
                         const sectionElem = document.querySelector(`[data-section="${section}"]`);
@@ -1649,77 +1803,134 @@ RIMAS PARA PRACTICAR:
                 // Restaurar edad seleccionada
                 if (progress.selectedAge) {
                     selectedAge = progress.selectedAge;
-                    document.querySelectorAll('.age-btn').forEach(btn => {
-                        if (btn.textContent.includes(selectedAge)) {
-                            btn.classList.add('active');
-                        }
-                    });
-                    updateAgeContent();
+                    // Simular click en el botón de edad
+                    setTimeout(() => {
+                        selectAge(selectedAge);
+                    }, 500);
                 }
                 
-                // Restaurar técnicas y situaciones
-                if (progress.techniquesCompleted) {
+                // Restaurar técnicas completadas
+                if (progress.techniquesCompleted && Array.isArray(progress.techniquesCompleted)) {
                     progress.techniquesCompleted.forEach(tech => techniquesCompleted.add(tech));
                 }
-                if (progress.situationsCompleted) {
+                
+                // Restaurar situaciones completadas
+                if (progress.situationsCompleted && Array.isArray(progress.situationsCompleted)) {
                     progress.situationsCompleted.forEach(sit => situationsCompleted.add(sit));
                 }
                 
+                // Restaurar ejercicio actual
+                if (progress.currentExpansionExercise) {
+                    currentExpansionExercise = progress.currentExpansionExercise;
+                }
+                
+                // Actualizar interfaz
                 updateProgressBar();
                 updateAchievements();
+                
+                // Si el módulo está completo, mostrar botones
+                if (completedSections.size === totalSections) {
+                    const certificateBtn = document.getElementById('certificateBtn');
+                    const nextModuleBtn = document.getElementById('nextModuleBtn');
+                    if (certificateBtn) certificateBtn.style.display = 'inline-block';
+                    if (nextModuleBtn) nextModuleBtn.style.display = 'inline-block';
+                }
             }
             
-            // Cargar plan semanal
+            // Cargar plan semanal si existe
             const weeklyPlan = localStorage.getItem('module2WeeklyPlan');
             if (weeklyPlan) {
                 const plan = JSON.parse(weeklyPlan);
-                plan.selected.forEach(day => {
-                    document.getElementById(day).checked = true;
-                });
-                updateWeeklyPlan();
+                if (plan.selected && Array.isArray(plan.selected)) {
+                    plan.selected.forEach(day => {
+                        const checkbox = document.getElementById(day);
+                        if (checkbox) {
+                            checkbox.checked = true;
+                        }
+                    });
+                    updateWeeklyPlan();
+                }
             }
+        } catch (error) {
+            console.error('Error cargando progreso:', error);
         }
+    }
 
-        // Logout
-        function logout() {
-            if (confirm('¿Estás seguro que quieres salir? Tu progreso se guardará automáticamente.')) {
-                saveProgress();
-                window.location.href = '../index.html';
-            }
+    // Logout
+    function logout() {
+        if (confirm('¿Estás seguro que quieres salir? Tu progreso se guardará automáticamente.')) {
+            saveProgress();
+            window.location.href = '../index.html';
         }
+    }
 
-        // Notificaciones
-        function showNotification(message, type) {
-            // Crear elemento de notificación
-            const notification = document.createElement('div');
-            notification.className = `alert alert-${type === 'success' ? 'success' : type === 'warning' ? 'warning' : 'info'}`;
-            notification.style.cssText = 'position: fixed; top: 80px; right: 20px; z-index: 9999; min-width: 300px; animation: slideIn 0.3s ease;';
-            notification.innerHTML = message;
-            document.body.appendChild(notification);
-            
-            // Remover después de 3 segundos
+    // Sistema de notificaciones mejorado
+    function showNotification(message, type = 'info') {
+        // Remover notificaciones anteriores
+        const existingNotifications = document.querySelectorAll('.notification-custom');
+        existingNotifications.forEach(notif => notif.remove());
+        
+        // Crear nueva notificación
+        const notification = document.createElement('div');
+        notification.className = `alert alert-${type} notification-custom`;
+        notification.style.cssText = `
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 9999;
+            min-width: 300px;
+            max-width: 400px;
+            animation: slideInNotification 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        `;
+        notification.innerHTML = message;
+        document.body.appendChild(notification);
+        
+        // Auto-remover después de 3 segundos
+        setTimeout(() => {
+            notification.style.animation = 'slideOutNotification 0.3s ease';
             setTimeout(() => {
-                notification.style.animation = 'slideOut 0.3s ease';
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
-        }
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 300);
+        }, 3000);
+    }
 
-        // Animaciones CSS
+    // Agregar estilos de animación si no existen
+    if (!document.getElementById('notification-styles')) {
         const style = document.createElement('style');
+        style.id = 'notification-styles';
         style.textContent = `
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
+            @keyframes slideInNotification {
+                from { 
+                    transform: translateX(100%); 
+                    opacity: 0; 
+                }
+                to { 
+                    transform: translateX(0); 
+                    opacity: 1; 
+                }
             }
-            @keyframes slideOut {
-                from { transform: translateX(0); opacity: 1; }
-                to { transform: translateX(100%); opacity: 0; }
+            @keyframes slideOutNotification {
+                from { 
+                    transform: translateX(0); 
+                    opacity: 1; 
+                }
+                to { 
+                    transform: translateX(100%); 
+                    opacity: 0; 
+                }
+            }
+            .notification-custom {
+                transition: all 0.3s ease;
             }
         `;
         document.head.appendChild(style);
+    }
 
-        console.log('🎯 Módulo 2: Técnicas Prácticas para Padres cargado correctamente');
-        console.log('📚 Recuerda seleccionar la edad de tu hijo para ver contenido personalizado');
-    </script>
-</body>
-</html>
+    // Log de inicio
+    console.log('🎯 Módulo 2: Técnicas Prácticas para Padres - Cargado correctamente');
+    console.log('📚 Versión: 2.0 - Corregida y funcional');
+    console.log('👶 Recuerda seleccionar la edad de tu hijo para comenzar');
+</script>
