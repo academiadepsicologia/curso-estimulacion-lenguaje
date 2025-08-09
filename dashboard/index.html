@@ -27,7 +27,7 @@
         .header {
             text-align: center;
             color: white;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             animation: fadeInDown 1s ease;
         }
 
@@ -47,7 +47,7 @@
             padding: 15px 25px;
             border-radius: 50px;
             display: inline-block;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             backdrop-filter: blur(10px);
         }
 
@@ -59,6 +59,8 @@
             text-decoration: none;
             margin-left: 20px;
             transition: background 0.3s;
+            display: inline-block;
+            margin-top: 10px;
         }
 
         .logout-btn:hover {
@@ -67,15 +69,15 @@
 
         .modules-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
         }
 
         .module-card {
             background: white;
             border-radius: 20px;
-            padding: 30px;
+            padding: 25px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
             position: relative;
@@ -146,7 +148,7 @@
         }
 
         .module-title {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: #333;
             margin-bottom: 10px;
         }
@@ -154,19 +156,21 @@
         .module-description {
             color: #666;
             line-height: 1.6;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
         }
 
         .module-topics {
             background: #f8f9fa;
             padding: 15px;
             border-radius: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .module-topics h4 {
             color: #764ba2;
             margin-bottom: 10px;
+            font-size: 0.9rem;
         }
 
         .module-topics ul {
@@ -178,6 +182,7 @@
             padding: 5px 0;
             padding-left: 20px;
             position: relative;
+            font-size: 0.85rem;
         }
 
         .module-topics li:before {
@@ -192,13 +197,14 @@
             align-items: center;
             gap: 10px;
             color: #666;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
         }
 
         .btn {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 12px 30px;
+            padding: 12px 20px;
             border: none;
             border-radius: 50px;
             font-size: 1rem;
@@ -207,6 +213,8 @@
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
+            width: 100%;
+            text-align: center;
         }
 
         .btn:hover:not(:disabled) {
@@ -221,9 +229,9 @@
 
         .progress-overview {
             background: white;
-            padding: 30px;
+            padding: 25px;
             border-radius: 20px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
@@ -248,8 +256,8 @@
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
             margin-top: 20px;
         }
 
@@ -261,14 +269,35 @@
         }
 
         .stat-number {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: bold;
             color: #764ba2;
         }
 
         .stat-label {
             color: #666;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 1000;
+        }
+
+        .mobile-nav a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 10px;
         }
 
         @keyframes fadeInDown {
@@ -291,12 +320,80 @@
             animation: fadeIn 0.8s ease;
         }
 
+        /* Responsive Design */
         @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
             .header h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+
+            .user-info {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+
+            .logout-btn {
+                display: block;
+                margin: 10px auto;
+                text-align: center;
             }
             
             .modules-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .module-card {
+                padding: 20px;
+            }
+
+            .module-title {
+                font-size: 1.1rem;
+            }
+
+            .module-description {
+                font-size: 0.9rem;
+            }
+
+            .module-topics li {
+                font-size: 0.8rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
+            }
+
+            .stat-label {
+                font-size: 0.75rem;
+            }
+
+            .progress-overview {
+                padding: 20px;
+            }
+
+            .mobile-nav {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .stats-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -310,12 +407,12 @@
             <div class="user-info">
                 <span id="userName">👤 Estudiante</span> | 
                 <span id="currentDate"></span>
-                <a href="../index.html" class="logout-btn">Salir</a>
+                <a href="../index.html" class="logout-btn">← Salir</a>
             </div>
         </div>
 
         <div class="progress-overview">
-            <h2>Tu Progreso General</h2>
+            <h2 style="margin-bottom: 15px;">Tu Progreso General</h2>
             <div class="progress-bar">
                 <div class="progress-fill" id="mainProgress">0%</div>
             </div>
@@ -345,15 +442,15 @@
                 <div class="module-number">1</div>
                 <h3 class="module-title">Fundamentos del Desarrollo del Lenguaje</h3>
                 <p class="module-description">
-                    Comprende cómo se desarrolla el lenguaje en los niños y identifica las señales importantes en cada etapa.
+                    Comprende cómo se desarrolla el lenguaje en los niños y identifica las señales importantes.
                 </p>
                 <div class="module-topics">
                     <h4>📚 Aprenderás:</h4>
                     <ul>
-                        <li>Etapas del desarrollo del lenguaje (0-6 años)</li>
+                        <li>Etapas del desarrollo (0-6 años)</li>
                         <li>Señales de alerta por edad</li>
-                        <li>Mitos vs realidades del habla infantil</li>
-                        <li>Cuándo buscar ayuda profesional</li>
+                        <li>Mitos vs realidades</li>
+                        <li>Cuándo buscar ayuda</li>
                     </ul>
                 </div>
                 <div class="module-duration">
@@ -367,21 +464,21 @@
                 <div class="module-number">2</div>
                 <h3 class="module-title">Técnicas de Estimulación</h3>
                 <p class="module-description">
-                    Aprende técnicas prácticas y efectivas para estimular el lenguaje en casa de manera natural y divertida.
+                    Aprende técnicas prácticas para estimular el lenguaje en casa.
                 </p>
                 <div class="module-topics">
                     <h4>📚 Aprenderás:</h4>
                     <ul>
-                        <li>Técnica del modelado lingüístico</li>
-                        <li>Expansión y extensión del lenguaje</li>
-                        <li>Uso de preguntas abiertas</li>
-                        <li>Crear ambientes ricos en lenguaje</li>
+                        <li>Modelado lingüístico</li>
+                        <li>Expansión del lenguaje</li>
+                        <li>Preguntas abiertas</li>
+                        <li>Ambientes ricos</li>
                     </ul>
                 </div>
                 <div class="module-duration">
                     ⏱️ Duración: 60 minutos
                 </div>
-                <button class="btn" disabled onclick="startModule(2)">🔒 Completa el Módulo 1</button>
+                <button class="btn" disabled onclick="startModule(2)">🔒 Bloqueado</button>
             </div>
 
             <!-- Módulo 3 -->
@@ -389,21 +486,21 @@
                 <div class="module-number">3</div>
                 <h3 class="module-title">Actividades y Juegos</h3>
                 <p class="module-description">
-                    Descubre actividades lúdicas y juegos específicos para cada edad que favorecen el desarrollo del lenguaje.
+                    Descubre actividades lúdicas para cada edad.
                 </p>
                 <div class="module-topics">
                     <h4>📚 Aprenderás:</h4>
                     <ul>
-                        <li>Juegos por edades (3-6 años)</li>
-                        <li>Cuentos y narración interactiva</li>
-                        <li>Canciones y rimas educativas</li>
-                        <li>Actividades de la vida diaria</li>
+                        <li>Juegos por edades</li>
+                        <li>Cuentos interactivos</li>
+                        <li>Canciones educativas</li>
+                        <li>Actividades diarias</li>
                     </ul>
                 </div>
                 <div class="module-duration">
                     ⏱️ Duración: 50 minutos
                 </div>
-                <button class="btn" disabled onclick="startModule(3)">🔒 Completa el Módulo 2</button>
+                <button class="btn" disabled onclick="startModule(3)">🔒 Bloqueado</button>
             </div>
 
             <!-- Módulo 4 -->
@@ -411,35 +508,35 @@
                 <div class="module-number">4</div>
                 <h3 class="module-title">Dificultades Comunes</h3>
                 <p class="module-description">
-                    Identifica y aprende a manejar las dificultades más comunes del lenguaje en la infancia.
+                    Identifica y maneja las dificultades más comunes.
                 </p>
                 <div class="module-topics">
                     <h4>📚 Aprenderás:</h4>
                     <ul>
                         <li>Tartamudez del desarrollo</li>
-                        <li>Dificultades de pronunciación</li>
-                        <li>Retraso simple del lenguaje</li>
-                        <li>Estrategias de apoyo en casa</li>
+                        <li>Problemas de pronunciación</li>
+                        <li>Retraso del lenguaje</li>
+                        <li>Estrategias de apoyo</li>
                     </ul>
                 </div>
                 <div class="module-duration">
                     ⏱️ Duración: 55 minutos
                 </div>
-                <button class="btn" disabled onclick="startModule(4)">🔒 Completa el Módulo 3</button>
+                <button class="btn" disabled onclick="startModule(4)">🔒 Bloqueado</button>
             </div>
 
             <!-- Módulo 5 -->
             <div class="module-card locked" id="module5">
                 <div class="module-number">5</div>
-                <h3 class="module-title">Plan de Acción Personalizado</h3>
+                <h3 class="module-title">Plan Personalizado</h3>
                 <p class="module-description">
-                    Crea un plan personalizado de estimulación adaptado a las necesidades específicas de tu hijo.
+                    Crea un plan adaptado a tu hijo.
                 </p>
                 <div class="module-topics">
                     <h4>📚 Aprenderás:</h4>
                     <ul>
-                        <li>Evaluación inicial del niño</li>
-                        <li>Establecimiento de objetivos</li>
+                        <li>Evaluación inicial</li>
+                        <li>Establecer objetivos</li>
                         <li>Cronograma de actividades</li>
                         <li>Seguimiento del progreso</li>
                     </ul>
@@ -447,7 +544,7 @@
                 <div class="module-duration">
                     ⏱️ Duración: 40 minutos
                 </div>
-                <button class="btn" disabled onclick="startModule(5)">🔒 Completa el Módulo 4</button>
+                <button class="btn" disabled onclick="startModule(5)">🔒 Bloqueado</button>
             </div>
 
             <!-- Certificado Final -->
@@ -455,27 +552,31 @@
                 <div class="module-number">🏆</div>
                 <h3 class="module-title">Certificado de Completación</h3>
                 <p class="module-description">
-                    ¡Felicitaciones! Has completado todo el curso de Estimulación del Lenguaje.
+                    ¡Felicitaciones! Has completado todo el curso.
                 </p>
                 <div class="module-topics" style="text-align: center;">
-                    <h4>🎓 Logros Obtenidos:</h4>
-                    <p>✅ 5 Módulos Completados<br>
-                    ✅ +4 Horas de Formación<br>
-                    ✅ Técnicas Profesionales<br>
-                    ✅ Plan Personalizado</p>
+                    <h4>🎓 Logros:</h4>
+                    <p>✅ 5 Módulos<br>
+                    ✅ +4 Horas<br>
+                    ✅ Certificado</p>
                 </div>
-                <button class="btn" disabled onclick="getCertificate()">🔒 Completa todos los módulos</button>
+                <button class="btn" disabled onclick="getCertificate()">🔒 Bloqueado</button>
             </div>
         </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <a href="../index.html">🏠 Inicio</a>
+        <a href="#" onclick="scrollToTop()">⬆️ Arriba</a>
     </div>
 
     <script>
         // Initialize date
         document.getElementById('currentDate').textContent = new Date().toLocaleDateString('es-ES', {
             weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
+            day: 'numeric',
+            month: 'short'
         });
 
         // Load progress from localStorage
@@ -491,6 +592,9 @@
                         moduleCard.classList.add('completed');
                         moduleCard.classList.remove('locked');
                         completedCount++;
+                        const btn = moduleCard.querySelector('.btn');
+                        btn.textContent = '✓ Completado';
+                        btn.disabled = false;
                     } else if (index > 0 && !courseProgress[index - 1]) {
                         moduleCard.classList.add('locked');
                     } else if (index > 0) {
@@ -545,38 +649,11 @@
 
         function generateCertificate() {
             const userName = prompt('¿Cuál es tu nombre completo para el certificado?') || 'Estudiante';
-            const date = new Date().toLocaleDateString('es-ES');
-            
-            const certificateText = `
-╔══════════════════════════════════════════════════════════════╗
-║                                                              ║
-║                    CERTIFICADO DE COMPLETACIÓN               ║
-║                                                              ║
-║                   Academia de Psicología                     ║
-║                                                              ║
-╠══════════════════════════════════════════════════════════════╣
-║                                                              ║
-║                  Certifica que:                              ║
-║                                                              ║
-║                     ${userName}                              ║
-║                                                              ║
-║         Ha completado exitosamente el curso de:              ║
-║                                                              ║
-║           "ESTIMULACIÓN DEL LENGUAJE INFANTIL"              ║
-║                                                              ║
-║              Duración: 4.5 horas académicas                  ║
-║                                                              ║
-║                  Fecha: ${date}                              ║
-║                                                              ║
-╚══════════════════════════════════════════════════════════════╝
-            `;
+            alert(`Certificado generado para: ${userName}\n\n¡Felicitaciones por completar el curso!`);
+        }
 
-            const blob = new Blob([certificateText], { type: 'text/plain' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'Certificado_Estimulacion_Lenguaje.txt';
-            a.click();
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // Initialize UI on load
@@ -588,18 +665,12 @@
         let streak = parseInt(localStorage.getItem('streak') || '0');
 
         if (lastVisit !== today) {
-            const yesterday = new Date();
-            yesterday.setDate(yesterday.getDate() - 1);
-            
-            if (lastVisit === yesterday.toDateString()) {
-                streak++;
-            } else {
-                streak = 1;
-            }
-            
+            streak = lastVisit === new Date(Date.now() - 86400000).toDateString() ? streak + 1 : 1;
             localStorage.setItem('streak', streak);
             localStorage.setItem('lastVisit', today);
         }
 
         document.getElementById('currentStreak').textContent = streak;
     </script>
+</body>
+</html>
