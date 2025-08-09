@@ -1194,6 +1194,34 @@
             }
         });
     </script>
+<!-- Botón flotante para móvil -->
+<div style="
+    position: fixed;
+    top: 70px;
+    right: 10px;
+    z-index: 1001;
+    display: none;
+" id="mobileAccessBtn">
+    <a href="dashboard/index.html" style="
+        background: white;
+        color: #667eea;
+        padding: 10px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        display: block;
+    ">
+        → Acceder al Curso
+    </a>
+</div>
+
+<script>
+// Mostrar botón solo en móvil
+if (window.innerWidth <= 768) {
+    document.getElementById('mobileAccessBtn').style.display = 'block';
+}
+</script>
 </body>
 </html>
 
