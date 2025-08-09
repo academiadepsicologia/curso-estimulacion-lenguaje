@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curso: Estimulación del Lenguaje en Casa | Academia de Psicología</title>
-    <meta name="description" content="Aprende técnicas profesionales para estimular el lenguaje de tu hijo de 3 a 5 años. Curso completo con métodos probados por especialistas.">
+    <title>Curso de Estimulación del Lenguaje Infantil - Academia de Psicología</title>
     
     <style>
         * {
@@ -17,19 +16,17 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
-            overflow-x: hidden;
         }
 
+        /* Header */
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
             padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .nav-container {
@@ -42,582 +39,416 @@
         }
 
         .logo {
+            color: white;
             font-size: 1.5rem;
             font-weight: bold;
+            text-decoration: none;
         }
 
-        .nav-buttons {
+        .nav-links {
             display: flex;
-            gap: 1rem;
+            gap: 2rem;
             align-items: center;
         }
 
-        .btn {
-            padding: 0.7rem 1.5rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
+        .nav-links a {
+            color: white;
             text-decoration: none;
-            display: inline-block;
-            text-align: center;
-            font-size: 0.95rem;
+            transition: opacity 0.3s;
         }
 
-        .btn-primary {
-            background: #ff6b6b;
-            color: white;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 120px 0 80px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="50" cy="10" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
-            opacity: 0.3;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        .hero-subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            display: block;
-            color: #ffd700;
-        }
-
-        .stat-text {
-            font-size: 0.9rem;
+        .nav-links a:hover {
             opacity: 0.8;
         }
 
-        .hero-cta {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
+        .btn-login {
+            background: white;
+            color: #667eea;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
         }
 
-        .btn-hero {
+        .btn-login:hover {
+            transform: scale(1.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 120px 2rem 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.2s;
+            animation-fill-mode: both;
+        }
+
+        .cta-button {
+            background: white;
+            color: #667eea;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.4s;
+            animation-fill-mode: both;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .price-tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            margin-top: 1rem;
             font-size: 1.1rem;
-            padding: 1rem 2rem;
         }
 
-        .problem-section {
-            padding: 80px 0;
+        .original-price {
+            text-decoration: line-through;
+            opacity: 0.7;
+            margin-right: 1rem;
+        }
+
+        .current-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4caf50;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 80px 2rem;
             background: #f8f9fa;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
         }
 
         .section-title {
             text-align: center;
             font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #2c3e50;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.2rem;
-            color: #666;
+            color: #333;
             margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
-        .problem-grid {
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-title {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        /* Problems Section */
+        .problems {
+            padding: 80px 2rem;
+            background: white;
+        }
+
+        .problem-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-bottom: 3rem;
         }
 
-        .problem-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            border-left: 5px solid #ff6b6b;
-        }
-
-        .problem-card:hover {
-            transform: translateY(-5px);
+        .problem-item {
+            display: flex;
+            align-items: start;
+            gap: 1rem;
         }
 
         .problem-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            color: #e74c3c;
+            font-size: 1.5rem;
+            flex-shrink: 0;
         }
 
-        .problem-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: #2c3e50;
+        .solution-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 3rem;
         }
 
-        .testimonials-section {
-            padding: 80px 0;
+        /* Modules Section */
+        .modules {
+            padding: 80px 2rem;
+            background: #f8f9fa;
+        }
+
+        .modules-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .module-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            position: relative;
+            padding-left: 4rem;
+        }
+
+        .module-number {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 2rem;
             background: white;
         }
 
         .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
         }
 
         .testimonial-card {
             background: #f8f9fa;
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             position: relative;
-        }
-
-        .testimonial-card::before {
-            content: '"';
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            font-size: 4rem;
-            color: #667eea;
-            font-family: serif;
         }
 
         .testimonial-text {
             font-style: italic;
             margin-bottom: 1rem;
-            line-height: 1.7;
+            color: #555;
         }
 
         .testimonial-author {
             font-weight: bold;
-            color: #2c3e50;
+            color: #333;
         }
 
         .testimonial-role {
-            font-size: 0.9rem;
             color: #666;
-        }
-
-        .solution-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-        }
-
-        .modules-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .module-card {
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(10px);
-            color: white;
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s ease;
-        }
-
-        .module-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255,255,255,0.2);
-        }
-
-        .module-number {
-            font-size: 3rem;
-            font-weight: bold;
-            opacity: 0.7;
-            margin-bottom: 0.5rem;
-        }
-
-        .module-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-
-        .module-details {
-            margin-top: 1rem;
             font-size: 0.9rem;
-            opacity: 0.9;
         }
 
-        .benefits-section {
-            padding: 80px 0;
-            background: white;
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .benefit-item {
-            text-align: center;
-            padding: 1.5rem;
-        }
-
-        .benefit-icon {
+        .quote-icon {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
             font-size: 3rem;
-            margin-bottom: 1rem;
             color: #667eea;
+            opacity: 0.2;
         }
 
-        .benefit-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            color: #2c3e50;
-        }
-
-        .pricing-section {
-            padding: 80px 0;
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 2rem;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             text-align: center;
         }
 
-        .price-card {
+        .pricing-card {
             background: white;
             color: #333;
             max-width: 500px;
-            margin: 2rem auto;
-            padding: 3rem 2rem;
+            margin: 0 auto;
+            padding: 3rem;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
-        .price-badge {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #ff6b6b;
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        .price {
+        .price-amount {
             font-size: 4rem;
             font-weight: bold;
-            color: #ff6b6b;
+            color: #667eea;
             margin: 1rem 0;
         }
 
-        .price-original {
-            text-decoration: line-through;
-            color: #999;
-            font-size: 1.5rem;
-            margin-right: 1rem;
+        .price-currency {
+            font-size: 2rem;
+            vertical-align: super;
         }
 
         .price-features {
             text-align: left;
             margin: 2rem 0;
-            padding: 0;
-            list-style: none;
         }
 
         .price-features li {
-            margin-bottom: 0.8rem;
-            position: relative;
-            padding-left: 2rem;
+            padding: 0.5rem 0;
+            list-style: none;
         }
 
-        .price-features li::before {
-            content: '✅';
-            position: absolute;
-            left: 0;
+        .price-features li:before {
+            content: '✓';
+            color: #4caf50;
+            font-weight: bold;
+            margin-right: 0.5rem;
         }
 
-        .guarantee-section {
-            background: #2c3e50;
-            color: white;
-            padding: 3rem 0;
+        /* Guarantee */
+        .guarantee {
+            padding: 80px 2rem;
+            background: #f8f9fa;
             text-align: center;
         }
 
-        .guarantee-content {
+        .guarantee-badge {
+            background: white;
+            display: inline-block;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .guarantee-days {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #4caf50;
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 80px 2rem;
+            background: white;
+        }
+
+        .faq-container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .guarantee-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        .faq-section {
-            padding: 80px 0;
-            background: #f8f9fa;
-        }
-
-        .faq-list {
-            max-width: 800px;
-            margin: 0 auto;
-            margin-top: 3rem;
         }
 
         .faq-item {
-            background: white;
+            background: #f8f9fa;
             margin-bottom: 1rem;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .faq-question {
-            padding: 1.5rem 2rem;
-            background: white;
-            border: none;
-            width: 100%;
-            text-align: left;
-            font-size: 1.1rem;
-            font-weight: 600;
+            padding: 1.5rem;
             cursor: pointer;
-            transition: background 0.3s ease;
+            font-weight: 600;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: background 0.3s;
         }
 
         .faq-question:hover {
-            background: #f8f9fa;
+            background: #e9ecef;
         }
 
         .faq-answer {
-            padding: 0 2rem 1.5rem;
-            color: #666;
-            display: none;
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
         }
 
         .faq-item.active .faq-answer {
-            display: block;
+            max-height: 500px;
+            padding: 1.5rem;
         }
 
-        .faq-toggle {
-            font-size: 1.2rem;
-            transition: transform 0.3s ease;
+        .faq-icon {
+            transition: transform 0.3s;
         }
 
-        .faq-item.active .faq-toggle {
-            transform: rotate(45deg);
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
         }
 
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background-color: white;
-            margin: 5% auto;
-            padding: 2rem;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 400px;
-            position: relative;
-            animation: modalSlide 0.3s ease;
-        }
-
-        @keyframes modalSlide {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .close {
-            position: absolute;
-            right: 1rem;
-            top: 1rem;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #999;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
-
-        .form-group input:focus {
-            border-color: #667eea;
-            outline: none;
-        }
-
-        .access-granted {
-            display: none;
-        }
-
-        .access-granted.show {
-            display: block;
-        }
-
-        .course-dashboard {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 15px;
-            margin: 2rem 0;
-        }
-
-        .progress-bar {
-            background: #e9ecef;
-            height: 10px;
-            border-radius: 5px;
-            overflow: hidden;
-            margin: 1rem 0;
-        }
-
-        .progress-fill {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            height: 100%;
-            transition: width 0.3s ease;
-        }
-
+        /* Footer */
         .footer {
-            background: #2c3e50;
+            background: #333;
             color: white;
-            padding: 3rem 0 1rem;
+            padding: 3rem 2rem;
             text-align: center;
         }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
         }
 
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-cta {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .nav-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .hero {
-                padding: 140px 0 60px;
-            }
-
-            .hero-stats {
-                gap: 1.5rem;
-            }
-
-            .stat-number {
-                font-size: 2rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .price {
-                font-size: 3rem;
-            }
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
         }
 
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -629,8 +460,121 @@
             }
         }
 
-        .animate-on-scroll {
-            animation: fadeInUp 0.8s ease-out;
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 90%;
+            animation: slideIn 0.3s ease;
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-header h2 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .btn-submit:hover {
+            transform: scale(1.02);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .price-amount {
+                font-size: 3rem;
+            }
         }
     </style>
 </head>
@@ -638,1293 +582,618 @@
     <!-- Header -->
     <header class="header">
         <div class="nav-container">
-            <div class="logo">🧠 Academia de Psicología</div>
-            <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="openModal()">Acceder al Curso</button>
-                <a href="#pricing" class="btn btn-primary">Comprar Ahora</a>
-            </div>
+            <a href="#" class="logo">🧠 Academia de Psicología</a>
+            <nav class="nav-links">
+                <a href="#beneficios">Beneficios</a>
+                <a href="#modulos">Contenido</a>
+                <a href="#testimonios">Testimonios</a>
+                <a href="#precio">Precio</a>
+                <a href="#" class="btn-login" onclick="openLogin()">Ingresar</a>
+            </nav>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            <h1>Desbloquea el Potencial de Comunicación de tu Hijo</h1>
-            <p class="hero-subtitle">
-                Aprende técnicas profesionales de estimulación del lenguaje para niños de 3 a 5 años.
-                <strong>Métodos probados por especialistas</strong> que transformarán la comunicación en tu hogar.
-            </p>
-            
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number">1,200+</span>
-                    <span class="stat-text">Padres capacitados</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">95%</span>
-                    <span class="stat-text">Ven mejoras en 30 días</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">65+</span>
-                    <span class="stat-text">Actividades prácticas</span>
-                </div>
-            </div>
-            
-            <div class="hero-cta">
-                <a href="#pricing" class="btn btn-primary btn-hero">Comenzar Ahora - $97</a>
-                <button class="btn btn-secondary btn-hero" onclick="openModal()">Ya Tengo Acceso</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Problem Section -->
-    <section class="problem-section">
-        <div class="container">
-            <h2 class="section-title">¿Te Sientes Identificado/a?</h2>
-            <p class="section-subtitle">Estas preocupaciones son más comunes de lo que piensas. No estás solo/a en esta situación.</p>
-            
-            <div class="problem-grid">
-                <div class="problem-card">
-                    <div class="problem-icon">😟</div>
-                    <h3>Mi hijo habla muy poco para su edad</h3>
-                    <p>Otros niños de su edad ya forman oraciones completas, pero el tuyo apenas dice palabras sueltas. Te preguntas si es normal o si deberías hacer algo al respecto.</p>
-                </div>
-                <div class="problem-card">
-                    <div class="problem-icon">😕</div>
-                    <h3>No se le entiende cuando habla</h3>
-                    <p>Su pronunciación es difícil de entender y te preocupa que esto afecte su autoestima, su confianza y sus relaciones sociales futuras.</p>
-                </div>
-                <div class="problem-card">
-                    <div class="problem-icon">😰</div>
-                    <h3>No sé si debería preocuparme</h3>
-                    <p>El pediatra dice "ya va a hablar", pero tu instinto de padre/madre te dice que podrías estar haciendo más para ayudarlo en esta etapa crítica.</p>
-                </div>
-                <div class="problem-card">
-                    <div class="problem-icon">🤷‍♀️</div>
-                    <h3>No sé cómo estimular su lenguaje</h3>
-                    <p>Quieres ayudar pero no sabes qué técnicas usar, cuándo aplicarlas ni cómo integrarlas naturalmente en el día a día de tu familia.</p>
-                </div>
-                <div class="problem-card">
-                    <div class="problem-icon">⏰</div>
-                    <h3>Me preocupa que sea tarde</h3>
-                    <p>Sientes que el tiempo pasa rápido y temes que las ventanas de oportunidad para el desarrollo del lenguaje se estén cerrando.</p>
-                </div>
-                <div class="problem-card">
-                    <div class="problem-icon">💰</div>
-                    <h3>Las terapias son muy costosas</h3>
-                    <p>Las sesiones privadas con especialistas cuestan cientos de dólares mensuales y no siempre están disponibles en tu área.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials-section">
-        <div class="container">
-            <h2 class="section-title">Lo que Dicen Otros Padres</h2>
-            <p class="section-subtitle">Resultados reales de familias como la tuya</p>
-            
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <p class="testimonial-text">
-                        En solo 3 semanas, Santiago pasó de decir palabras sueltas a formar oraciones de 4-5 palabras. 
-                        Las técnicas son muy fáciles de aplicar durante las comidas y el juego.
-                    </p>
-                    <div class="testimonial-author">María González</div>
-                    <div class="testimonial-role">Madre de Santiago, 4 años</div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <p class="testimonial-text">
-                        Mi hija era muy tímida y apenas hablaba en el jardín. Ahora participa activamente en clase 
-                        y su maestra no puede creer el cambio. ¡Gracias por devolverle la confianza!
-                    </p>
-                    <div class="testimonial-author">Carlos Ramírez</div>
-                    <div class="testimonial-role">Padre de Valentina, 5 años</div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <p class="testimonial-text">
-                        Llevaba meses esperando cita con el terapeuta del lenguaje. Este curso me dio las herramientas 
-                        para empezar a ayudar a mi hijo inmediatamente. Los resultados fueron increíbles.
-                    </p>
-                    <div class="testimonial-author">Ana Morales</div>
-                    <div class="testimonial-role">Madre de Diego, 3 años</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Solution Section -->
-    <section class="solution-section">
-        <div class="container">
-            <h2 class="section-title" style="color: white;">La Solución Completa Está Aquí</h2>
-            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
-                Un sistema paso a paso diseñado por especialistas en desarrollo infantil
-            </p>
-            
-            <div class="modules-grid">
-                <div class="module-card">
-                    <div class="module-number">01</div>
-                    <div class="module-title">Fundamentos del Desarrollo</div>
-                    <p>Comprende las etapas normales del desarrollo del lenguaje, identifica retrasos y aprende cuándo es crucial actuar.</p>
-                    <div class="module-details">
-                        • Hitos del desarrollo por edad<br>
-                        • Señales de alerta temprana<br>
-                        • Evaluación inicial en casa
-                    </div>
-                </div>
-                <div class="module-card">
-                    <div class="module-number">02</div>
-                    <div class="module-title">Técnicas de Estimulación</div>
-                    <p>Aprende métodos específicos utilizados por terapeutas profesionales, adaptados para que cualquier padre pueda aplicarlos en casa sin necesidad de materiales costosos.</p>
-                    <div class="module-details">
-                        • Modelado y repetición<br>
-                        • Expansión semántica<br>
-                        • Técnicas de espera y pausa
-                    </div>
-                </div>
-                
-                <div class="module-card">
-                    <div class="module-number">03</div>
-                    <div class="module-title">Soluciones por Problema</div>
-                    <p>Protocolos específicos para los problemas más comunes: timidez, mala pronunciación, vocabulario limitado, dificultades de comprensión.</p>
-                    <div class="module-details">
-                        • Niños tímidos o introvertidos<br>
-                        • Problemas de articulación<br>
-                        • Expansión de vocabulario
-                    </div>
-                </div>
-                
-                <div class="module-card">
-                    <div class="module-number">04</div>
-                    <div class="module-title">Actividades Diarias</div>
-                    <p>65+ actividades organizadas por edad y objetivo específico. Cada actividad incluye materiales (que ya tienes en casa), instrucciones paso a paso y variaciones.</p>
-                    <div class="module-details">
-                        • Juegos durante las comidas<br>
-                        • Actividades de baño y rutinas<br>
-                        • Lectura interactiva avanzada
-                    </div>
-                </div>
-                
-                <div class="module-card">
-                    <div class="module-number">05</div>
-                    <div class="module-title">Preparación Escolar</div>
-                    <p>Asegura que tu hijo llegue al colegio con todas las habilidades lingüísticas necesarias para un aprendizaje exitoso y relaciones sociales positivas.</p>
-                    <div class="module-details">
-                        • Habilidades narrativas<br>
-                        • Seguimiento de instrucciones<br>
-                        • Preparación para la lectoescritura
-                    </div>
-                </div>
-            </div>
+        <h1>Transforma el Lenguaje de Tu Hijo en Solo 30 Días</h1>
+        <p>El método científico que usan los terapeutas del lenguaje, ahora disponible para padres</p>
+        <a href="#precio" class="cta-button">¡Quiero Inscribirme Ahora!</a>
+        <div class="price-tag">
+            <span class="original-price">$97 USD</span>
+            <span class="current-price">$47 USD</span>
+            <span>- Oferta por tiempo limitado</span>
         </div>
     </section>
 
     <!-- Benefits Section -->
-    <section class="benefits-section">
+    <section class="benefits" id="beneficios">
         <div class="container">
-            <h2 class="section-title">¿Qué Hace Diferente a Este Curso?</h2>
-            <p class="section-subtitle">No es solo teoría. Es un sistema completo y práctico diseñado para padres ocupados.</p>
-            
+            <h2 class="section-title">¿Qué Lograrás con Este Curso?</h2>
             <div class="benefits-grid">
-                <div class="benefit-item">
+                <div class="benefit-card">
                     <div class="benefit-icon">🎯</div>
-                    <div class="benefit-title">Enfoque Práctico</div>
-                    <p>Todo se puede aplicar inmediatamente con materiales que ya tienes en casa</p>
+                    <h3 class="benefit-title">Resultados en 30 Días</h3>
+                    <p>Verás mejoras notables en el vocabulario y expresión de tu hijo en el primer mes</p>
                 </div>
-                
-                <div class="benefit-item">
+                <div class="benefit-card">
                     <div class="benefit-icon">👩‍⚕️</div>
-                    <div class="benefit-title">Respaldo Profesional</div>
-                    <p>Desarrollado por terapeutas del lenguaje con más de 15 años de experiencia</p>
+                    <h3 class="benefit-title">Técnicas Profesionales</h3>
+                    <p>Aprenderás las mismas estrategias que usan los terapeutas del lenguaje</p>
                 </div>
-                
-                <div class="benefit-item">
-                    <div class="benefit-icon">⏱️</div>
-                    <div class="benefit-title">Resultados Rápidos</div>
-                    <p>La mayoría de padres ven mejoras significativas en las primeras 2-3 semanas</p>
+                <div class="benefit-card">
+                    <div class="benefit-icon">⏰</div>
+                    <h3 class="benefit-title">Solo 15 Minutos al Día</h3>
+                    <p>Ejercicios prácticos que puedes hacer en tu rutina diaria sin esfuerzo extra</p>
                 </div>
-                
-                <div class="benefit-item">
+                <div class="benefit-card">
                     <div class="benefit-icon">📱</div>
-                    <div class="benefit-title">Acceso de por Vida</div>
-                    <p>Una vez que compras, tienes acceso para siempre, incluyendo futuras actualizaciones</p>
+                    <h3 class="benefit-title">Acceso de Por Vida</h3>
+                    <p>Estudia a tu ritmo, desde cualquier dispositivo, cuando quieras</p>
                 </div>
-                
-                <div class="benefit-item">
-                    <div class="benefit-icon">🏠</div>
-                    <div class="benefit-title">Desde Casa</div>
-                    <p>No necesitas salir de casa ni programar citas. Todo se integra en tu rutina diaria</p>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎓</div>
+                    <h3 class="benefit-title">Certificado Incluido</h3>
+                    <p>Recibe un certificado de completación avalado por profesionales</p>
                 </div>
-                
-                <div class="benefit-item">
-                    <div class="benefit-icon">💡</div>
-                    <div class="benefit-title">Fácil de Seguir</div>
-                    <p>Instrucciones claras paso a paso, sin tecnicismos complicados</p>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💬</div>
+                    <h3 class="benefit-title">Soporte Continuo</h3>
+                    <p>Acceso a nuestra comunidad de padres y respuestas a tus dudas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problems Section -->
+    <section class="problems">
+        <div class="container">
+            <h2 class="section-title">¿Tu Hijo Presenta Alguna de Estas Situaciones?</h2>
+            <div class="problem-list">
+                <div class="problem-item">
+                    <span class="problem-icon">⚠️</span>
+                    <p>Tiene 3 años y solo dice pocas palabras</p>
+                </div>
+                <div class="problem-item">
+                    <span class="problem-icon">⚠️</span>
+                    <p>Le cuesta formar oraciones completas</p>
+                </div>
+                <div class="problem-item">
+                    <span class="problem-icon">⚠️</span>
+                    <p>Se frustra porque no puede expresarse</p>
+                </div>
+                <div class="problem-item">
+                    <span class="problem-icon">⚠️</span>
+                    <p>Usa gestos en lugar de palabras</p>
+                </div>
+                <div class="problem-item">
+                    <span class="problem-icon">⚠️</span>
+                    <p>Tiene dificultades para pronunciar</p>
+                </div>
+                <div class="problem-item">
+                    <span class="problem-icon">⚠️</span>
+                    <p>Otros niños de su edad hablan más</p>
+                </div>
+            </div>
+            <div class="solution-box">
+                <h3>🎯 La Solución Está en Tus Manos</h3>
+                <p>No necesitas esperar más. Con las técnicas correctas, puedes ayudar a tu hijo desde casa, de forma natural y divertida.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modules Section -->
+    <section class="modules" id="modulos">
+        <div class="container">
+            <h2 class="section-title">Contenido del Curso</h2>
+            <div class="modules-timeline">
+                <div class="module-item">
+                    <div class="module-number">1</div>
+                    <h3>Fundamentos del Desarrollo del Lenguaje</h3>
+                    <p>Comprende las etapas normales del desarrollo, señales de alerta y cuándo preocuparte realmente.</p>
+                </div>
+                <div class="module-item">
+                    <div class="module-number">2</div>
+                    <h3>Técnicas de Estimulación Profesional</h3>
+                    <p>Aprende las 5 técnicas más efectivas que usan los terapeutas: modelado, expansión, preguntas abiertas y más.</p>
+                </div>
+                <div class="module-item">
+                    <div class="module-number">3</div>
+                    <h3>Actividades y Juegos por Edad</h3>
+                    <p>Descubre juegos específicos para 3, 4 y 5 años que desarrollan el lenguaje mientras se divierten.</p>
+                </div>
+                <div class="module-item">
+                    <div class="module-number">4</div>
+                    <h3>Soluciones a Problemas Comunes</h3>
+                    <p>Maneja tartamudez, problemas de pronunciación y retrasos del lenguaje con estrategias probadas.</p>
+                </div>
+                <div class="module-item">
+                    <div class="module-number">5</div>
+                    <h3>Plan Personalizado de 30 Días</h3>
+                    <p>Crea un programa específico para tu hijo con objetivos claros y medibles.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonios">
+        <div class="container">
+            <h2 class="section-title">Lo Que Dicen Otros Padres</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <span class="quote-icon">"</span>
+                    <p class="testimonial-text">Mi hijo de 3 años pasó de decir palabras sueltas a formar oraciones completas en solo 3 semanas. ¡Increíble!</p>
+                    <p class="testimonial-author">María González</p>
+                    <p class="testimonial-role">Mamá de Diego, 3 años</p>
+                </div>
+                <div class="testimonial-card">
+                    <span class="quote-icon">"</span>
+                    <p class="testimonial-text">Las técnicas son súper fáciles de aplicar. Solo 15 minutos al día y ya veo cambios enormes en mi hija.</p>
+                    <p class="testimonial-author">Carlos Rodríguez</p>
+                    <p class="testimonial-role">Papá de Sofía, 4 años</p>
+                </div>
+                <div class="testimonial-card">
+                    <span class="quote-icon">"</span>
+                    <p class="testimonial-text">Estaba preocupada porque mi hijo no hablaba como otros niños. Este curso me dio las herramientas exactas que necesitaba.</p>
+                    <p class="testimonial-author">Ana Martínez</p>
+                    <p class="testimonial-role">Mamá de Lucas, 5 años</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Pricing Section -->
-    <section class="pricing-section" id="pricing">
+    <section class="pricing" id="precio">
         <div class="container">
-            <h2 class="section-title" style="color: white;">Invierte en el Futuro de tu Hijo</h2>
-            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
-                Por menos de lo que cuesta una sola sesión privada
-            </p>
-            
-            <div class="price-card">
-                <div class="price-badge">Oferta Especial</div>
-                <h3>Curso Completo</h3>
-                <div class="price">
-                    <span class="price-original">$297</span>
-                    $97
+            <h2 class="section-title" style="color: white;">Invierte en el Futuro de Tu Hijo</h2>
+            <div class="pricing-card">
+                <h3>Acceso Completo de Por Vida</h3>
+                <div class="price-amount">
+                    <span class="price-currency">$</span>47
                 </div>
+                <p style="text-decoration: line-through; color: #999;">Precio regular: $97 USD</p>
+                <p style="color: #4caf50; font-weight: bold;">¡Ahorra 50% HOY!</p>
                 <ul class="price-features">
-                    <li>5 Módulos completos con contenido profesional</li>
-                    <li>65+ Actividades prácticas organizadas por edad</li>
-                    <li>Herramientas de evaluación personalizadas</li>
-                    <li>Materiales descargables e imprimibles</li>
-                    <li>Acceso inmediato y de por vida</li>
-                    <li>Actualizaciones gratuitas futuras</li>
-                    <li>Soporte por email incluido</li>
+                    <li>5 módulos completos con videos y ejercicios</li>
+                    <li>Recursos descargables y guías PDF</li>
+                    <li>Actualizaciones gratuitas de por vida</li>
+                    <li>Certificado de completación</li>
+                    <li>Garantía de 30 días</li>
+                    <li>Soporte por email</li>
                 </ul>
-                <a href="#" class="btn btn-primary btn-hero" onclick="simulatePurchase()" style="margin: 1rem 0;">
-                    Comprar Ahora - Solo $97
-                </a>
-                <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
-                    💳 Pago seguro • 🔄 Garantía 30 días • 📱 Acceso inmediato
+                <button class="cta-button" style="width: 100%;" onclick="processPurchase()">
+                    Comprar Ahora - $47 USD
+                </button>
+                <p style="margin-top: 1rem; color: #666; font-size: 0.9rem;">
+                    Pago seguro procesado por Stripe
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Guarantee Section -->
-    <section class="guarantee-section">
-        <div class="guarantee-content">
-            <div class="guarantee-icon">🛡️</div>
-            <h2>Garantía de Satisfacción Total</h2>
-            <p style="font-size: 1.2rem; margin: 1rem 0;">
-                Si en los próximos 30 días no ves mejoras significativas en el lenguaje de tu hijo 
-                siguiendo nuestro sistema, te devolvemos el 100% de tu dinero, sin preguntas.
-            </p>
-            <p>Estamos tan seguros de que este curso transformará la comunicación en tu hogar, 
-            que asumimos todo el riesgo.</p>
+    <!-- Guarantee -->
+    <section class="guarantee">
+        <div class="container">
+            <h2 class="section-title">Garantía de Satisfacción</h2>
+            <div class="guarantee-badge">
+                <div class="guarantee-days">30 DÍAS</div>
+                <h3>100% Garantía de Devolución</h3>
+                <p>Si no ves resultados en 30 días, te devolvemos tu dinero. Sin preguntas.</p>
+            </div>
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="faq-section">
+    <!-- FAQ -->
+    <section class="faq">
         <div class="container">
             <h2 class="section-title">Preguntas Frecuentes</h2>
-            <div class="faq-list">
+            <div class="faq-container">
                 <div class="faq-item">
-                    <button class="faq-question">
-                        ¿Es adecuado para mi hijo si tiene 3 años recién cumplidos?
-                        <span class="faq-toggle">+</span>
-                    </button>
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        ¿Para qué edades es este curso?
+                        <span class="faq-icon">▼</span>
+                    </div>
                     <div class="faq-answer">
-                        Absolutamente. El curso está diseñado específicamente para niños de 3 a 5 años, incluyendo actividades adaptadas para cada etapa. Los 3 años son una edad perfecta para comenzar con estimulación del lenguaje.
+                        <p>El curso está diseñado para niños de 3 a 6 años, con ejercicios específicos para cada edad. Si tu hijo tiene 2 años y medio o 7 años, también puede beneficiarse del contenido.</p>
                     </div>
                 </div>
-                
                 <div class="faq-item">
-                    <button class="faq-question">
-                        ¿Necesito conocimientos previos en terapia del lenguaje?
-                        <span class="faq-toggle">+</span>
-                    </button>
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        ¿Cuánto tiempo debo dedicar al día?
+                        <span class="faq-icon">▼</span>
+                    </div>
                     <div class="faq-answer">
-                        No necesitas ningún conocimiento previo. Todo está explicado en términos simples y claros, paso a paso. El curso está diseñado específicamente para padres sin formación profesional.
+                        <p>Solo necesitas 15 minutos al día. Las técnicas están diseñadas para integrarse en tu rutina diaria: durante las comidas, el baño o el juego.</p>
                     </div>
                 </div>
-                
                 <div class="faq-item">
-                    <button class="faq-question">
-                        ¿Cuánto tiempo debo dedicar diariamente?
-                        <span class="faq-toggle">+</span>
-                    </button>
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        ¿Necesito conocimientos previos?
+                        <span class="faq-icon">▼</span>
+                    </div>
                     <div class="faq-answer">
-                        Las actividades se integran naturalmente en tu rutina diaria. No necesitas tiempo adicional - las técnicas se aplican durante las comidas, el baño, el juego y otras actividades cotidianas.
+                        <p>No. El curso está diseñado para padres sin experiencia. Todo se explica paso a paso con ejemplos prácticos y videos demostrativos.</p>
                     </div>
                 </div>
-                
                 <div class="faq-item">
-                    <button class="faq-question">
-                        ¿Funciona si mi hijo es muy tímido?
-                        <span class="faq-toggle">+</span>
-                    </button>
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        ¿Cuándo veré resultados?
+                        <span class="faq-icon">▼</span>
+                    </div>
                     <div class="faq-answer">
-                        Sí, tenemos un módulo específico para niños tímidos o introvertidos. Muchos padres han visto excelentes resultados aplicando nuestras técnicas especializadas para este perfil.
+                        <p>La mayoría de padres reportan mejoras notables en las primeras 2-3 semanas. Los resultados dependen de la consistencia y la edad del niño.</p>
                     </div>
                 </div>
-                
                 <div class="faq-item">
-                    <button class="faq-question">
-                        ¿Puedo acceder al curso desde mi teléfono?
-                        <span class="faq-toggle">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        Sí, el curso está optimizado para cualquier dispositivo: teléfono, tablet o computadora. Puedes acceder desde cualquier lugar y en cualquier momento.
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        ¿Reemplaza esto a un terapeuta?
+                        <span class="faq-icon">▼</span>
                     </div>
-                </div>
-                
-                <div class="faq-item">
-                    <button class="faq-question">
-                        ¿Qué pasa si no veo resultados?
-                        <span class="faq-toggle">+</span>
-                    </button>
                     <div class="faq-answer">
-                        Tienes 30 días completos para probar el curso. Si no ves mejoras siguiendo nuestro sistema, te devolvemos el 100% de tu dinero, sin preguntas ni complicaciones.
+                        <p>Este curso es un complemento excelente a la terapia o una primera intervención. Si tu hijo tiene necesidades especiales, siempre consulta con un profesional.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Login Modal -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Acceder al Curso</h2>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Código de Acceso:</label>
-                    <input type="password" id="password" name="password" required placeholder="Código recibido tras la compra">
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">
-                    Acceder al Curso
-                </button>
-            </form>
-            <p style="margin-top: 1rem; text-align: center; color: #666; font-size: 0.9rem;">
-                ¿No tienes acceso? <a href="#pricing">Compra el curso aquí</a>
-            </p>
-        </div>
-    </div>
-    <!-- Course Dashboard (Hidden initially) -->
-    <div id="courseDashboard" class="access-granted">
-        <div class="container" style="padding-top: 100px;">
-            <div class="course-dashboard">
-                <h2>¡Bienvenido/a al Curso de Estimulación del Lenguaje!</h2>
-                <p>Estás a punto de transformar la comunicación con tu hijo. Tu progreso actual:</p>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 0%"></div>
-                </div>
-                <p><span id="progressText">0% completado</span> - ¡Comencemos!</p>
-                
-                <div class="modules-grid" style="margin-top: 2rem;">
-                    <a href="modulo1/index.html" class="module-card" style="text-decoration: none;">
-                        <div class="module-number">01</div>
-                        <div class="module-title">Fundamentos del Desarrollo</div>
-                        <p>Comenzar tu viaje →</p>
-                    </a>
-                    
-                    <a href="modulo2/index.html" class="module-card" style="opacity: 0.5; pointer-events: none; text-decoration: none;">
-                        <div class="module-number">02</div>
-                        <div class="module-title">Técnicas de Estimulación</div>
-                        <p>🔒 Se desbloquea al completar el módulo 1</p>
-                    </a>
-                    
-                    <a href="modulo3/index.html" class="module-card" style="opacity: 0.5; pointer-events: none; text-decoration: none;">
-                        <div class="module-number">03</div>
-                        <div class="module-title">Soluciones por Problema</div>
-                        <p>🔒 Se desbloquea al completar el módulo 2</p>
-                    </a>
-                    
-                    <a href="modulo4/index.html" class="module-card" style="opacity: 0.5; pointer-events: none; text-decoration: none;">
-                        <div class="module-number">04</div>
-                        <div class="module-title">Actividades Diarias</div>
-                        <p>🔒 Se desbloquea al completar el módulo 3</p>
-                    </a>
-                    
-                    <a href="modulo5/index.html" class="module-card" style="opacity: 0.5; pointer-events: none; text-decoration: none;">
-                        <div class="module-number">05</div>
-                        <div class="module-title">Preparación Escolar</div>
-                        <p>🔒 Se desbloquea al completar el módulo 4</p>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-content">
-            <div style="margin-bottom: 2rem;">
-                <div class="logo" style="margin-bottom: 1rem;">🧠 Academia de Psicología</div>
-                <p>Transformando la comunicación familiar a través de la educación especializada</p>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Términos y Condiciones</a>
+                <a href="#">Política de Privacidad</a>
+                <a href="#">Contacto</a>
             </div>
-            
-            <div style="margin-bottom: 2rem;">
-                <p><strong>Contacto:</strong> soporte@academiadepsicologia.com</p>
-                <p><strong>Horario de atención:</strong> Lunes a viernes, 9:00 AM - 6:00 PM</p>
-            </div>
-            
-            <div style="border-top: 1px solid #444; padding-top: 2rem; font-size: 0.9rem; color: #bbb;">
-                <p>&copy; 2024 Academia de Psicología. Todos los derechos reservados.</p>
-                <p>Este curso ha sido desarrollado por profesionales licenciados en terapia del lenguaje.</p>
-            </div>
+            <p>&copy; 2024 Academia de Psicología. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-   <script>
-    // Variables globales
-    let completedSections = new Set();
-    let totalSections = 6;
-    let selectedAge = null;
-    let currentModeladoQuestion = 1;
-    let modeladoQuestionsAnswered = new Set();
-    let currentExpansionExercise = 0;
-    let techniquesCompleted = new Set();
-    let situationsCompleted = new Set();
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content" style="position: relative;">
+            <span class="close-modal" onclick="closeLogin()">×</span>
+            <div class="modal-header">
+                <h2>Acceso al Curso</h2>
+                <p>Ingresa tus datos para continuar</p>
+            </div>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="loginEmail" required placeholder="tu@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="loginPassword" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-submit">Ingresar al Curso</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem; color: #666;">
+                ¿No tienes cuenta? <a href="#precio" onclick="closeLogin()" style="color: #667eea;">Compra el curso aquí</a>
+            </p>
+        </div>
+    </div>
 
-    // Arrays de ejercicios
-    const expansionExercises = {
-        3: [
-            { phrase: "Agua", hint: "Agrega temperatura o cantidad", example: "Agua fría" },
-            { phrase: "Mamá fue", hint: "Agrega lugar", example: "Mamá fue al trabajo" },
-            { phrase: "Quiero jugar", hint: "Agrega con qué o con quién", example: "Quiero jugar con los bloques" }
-        ],
-        4: [
-            { phrase: "El gato duerme", hint: "Agrega dónde y cómo", example: "El gato duerme en el sofá tranquilo" },
-            { phrase: "Estoy feliz", hint: "Agrega por qué", example: "Estoy feliz porque vino la abuela" },
-            { phrase: "Vamos al parque", hint: "Agrega con quién y cuándo", example: "Vamos al parque con papá ahora" }
-        ],
-        5: [
-            { phrase: "Ayer fuimos", hint: "Agrega lugar, con quién y qué hicieron", example: "Ayer fuimos al zoológico con los primos y vimos leones" },
-            { phrase: "Mi amigo está triste", hint: "Agrega quién es y por qué", example: "Mi amigo Juan está triste porque perdió su juguete" },
-            { phrase: "Me gusta leer", hint: "Agrega qué tipo de libros y cuándo", example: "Me gusta leer cuentos de aventuras antes de dormir" }
-        ]
-    };
+    <script>
+        // FAQ Toggle
+        function toggleFaq(element) {
+            const faqItem = element.parentElement;
+            faqItem.classList.toggle('active');
+        }
 
-    // Respuestas correctas para modelado
-    const modeladoCorrectAnswers = {
-        '3-1': 'b', '3-2': 'b', '3-3': 'a',
-        '4-1': 'a', '4-2': 'b', '4-3': 'b',
-        '5-1': 'b', '5-2': 'a', '5-3': 'b'
-    };
+        // Login Modal
+        function openLogin() {
+            document.getElementById('loginModal').classList.add('active');
+        }
 
-    // Inicialización cuando carga la página
-    window.addEventListener('DOMContentLoaded', function() {
-        checkModuleAccess();
-        loadSavedProgress();
-        updateQuestionCounter();
-        
-        if (!selectedAge) {
-            const ageMessage = document.createElement('div');
-            ageMessage.className = 'alert alert-warning';
-            ageMessage.style.margin = '1rem 0';
-            ageMessage.innerHTML = '👆 <strong>Importante:</strong> Selecciona primero la edad de tu hijo para ver el contenido adaptado';
+        function closeLogin() {
+            document.getElementById('loginModal').classList.remove('active');
+        }
+
+        // Handle Login
+        function handleLogin(event) {
+            event.preventDefault();
             
-            const firstSection = document.querySelector('.content-section');
-            if (firstSection) {
-                firstSection.insertBefore(ageMessage, firstSection.firstChild);
-            }
-        }
-    });
-
-    // Verificar acceso al módulo
-    function checkModuleAccess() {
-        const courseProgress = JSON.parse(localStorage.getItem('courseProgress') || '[false,false,false,false,false]');
-        // Comentado para pruebas
-        // if (!courseProgress[0]) {
-        //     alert('⚠️ Debes completar el Módulo 1 primero');
-        //     window.location.href = '../modulo1/index.html';
-        // }
-    }
-
-    // Selección de edad
-    function selectAge(age) {
-        selectedAge = age;
-        
-        document.querySelectorAll('.age-btn').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        
-        document.querySelectorAll('.age-btn').forEach(btn => {
-            if (btn.onclick && btn.onclick.toString().includes(age)) {
-                btn.classList.add('active');
-            }
-        });
-        
-        const ageMessage = document.getElementById('ageMessage');
-        if (ageMessage) {
-            ageMessage.style.display = 'block';
-            const selectedAgeSpan = document.getElementById('selectedAge');
-            if (selectedAgeSpan) {
-                selectedAgeSpan.textContent = age;
-            }
-        }
-        
-        updateAgeContent();
-        localStorage.setItem('module2SelectedAge', age);
-        showNotification(`✅ Contenido adaptado para ${age} años`, 'success');
-        
-        const warningMessage = document.querySelector('.alert-warning');
-        if (warningMessage && warningMessage.innerHTML.includes('Selecciona primero')) {
-            warningMessage.remove();
-        }
-    }
-
-    // Actualizar contenido según edad
-    function updateAgeContent() {
-        if (!selectedAge) return;
-        
-        document.querySelectorAll('.age-specific-examples').forEach(elem => {
-            elem.style.display = 'none';
-            elem.classList.remove('active');
-        });
-        
-        const ageElements = document.querySelectorAll(`[id*="-age-${selectedAge}"]`);
-        ageElements.forEach(elem => {
-            elem.style.display = 'block';
-            elem.classList.add('active');
-        });
-        
-        document.querySelectorAll('[id^="modelado-test-age-"]').forEach(elem => {
-            elem.style.display = 'none';
-        });
-        
-        const ageTest = document.getElementById(`modelado-test-age-${selectedAge}`);
-        if (ageTest) {
-            ageTest.style.display = 'block';
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
             
-            for (let i = 1; i <= 3; i++) {
-                const questionDiv = document.getElementById(`question-${selectedAge}-${i}`);
-                if (questionDiv) {
-                    questionDiv.style.display = i === 1 ? 'block' : 'none';
+            // Simple validation for demo
+            if (email && password) {
+                // Store login state
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userEmail', email);
+                
+                // Redirect to dashboard
+                window.location.href = 'dashboard/index.html';
+            }
+        }
+
+        // Process Purchase
+        function processPurchase() {
+            // In a real application, this would integrate with a payment processor
+            alert('¡Excelente decisión! Serás redirigido al proceso de pago seguro...');
+            
+            // Simulate payment process
+            setTimeout(() => {
+                const userEmail = prompt('Ingresa tu email para crear tu cuenta:');
+                if (userEmail) {
+                    const password = prompt('Crea una contraseña para tu cuenta:');
+                    if (password) {
+                        // Store user data
+                        localStorage.setItem('isLoggedIn', 'true');
+                        localStorage.setItem('userEmail', userEmail);
+                        localStorage.setItem('isPurchased', 'true');
+                        
+                        alert('¡Compra exitosa! Te llevaremos a tu curso...');
+                        
+                        // Redirect to dashboard
+                        window.location.href = 'dashboard/index.html';
+                    }
                 }
-            }
+            }, 1000);
         }
-        
-        updateQuestionCounter();
-        
-        const exerciseDiv = document.getElementById('expansion-exercise');
-        if (exerciseDiv) {
-            exerciseDiv.style.display = 'block';
-            loadExpansionExercise();
-        }
-    }
 
-    // Verificar respuesta del test de modelado
-    function checkModeladoAnswer(age, questionNum, answer) {
-        if (!selectedAge) {
-            showNotification('⚠️ Primero selecciona la edad de tu hijo', 'warning');
-            return;
-        }
-        
-        const key = `${age}-${questionNum}`;
-        const feedbackDiv = document.getElementById(`modelado-feedback-${age}`);
-        
-        if (!feedbackDiv) return;
-        
-        modeladoQuestionsAnswered.add(key);
-        
-        const isCorrect = answer === modeladoCorrectAnswers[key];
-        
-        feedbackDiv.style.display = 'block';
-        feedbackDiv.className = `feedback-box ${isCorrect ? 'feedback-correct' : 'feedback-incorrect'} show`;
-        
-        if (isCorrect) {
-            feedbackDiv.innerHTML = '✅ ¡Correcto! Usaste el modelado perfectamente sin corregir directamente.';
-            
-            const ageQuestions = [`${age}-1`, `${age}-2`, `${age}-3`];
-            const answeredForAge = ageQuestions.filter(q => modeladoQuestionsAnswered.has(q));
-            
-            if (answeredForAge.length >= 2) {
-                techniquesCompleted.add('modelado');
-                updateAchievements();
-                
-                setTimeout(() => {
-                    showNotification('🎉 ¡Has dominado la técnica del Modelado!', 'success');
-                }, 500);
-            }
-        } else {
-            let feedback = '❌ ';
-            if (answer === 'a' && questionNum === 1) {
-                feedback += 'Esta opción corrige directamente. Recuerda: modela sin decir "no se dice así".';
-            } else if (answer === 'c') {
-                feedback += 'No repitas el error ni pidas que repita. Modela naturalmente la forma correcta.';
-            } else {
-                feedback += 'Intenta otra vez. El modelado repite correctamente de forma natural.';
-            }
-            feedbackDiv.innerHTML = feedback;
-        }
-        
-        updateQuestionCounter();
-    }
-
-    // Siguiente pregunta de modelado
-    function nextModeladoQuestion() {
-        if (!selectedAge) {
-            showNotification('⚠️ Primero selecciona la edad de tu hijo', 'warning');
-            return;
-        }
-        
-        const currentQuestionDiv = document.getElementById(`question-${selectedAge}-${currentModeladoQuestion}`);
-        if (currentQuestionDiv) {
-            currentQuestionDiv.style.display = 'none';
-        }
-        
-        currentModeladoQuestion++;
-        
-        if (currentModeladoQuestion > 3) {
-            currentModeladoQuestion = 1;
-            
-            const resetBtn = document.getElementById('resetTestBtn');
-            const nextBtn = document.getElementById('nextQuestionBtn');
-            if (resetBtn) resetBtn.style.display = 'inline-block';
-            if (nextBtn) nextBtn.style.display = 'none';
-            
-            showNotification('✅ Has completado todas las preguntas', 'success');
-        }
-        
-        const nextQuestionDiv = document.getElementById(`question-${selectedAge}-${currentModeladoQuestion}`);
-        if (nextQuestionDiv) {
-            nextQuestionDiv.style.display = 'block';
-        }
-        
-        const feedbackDiv = document.getElementById(`modelado-feedback-${selectedAge}`);
-        if (feedbackDiv) {
-            feedbackDiv.style.display = 'none';
-        }
-        
-        updateQuestionCounter();
-    }
-
-    // Reiniciar test
-    function resetModeladoTest() {
-        currentModeladoQuestion = 1;
-        modeladoQuestionsAnswered.clear();
-        
-        for (let i = 1; i <= 3; i++) {
-            const questionDiv = document.getElementById(`question-${selectedAge}-${i}`);
-            if (questionDiv) {
-                questionDiv.style.display = i === 1 ? 'block' : 'none';
-            }
-        }
-        
-        const feedbackDiv = document.getElementById(`modelado-feedback-${selectedAge}`);
-        if (feedbackDiv) {
-            feedbackDiv.style.display = 'none';
-        }
-        
-        const resetBtn = document.getElementById('resetTestBtn');
-        const nextBtn = document.getElementById('nextQuestionBtn');
-        if (resetBtn) resetBtn.style.display = 'none';
-        if (nextBtn) nextBtn.style.display = 'inline-block';
-        
-        updateQuestionCounter();
-        showNotification('Test reiniciado', 'info');
-    }
-
-    // Actualizar contador de preguntas
-    function updateQuestionCounter() {
-        const currentSpan = document.getElementById('current-question');
-        const totalSpan = document.getElementById('total-questions');
-        
-        if (currentSpan) currentSpan.textContent = currentModeladoQuestion;
-        if (totalSpan) totalSpan.textContent = '3';
-    }
-
-    // Actualizar racha de práctica
-    function updatePracticeStreak() {
-        const days = ['dia1', 'dia2', 'dia3', 'dia4', 'dia5', 'dia6', 'dia7'];
-        let consecutiveDays = 0;
-        let totalDays = 0;
-        
-        for (let day of days) {
-            const checkbox = document.getElementById(day);
-            if (checkbox && checkbox.checked) {
-                consecutiveDays++;
-                totalDays++;
-            } else {
-                break;
-            }
-        }
-        
-        const streakCount = document.getElementById('streakCount');
-        const streakMessage = document.getElementById('streakMessage');
-        
-        if (streakCount) streakCount.textContent = consecutiveDays;
-        
-        if (streakMessage) {
-            if (consecutiveDays >= 7) {
-                streakMessage.innerHTML = '🔥 ¡Semana completa! El hábito se está formando';
-                streakMessage.style.color = '#28a745';
-            } else if (consecutiveDays >= 5) {
-                streakMessage.innerHTML = '⭐ ¡Excelente constancia! Sigue así';
-                streakMessage.style.color = '#ffc107';
-            } else if (consecutiveDays >= 3) {
-                streakMessage.innerHTML = '💪 ¡Buen inicio! La consistencia es clave';
-                streakMessage.style.color = '#17a2b8';
-            } else if (consecutiveDays >= 1) {
-                streakMessage.innerHTML = '👍 ¡Primer paso dado!';
-                streakMessage.style.color = '#6c757d';
-            } else {
-                streakMessage.innerHTML = 'Marca los días que practiques';
-                streakMessage.style.color = '#6c757d';
-            }
-        }
-        
-        const practiceData = {
-            days: days.map(d => document.getElementById(d).checked),
-            lastUpdate: new Date().toISOString()
-        };
-        localStorage.setItem('module2PracticeStreak', JSON.stringify(practiceData));
-        
-        if (totalDays >= 3) {
-            techniquesCompleted.add('practica-constante');
-            updateAchievements();
-        }
-    }
-
-    // Cargar racha guardada
-    function loadPracticeStreak() {
-        const saved = localStorage.getItem('module2PracticeStreak');
-        if (saved) {
-            const data = JSON.parse(saved);
-            const days = ['dia1', 'dia2', 'dia3', 'dia4', 'dia5', 'dia6', 'dia7'];
-            
-            days.forEach((day, index) => {
-                const checkbox = document.getElementById(day);
-                if (checkbox && data.days[index]) {
-                    checkbox.checked = true;
-                }
-            });
-            
-            updatePracticeStreak();
-        }
-    }
-
-    // Verificar respuesta (función antigua para compatibilidad)
-    function checkAnswer(technique, questionNum, answer) {
-        // Redirigir a la nueva función
-        if (selectedAge) {
-            checkModeladoAnswer(selectedAge, questionNum, answer);
-        } else {
-            showNotification('⚠️ Primero selecciona la edad de tu hijo', 'warning');
-        }
-    }
-
-    // Cargar ejercicio de expansión
-    function loadExpansionExercise() {
-        if (!selectedAge) return;
-        
-        const exercises = expansionExercises[selectedAge];
-        if (!exercises || exercises.length === 0) return;
-        
-        const exercise = exercises[currentExpansionExercise % exercises.length];
-        
-        const phraseElement = document.getElementById('expansion-child-phrase');
-        const answerElement = document.getElementById('expansion-answer');
-        
-        if (phraseElement) {
-            phraseElement.textContent = exercise.phrase;
-        }
-        
-        if (answerElement) {
-            answerElement.value = '';
-            answerElement.placeholder = `Pista: ${exercise.hint}`;
-        }
-        
-        const feedbackDiv = document.getElementById('expansion-feedback');
-        if (feedbackDiv) {
-            feedbackDiv.style.display = 'none';
-        }
-    }
-
-    // Verificar expansión
-    function checkExpansion() {
-        if (!selectedAge) {
-            showNotification('⚠️ Primero selecciona la edad de tu hijo', 'warning');
-            return;
-        }
-        
-        const answerElement = document.getElementById('expansion-answer');
-        if (!answerElement) return;
-        
-        const answer = answerElement.value.trim();
-        const feedbackDiv = document.getElementById('expansion-feedback');
-        
-        if (!answer) {
-            showNotification('Escribe tu expansión primero', 'warning');
-            return;
-        }
-        
-        const exercises = expansionExercises[selectedAge];
-        const exercise = exercises[currentExpansionExercise % exercises.length];
-        
-        const originalWords = exercise.phrase.split(' ').length;
-        const expandedWords = answer.split(' ').length;
-        
-        if (feedbackDiv) {
-            feedbackDiv.style.display = 'block';
-            
-            if (expandedWords > originalWords) {
-                feedbackDiv.className = 'feedback-box feedback-correct show';
-                feedbackDiv.innerHTML = `✅ ¡Excelente! Agregaste ${expandedWords - originalWords} palabras. Tu expansión "${answer}" enriquece la frase original. Ejemplo modelo: "${exercise.example}"`;
-                
-                techniquesCompleted.add('expansion');
-                updateAchievements();
-            } else {
-                feedbackDiv.className = 'feedback-box feedback-incorrect show';
-                feedbackDiv.innerHTML = `⚠️ Intenta agregar más información. ${exercise.hint}. Ejemplo: "${exercise.example}"`;
-            }
-        }
-    }
-
-    // Siguiente ejercicio de expansión
-    function nextExpansionExercise() {
-        if (!selectedAge) {
-            showNotification('⚠️ Primero selecciona la edad de tu hijo', 'warning');
-            return;
-        }
-        
-        currentExpansionExercise++;
-        loadExpansionExercise();
-        showNotification('Nuevo ejercicio de expansión', 'info');
-    }
-
-    // Mostrar tab
-    function showTab(tabName) {
-        document.querySelectorAll('.tab-content').forEach(content => {
-            content.classList.remove('active');
-        });
-        
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.classList.remove('active');
-        });
-        
-        const selectedTab = document.getElementById(tabName);
-        if (selectedTab) {
-            selectedTab.classList.add('active');
-        }
-        
-        document.querySelectorAll('.tab').forEach(tab => {
-            if (tab.onclick && tab.onclick.toString().includes(tabName)) {
-                tab.classList.add('active');
-            }
-        });
-    }
-
-    // Toggle situación completada
-    function toggleComplete(card) {
-        if (!card) return;
-        
-        card.classList.toggle('completed');
-        
-        const title = card.querySelector('h4');
-        if (title) {
-            if (card.classList.contains('completed')) {
-                situationsCompleted.add(title.textContent);
-                showNotification('✅ Situación practicada', 'success');
-            } else {
-                situationsCompleted.delete(title.textContent);
-            }
-        }
-        
-        updateAchievements();
-    }
-
-    // Mostrar más juegos
-    function showMoreGames() {
-        const moreGames = document.getElementById('moreGames');
-        if (!moreGames) return;
-        
-        const button = event.target;
-        
-        if (moreGames.style.display === 'none' || moreGames.style.display === '') {
-            moreGames.style.display = 'block';
-            if (button) button.textContent = 'Ocultar Juegos';
-        } else {
-            moreGames.style.display = 'none';
-            if (button) button.textContent = 'Ver Más Juegos';
-        }
-    }
-
-    // Mostrar guía rápida
-    function showQuickGuide() {
-        const guide = document.getElementById('quickGuide');
-        if (!guide) return;
-        
-        const button = event.target;
-        
-        if (guide.style.display === 'none' || guide.style.display === '') {
-            guide.style.display = 'block';
-            if (button) button.textContent = 'Ocultar Guía';
-        } else {
-            guide.style.display = 'none';
-            if (button) button.textContent = 'Ver Guía Rápida';
-        }
-    }
-
-    // Mostrar canciones
-    function showSongs() {
-        const songs = document.getElementById('songsResources');
-        if (!songs) return;
-        
-        const button = event.target;
-        
-        if (songs.style.display === 'none' || songs.style.display === '') {
-            songs.style.display = 'block';
-            if (button) button.textContent = 'Ocultar Canciones';
-        } else {
-            songs.style.display = 'none';
-            if (button) button.textContent = 'Ver Canciones';
-        }
-    }
-
-    // Completar sección
-    function completeSection(sectionNumber) {
-        if (!selectedAge && sectionNumber !== 6) {
-            showNotification('⚠️ Primero selecciona la edad de tu hijo', 'warning');
-            return;
-        }
-        
-        completedSections.add(sectionNumber);
-        updateProgressBar();
-        saveProgress();
-        
-        const section = document.querySelector(`[data-section="${sectionNumber}"]`);
-        if (section) {
-            section.style.border = '3px solid #28a745';
-            section.style.background = 'linear-gradient(to right, #d4edda 0%, white 5%)';
-            section.style.transition = 'all 0.3s ease';
-        }
-        
-        showNotification(`✅ Sección ${sectionNumber} completada`, 'success');
-        
-        if (completedSections.size === totalSections) {
-            completeModule();
-        }
-    }
-
-    // Actualizar barra de progreso
-    function updateProgressBar() {
-        const progress = (completedSections.size / totalSections) * 100;
-        
-        const progressFill = document.getElementById('progressFill');
-        const progressText = document.getElementById('progressText');
-        const completedSectionsText = document.getElementById('completedSections');
-        
-        if (progressFill) {
-            progressFill.style.width = progress + '%';
-        }
-        if (progressText) {
-            progressText.textContent = Math.round(progress) + '% completado';
-        }
-        if (completedSectionsText) {
-            completedSectionsText.textContent = `${completedSections.size} de ${totalSections} secciones`;
-        }
-    }
-
-    // Actualizar achievements
-    function updateAchievements() {
-        const techniques = techniquesCompleted.size;
-        
-        if (techniques >= 1) {
-            const badge1 = document.getElementById('badge1');
-            if (badge1 && !badge1.classList.contains('unlocked')) {
-                badge1.classList.add('unlocked');
-                showNotification('🎯 ¡Logro desbloqueado: Primera Técnica!', 'success');
-            }
-        }
-        
-        if (techniques >= 3 || (techniques >= 2 && techniquesCompleted.has('practica-constante'))) {
-            const badge2 = document.getElementById('badge2');
-            if (badge2 && !badge2.classList.contains('unlocked')) {
-                badge2.classList.add('unlocked');
-                showNotification('💪 ¡Logro desbloqueado: 3 Técnicas!', 'success');
-            }
-        }
-        
-        if (techniques >= 4) {
-            const badge3 = document.getElementById('badge3');
-            if (badge3 && !badge3.classList.contains('unlocked')) {
-                badge3.classList.add('unlocked');
-                showNotification('🌟 ¡Logro desbloqueado: Todas las Técnicas!', 'success');
-            }
-        }
-        
-        if (completedSections.size === totalSections) {
-            const badge4 = document.getElementById('badge4');
-            if (badge4 && !badge4.classList.contains('unlocked')) {
-                badge4.classList.add('unlocked');
-                showNotification('🏆 ¡Logro desbloqueado: Módulo Completo!', 'success');
-            }
-        }
-    }
-
-    // Completar módulo
-    function completeModule() {
-        const certificateBtn = document.getElementById('certificateBtn');
-        const nextModuleBtn = document.getElementById('nextModuleBtn');
-        
-        if (certificateBtn) {
-            certificateBtn.style.display = 'inline-block';
-        }
-        if (nextModuleBtn) {
-            nextModuleBtn.style.display = 'inline-block';
-        }
-        
-        let courseProgress = JSON.parse(localStorage.getItem('courseProgress') || '[false,false,false,false,false]');
-        courseProgress[1] = true;
-        localStorage.setItem('courseProgress', JSON.stringify(courseProgress));
-        
-        showNotification('🎉 ¡FELICITACIONES! Has completado el Módulo 2', 'success');
-        
-        setTimeout(() => {
-            alert('🏆 ¡Módulo 2 Completado!\n\n' +
-                  '✅ Dominas 4 técnicas fundamentales\n' +
-                  '✅ Sabes aplicarlas en situaciones diarias\n' +
-                  '✅ Tienes tu plan personal\n\n' +
-                  '¡Continúa al Módulo 3 para aprender soluciones específicas!');
-        }, 1000);
-    }
-
-    // Generar certificado
-    function generateCertificate() {
-        const userName = prompt('¿Cuál es tu nombre para el certificado?') || 'Estudiante';
-        
-        const certificate = `
-╔════════════════════════════════════════════════════╗
-║                                                    ║
-║         🏆 CERTIFICADO DE COMPLETACIÓN 🏆          ║
-║                                                    ║
-║      ESTIMULACIÓN DEL LENGUAJE INFANTIL           ║
-║                                                    ║
-╠════════════════════════════════════════════════════╣
-║                                                    ║
-║  Certificamos que:                                 ║
-║                                                    ║
-║            ${userName.toUpperCase().padEnd(40, ' ')}║
-║                                                    ║
-║  Ha completado exitosamente el MÓDULO 2:          ║
-║                                                    ║
-║      "TÉCNICAS PRÁCTICAS PARA PADRES"             ║
-║                                                    ║
-║  Competencias Adquiridas:                         ║
-║  ✅ Modelado lingüístico sin corrección directa   ║
-║  ✅ Expansión del lenguaje con ejemplos           ║
-║  ✅ Preguntas abiertas para estimular             ║
-║  ✅ Narración paralela y auto-conversación        ║
-║  ✅ Aplicación práctica en vida diaria            ║
-║                                                    ║
-║  Edad de aplicación: ${(selectedAge || 'General').padEnd(26, ' ')}║
-║  Técnicas dominadas: ${techniquesCompleted.size}/4                     ║
-║  Situaciones practicadas: ${situationsCompleted.size}                  ║
-║                                                    ║
-║  Fecha: ${new Date().toLocaleDateString('es-ES').padEnd(43, ' ')}║
-║                                                    ║
-║  ID Certificado: MOD2-${Date.now()}      ║
-║                                                    ║
-╚════════════════════════════════════════════════════╝
-        `;
-        
-        const blob = new Blob([certificate], { type: 'text/plain;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `Certificado_Modulo2_${userName.replace(/\s/g, '_')}.txt`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        
-        showNotification('🎉 Certificado descargado exitosamente', 'success');
-    }
-
-    // Mostrar progreso
-    function showProgress() {
-        const progress = (completedSections.size / totalSections) * 100;
-        
-        let techniquesList = Array.from(techniquesCompleted).join(', ') || 'Ninguna aún';
-        let situationsList = situationsCompleted.size > 0 ? 
-            `${situationsCompleted.size} situaciones` : 'Ninguna aún';
-        
-        const progressMessage = `
-📊 TU PROGRESO EN MÓDULO 2:
-
-📈 Progreso general: ${Math.round(progress)}%
-📚 Secciones completadas: ${completedSections.size} de ${totalSections}
-👶 Edad seleccionada: ${selectedAge ? selectedAge + ' años' : 'No seleccionada'}
-
-🎯 Técnicas practicadas: ${techniquesCompleted.size} de 4
-   ${techniquesList}
-
-🏠 Situaciones practicadas: ${situationsList}
-
-${progress === 100 ? '🎉 ¡MÓDULO COMPLETADO! Descarga tu certificado.' : '💪 ¡Sigue practicando! Cada día cuenta.'}
-        `;
-        
-        alert(progressMessage);
-    }
-
-    // Guardar progreso
-    function saveProgress() {
-        const progress = {
-            completedSections: Array.from(completedSections),
-            selectedAge: selectedAge,
-            techniquesCompleted: Array.from(techniquesCompleted),
-            situationsCompleted: Array.from(situationsCompleted),
-            currentExpansionExercise: currentExpansionExercise,
-            lastAccess: new Date().toISOString()
-        };
-        
-        localStorage.setItem('module2Progress', JSON.stringify(progress));
-    }
-
-    // Cargar progreso guardado
-    function loadSavedProgress() {
-        try {
-            const saved = localStorage.getItem('module2Progress');
-            if (saved) {
-                const progress = JSON.parse(saved);
-                
-                if (progress.completedSections && Array.isArray(progress.completedSections)) {
-                    progress.completedSections.forEach(section => {
-                        completedSections.add(section);
-                        const sectionElem = document.querySelector(`[data-section="${section}"]`);
-                        if (sectionElem) {
-                            sectionElem.style.border = '3px solid #28a745';
-                            sectionElem.style.background = 'linear-gradient(to right, #d4edda 0%, white 5%)';
-                        }
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
                     });
                 }
-                
-                if (progress.selectedAge) {
-                    selectedAge = progress.selectedAge;
-                    setTimeout(() => {
-                        selectAge(selectedAge);
-                    }, 500);
+            });
+        });
+
+        // Add countdown timer for offer
+        function initCountdown() {
+            const countdownElement = document.createElement('div');
+            countdownElement.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #e74c3c, #c0392b);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+                z-index: 999;
+                font-weight: bold;
+                animation: pulse 2s infinite;
+            `;
+            
+            // Add pulse animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes pulse {
+                    0% { transform: scale(1); }
+                    50% { transform: scale(1.05); }
+                    100% { transform: scale(1); }
                 }
+            `;
+            document.head.appendChild(style);
+            
+            // Set countdown time (24 hours from now)
+            const endTime = new Date().getTime() + (24 * 60 * 60 * 1000);
+            
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = endTime - now;
                 
-                if (progress.techniquesCompleted && Array.isArray(progress.techniquesCompleted)) {
-                    progress.techniquesCompleted.forEach(tech => techniquesCompleted.add(tech));
-                }
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
                 
-                if (progress.situationsCompleted && Array.isArray(progress.situationsCompleted)) {
-                    progress.situationsCompleted.forEach(sit => situationsCompleted.add(sit));
-                }
+                countdownElement.innerHTML = `
+                    ⏰ Oferta termina en: ${hours}h ${minutes}m ${seconds}s
+                `;
                 
-                if (progress.currentExpansionExercise) {
-                    currentExpansionExercise = progress.currentExpansionExercise;
-                }
-                
-                updateProgressBar();
-                updateAchievements();
-                
-                if (completedSections.size === totalSections) {
-                    const certificateBtn = document.getElementById('certificateBtn');
-                    const nextModuleBtn = document.getElementById('nextModuleBtn');
-                    if (certificateBtn) certificateBtn.style.display = 'inline-block';
-                    if (nextModuleBtn) nextModuleBtn.style.display = 'inline-block';
+                if (distance < 0) {
+                    countdownElement.innerHTML = '⏰ Oferta expirada';
                 }
             }
             
-            // Cargar racha de práctica
-            loadPracticeStreak();
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
             
-        } catch (error) {
-            console.error('Error cargando progreso:', error);
+            document.body.appendChild(countdownElement);
         }
-    }
 
-    // Logout
-    function logout() {
-        if (confirm('¿Estás seguro que quieres salir? Tu progreso se guardará automáticamente.')) {
-            saveProgress();
-            window.location.href = '../index.html';
+        // Initialize countdown on page load
+        window.addEventListener('load', initCountdown);
+
+        // Add scroll animations
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.benefit-card, .module-item, .testimonial-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.6s ease';
+                        entry.target.style.opacity = '1';
+                    }
+                });
+            });
+            
+            elements.forEach(element => {
+                element.style.opacity = '0';
+                observer.observe(element);
+            });
         }
-    }
 
-    // Sistema de notificaciones mejorado
-    function showNotification(message, type = 'info') {
-        const existingNotifications = document.querySelectorAll('.notification-custom');
-        existingNotifications.forEach(notif => notif.remove());
+        animateOnScroll();
+
+        // Add floating action button for mobile
+        if (window.innerWidth <= 768) {
+            const floatingBtn = document.createElement('button');
+            floatingBtn.innerHTML = '🛒 Comprar Ahora';
+            floatingBtn.style.cssText = `
+                position: fixed;
+                bottom: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(135deg, #667eea, #764ba2);
+                color: white;
+                padding: 15px 30px;
+                border: none;
+                border-radius: 50px;
+                font-size: 1.1rem;
+                font-weight: bold;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                z-index: 998;
+            `;
+            floatingBtn.onclick = () => {
+                document.getElementById('precio').scrollIntoView({ behavior: 'smooth' });
+            };
+            document.body.appendChild(floatingBtn);
+        }
+
+        // Track page events for analytics (in production, use real analytics)
+        function trackEvent(eventName, eventData) {
+            console.log('Event tracked:', eventName, eventData);
+            // In production, send to analytics service
+        }
+
+        // Track scroll depth
+        let maxScroll = 0;
+        window.addEventListener('scroll', () => {
+            const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            if (scrollPercentage > maxScroll) {
+                maxScroll = scrollPercentage;
+                if (maxScroll > 25 && maxScroll < 26) trackEvent('scroll', { depth: '25%' });
+                if (maxScroll > 50 && maxScroll < 51) trackEvent('scroll', { depth: '50%' });
+                if (maxScroll > 75 && maxScroll < 76) trackEvent('scroll', { depth: '75%' });
+                if (maxScroll > 90) trackEvent('scroll', { depth: '90%' });
+            }
+        });
+
+        // Exit intent popup
+        let exitIntentShown = false;
+        document.addEventListener('mouseleave', (e) => {
+            if (e.clientY <= 0 && !exitIntentShown) {
+                exitIntentShown = true;
+                
+                const popup = document.createElement('div');
+                popup.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: white;
+                    padding: 40px;
+                    border-radius: 20px;
+                    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                    z-index: 3000;
+                    max-width: 500px;
+                    text-align: center;
+                `;
+                
+                popup.innerHTML = `
+                    <h2 style="color: #667eea; margin-bottom: 20px;">¡Espera! 🎁</h2>
+                    <p style="margin-bottom: 20px;">Antes de irte, obtén un 10% de descuento adicional</p>
+                    <p style="font-size: 2rem; color: #4caf50; font-weight: bold;">Solo $42 USD</p>
+                    <p style="text-decoration: line-through; color: #999;">Precio regular: $97</p>
+                    <button onclick="processPurchase()" style="
+                        background: linear-gradient(135deg, #667eea, #764ba2);
+                        color: white;
+                        padding: 15px 40px;
+                        border: none;
+                        border-radius: 50px;
+                        font-size: 1.1rem;
+                        font-weight: bold;
+                        cursor: pointer;
+                        margin-top: 20px;
+                    ">Aprovechar Descuento Extra</button>
+                    <p style="margin-top: 15px; color: #666; cursor: pointer;" onclick="this.parentElement.remove()">
+                        No gracias, prefiero pagar el precio completo
+                    </p>
+                `;
+                
+                // Add overlay
+                const overlay = document.createElement('div');
+                overlay.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0,0,0,0.5);
+                    z-index: 2999;
+                `;
+                overlay.onclick = () => {
+                    popup.remove();
+                    overlay.remove();
+                };
+                
+                document.body.appendChild(overlay);
+                document.body.appendChild(popup);
+            }
+        });
+
+        // Testimonial carousel (auto-rotate)
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.testimonial-card');
         
-        const notification = document.createElement('div');
-        notification.className = `alert alert-${type} notification-custom`;
-        notification.style.cssText = `
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            z-index: 9999;
-            min-width: 300px;
-            max-width: 400px;
-            animation: slideInNotification 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        `;
-        notification.innerHTML = message;
-        document.body.appendChild(notification);
+        function rotateTestimonials() {
+            if (window.innerWidth <= 768) {
+                testimonials.forEach((testimonial, index) => {
+                    testimonial.style.display = index === currentTestimonial ? 'block' : 'none';
+                });
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            } else {
+                testimonials.forEach(testimonial => {
+                    testimonial.style.display = 'block';
+                });
+            }
+        }
         
-        setTimeout(() => {
-            notification.style.animation = 'slideOutNotification 0.3s ease';
-            setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.remove();
-                }
-            }, 300);
-        }, 3000);
-    }
+        setInterval(rotateTestimonials, 5000);
+        rotateTestimonials();
 
-    // Agregar estilos de animación si no existen
-    if (!document.getElementById('notification-styles')) {
-        const style = document.createElement('style');
-        style.id = 'notification-styles';
-        style.textContent = `
-            @keyframes slideInNotification {
-                from { 
-                    transform: translateX(100%); 
-                    opacity: 0; 
-                }
-                to { 
-                    transform: translateX(0); 
-                    opacity: 1; 
-                }
-            }
-            @keyframes slideOutNotification {
-                from { 
-                    transform: translateX(0); 
-                    opacity: 1; 
-                }
-                to { 
-                    transform: translateX(100%); 
-                    opacity: 0; 
-                }
-            }
-            .notification-custom {
-                transition: all 0.3s ease;
-            }
-            .question-content {
-                transition: all 0.3s ease;
-            }
-            .achievement-badge {
-                transition: all 0.3s ease;
-            }
-            .achievement-badge.unlocked {
-                animation: bounceIn 0.5s ease;
-            }
-            @keyframes bounceIn {
-                0% { transform: scale(0); }
-                50% { transform: scale(1.1); }
-                100% { transform: scale(1); }
-            }
-        `;
-        document.head.appendChild(style);
-    }
+        // Add trust badges
+        function addTrustBadges() {
+            const trustSection = document.createElement('section');
+            trustSection.style.cssText = `
+                padding: 40px 20px;
+                background: #f8f9fa;
+                text-align: center;
+            `;
+            
+            trustSection.innerHTML = `
+                <div style="max-width: 1200px; margin: 0 auto;">
+                    <p style="color: #666; margin-bottom: 20px;">Compra 100% Segura</p>
+                    <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+                        <span style="font-size: 2rem;">🔒 SSL Seguro</span>
+                        <span style="font-size: 2rem;">💳 Pago Protegido</span>
+                        <span style="font-size: 2rem;">✅ Garantía 30 Días</span>
+                        <span style="font-size: 2rem;">📧 Soporte 24/7</span>
+                    </div>
+                </div>
+            `;
+            
+            // Insert after pricing section
+            const pricingSection = document.querySelector('.pricing');
+            pricingSection.parentNode.insertBefore(trustSection, pricingSection.nextSibling);
+        }
+        
+        addTrustBadges();
 
-    // Log de inicio
-    console.log('🎯 Módulo 2: Técnicas Prácticas para Padres - Versión 2.1');
-    console.log('📚 Todas las funciones cargadas correctamente');
-    console.log('👶 Recuerda seleccionar la edad de tu hijo para comenzar');
-</script>
-                    
+        // Save scroll position
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.setItem('scrollPosition', window.scrollY);
+        });
+
+        // Restore scroll position
+        window.addEventListener('load', () => {
+            const scrollPosition = sessionStorage.getItem('scrollPosition');
+            if (scrollPosition) {
+                window.scrollTo(0, parseInt(scrollPosition));
+                sessionStorage.removeItem('scrollPosition');
+            }
+        });
+    </script>
 </body>
 </html>
+
