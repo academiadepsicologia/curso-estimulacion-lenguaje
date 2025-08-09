@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curso de Estimulación del Lenguaje Infantil - Academia de Psicología</title>
+    <title>Módulo 2: Técnicas Científicas de Estimulación del Lenguaje</title>
     
     <style>
         * {
@@ -16,17 +16,18 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
+            background: #f8f9fa;
         }
 
-        /* Header */
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
             padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
         }
 
         .nav-container {
@@ -39,10 +40,8 @@
         }
 
         .logo {
-            color: white;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: bold;
-            text-decoration: none;
         }
 
         .nav-links {
@@ -61,196 +60,284 @@
             opacity: 0.8;
         }
 
-        .btn-login {
-            background: white;
-            color: #667eea;
-            padding: 0.5rem 1.5rem;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.3s;
-        }
-
-        .btn-login:hover {
-            transform: scale(1.05);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 120px 2rem 80px;
-            text-align: center;
-            color: white;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.95;
-            animation: fadeInUp 1s ease 0.2s;
-            animation-fill-mode: both;
-        }
-
-        .cta-button {
-            background: white;
-            color: #667eea;
-            padding: 1rem 3rem;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            animation: fadeInUp 1s ease 0.4s;
-            animation-fill-mode: both;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-
-        .price-tag {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            margin-top: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .original-price {
-            text-decoration: line-through;
-            opacity: 0.7;
-            margin-right: 1rem;
-        }
-
-        .current-price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #4caf50;
-        }
-
-        /* Benefits Section */
-        .benefits {
-            padding: 80px 2rem;
-            background: #f8f9fa;
-        }
-
-        .container {
-            max-width: 1200px;
+        .main-content {
+            max-width: 1000px;
             margin: 0 auto;
+            padding: 100px 2rem 2rem;
         }
 
-        .section-title {
+        .progress-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            height: 100%;
+            transition: width 0.5s ease;
+        }
+
+        .module-header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
             text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .module-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .module-header h1 {
             font-size: 2.5rem;
-            color: #333;
-            margin-bottom: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
         }
 
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .benefit-card {
+        .content-section {
             background: white;
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
         }
 
-        .benefit-card:hover {
-            transform: translateY(-5px);
+        .content-section:hover {
+            transform: translateY(-2px);
         }
 
-        .benefit-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .benefit-title {
-            font-size: 1.3rem;
-            color: #333;
-            margin-bottom: 1rem;
-        }
-
-        /* Problems Section */
-        .problems {
-            padding: 80px 2rem;
-            background: white;
-        }
-
-        .problem-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .problem-item {
+        .section-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
             display: flex;
-            align-items: start;
-            gap: 1rem;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .problem-icon {
-            color: #e74c3c;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .solution-box {
+        .technique-card {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 3rem;
-            border-radius: 20px;
-            text-align: center;
-            margin-top: 3rem;
-        }
-
-        /* Modules Section */
-        .modules {
-            padding: 80px 2rem;
-            background: #f8f9fa;
-        }
-
-        .modules-timeline {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .module-item {
-            background: white;
             padding: 2rem;
             border-radius: 15px;
-            margin-bottom: 2rem;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin: 2rem 0;
             position: relative;
-            padding-left: 4rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .module-number {
+        .technique-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .technique-card.practiced {
+            opacity: 0.9;
+            border: 3px solid #28a745;
+        }
+
+        .technique-card.practiced::after {
+            content: '✓';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #28a745;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .technique-example {
+            background: rgba(255,255,255,0.95);
+            color: #333;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #2196f3;
+        }
+
+        .practice-box {
+            background: #fff3e0;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border: 2px solid #ff9800;
+            position: relative;
+        }
+
+        .practice-box.completed {
+            background: #e8f5e9;
+            border-color: #4caf50;
+        }
+
+        .interactive-exercise {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            min-height: 200px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 1rem 0.5rem 1rem 0;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
+        }
+
+        .demo-video {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .demo-video::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%);
+        }
+
+        .play-button {
+            font-size: 4rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            animation: pulse-play 2s infinite;
+        }
+
+        @keyframes pulse-play {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .demo-video:hover .play-button {
+            transform: scale(1.2);
+        }
+
+        .technique-steps {
+            counter-reset: step-counter;
+        }
+
+        .step-item {
+            counter-increment: step-counter;
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            position: relative;
+            padding-left: 4rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .step-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .step-item.completed {
+            background: #d4edda;
+            border-left: 3px solid #28a745;
+        }
+
+        .step-item::before {
+            content: counter(step-counter);
             position: absolute;
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
-            width: 40px;
-            height: 40px;
+            width: 2rem;
+            height: 2rem;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -258,941 +345,1526 @@
             font-weight: bold;
         }
 
-        /* Testimonials */
-        .testimonials {
-            padding: 80px 2rem;
-            background: white;
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .testimonial-card {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 15px;
-            position: relative;
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 1rem;
-            color: #555;
-        }
-
-        .testimonial-author {
-            font-weight: bold;
-            color: #333;
-        }
-
-        .testimonial-role {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .quote-icon {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 3rem;
-            color: #667eea;
-            opacity: 0.2;
-        }
-
-        /* Pricing Section */
-        .pricing {
-            padding: 80px 2rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-        }
-
-        .pricing-card {
-            background: white;
-            color: #333;
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-
-        .price-amount {
-            font-size: 4rem;
-            font-weight: bold;
-            color: #667eea;
-            margin: 1rem 0;
-        }
-
-        .price-currency {
-            font-size: 2rem;
-            vertical-align: super;
-        }
-
-        .price-features {
-            text-align: left;
-            margin: 2rem 0;
-        }
-
-        .price-features li {
-            padding: 0.5rem 0;
-            list-style: none;
-        }
-
-        .price-features li:before {
-            content: '✓';
-            color: #4caf50;
-            font-weight: bold;
-            margin-right: 0.5rem;
-        }
-
-        /* Guarantee */
-        .guarantee {
-            padding: 80px 2rem;
-            background: #f8f9fa;
-            text-align: center;
-        }
-
-        .guarantee-badge {
-            background: white;
-            display: inline-block;
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .guarantee-days {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #4caf50;
-        }
-
-        /* FAQ */
-        .faq {
-            padding: 80px 2rem;
-            background: white;
-        }
-
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background: #f8f9fa;
-            margin-bottom: 1rem;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .faq-question {
-            padding: 1.5rem;
-            cursor: pointer;
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.3s;
-        }
-
-        .faq-question:hover {
-            background: #e9ecef;
-        }
-
-        .faq-answer {
-            padding: 0 1.5rem;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 500px;
-            padding: 1.5rem;
-        }
-
-        .faq-icon {
-            transition: transform 0.3s;
-        }
-
-        .faq-item.active .faq-icon {
-            transform: rotate(180deg);
-        }
-
-        /* Footer */
-        .footer {
-            background: #333;
-            color: white;
-            padding: 3rem 2rem;
-            text-align: center;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-            opacity: 0.8;
-            transition: opacity 0.3s;
-        }
-
-        .footer-links a:hover {
-            opacity: 1;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Login Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            max-width: 400px;
-            width: 90%;
-            animation: slideIn 0.3s ease;
-        }
-
-        .modal-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .modal-header h2 {
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #666;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
-
-        .btn-submit {
-            width: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+        .alert {
             padding: 1rem;
-            border: none;
             border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .btn-submit:hover {
-            transform: scale(1.02);
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #999;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            margin: 1rem 0;
+            animation: slideIn 0.3s ease;
         }
 
         @keyframes slideIn {
             from {
-                transform: translateY(-50px);
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .situation-tabs {
+            display: flex;
+            background: white;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+            margin-bottom: 0;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 1rem;
+            background: #f8f9fa;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            min-width: 120px;
+            position: relative;
+        }
+
+        .tab::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .tab.active::after {
+            transform: scaleX(1);
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
                 opacity: 0;
             }
             to {
-                transform: translateY(0);
                 opacity: 1;
             }
         }
 
-        /* Responsive */
+        .tab-content.active {
+            display: block;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .resource-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resource-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .resource-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .resource-card:hover {
+            border-color: #f093fb;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .resource-card.downloaded {
+            background: #f0f8ff;
+            border-color: #28a745;
+        }
+
+        .resource-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .resource-card:hover .resource-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .module-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .timer-box {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 1rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timer-display {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .timer-box.active {
+            animation: timer-pulse 1s infinite;
+        }
+
+        @keyframes timer-pulse {
+            0%, 100% { box-shadow: 0 5px 15px rgba(255,107,107,0.3); }
+            50% { box-shadow: 0 5px 30px rgba(255,107,107,0.5); }
+        }
+
         @media (max-width: 768px) {
-            .hero h1 {
+            .module-header h1 {
                 font-size: 2rem;
             }
             
-            .hero p {
-                font-size: 1.1rem;
+            .situation-tabs {
+                flex-wrap: wrap;
             }
             
-            .nav-links {
-                display: none;
+            .tab {
+                min-width: auto;
+                flex-basis: calc(50% - 1px);
             }
             
-            .price-amount {
-                font-size: 3rem;
+            .module-navigation {
+                flex-direction: column;
+                gap: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="nav-container">
-            <a href="#" class="logo">🧠 Academia de Psicología</a>
-            <nav class="nav-links">
-                <a href="#beneficios">Beneficios</a>
-                <a href="#modulos">Contenido</a>
-                <a href="#testimonios">Testimonios</a>
-                <a href="#precio">Precio</a>
-                <a href="#" class="btn-login" onclick="openLogin()">Ingresar</a>
-            </nav>
+            <div class="logo">🎯 Módulo 2: Técnicas Científicas</div>
+            <div class="nav-links">
+                <a href="../index.html">← Dashboard</a>
+                <a href="../modulo1/index.html">Módulo 1</a>
+                <a href="#" onclick="showProgress()">Mi Progreso</a>
+                <a href="#" onclick="logout()">Salir</a>
+            </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>Transforma el Lenguaje de Tu Hijo en Solo 30 Días</h1>
-        <p>El método científico que usan los terapeutas del lenguaje, ahora disponible para padres</p>
-        <a href="#precio" class="cta-button">¡Quiero Inscribirme Ahora!</a>
-        <div class="price-tag">
-            <span class="original-price">$97 USD</span>
-            <span class="current-price">$47 USD</span>
-            <span>- Oferta por tiempo limitado</span>
-        </div>
-    </section>
-
-    <!-- Benefits Section -->
-    <section class="benefits" id="beneficios">
-        <div class="container">
-            <h2 class="section-title">¿Qué Lograrás con Este Curso?</h2>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">🎯</div>
-                    <h3 class="benefit-title">Resultados en 30 Días</h3>
-                    <p>Verás mejoras notables en el vocabulario y expresión de tu hijo en el primer mes</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">👩‍⚕️</div>
-                    <h3 class="benefit-title">Técnicas Profesionales</h3>
-                    <p>Aprenderás las mismas estrategias que usan los terapeutas del lenguaje</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">⏰</div>
-                    <h3 class="benefit-title">Solo 15 Minutos al Día</h3>
-                    <p>Ejercicios prácticos que puedes hacer en tu rutina diaria sin esfuerzo extra</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">📱</div>
-                    <h3 class="benefit-title">Acceso de Por Vida</h3>
-                    <p>Estudia a tu ritmo, desde cualquier dispositivo, cuando quieras</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">🎓</div>
-                    <h3 class="benefit-title">Certificado Incluido</h3>
-                    <p>Recibe un certificado de completación avalado por profesionales</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">💬</div>
-                    <h3 class="benefit-title">Soporte Continuo</h3>
-                    <p>Acceso a nuestra comunidad de padres y respuestas a tus dudas</p>
-                </div>
+    <div class="main-content">
+        <div class="progress-section">
+            <h3>Tu Progreso en el Módulo 2</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
             </div>
-        </div>
-    </section>
-
-    <!-- Problems Section -->
-    <section class="problems">
-        <div class="container">
-            <h2 class="section-title">¿Tu Hijo Presenta Alguna de Estas Situaciones?</h2>
-            <div class="problem-list">
-                <div class="problem-item">
-                    <span class="problem-icon">⚠️</span>
-                    <p>Tiene 3 años y solo dice pocas palabras</p>
-                </div>
-                <div class="problem-item">
-                    <span class="problem-icon">⚠️</span>
-                    <p>Le cuesta formar oraciones completas</p>
-                </div>
-                <div class="problem-item">
-                    <span class="problem-icon">⚠️</span>
-                    <p>Se frustra porque no puede expresarse</p>
-                </div>
-                <div class="problem-item">
-                    <span class="problem-icon">⚠️</span>
-                    <p>Usa gestos en lugar de palabras</p>
-                </div>
-                <div class="problem-item">
-                    <span class="problem-icon">⚠️</span>
-                    <p>Tiene dificultades para pronunciar</p>
-                </div>
-                <div class="problem-item">
-                    <span class="problem-icon">⚠️</span>
-                    <p>Otros niños de su edad hablan más</p>
-                </div>
-            </div>
-            <div class="solution-box">
-                <h3>🎯 La Solución Está en Tus Manos</h3>
-                <p>No necesitas esperar más. Con las técnicas correctas, puedes ayudar a tu hijo desde casa, de forma natural y divertida.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Modules Section -->
-    <section class="modules" id="modulos">
-        <div class="container">
-            <h2 class="section-title">Contenido del Curso</h2>
-            <div class="modules-timeline">
-                <div class="module-item">
-                    <div class="module-number">1</div>
-                    <h3>Fundamentos del Desarrollo del Lenguaje</h3>
-                    <p>Comprende las etapas normales del desarrollo, señales de alerta y cuándo preocuparte realmente.</p>
-                </div>
-                <div class="module-item">
-                    <div class="module-number">2</div>
-                    <h3>Técnicas de Estimulación Profesional</h3>
-                    <p>Aprende las 5 técnicas más efectivas que usan los terapeutas: modelado, expansión, preguntas abiertas y más.</p>
-                </div>
-                <div class="module-item">
-                    <div class="module-number">3</div>
-                    <h3>Actividades y Juegos por Edad</h3>
-                    <p>Descubre juegos específicos para 3, 4 y 5 años que desarrollan el lenguaje mientras se divierten.</p>
-                </div>
-                <div class="module-item">
-                    <div class="module-number">4</div>
-                    <h3>Soluciones a Problemas Comunes</h3>
-                    <p>Maneja tartamudez, problemas de pronunciación y retrasos del lenguaje con estrategias probadas.</p>
-                </div>
-                <div class="module-item">
-                    <div class="module-number">5</div>
-                    <h3>Plan Personalizado de 30 Días</h3>
-                    <p>Crea un programa específico para tu hijo con objetivos claros y medibles.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="testimonials" id="testimonios">
-        <div class="container">
-            <h2 class="section-title">Lo Que Dicen Otros Padres</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <span class="quote-icon">"</span>
-                    <p class="testimonial-text">Mi hijo de 3 años pasó de decir palabras sueltas a formar oraciones completas en solo 3 semanas. ¡Increíble!</p>
-                    <p class="testimonial-author">María González</p>
-                    <p class="testimonial-role">Mamá de Diego, 3 años</p>
-                </div>
-                <div class="testimonial-card">
-                    <span class="quote-icon">"</span>
-                    <p class="testimonial-text">Las técnicas son súper fáciles de aplicar. Solo 15 minutos al día y ya veo cambios enormes en mi hija.</p>
-                    <p class="testimonial-author">Carlos Rodríguez</p>
-                    <p class="testimonial-role">Papá de Sofía, 4 años</p>
-                </div>
-                <div class="testimonial-card">
-                    <span class="quote-icon">"</span>
-                    <p class="testimonial-text">Estaba preocupada porque mi hijo no hablaba como otros niños. Este curso me dio las herramientas exactas que necesitaba.</p>
-                    <p class="testimonial-author">Ana Martínez</p>
-                    <p class="testimonial-role">Mamá de Lucas, 5 años</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section class="pricing" id="precio">
-        <div class="container">
-            <h2 class="section-title" style="color: white;">Invierte en el Futuro de Tu Hijo</h2>
-            <div class="pricing-card">
-                <h3>Acceso Completo de Por Vida</h3>
-                <div class="price-amount">
-                    <span class="price-currency">$</span>47
-                </div>
-                <p style="text-decoration: line-through; color: #999;">Precio regular: $97 USD</p>
-                <p style="color: #4caf50; font-weight: bold;">¡Ahorra 50% HOY!</p>
-                <ul class="price-features">
-                    <li>5 módulos completos con videos y ejercicios</li>
-                    <li>Recursos descargables y guías PDF</li>
-                    <li>Actualizaciones gratuitas de por vida</li>
-                    <li>Certificado de completación</li>
-                    <li>Garantía de 30 días</li>
-                    <li>Soporte por email</li>
-                </ul>
-                <button class="cta-button" style="width: 100%;" onclick="processPurchase()">
-                    Comprar Ahora - $47 USD
-                </button>
-                <p style="margin-top: 1rem; color: #666; font-size: 0.9rem;">
-                    Pago seguro procesado por Stripe
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Guarantee -->
-    <section class="guarantee">
-        <div class="container">
-            <h2 class="section-title">Garantía de Satisfacción</h2>
-            <div class="guarantee-badge">
-                <div class="guarantee-days">30 DÍAS</div>
-                <h3>100% Garantía de Devolución</h3>
-                <p>Si no ves resultados en 30 días, te devolvemos tu dinero. Sin preguntas.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="faq">
-        <div class="container">
-            <h2 class="section-title">Preguntas Frecuentes</h2>
-            <div class="faq-container">
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        ¿Para qué edades es este curso?
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>El curso está diseñado para niños de 3 a 6 años, con ejercicios específicos para cada edad. Si tu hijo tiene 2 años y medio o 7 años, también puede beneficiarse del contenido.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        ¿Cuánto tiempo debo dedicar al día?
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Solo necesitas 15 minutos al día. Las técnicas están diseñadas para integrarse en tu rutina diaria: durante las comidas, el baño o el juego.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        ¿Necesito conocimientos previos?
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>No. El curso está diseñado para padres sin experiencia. Todo se explica paso a paso con ejemplos prácticos y videos demostrativos.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        ¿Cuándo veré resultados?
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>La mayoría de padres reportan mejoras notables en las primeras 2-3 semanas. Los resultados dependen de la consistencia y la edad del niño.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        ¿Reemplaza esto a un terapeuta?
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Este curso es un complemento excelente a la terapia o una primera intervención. Si tu hijo tiene necesidades especiales, siempre consulta con un profesional.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-links">
-                <a href="#">Términos y Condiciones</a>
-                <a href="#">Política de Privacidad</a>
-                <a href="#">Contacto</a>
-            </div>
-            <p>&copy; 2024 Academia de Psicología. Todos los derechos reservados.</p>
-        </div>
-    </footer>
-
-    <!-- Login Modal -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content" style="position: relative;">
-            <span class="close-modal" onclick="closeLogin()">×</span>
-            <div class="modal-header">
-                <h2>Acceso al Curso</h2>
-                <p>Ingresa tus datos para continuar</p>
-            </div>
-            <form onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label>Correo Electrónico</label>
-                    <input type="email" id="loginEmail" required placeholder="tu@email.com">
-                </div>
-                <div class="form-group">
-                    <label>Contraseña</label>
-                    <input type="password" id="loginPassword" required placeholder="••••••••">
-                </div>
-               <button type="submit" class="btn-submit">Ingresar al Curso</button>
-            </form>
-            <p style="text-align: center; margin-top: 1rem; color: #666;">
-                ¿No tienes cuenta? <a href="#precio" onclick="closeLogin()" style="color: #667eea;">Compra el curso aquí</a>
+            <p><span id="progressText">0% completado</span> • <span id="completedSections">0 de 8 secciones</span></p>
+            <p id="techniquesPracticed" style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">
+                Técnicas practicadas: <span id="practiceCount">0</span> de 5
             </p>
+        </div>
+
+        <div class="module-header">
+            <h1>🎯 Técnicas Científicas de Estimulación del Lenguaje</h1>
+            <p>Métodos basados en evidencia de la neurociencia y logopedia infantil</p>
+            <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.9;">
+                ⚡ Basado en investigaciones de Vygotsky, Bruner y la Academia Americana de Pediatría
+            </div>
+        </div>
+        <!-- Sección 1: Las 5 Técnicas Fundamentales con Base Científica -->
+        <div class="content-section" data-section="1">
+            <h2 class="section-title">
+                <span>🧠</span>
+                Las 5 Técnicas Fundamentales (Base Neurocientífica)
+            </h2>
+            
+            <div class="alert alert-info">
+                <strong>📚 Base Científica:</strong> Estas técnicas están respaldadas por más de 30 años de investigación en desarrollo del lenguaje infantil (Hart & Risley, 1995; Zimmerman et al., 2009).
+            </div>
+
+            <div class="technique-card" onclick="markAsPracticed(this, 'modelado')">
+                <h3>🗣️ 1. MODELADO LINGÜÍSTICO (Técnica de Recasting)</h3>
+                <p><strong>Fundamento:</strong> Activa las neuronas espejo del lenguaje sin crear ansiedad comunicativa.</p>
+                
+                <div class="technique-example">
+                    <strong>Ejemplo Práctico:</strong><br>
+                    👶 Niño: "Ete toche ande" (Este coche grande)<br>
+                    👩 Adulto: "Sí, este coche ES grande. El coche grande va rápido."<br>
+                    <br>
+                    <strong>Por qué funciona:</strong> El cerebro infantil procesa la forma correcta sin sentir corrección negativa.
+                </div>
+                
+                <div class="alert alert-success">
+                    <strong>💡 Evidencia:</strong> Aumenta el vocabulario en 40% más que la corrección directa (Saxton, 2005).
+                </div>
+                
+                <button class="btn btn-warning" onclick="practiceModelado()">🎮 Practicar Ahora</button>
+            </div>
+
+            <div class="technique-card" onclick="markAsPracticed(this, 'espera')">
+                <h3>⏱️ 2. PAUSA EXPECTANTE (Wait Time Strategy)</h3>
+                <p><strong>Fundamento:</strong> Da tiempo al procesamiento neurológico del lenguaje (3-5 segundos).</p>
+                
+                <div class="technique-example">
+                    <strong>Protocolo Científico:</strong><br>
+                    1. Haz contacto visual<br>
+                    2. Muestra expectativa con tu expresión<br>
+                    3. Cuenta mentalmente: "mil uno, mil dos, mil tres..."<br>
+                    4. Si no responde, da una pista visual o verbal mínima<br>
+                    5. Espera otros 3 segundos<br>
+                    6. Modela la respuesta si es necesario
+                </div>
+                
+                <div class="interactive-exercise">
+                    <h4>⏰ Práctica de Timing:</h4>
+                    <button class="btn" onclick="startWaitTimeExercise()">Iniciar Ejercicio de Pausa</button>
+                    <div id="waitTimeDisplay" style="display: none; margin-top: 1rem;">
+                        <div style="font-size: 2rem; text-align: center;" id="waitCounter">0</div>
+                        <p style="text-align: center;">Mantén la pausa...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique-card" onclick="markAsPracticed(this, 'expansion')">
+                <h3>📈 3. EXPANSIÓN SEMÁNTICA PLUS (Semantic Contingency)</h3>
+                <p><strong>Fundamento:</strong> Construye redes neuronales añadiendo información contextual relevante.</p>
+                
+                <div class="technique-example">
+                    <strong>Niveles de Expansión:</strong><br>
+                    <div style="background: white; color: #333; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <strong>Nivel 1 - Básico:</strong><br>
+                        👶 "Perro"<br>
+                        👩 "Sí, perro grande"<br><br>
+                        
+                        <strong>Nivel 2 - Intermedio:</strong><br>
+                        👶 "Perro"<br>
+                        👩 "El perro café está corriendo"<br><br>
+                        
+                        <strong>Nivel 3 - Avanzado:</strong><br>
+                        👶 "Perro"<br>
+                        👩 "El perro café está corriendo porque quiere jugar contigo"
+                    </div>
+                </div>
+                
+                <button class="btn btn-warning" onclick="practiceExpansion()">🎮 Ejercicio Interactivo</button>
+            </div>
+
+            <div class="technique-card" onclick="markAsPracticed(this, 'preguntas')">
+                <h3>❓ 4. PREGUNTAS COGNITIVAS ESCALONADAS (Bloom's Taxonomy)</h3>
+                <p><strong>Fundamento:</strong> Estimula diferentes niveles de procesamiento cognitivo-lingüístico.</p>
+                
+                <div class="technique-example">
+                    <strong>Jerarquía de Preguntas:</strong><br>
+                    <div style="background: white; color: #333; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        📍 <strong>Nivel 1 - Observación:</strong> "¿Qué ves?"<br>
+                        📍 <strong>Nivel 2 - Descripción:</strong> "¿Cómo es?"<br>
+                        📍 <strong>Nivel 3 - Comparación:</strong> "¿Es más grande o pequeño que...?"<br>
+                        📍 <strong>Nivel 4 - Predicción:</strong> "¿Qué pasará después?"<br>
+                        📍 <strong>Nivel 5 - Razonamiento:</strong> "¿Por qué crees que...?"<br>
+                        📍 <strong>Nivel 6 - Creatividad:</strong> "¿Qué harías tú si...?"
+                    </div>
+                </div>
+            </div>
+
+            <div class="technique-card" onclick="markAsPracticed(this, 'paralelo')">
+                <h3>🎭 5. HABLA PARALELA Y AUTO-CONVERSACIÓN (Parallel & Self Talk)</h3>
+                <p><strong>Fundamento:</strong> Inmersión lingüística que activa el área de Broca y Wernicke simultáneamente.</p>
+                
+                <div class="technique-example">
+                    <strong>Diferencia Clave:</strong><br>
+                    <div style="background: white; color: #333; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <strong>🗣️ Habla Paralela:</strong> Narras lo que HACE EL NIÑO<br>
+                        "Estás construyendo una torre alta. Pones el bloque rojo arriba."<br><br>
+                        
+                        <strong>💭 Auto-conversación:</strong> Narras lo que HACES TÚ<br>
+                        "Voy a cortar la manzana. La corto en pedazos pequeños."
+                    </div>
+                </div>
+            </div>
+
+            <div class="practice-box">
+                <h4>🎯 Reto de Práctica Diaria:</h4>
+                <p>Usa cada técnica al menos 3 veces hoy. Marca las que completes:</p>
+                <div id="dailyChecklist" style="margin-top: 1rem;">
+                    <label style="display: block; margin: 0.5rem 0;">
+                        <input type="checkbox" onchange="updateDailyProgress()"> Modelado (3 veces)
+                    </label>
+                    <label style="display: block; margin: 0.5rem 0;">
+                        <input type="checkbox" onchange="updateDailyProgress()"> Pausa expectante (3 veces)
+                    </label>
+                    <label style="display: block; margin: 0.5rem 0;">
+                        <input type="checkbox" onchange="updateDailyProgress()"> Expansión (3 veces)
+                    </label>
+                    <label style="display: block; margin: 0.5rem 0;">
+                        <input type="checkbox" onchange="updateDailyProgress()"> Preguntas escalonadas (3 veces)
+                    </label>
+                    <label style="display: block; margin: 0.5rem 0;">
+                        <input type="checkbox" onchange="updateDailyProgress()"> Habla paralela (3 veces)
+                    </label>
+                </div>
+                <div id="dailyProgress" class="alert alert-info" style="margin-top: 1rem; display: none;">
+                    Progreso diario: <span id="dailyPercentage">0%</span>
+                </div>
+            </div>
+
+            <button class="btn btn-success" onclick="completeSection(1)">✓ He Dominado las 5 Técnicas</button>
+        </div>
+
+        <!-- Sección 2: Técnicas por Situación con Ejercicios -->
+        <div class="content-section" data-section="2">
+            <h2 class="section-title">
+                <span>🏠</span>
+                Aplicación Situacional (Contextual Learning)
+            </h2>
+
+            <div class="situation-tabs">
+                <button class="tab active" onclick="showSituationTab('comida')">🍽️ Comidas</button>
+                <button class="tab" onclick="showSituationTab('bano')">🛁 Baño</button>
+                <button class="tab" onclick="showSituationTab('juego')">🧸 Juego</button>
+                <button class="tab" onclick="showSituationTab('paseo')">🚶 Paseos</button>
+                <button class="tab" onclick="showSituationTab('dormir')">🌙 Rutina Nocturna</button>
+            </div>
+
+            <div id="comida" class="tab-content active">
+                <h3>🍽️ Estrategias Durante las Comidas</h3>
+                
+                <div class="alert alert-info">
+                    <strong>🧠 Dato:</strong> Las comidas activan múltiples sentidos, mejorando la retención del vocabulario en 60% (Rowe, 2012).
+                </div>
+                
+                <div class="technique-steps">
+                    <div class="step-item" onclick="toggleStepComplete(this)">
+                        <strong>Preparación (Pre-comida):</strong><br>
+                        "Vamos a preparar la comida. Necesitamos platos, cucharas, servilletas..."<br>
+                        <em>Objetivo: Vocabulario de anticipación</em>
+                    </div>
+                    <div class="step-item" onclick="toggleStepComplete(this)">
+                        <strong>Durante la comida:</strong><br>
+                        "La sopa está caliente, soplamos fuuu. Ahora está tibia, perfecta para comer"<br>
+                        <em>Objetivo: Conceptos sensoriales</em>
+                    </div>
+                    <div class="step-item" onclick="toggleStepComplete(this)">
+                        <strong>Matemáticas comestibles:</strong><br>
+                        "Tienes 5 uvas. Comes 2. ¿Cuántas quedan? 1, 2, 3... ¡tres uvas!"<br>
+                        <em>Objetivo: Conceptos numéricos</em>
+                    </div>
+                    <div class="step-item" onclick="toggleStepComplete(this)">
+                        <strong>Cierre conversacional:</strong><br>
+                        "¿Qué fue lo más rico? ¿Quieres más? ¿Estás lleno?"<br>
+                        <em>Objetivo: Expresión de preferencias</em>
+                    </div>
+                </div>
+
+                <div class="interactive-exercise">
+                    <h4>🎮 Juego: Restaurante en Casa</h4>
+                    <p>Convierte la comida en un juego de roles:</p>
+                    <button class="btn btn-warning" onclick="startRestaurantGame()">Iniciar Juego de Restaurante</button>
+                    <div id="restaurantGame" style="display: none; margin-top: 1rem;">
+                        <!-- El contenido del juego se generará dinámicamente -->
+                    </div>
+                </div>
+            </div>
+
+            <div id="bano" class="tab-content">
+                <h3>🛁 Estrategias Durante el Baño</h3>
+                
+                <div class="alert alert-info">
+                    <strong>🧠 Dato:</strong> El agua estimula la producción de dopamina, mejorando la receptividad al aprendizaje.
+                </div>
+                
+                <div class="technique-steps">
+                    <div class="step-item" onclick="toggleStepComplete(this)">
+                        <strong>Vocabulario corporal:</strong><br>
+                        "Lavamos el brazo derecho, ahora el izquierdo. Los codos, las muñecas, cada dedito"<br>
+                        <em>Objetivo: Esquema corporal y lateralidad</em>
+                    </div>
+                    <div class="step-item" onclick="toggleStepComplete(this)">
+                        <strong>Conceptos científicos:</strong><br>
+                        "El jabón hace burbujas porque tiene algo especial que atrapa el aire"<br>
+                        <em>Objetivo: Causa-efecto y vocabulario científico</em>
+                    </div>
+                    <div class="step-item" onclick="toggleStepComplete(this)">
+                        <strong>Secuencias temporales:</strong><br>
+                        "Primero mojamos, después enjabonamos, luego enjuagamos, finalmente secamos"<br>
+                        <em>Objetivo: Conectores temporales</em>
+                    </div>
+                </div>
+
+                <div class="practice-box">
+                    <h4>💡 Experimento del Baño:</h4>
+                    <p>Objetos que flotan vs. hunden - Vocabulario científico básico</p>
+                    <button class="btn" onclick="showBathExperiment()">Ver Instrucciones</button>
+                </div>
+            </div>
+
+            <div id="juego" class="tab-content">
+                <h3>🧸 Estrategias Durante el Juego</h3>
+                
+                <div class="alert alert-info">
+                    <strong>🧠 Dato:</strong> El juego simbólico activa las mismas áreas cerebrales que el lenguaje narrativo.
+                </div>
+                
+                <div class="interactive-exercise">
+                    <h4>🎲 Generador de Escenarios de Juego:</h4>
+                    <button class="btn btn-warning" onclick="generatePlayScenario()">Generar Nuevo Escenario</button>
+                    <div id="playScenario" style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 10px; display: none;">
+                        <!-- Escenario generado dinámicamente -->
+                    </div>
+                </div>
+            </div>
+
+            <div id="paseo" class="tab-content">
+                <h3>🚶 Estrategias Durante Paseos</h3>
+                
+                <div class="practice-box">
+                    <h4>🗺️ Safari Urbano de Vocabulario:</h4>
+                    <p>Convierte cada paseo en una aventura lingüística</p>
+                    <ol>
+                        <li>Elige una categoría (colores, formas, sonidos)</li>
+                        <li>Busca 5 ejemplos durante el paseo</li>
+                        <li>Describe cada hallazgo con 3 palabras</li>
+                        <li>Crea una historia con lo encontrado</li>
+                    </ol>
+                    <button class="btn" onclick="startUrbanSafari()">Iniciar Safari</button>
+                </div>
+            </div>
+
+            <div id="dormir" class="tab-content">
+                <h3>🌙 Estrategias para la Rutina Nocturna</h3>
+                
+                <div class="technique-steps">
+                    <div class="step-item" onclick="toggleStepComplete(this)">
+                        <strong>Resumen del día:</strong><br>
+                        "Hoy hicimos... Primero... Después... Lo mejor fue..."<br>
+                        <em>Objetivo: Memoria episódica y narración</em>
+                    </div>
+                    <div class="step-item" onclick="toggleStepComplete(this)">
+                        <strong>Predicciones del mañana:</strong><br>
+                        "Mañana vamos a... Primero haremos..."<br>
+                        <em>Objetivo: Futuro y planificación</em>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-success" onclick="completeSection(2)">✓ Domino las Aplicaciones Situacionales</button>
+        </div>
+
+        <!-- Sección 3: Laboratorio Virtual de Práctica -->
+        <div class="content-section" data-section="3">
+            <h2 class="section-title">
+                <span>🔬</span>
+                Laboratorio Virtual de Práctica
+            </h2>
+
+            <div class="alert alert-warning">
+                <strong>🎯 Objetivo:</strong> Practica las técnicas en un entorno seguro antes de aplicarlas con tu hijo.
+            </div>
+
+            <div class="interactive-exercise" style="min-height: 300px;">
+                <h3>Simulador de Conversación Infantil</h3>
+                <div id="conversationSimulator">
+                    <div style="background: white; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                        <p><strong>Situación:</strong></p>
+                        <p id="simSituation" style="font-style: italic; color: #666;">Tu hijo de 4 años dice: "Yo querer ese juguete grande de allá"</p>
+                        
+                        <p style="margin-top: 1rem;"><strong>¿Cuál técnica usarías?</strong></p>
+                        <div style="display: grid; gap: 0.5rem; margin-top: 1rem;">
+                            <button class="btn btn-secondary" onclick="checkTechnique('modelado')">
+                                Modelado: "Ah, tú quieres ese juguete grande"
+                            </button>
+                            <button class="btn btn-secondary" onclick="checkTechnique('expansion')">
+                                Expansión: "Quieres el juguete grande rojo que está en el estante alto"
+                            </button>
+                            <button class="btn btn-secondary" onclick="checkTechnique('pregunta')">
+                                Pregunta: "¿Por qué te gusta ese juguete?"
+                            </button>
+                            <button class="btn btn-secondary" onclick="checkTechnique('correccion')">
+                                Corrección: "No se dice así, di 'yo quiero'"
+                            </button>
+                        </div>
+                        
+                        <div id="feedbackArea" style="margin-top: 1rem; display: none;">
+                            <!-- Feedback dinámico -->
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-warning" onclick="nextSimulation()">➡️ Siguiente Situación</button>
+                    <p style="text-align: center; margin-top: 1rem;">
+                        Situación <span id="simNumber">1</span> de 10
+                    </p>
+                </div>
+            </div>
+
+            <div class="practice-box">
+                <h4>📊 Tu Puntuación:</h4>
+                <div id="simulatorScore" style="font-size: 2rem; text-align: center; margin: 1rem 0;">
+                    0/10
+                </div>
+                <div id="scoreMessage" style="text-align: center; color: #666;">
+                    Completa todas las situaciones para ver tu nivel
+                </div>
+            </div>
+
+            <button class="btn btn-success" onclick="completeSection(3)">✓ Laboratorio Completado</button>
+        </div>
+        <!-- Sección 4: Recursos Descargables Mejorados -->
+        <div class="content-section" data-section="4">
+            <h2 class="section-title">
+                <span>📚</span>
+                Centro de Recursos Profesionales
+            </h2>
+
+            <div class="resource-grid">
+                <div class="resource-card" id="resource1">
+                    <div class="resource-icon">📋</div>
+                    <h3>Protocolo Semanal Intensivo</h3>
+                    <p>Plan estructurado de 21 días basado en neuroplasticidad</p>
+                    <button class="btn btn-success" onclick="downloadResource('protocolo-intensivo', 'resource1')">
+                        💾 Descargar PDF
+                    </button>
+                </div>
+
+                <div class="resource-card" id="resource2">
+                    <div class="resource-icon">🎯</div>
+                    <h3>100 Actividades por Edad</h3>
+                    <p>Actividades específicas para 3, 4 y 5 años con objetivos claros</p>
+                    <button class="btn btn-success" onclick="downloadResource('actividades-edad', 'resource2')">
+                        💾 Descargar PDF
+                    </button>
+                </div>
+
+                <div class="resource-card" id="resource3">
+                    <div class="resource-icon">📊</div>
+                    <h3>Evaluación y Seguimiento</h3>
+                    <p>Instrumentos validados para medir progreso semanal</p>
+                    <button class="btn btn-success" onclick="downloadResource('evaluacion-seguimiento', 'resource3')">
+                        💾 Descargar PDF
+                    </button>
+                </div>
+
+                <div class="resource-card" id="resource4">
+                    <div class="resource-icon">🎵</div>
+                    <h3>50 Canciones Terapéuticas</h3>
+                    <p>Canciones diseñadas para objetivos lingüísticos específicos</p>
+                    <button class="btn btn-success" onclick="downloadResource('canciones-terapeuticas', 'resource4')">
+                        💾 Descargar PDF
+                    </button>
+                </div>
+
+                <div class="resource-card" id="resource5">
+                    <div class="resource-icon">🃏</div>
+                    <h3>Tarjetas de Práctica</h3>
+                    <p>300 tarjetas imprimibles categorizadas por fonemas</p>
+                    <button class="btn btn-success" onclick="downloadResource('tarjetas-practica', 'resource5')">
+                        💾 Descargar PDF
+                    </button>
+                </div>
+
+                <div class="resource-card" id="resource6">
+                    <div class="resource-icon">📖</div>
+                    <h3>Guía de Cuentos Interactivos</h3>
+                    <p>Cómo convertir cualquier cuento en sesión terapéutica</p>
+                    <button class="btn btn-success" onclick="downloadResource('guia-cuentos', 'resource6')">
+                        💾 Descargar PDF
+                    </button>
+                </div>
+            </div>
+
+            <div class="alert alert-success" id="downloadProgress" style="display: none;">
+                <strong>📥 Recursos descargados:</strong> <span id="downloadCount">0</span> de 6
+            </div>
+
+            <button class="btn btn-success" onclick="completeSection(4)">✓ Recursos Obtenidos</button>
+        </div>
+
+        <!-- Sección 5: Sesiones Estructuradas con Timer -->
+        <div class="content-section" data-section="5">
+            <h2 class="section-title">
+                <span>⏰</span>
+                Sesiones Estructuradas de Alto Impacto
+            </h2>
+
+            <div class="timer-box">
+                <h3>⏱️ Timer Terapéutico Inteligente</h3>
+                <div class="timer-display" id="timerDisplay">15:00</div>
+                <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1rem;">
+                    <button class="btn btn-secondary" onclick="setTimer(5)">5 min</button>
+                    <button class="btn btn-secondary" onclick="setTimer(10)">10 min</button>
+                    <button class="btn btn-secondary" onclick="setTimer(15)">15 min</button>
+                    <button class="btn btn-secondary" onclick="setTimer(20)">20 min</button>
+                </div>
+                <button class="btn" onclick="toggleTimer()" id="timerBtn">▶️ INICIAR</button>
+                <div id="sessionGuide" style="margin-top: 1rem; display: none;">
+                    <p style="font-size: 0.9rem;">Actividad actual: <span id="currentActivity">-</span></p>
+                </div>
+            </div>
+
+            <div class="practice-box">
+                <h4>🌟 Sesión Estrella: "Power Hour" del Lenguaje</h4>
+                <div class="technique-steps">
+                    <div class="step-item" onclick="toggleStepComplete(this)">
+                        <strong>0-3 min: Calentamiento</strong><br>
+                        Canciones con movimientos, activación corporal
+                    </div>
+                    <div class="step-item" onclick="toggleStepComplete(this)">
+                        <strong>3-8 min: Vocabulario Nuevo</strong><br>
+                        Introducir 3-5 palabras nuevas con objetos reales
+                    </div>
+                    <div class="step-item" onclick="toggleStepComplete(this)">
+                        <strong>8-12 min: Práctica Activa</strong><br>
+                        Juegos usando las técnicas aprendidas
+                    </div>
+                    <div class="step-item" onclick="toggleStepComplete(this)">
+                        <strong>12-14 min: Consolidación</strong><br>
+                        Repaso rápido y celebración de logros
+                    </div>
+                    <div class="step-item" onclick="toggleStepComplete(this)">
+                        <strong>14-15 min: Cierre Positivo</strong><br>
+                        Abrazo, felicitación, anticipación de la próxima sesión
+                    </div>
+                </div>
+                <button class="btn btn-warning" onclick="startPowerSession()">⚡ Iniciar Power Session</button>
+            </div>
+
+            <button class="btn btn-success" onclick="completeSection(5)">✓ Sesiones Dominadas</button>
+        </div>
+
+        <!-- Sección 6: Gamificación y Recompensas -->
+        <div class="content-section" data-section="6">
+            <h2 class="section-title">
+                <span>🏆</span>
+                Sistema de Logros y Motivación
+            </h2>
+
+            <div class="interactive-exercise">
+                <h3>🎮 Tu Tablero de Logros</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 2rem 0;">
+                    <div class="achievement" id="ach1" style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 10px;">
+                        <div style="font-size: 3rem;">🥉</div>
+                        <p><strong>Principiante</strong></p>
+                        <p style="font-size: 0.8rem;">Primera técnica dominada</p>
+                    </div>
+                    <div class="achievement" id="ach2" style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 10px;">
+                        <div style="font-size: 3rem;">🥈</div>
+                        <p><strong>Practicante</strong></p>
+                        <p style="font-size: 0.8rem;">5 días consecutivos</p>
+                    </div>
+                    <div class="achievement" id="ach3" style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 10px;">
+                        <div style="font-size: 3rem;">🥇</div>
+                        <p><strong>Experto</strong></p>
+                        <p style="font-size: 0.8rem;">Todas las técnicas dominadas</p>
+                    </div>
+                    <div class="achievement" id="ach4" style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 10px;">
+                        <div style="font-size: 3rem;">💎</div>
+                        <p><strong>Maestro</strong></p>
+                        <p style="font-size: 0.8rem;">21 días de práctica</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="practice-box">
+                <h4>📅 Calendario de Práctica</h4>
+                <p>Marca cada día que practiques (objetivo: 21 días para crear el hábito)</p>
+                <div id="practiceCalendar" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem; margin: 1rem 0;">
+                    <!-- Se generará dinámicamente -->
+                </div>
+                <button class="btn btn-warning" onclick="initCalendar()">Inicializar Calendario</button>
+            </div>
+
+            <button class="btn btn-success" onclick="completeSection(6)">✓ Sistema de Logros Configurado</button>
+        </div>
+
+        <!-- Sección 7: Evaluación de Progreso -->
+        <div class="content-section" data-section="7">
+            <h2 class="section-title">
+                <span>📊</span>
+                Evaluación y Medición del Progreso
+            </h2>
+
+            <div class="interactive-exercise">
+                <h3>📈 Test de Aplicación de Técnicas</h3>
+                <p>Evalúa tu dominio de las técnicas aprendidas:</p>
+                
+                <div id="evaluationQuiz" style="margin: 2rem 0;">
+                    <div class="quiz-question" style="background: white; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                        <p><strong>Pregunta 1:</strong> Tu hijo dice "coche roto". Usando expansión semántica, ¿cuál sería la mejor respuesta?</p>
+                        <div style="margin: 1rem 0;">
+                            <label style="display: block; margin: 0.5rem 0;">
+                                <input type="radio" name="q1" value="a"> "No, el coche no está roto"
+                            </label>
+                            <label style="display: block; margin: 0.5rem 0;">
+                                <input type="radio" name="q1" value="b"> "Sí, el coche rojo está roto, necesita arreglo"
+                            </label>
+                            <label style="display: block; margin: 0.5rem 0;">
+                                <input type="radio" name="q1" value="c"> "Di: el coche está roto"
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-warning" onclick="evaluateQuiz()">📊 Ver Resultados</button>
+                <div id="quizResults" style="margin-top: 1rem; display: none;">
+                    <!-- Resultados del quiz -->
+                </div>
+            </div>
+
+            <div class="practice-box">
+                <h4>📝 Registro de Observaciones</h4>
+                <textarea id="observations" placeholder="Anota los cambios que observes en tu hijo esta semana..." 
+                    style="width: 100%; height: 100px; padding: 1rem; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+                <button class="btn" onclick="saveObservations()">💾 Guardar Observaciones</button>
+            </div>
+
+            <button class="btn btn-success" onclick="completeSection(7)">✓ Evaluación Completada</button>
+        </div>
+
+        <!-- Sección 8: Plan Maestro Personalizado -->
+        <div class="content-section" data-section="8">
+            <h2 class="section-title">
+                <span>🎯</span>
+                Tu Plan Maestro Personalizado
+            </h2>
+
+            <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 2rem; border-radius: 15px;">
+                <h3>🔥 Crea Tu Estrategia Ganadora</h3>
+                
+                <div style="margin: 2rem 0;">
+                    <h4>1. Mis Técnicas Estrella (elige 3):</h4>
+                    <div id="starTechniques" style="display: grid; gap: 0.5rem; margin: 1rem 0;">
+                        <label><input type="checkbox" value="modelado"> Modelado Lingüístico</label>
+                        <label><input type="checkbox" value="pausa"> Pausa Expectante</label>
+                        <label><input type="checkbox" value="expansion"> Expansión Semántica</label>
+                        <label><input type="checkbox" value="preguntas"> Preguntas Escalonadas</label>
+                        <label><input type="checkbox" value="paralelo"> Habla Paralela</label>
+                    </div>
+                </div>
+                
+                <div style="margin: 2rem 0;">
+                    <h4>2. Mi Horario Óptimo:</h4>
+                    <select id="optimalTime" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0;">
+                        <option value="">Selecciona el mejor momento</option>
+                        <option value="morning">Mañana (7-10 AM) - Máxima atención</option>
+                        <option value="midday">Mediodía (11-2 PM) - Después de actividad física</option>
+                        <option value="afternoon">Tarde (3-6 PM) - Después de siesta</option>
+                        <option value="evening">Noche (6-8 PM) - Rutina pre-sueño</option>
+                    </select>
+                </div>
+                
+                <div style="margin: 2rem 0;">
+                    <h4>3. Mi Compromiso Semanal:</h4>
+                    <input type="range" id="weeklyCommitment" min="3" max="7" value="5" 
+                        onchange="updateCommitment(this.value)"
+                        style="width: 100%;">
+                    <p style="text-align: center;">
+                        <span id="commitmentDays">5</span> días por semana
+                    </p>
+                </div>
+                
+                <div style="margin: 2rem 0;">
+                    <h4>4. Mi Meta Principal:</h4>
+                    <textarea id="mainGoal" placeholder="Ej: Que mi hijo forme oraciones de 5 palabras en 30 días" 
+                        style="width: 100%; height: 60px; padding: 0.5rem;"></textarea>
+                </div>
+                
+                <button class="btn" onclick="generateMasterPlan()">🚀 Generar Mi Plan Maestro</button>
+                
+                <div id="masterPlanResult" style="display: none; margin-top: 2rem; background: white; padding: 1.5rem; border-radius: 10px;">
+                    <!-- Plan generado -->
+                </div>
+            </div>
+
+            <button class="btn btn-success" onclick="completeSection(8)">✓ Completar Módulo 2</button>
+        </div>
+
+        <!-- Navigation -->
+        <div class="module-navigation">
+            <a href="../modulo1/index.html" class="btn btn-secondary">← Módulo 1</a>
+            <div>
+                <button class="btn" onclick="generateCertificate()" id="certificateBtn" style="display: none;">🏆 Certificado</button>
+                <a href="../modulo3/index.html" class="btn" id="nextModuleBtn" style="display: none;">Módulo 3 →</a>
+            </div>
         </div>
     </div>
 
     <script>
-        // FAQ Toggle
-        function toggleFaq(element) {
-            const faqItem = element.parentElement;
-            faqItem.classList.toggle('active');
-        }
+        // Variables globales
+        let completedSections = new Set();
+        let totalSections = 8;
+        let timerInterval = null;
+        let timeLeft = 900; // 15 minutos por defecto
+        let techniquesPracticed = new Set();
+        let simulationScore = 0;
+        let currentSimulation = 0;
+        let downloadedResources = new Set();
 
-        // Login Modal
-        function openLogin() {
-            document.getElementById('loginModal').classList.add('active');
-        }
+        // Array de situaciones para el simulador
+        const simulations = [
+            {
+                situation: "Tu hijo de 4 años dice: 'Yo querer ese juguete grande de allá'",
+                correct: "expansion",
+                feedback: {
+                    modelado: "Bien, pero la expansión añadiría más información valiosa",
+                    expansion: "¡Excelente! Agregaste información relevante sin corregir",
+                    pregunta: "Buena pregunta, pero primero modela o expande",
+                    correccion: "Evita corregir directamente, usa modelado en su lugar"
+                }
+            },
+            {
+                situation: "Tu hijo señala un perro y solo dice: 'Guau'",
+                correct: "expansion",
+                feedback: {
+                    modelado: "Bien, reconoces que es un perro",
+                    expansion: "¡Perfecto! Expandiste el vocabulario significativamente",
+                    pregunta: "Las preguntas son buenas, pero primero expande",
+                    correccion: "No es necesario corregir, está comunicándose"
+                }
+            },
+            // Agregar más situaciones según necesites
+        ];
 
-        function closeLogin() {
-            document.getElementById('loginModal').classList.remove('active');
-        }
+        // Inicialización al cargar
+        document.addEventListener('DOMContentLoaded', function() {
+            checkModuleAccess();
+            loadSavedProgress();
+            initializeInteractiveElements();
+        });
 
-        // Handle Login
-        function handleLogin(event) {
-            event.preventDefault();
-            
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            
-            // Simple validation for demo
-            if (email && password) {
-                // Store login state
-                localStorage.setItem('isLoggedIn', 'true');
-                localStorage.setItem('userEmail', email);
-                
-                // Redirect to dashboard
-                window.location.href = 'dashboard.html';
+        // Verificar acceso al módulo
+        function checkModuleAccess() {
+            const courseProgress = JSON.parse(localStorage.getItem('courseProgress') || '[false,false,false,false,false]');
+            if (!courseProgress[0]) {
+                alert('⚠️ Debes completar el Módulo 1 primero');
+                window.location.href = '../modulo1/index.html';
             }
         }
 
-        // Process Purchase
-        function processPurchase() {
-            // In a real application, this would integrate with a payment processor
-            alert('¡Excelente decisión! Serás redirigido al proceso de pago seguro...');
+        // Cargar progreso guardado
+        function loadSavedProgress() {
+            const savedProgress = localStorage.getItem('module2Progress');
+            if (savedProgress) {
+                const progress = JSON.parse(savedProgress);
+                if (progress.completedSections) {
+                    progress.completedSections.forEach(section => {
+                        completedSections.add(section);
+                        markSectionComplete(section);
+                    });
+                }
+                if (progress.techniquesPracticed) {
+                    progress.techniquesPracticed.forEach(tech => {
+                        techniquesPracticed.add(tech);
+                    });
+                }
+                updateProgressBar();
+            }
+        }
+
+        // Guardar progreso
+        function saveProgress() {
+            const progress = {
+                completedSections: Array.from(completedSections),
+                techniquesPracticed: Array.from(techniquesPracticed),
+                lastAccess: new Date().toISOString()
+            };
+            localStorage.setItem('module2Progress', JSON.stringify(progress));
+        }
+
+        // Actualizar barra de progreso
+        function updateProgressBar() {
+            const progress = (completedSections.size / totalSections) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = Math.round(progress) + '% completado';
+            document.getElementById('completedSections').textContent = `${completedSections.size} de ${totalSections} secciones`;
+            document.getElementById('practiceCount').textContent = techniquesPracticed.size;
+        }
+
+        // Completar sección
+        function completeSection(sectionNumber) {
+            completedSections.add(sectionNumber);
+            markSectionComplete(sectionNumber);
+            updateProgressBar();
+            saveProgress();
             
-            // Simulate payment process
-            setTimeout(() => {
-                const userEmail = prompt('Ingresa tu email para crear tu cuenta:');
-                if (userEmail) {
-                    const password = prompt('Crea una contraseña para tu cuenta:');
-                    if (password) {
-                        // Store user data
-                        localStorage.setItem('isLoggedIn', 'true');
-                        localStorage.setItem('userEmail', userEmail);
-                        localStorage.setItem('isPurchased', 'true');
-                        
-                        alert('¡Compra exitosa! Te llevaremos a tu curso...');
-                        
-                        // Redirect to dashboard
-                        window.location.href = 'dashboard.html';
-                    }
+            showNotification('✅ ¡Sección completada!', 'success');
+            
+            if (completedSections.size === totalSections) {
+                completeModule();
+            }
+        }
+
+        // Marcar sección como completa visualmente
+        function markSectionComplete(sectionNumber) {
+            const section = document.querySelector(`[data-section="${sectionNumber}"]`);
+            if (section) {
+                section.style.border = '3px solid #28a745';
+                section.style.background = 'linear-gradient(to right, #d4edda 0%, white 5%)';
+            }
+        }
+
+        // Completar módulo
+        function completeModule() {
+            document.getElementById('certificateBtn').style.display = 'inline-block';
+            document.getElementById('nextModuleBtn').style.display = 'inline-block';
+            
+            // Actualizar progreso del curso
+            let courseProgress = JSON.parse(localStorage.getItem('courseProgress') || '[false,false,false,false,false]');
+            courseProgress[1] = true;
+            localStorage.setItem('courseProgress', JSON.stringify(courseProgress));
+            
+            showNotification('🎉 ¡MÓDULO 2 COMPLETADO! Has dominado las técnicas de estimulación', 'success');
+        }
+
+        // Funciones de técnicas interactivas
+        function markAsPracticed(card, technique) {
+            if (!card.classList.contains('practiced')) {
+                card.classList.add('practiced');
+                techniquesPracticed.add(technique);
+                updateProgressBar();
+                saveProgress();
+                showNotification('✅ Técnica marcada como practicada', 'success');
+            }
+        }
+
+        function practiceModelado() {
+            showInteractiveDialog('Práctica de Modelado', 
+                'El niño dice: "Ete toche ande"<br>Tú respondes: "Sí, este coche es grande"<br><br>Ahora practica con estas frases:<br>• "Yo tener hambre" → "Yo tengo hambre"<br>• "Papá ir trabajo" → "Papá va al trabajo"');
+        }
+
+        function practiceExpansion() {
+            showInteractiveDialog('Práctica de Expansión',
+                'Expande estas expresiones:<br><br>Niño: "Agua"<br>Tú: "Quieres agua fría"<br><br>Niño: "Mamá casa"<br>Tú: "Mamá está en la casa cocinando"<br><br>¡Tu turno! Practica con objetos cerca de ti.');
+        }
+
+        function startWaitTimeExercise() {
+            const display = document.getElementById('waitTimeDisplay');
+            const counter = document.getElementById('waitCounter');
+            display.style.display = 'block';
+            
+            let count = 0;
+            const interval = setInterval(() => {
+                count++;
+                counter.textContent = count;
+                
+                if (count >= 5) {
+                    clearInterval(interval);
+                    showNotification('✅ ¡Perfecto! Mantuviste la pausa expectante', 'success');
+                    setTimeout(() => {
+                        display.style.display = 'none';
+                        counter.textContent = '0';
+                    }, 2000);
                 }
             }, 1000);
         }
 
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add countdown timer for offer
-        function initCountdown() {
-            const countdownElement = document.createElement('div');
-            countdownElement.style.cssText = `
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                background: linear-gradient(135deg, #e74c3c, #c0392b);
-                color: white;
-                padding: 15px 20px;
-                border-radius: 10px;
-                box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-                z-index: 999;
-                font-weight: bold;
-                animation: pulse 2s infinite;
-            `;
+        // Funciones del simulador
+        function checkTechnique(technique) {
+            const current = simulations[currentSimulation];
+            const feedback = document.getElementById('feedbackArea');
             
-            // Add pulse animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes pulse {
-                    0% { transform: scale(1); }
-                    50% { transform: scale(1.05); }
-                    100% { transform: scale(1); }
-                }
-            `;
-            document.head.appendChild(style);
+            feedback.style.display = 'block';
             
-            // Set countdown time (24 hours from now)
-            const endTime = new Date().getTime() + (24 * 60 * 60 * 1000);
-            
-            function updateCountdown() {
-                const now = new Date().getTime();
-                const distance = endTime - now;
-                
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                
-                countdownElement.innerHTML = `
-                    ⏰ Oferta termina en: ${hours}h ${minutes}m ${seconds}s
-                `;
-                
-                if (distance < 0) {
-                    countdownElement.innerHTML = '⏰ Oferta expirada';
-                }
-            }
-            
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
-            
-            document.body.appendChild(countdownElement);
-        }
-
-        // Initialize countdown on page load
-        window.addEventListener('load', initCountdown);
-
-        // Add scroll animations
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.benefit-card, .module-item, .testimonial-card');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animation = 'fadeInUp 0.6s ease';
-                        entry.target.style.opacity = '1';
-                    }
-                });
-            });
-            
-            elements.forEach(element => {
-                element.style.opacity = '0';
-                observer.observe(element);
-            });
-        }
-
-        animateOnScroll();
-
-        // Add floating action button for mobile
-        if (window.innerWidth <= 768) {
-            const floatingBtn = document.createElement('button');
-            floatingBtn.innerHTML = '🛒 Comprar Ahora';
-            floatingBtn.style.cssText = `
-                position: fixed;
-                bottom: 80px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: linear-gradient(135deg, #667eea, #764ba2);
-                color: white;
-                padding: 15px 30px;
-                border: none;
-                border-radius: 50px;
-                font-size: 1.1rem;
-                font-weight: bold;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-                z-index: 998;
-            `;
-            floatingBtn.onclick = () => {
-                document.getElementById('precio').scrollIntoView({ behavior: 'smooth' });
-            };
-            document.body.appendChild(floatingBtn);
-        }
-
-        // Track page events for analytics (in production, use real analytics)
-        function trackEvent(eventName, eventData) {
-            console.log('Event tracked:', eventName, eventData);
-            // In production, send to analytics service
-        }
-
-        // Track scroll depth
-        let maxScroll = 0;
-        window.addEventListener('scroll', () => {
-            const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-            if (scrollPercentage > maxScroll) {
-                maxScroll = scrollPercentage;
-                if (maxScroll > 25 && maxScroll < 26) trackEvent('scroll', { depth: '25%' });
-                if (maxScroll > 50 && maxScroll < 51) trackEvent('scroll', { depth: '50%' });
-                if (maxScroll > 75 && maxScroll < 76) trackEvent('scroll', { depth: '75%' });
-                if (maxScroll > 90) trackEvent('scroll', { depth: '90%' });
-            }
-        });
-
-        // Exit intent popup
-        let exitIntentShown = false;
-        document.addEventListener('mouseleave', (e) => {
-            if (e.clientY <= 0 && !exitIntentShown) {
-                exitIntentShown = true;
-                
-                const popup = document.createElement('div');
-                popup.style.cssText = `
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    background: white;
-                    padding: 40px;
-                    border-radius: 20px;
-                    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-                    z-index: 3000;
-                    max-width: 500px;
-                    text-align: center;
-                `;
-                
-                popup.innerHTML = `
-                    <h2 style="color: #667eea; margin-bottom: 20px;">¡Espera! 🎁</h2>
-                    <p style="margin-bottom: 20px;">Antes de irte, obtén un 10% de descuento adicional</p>
-                    <p style="font-size: 2rem; color: #4caf50; font-weight: bold;">Solo $42 USD</p>
-                    <p style="text-decoration: line-through; color: #999;">Precio regular: $97</p>
-                    <button onclick="processPurchase()" style="
-                        background: linear-gradient(135deg, #667eea, #764ba2);
-                        color: white;
-                        padding: 15px 40px;
-                        border: none;
-                        border-radius: 50px;
-                        font-size: 1.1rem;
-                        font-weight: bold;
-                        cursor: pointer;
-                        margin-top: 20px;
-                    ">Aprovechar Descuento Extra</button>
-                    <p style="margin-top: 15px; color: #666; cursor: pointer;" onclick="this.parentElement.remove()">
-                        No gracias, prefiero pagar el precio completo
-                    </p>
-                `;
-                
-                // Add overlay
-                const overlay = document.createElement('div');
-                overlay.style.cssText = `
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background: rgba(0,0,0,0.5);
-                    z-index: 2999;
-                `;
-                overlay.onclick = () => {
-                    popup.remove();
-                    overlay.remove();
-                };
-                
-                document.body.appendChild(overlay);
-                document.body.appendChild(popup);
-            }
-        });
-
-        // Testimonial carousel (auto-rotate)
-        let currentTestimonial = 0;
-        const testimonials = document.querySelectorAll('.testimonial-card');
-        
-        function rotateTestimonials() {
-            if (window.innerWidth <= 768) {
-                testimonials.forEach((testimonial, index) => {
-                    testimonial.style.display = index === currentTestimonial ? 'block' : 'none';
-                });
-                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            if (technique === current.correct) {
+                simulationScore++;
+                feedback.innerHTML = `<div class="alert alert-success">✅ ¡Correcto! ${current.feedback[technique]}</div>`;
+            } else if (technique === 'correccion') {
+                feedback.innerHTML = `<div class="alert alert-danger">❌ ${current.feedback[technique]}</div>`;
             } else {
-                testimonials.forEach(testimonial => {
-                    testimonial.style.display = 'block';
-                });
+                feedback.innerHTML = `<div class="alert alert-warning">⚠️ ${current.feedback[technique]}</div>`;
+            }
+            
+            updateSimulatorScore();
+        }
+
+        function nextSimulation() {
+            currentSimulation = (currentSimulation + 1) % simulations.length;
+            const sim = simulations[currentSimulation];
+            
+            document.getElementById('simSituation').textContent = sim.situation;
+            document.getElementById('feedbackArea').style.display = 'none';
+            document.getElementById('simNumber').textContent = currentSimulation + 1;
+        }
+
+        function updateSimulatorScore() {
+            document.getElementById('simulatorScore').textContent = `${simulationScore}/10`;
+            
+            if (simulationScore >= 8) {
+                document.getElementById('scoreMessage').textContent = '¡Excelente! Dominas las técnicas';
+            } else if (simulationScore >= 5) {
+                document.getElementById('scoreMessage').textContent = 'Buen progreso, sigue practicando';
             }
         }
-        
-        setInterval(rotateTestimonials, 5000);
-        rotateTestimonials();
 
-        // Add trust badges
-        function addTrustBadges() {
-            const trustSection = document.createElement('section');
-            trustSection.style.cssText = `
-                padding: 40px 20px;
-                background: #f8f9fa;
-                text-align: center;
+        // Funciones de tabs
+        function showSituationTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(t => {
+                t.classList.remove('active');
+            });
+            
+            document.getElementById(tab).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Timer functions
+        function setTimer(minutes) {
+            timeLeft = minutes * 60;
+            updateTimerDisplay();
+        }
+
+        function toggleTimer() {
+            const btn = document.getElementById('timerBtn');
+            
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                btn.textContent = '▶️ INICIAR';
+                document.querySelector('.timer-box').classList.remove('active');
+            } else {
+                btn.textContent = '⏸️ PAUSAR';
+                document.querySelector('.timer-box').classList.add('active');
+                startTimer();
+            }
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    showNotification('🎉 ¡Sesión completada!', 'success');
+                    document.getElementById('timerBtn').textContent = '▶️ INICIAR';
+                    document.querySelector('.timer-box').classList.remove('active');
+                    timeLeft = 900;
+                    updateTimerDisplay();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timerDisplay').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Recursos
+        function downloadResource(type, cardId) {
+            const card = document.getElementById(cardId);
+            card.classList.add('downloaded');
+            downloadedResources.add(type);
+            
+            document.getElementById('downloadProgress').style.display = 'block';
+            document.getElementById('downloadCount').textContent = downloadedResources.size;
+            
+            // Simular descarga
+            showNotification('📥 Descargando recurso...', 'info');
+            
+            setTimeout(() => {
+                generateResourceFile(type);
+                showNotification('✅ Recurso descargado', 'success');
+            }, 1000);
+        }
+
+        function generateResourceFile(type) {
+            // Aquí iría el contenido real de cada recurso
+            const content = `Recurso: ${type}\n\nContenido profesional del módulo 2...`;
+            
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${type}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Utilidades
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type}`;
+            notification.style.cssText = 'position: fixed; top: 80px; right: 20px; z-index: 9999; min-width: 250px;';
+            notification.innerHTML = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.remove(), 3000);
+        }
+
+        function showInteractiveDialog(title, content) {
+            alert(`${title}\n\n${content}`);
+        }
+
+        function toggleStepComplete(step) {
+            step.classList.toggle('completed');
+        }
+
+        function updateDailyProgress() {
+            const checkboxes = document.querySelectorAll('#dailyChecklist input');
+            const checked = document.querySelectorAll('#dailyChecklist input:checked');
+            const percentage = (checked.length / checkboxes.length) * 100;
+            
+            document.getElementById('dailyProgress').style.display = 'block';
+            document.getElementById('dailyPercentage').textContent = Math.round(percentage) + '%';
+        }
+
+        function updateCommitment(value) {
+            document.getElementById('commitmentDays').textContent = value;
+        }
+
+        function generateMasterPlan() {
+            const techniques = Array.from(document.querySelectorAll('#starTechniques input:checked')).map(i => i.value);
+            const time = document.getElementById('optimalTime').value;
+            const days = document.getElementById('weeklyCommitment').value;
+            const goal = document.getElementById('mainGoal').value;
+            
+            if (techniques.length < 3 || !time || !goal) {
+                showNotification('⚠️ Completa todos los campos', 'warning');
+                return;
+            }
+            
+            const planDiv = document.getElementById('masterPlanResult');
+            planDiv.style.display = 'block';
+            planDiv.innerHTML = `
+                <h4>🎯 Tu Plan Maestro Personalizado</h4>
+                <p><strong>Técnicas principales:</strong> ${techniques.join(', ')}</p>
+                <p><strong>Horario óptimo:</strong> ${time}</p>
+                <p><strong>Frecuencia:</strong> ${days} días por semana</p>
+                <p><strong>Meta:</strong> ${goal}</p>
+                <p style="margin-top: 1rem; color: #28a745;"><strong>🚀 Plan activado con éxito</strong></p>
             `;
             
-            trustSection.innerHTML = `
-                <div style="max-width: 1200px; margin: 0 auto;">
-                    <p style="color: #666; margin-bottom: 20px;">Compra 100% Segura</p>
-                    <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
-                        <span style="font-size: 2rem;">🔒 SSL Seguro</span>
-                        <span style="font-size: 2rem;">💳 Pago Protegido</span>
-                        <span style="font-size: 2rem;">✅ Garantía 30 Días</span>
-                        <span style="font-size: 2rem;">📧 Soporte 24/7</span>
-                    </div>
+            // Guardar plan maestro
+            const masterPlan = {
+                techniques: techniques,
+                time: time,
+                days: days,
+                goal: goal,
+                created: new Date().toISOString()
+            };
+            localStorage.setItem('module2MasterPlan', JSON.stringify(masterPlan));
+            
+            showNotification('✅ Plan Maestro guardado', 'success');
+        }
+
+        function generateCertificate() {
+            const plan = JSON.parse(localStorage.getItem('module2MasterPlan') || '{}');
+            const userName = prompt('¿Cuál es tu nombre para el certificado?') || 'Estudiante';
+            
+            const certificate = `
+╔════════════════════════════════════════════════════╗
+║                                                    ║
+║         🏆 CERTIFICADO DE COMPLETACIÓN 🏆          ║
+║                                                    ║
+║      Academia de Psicología - Módulo 2            ║
+║                                                    ║
+╠════════════════════════════════════════════════════╣
+║                                                    ║
+║  Certificamos que:                                 ║
+║                                                    ║
+║            ${userName.toUpperCase()}               ║
+║                                                    ║
+║  Ha completado exitosamente el MÓDULO 2:          ║
+║                                                    ║
+║   "Técnicas Científicas de Estimulación"          ║
+║                                                    ║
+║  Competencias Adquiridas:                         ║
+║  ✅ Dominio de 5 técnicas fundamentales           ║
+║  ✅ Aplicación situacional experta                ║
+║  ✅ Manejo de sesiones estructuradas              ║
+║  ✅ Evaluación y seguimiento del progreso         ║
+║  ✅ Plan maestro personalizado creado             ║
+║                                                    ║
+║  Técnicas dominadas: ${techniquesPracticed.size}/5               ║
+║  Recursos descargados: ${downloadedResources.size}/6             ║
+║                                                    ║
+║  Fecha: ${new Date().toLocaleDateString('es-ES')} ║
+║                                                    ║
+║  Firmado digitalmente                             ║
+║  ID: ${Date.now()}                     ║
+║                                                    ║
+╚════════════════════════════════════════════════════╝
+
+¡Preparado/a para el Módulo 3: Soluciones Específicas!
+            `;
+            
+            const blob = new Blob([certificate], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Certificado_Modulo2_${userName.replace(/\s/g, '_')}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showNotification('🎉 ¡Certificado descargado!', 'success');
+        }
+
+        function showProgress() {
+            const progress = (completedSections.size / totalSections) * 100;
+            const techniques = Array.from(techniquesPracticed).join(', ') || 'Ninguna aún';
+            
+            alert(`📊 TU PROGRESO EN MÓDULO 2:
+            
+📈 Progreso general: ${Math.round(progress)}%
+📚 Secciones completadas: ${completedSections.size} de ${totalSections}
+🎯 Técnicas practicadas: ${techniquesPracticed.size} de 5
+📝 Técnicas: ${techniques}
+📥 Recursos descargados: ${downloadedResources.size} de 6
+
+${progress === 100 ? '🎉 ¡MÓDULO COMPLETADO!' : '💪 ¡Sigue adelante!'}`);
+        }
+
+        function logout() {
+            if (confirm('¿Estás seguro que quieres salir? Tu progreso se guardará automáticamente.')) {
+                saveProgress();
+                window.location.href = '../index.html';
+            }
+        }
+
+        // Funciones adicionales interactivas
+        function startRestaurantGame() {
+            const gameDiv = document.getElementById('restaurantGame');
+            gameDiv.style.display = 'block';
+            gameDiv.innerHTML = `
+                <div class="alert alert-info">
+                    <h4>🍽️ Juego: Restaurante Lingüístico</h4>
+                    <p><strong>Tú eres el mesero/a, tu hijo es el cliente:</strong></p>
+                    <ol>
+                        <li>"Buenos días, ¿qué desea comer?"</li>
+                        <li>"Tenemos sopa, pasta, pollo..."</li>
+                        <li>"¿Quiere algo de beber?"</li>
+                        <li>"¿Cómo quiere su comida? ¿Caliente o fría?"</li>
+                    </ol>
+                    <p><strong>Objetivos lingüísticos:</strong></p>
+                    <ul>
+                        <li>Formular peticiones completas</li>
+                        <li>Usar "por favor" y "gracias"</li>
+                        <li>Expresar preferencias</li>
+                    </ul>
+                    <button class="btn btn-warning" onclick="endRestaurantGame()">Terminar Juego</button>
                 </div>
             `;
-            
-            // Insert after pricing section
-            const pricingSection = document.querySelector('.pricing');
-            pricingSection.parentNode.insertBefore(trustSection, pricingSection.nextSibling);
         }
-        
-        addTrustBadges();
 
-        // Save scroll position
-        window.addEventListener('beforeunload', () => {
-            sessionStorage.setItem('scrollPosition', window.scrollY);
-        });
+        function endRestaurantGame() {
+            document.getElementById('restaurantGame').style.display = 'none';
+            showNotification('✅ ¡Juego completado! Practica esto durante las comidas reales', 'success');
+        }
 
-        // Restore scroll position
-        window.addEventListener('load', () => {
-            const scrollPosition = sessionStorage.getItem('scrollPosition');
-            if (scrollPosition) {
-                window.scrollTo(0, parseInt(scrollPosition));
-                sessionStorage.removeItem('scrollPosition');
+        function showBathExperiment() {
+            showInteractiveDialog('🛁 Experimento del Baño',
+                'Materiales: Objetos diversos (esponja, jabón, juguetes)\n\n' +
+                'Procedimiento:\n' +
+                '1. Predice: "¿Flotará o se hundirá?"\n' +
+                '2. Prueba: Coloca el objeto en el agua\n' +
+                '3. Observa: "Mira, flota/se hunde"\n' +
+                '4. Explica: "Flota porque tiene aire adentro"\n\n' +
+                'Vocabulario: flotar, hundir, arriba, abajo, ligero, pesado');
+        }
+
+        function generatePlayScenario() {
+            const scenarios = [
+                {
+                    title: "🏥 Hospital de Peluches",
+                    setup: "Los peluches están enfermos",
+                    vocabulary: "doctor, medicina, curar, dolor, mejor",
+                    phrases: "¿Dónde te duele? Te voy a curar. Ya está mejor."
+                },
+                {
+                    title: "🏪 Tienda de Juguetes",
+                    setup: "Vender y comprar juguetes",
+                    vocabulary: "comprar, vender, dinero, caro, barato",
+                    phrases: "¿Cuánto cuesta? Es muy caro. ¿Tiene cambio?"
+                },
+                {
+                    title: "🚗 Viaje en Auto",
+                    setup: "Viajan a diferentes lugares",
+                    vocabulary: "conducir, rápido, lento, parar, seguir",
+                    phrases: "Vamos rápido. Para en el semáforo. Llegamos."
+                }
+            ];
+            
+            const scenario = scenarios[Math.floor(Math.random() * scenarios.length)];
+            const scenarioDiv = document.getElementById('playScenario');
+            scenarioDiv.style.display = 'block';
+            scenarioDiv.innerHTML = `
+                <h4>${scenario.title}</h4>
+                <p><strong>Situación:</strong> ${scenario.setup}</p>
+                <p><strong>Vocabulario objetivo:</strong> ${scenario.vocabulary}</p>
+                <p><strong>Frases modelo:</strong> ${scenario.phrases}</p>
+                <button class="btn" onclick="document.getElementById('playScenario').style.display='none'">Cerrar</button>
+            `;
+        }
+
+        function startUrbanSafari() {
+            const categories = ['colores', 'formas', 'tamaños', 'texturas', 'sonidos'];
+            const category = categories[Math.floor(Math.random() * categories.length)];
+            
+            showInteractiveDialog('🗺️ Safari Urbano Activado',
+                `Tu misión de hoy: Encuentra 5 ejemplos de ${category.toUpperCase()}\n\n` +
+                `Reglas:\n` +
+                `1. Cada hallazgo = 3 palabras descriptivas\n` +
+                `2. Toma una foto mental\n` +
+                `3. Al final, crea una historia con los 5 elementos\n\n` +
+                `¡Que comience la aventura lingüística!`);
+        }
+
+        function startPowerSession() {
+            setTimer(15);
+            toggleTimer();
+            
+            const activities = [
+                "Calentamiento con canciones",
+                "Introducción de vocabulario nuevo",
+                "Práctica activa con juegos",
+                "Consolidación y repaso",
+                "Cierre positivo con abrazo"
+            ];
+            
+            let currentActivity = 0;
+            const sessionInterval = setInterval(() => {
+                if (currentActivity < activities.length) {
+                    document.getElementById('currentActivity').textContent = activities[currentActivity];
+                    document.getElementById('sessionGuide').style.display = 'block';
+                    currentActivity++;
+                } else {
+                    clearInterval(sessionInterval);
+                }
+            }, 180000); // Cada 3 minutos
+        }
+
+        function initCalendar() {
+            const calendar = document.getElementById('practiceCalendar');
+            calendar.innerHTML = '';
+            
+            for (let i = 1; i <= 21; i++) {
+                const day = document.createElement('div');
+                day.style.cssText = 'padding: 1rem; background: #f8f9fa; border-radius: 5px; text-align: center; cursor: pointer;';
+                day.textContent = i;
+                day.onclick = function() {
+                    this.style.background = this.style.background === 'rgb(212, 237, 218)' ? '#f8f9fa' : '#d4edda';
+                    updateCalendarProgress();
+                };
+                calendar.appendChild(day);
             }
-        });
+        }
+
+        function updateCalendarProgress() {
+            const markedDays = document.querySelectorAll('#practiceCalendar div[style*="rgb(212, 237, 218)"]').length;
+            
+            if (markedDays >= 21) {
+                unlockAchievement('ach4', '💎 ¡Maestro desbloqueado!');
+            } else if (markedDays >= 10) {
+                unlockAchievement('ach3', '🥇 ¡Experto desbloqueado!');
+            } else if (markedDays >= 5) {
+                unlockAchievement('ach2', '🥈 ¡Practicante desbloqueado!');
+            } else if (markedDays >= 1) {
+                unlockAchievement('ach1', '🥉 ¡Principiante desbloqueado!');
+            }
+        }
+
+        function unlockAchievement(achId, message) {
+            const achievement = document.getElementById(achId);
+            if (achievement) {
+                achievement.style.background = 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)';
+                achievement.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    achievement.style.transform = 'scale(1)';
+                }, 300);
+            }
+            showNotification(message, 'success');
+        }
+
+        function evaluateQuiz() {
+            const answer = document.querySelector('input[name="q1"]:checked');
+            const results = document.getElementById('quizResults');
+            
+            if (!answer) {
+                showNotification('⚠️ Selecciona una respuesta', 'warning');
+                return;
+            }
+            
+            results.style.display = 'block';
+            if (answer.value === 'b') {
+                results.innerHTML = '<div class="alert alert-success">✅ ¡Correcto! Dominas la expansión semántica</div>';
+            } else {
+                results.innerHTML = '<div class="alert alert-warning">⚠️ Revisa la técnica de expansión semántica</div>';
+            }
+        }
+
+        function saveObservations() {
+            const observations = document.getElementById('observations').value;
+            if (observations.trim()) {
+                const data = {
+                    observations: observations,
+                    date: new Date().toISOString(),
+                    module: 2
+                };
+                localStorage.setItem('module2Observations', JSON.stringify(data));
+                showNotification('✅ Observaciones guardadas', 'success');
+            }
+        }
+
+        // Inicializar elementos interactivos
+        function initializeInteractiveElements() {
+            // Agregar animaciones a las tarjetas de técnicas
+            document.querySelectorAll('.technique-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.02)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+            
+            // Cargar observaciones guardadas si existen
+            const savedObs = localStorage.getItem('module2Observations');
+            if (savedObs) {
+                const data = JSON.parse(savedObs);
+                document.getElementById('observations').value = data.observations;
+            }
+        }
+
+        console.log('🎯 Módulo 2: Técnicas Científicas de Estimulación cargado correctamente');
+        console.log('📚 8 secciones interactivas disponibles');
+        console.log('🧠 Basado en investigación neurocientífica actual');
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
