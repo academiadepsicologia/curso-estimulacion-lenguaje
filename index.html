@@ -1024,38 +1024,7 @@
         }
 
         animateOnScroll();
-
-        // Add floating action button for mobile
-        if (window.innerWidth <= 768) {
-            const floatingBtn = document.createElement('button');
-            floatingBtn.innerHTML = '🛒 Comprar Ahora';
-            floatingBtn.style.cssText = `
-                position: fixed;
-                bottom: 80px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: linear-gradient(135deg, #667eea, #764ba2);
-                color: white;
-                padding: 15px 30px;
-                border: none;
-                border-radius: 50px;
-                font-size: 1.1rem;
-                font-weight: bold;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-                z-index: 998;
-            `;
-            floatingBtn.onclick = () => {
-                document.getElementById('precio').scrollIntoView({ behavior: 'smooth' });
-            };
-            document.body.appendChild(floatingBtn);
-        }
-
-        // Track page events for analytics (in production, use real analytics)
-        function trackEvent(eventName, eventData) {
-            console.log('Event tracked:', eventName, eventData);
-            // In production, send to analytics service
-        }
-
+        
         // Track scroll depth
         let maxScroll = 0;
         window.addEventListener('scroll', () => {
