@@ -75,6 +75,16 @@
             transform: scale(1.05);
         }
 
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -572,8 +582,25 @@
                 display: none;
             }
             
+            .mobile-menu-btn {
+                display: block;
+            }
+            
             .price-amount {
                 font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .module-item {
+                padding-left: 3rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
             }
         }
     </style>
@@ -588,10 +615,34 @@
                 <a href="#modulos">Contenido</a>
                 <a href="#testimonios">Testimonios</a>
                 <a href="#precio">Precio</a>
-                <a href="#" class="btn-login" onclick="openLogin()">Ingresar</a>
+                <a href="dashboard/index.html" class="btn-login">Ingresar</a>
             </nav>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
         </div>
     </header>
+
+    <!-- Mobile Access Button -->
+    <div id="mobileAccessButton" style="
+        position: fixed;
+        top: 70px;
+        right: 10px;
+        z-index: 1001;
+        display: none;
+    ">
+        <a href="dashboard/index.html" style="
+            background: white;
+            color: #667eea;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            display: block;
+            border: 2px solid #667eea;
+        ">
+            → Acceder al Curso
+        </a>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -741,7 +792,6 @@
             </div>
         </div>
     </section>
-
     <!-- Pricing Section -->
     <section class="pricing" id="precio">
         <div class="container">
@@ -875,10 +925,31 @@
     </div>
 
     <script>
+        // Check if mobile and show access button
+        function checkMobile() {
+            const mobileButton = document.getElementById('mobileAccessButton');
+            if (window.innerWidth <= 768) {
+                mobileButton.style.display = 'block';
+            } else {
+                mobileButton.style.display = 'none';
+            }
+        }
+        
+        // Check on load and resize
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+
         // FAQ Toggle
         function toggleFaq(element) {
             const faqItem = element.parentElement;
             faqItem.classList.toggle('active');
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            // This function can be expanded to show a full mobile menu if needed
+            const loginModal = document.getElementById('loginModal');
+            loginModal.classList.add('active');
         }
 
         // Login Modal
@@ -1024,24 +1095,11 @@
         }
 
         animateOnScroll();
-        
-        // Track scroll depth
-        let maxScroll = 0;
-        window.addEventListener('scroll', () => {
-            const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-            if (scrollPercentage > maxScroll) {
-                maxScroll = scrollPercentage;
-                if (maxScroll > 25 && maxScroll < 26) trackEvent('scroll', { depth: '25%' });
-                if (maxScroll > 50 && maxScroll < 51) trackEvent('scroll', { depth: '50%' });
-                if (maxScroll > 75 && maxScroll < 76) trackEvent('scroll', { depth: '75%' });
-                if (maxScroll > 90) trackEvent('scroll', { depth: '90%' });
-            }
-        });
 
         // Exit intent popup
         let exitIntentShown = false;
         document.addEventListener('mouseleave', (e) => {
-            if (e.clientY <= 0 && !exitIntentShown) {
+            if (e.clientY <= 0 && !exitIntentShown && window.innerWidth > 768) {
                 exitIntentShown = true;
                 
                 const popup = document.createElement('div');
@@ -1101,26 +1159,6 @@
             }
         });
 
-        // Testimonial carousel (auto-rotate)
-        let currentTestimonial = 0;
-        const testimonials = document.querySelectorAll('.testimonial-card');
-        
-        function rotateTestimonials() {
-            if (window.innerWidth <= 768) {
-                testimonials.forEach((testimonial, index) => {
-                    testimonial.style.display = index === currentTestimonial ? 'block' : 'none';
-                });
-                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-            } else {
-                testimonials.forEach(testimonial => {
-                    testimonial.style.display = 'block';
-                });
-            }
-        }
-        
-        setInterval(rotateTestimonials, 5000);
-        rotateTestimonials();
-
         // Add trust badges
         function addTrustBadges() {
             const trustSection = document.createElement('section');
@@ -1144,53 +1182,12 @@
             
             // Insert after pricing section
             const pricingSection = document.querySelector('.pricing');
-            pricingSection.parentNode.insertBefore(trustSection, pricingSection.nextSibling);
+            if (pricingSection && pricingSection.nextSibling) {
+                pricingSection.parentNode.insertBefore(trustSection, pricingSection.nextSibling);
+            }
         }
         
         addTrustBadges();
-
-        // Save scroll position
-        window.addEventListener('beforeunload', () => {
-            sessionStorage.setItem('scrollPosition', window.scrollY);
-        });
-
-        // Restore scroll position
-        window.addEventListener('load', () => {
-            const scrollPosition = sessionStorage.getItem('scrollPosition');
-            if (scrollPosition) {
-                window.scrollTo(0, parseInt(scrollPosition));
-                sessionStorage.removeItem('scrollPosition');
-            }
-        });
     </script>
-<!-- Botón flotante para móvil -->
-<div style="
-    position: fixed;
-    top: 70px;
-    right: 10px;
-    z-index: 1001;
-    display: none;
-" id="mobileAccessBtn">
-    <a href="dashboard/index.html" style="
-        background: white;
-        color: #667eea;
-        padding: 10px 20px;
-        border-radius: 25px;
-        text-decoration: none;
-        font-weight: bold;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        display: block;
-    ">
-        → Acceder al Curso
-    </a>
-</div>
-
-<script>
-// Mostrar botón solo en móvil
-if (window.innerWidth <= 768) {
-    document.getElementById('mobileAccessBtn').style.display = 'block';
-}
-</script>
 </body>
 </html>
-
