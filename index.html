@@ -62,16 +62,19 @@
         }
 
         .btn-login {
-            background: white;
+            background: rgba(255,255,255,0.9);
             color: #667eea;
             padding: 0.5rem 1.5rem;
             border-radius: 25px;
             text-decoration: none;
             font-weight: 600;
-            transition: transform 0.3s;
+            transition: all 0.3s;
+            border: 2px solid rgba(255,255,255,0.9);
         }
 
         .btn-login:hover {
+            background: white;
+            color: #667eea;
             transform: scale(1.05);
         }
 
@@ -617,32 +620,9 @@
                 <a href="#precio">Precio</a>
                 <a href="dashboard/index.html" class="btn-login">Ingresar</a>
             </nav>
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <button class="mobile-menu-btn" onclick="openLogin()">☰</button>
         </div>
     </header>
-
-    <!-- Mobile Access Button -->
-    <div id="mobileAccessButton" style="
-        position: fixed;
-        top: 70px;
-        right: 10px;
-        z-index: 1001;
-        display: none;
-    ">
-        <a href="dashboard/index.html" style="
-            background: white;
-            color: #667eea;
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            display: block;
-            border: 2px solid #667eea;
-        ">
-            → Acceder al Curso
-        </a>
-    </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -925,31 +905,10 @@
     </div>
 
     <script>
-        // Check if mobile and show access button
-        function checkMobile() {
-            const mobileButton = document.getElementById('mobileAccessButton');
-            if (window.innerWidth <= 768) {
-                mobileButton.style.display = 'block';
-            } else {
-                mobileButton.style.display = 'none';
-            }
-        }
-        
-        // Check on load and resize
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-
         // FAQ Toggle
         function toggleFaq(element) {
             const faqItem = element.parentElement;
             faqItem.classList.toggle('active');
-        }
-
-        // Mobile Menu Toggle
-        function toggleMobileMenu() {
-            // This function can be expanded to show a full mobile menu if needed
-            const loginModal = document.getElementById('loginModal');
-            loginModal.classList.add('active');
         }
 
         // Login Modal
@@ -1095,69 +1054,6 @@
         }
 
         animateOnScroll();
-
-        // Exit intent popup
-        let exitIntentShown = false;
-        document.addEventListener('mouseleave', (e) => {
-            if (e.clientY <= 0 && !exitIntentShown && window.innerWidth > 768) {
-                exitIntentShown = true;
-                
-                const popup = document.createElement('div');
-                popup.style.cssText = `
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    background: white;
-                    padding: 40px;
-                    border-radius: 20px;
-                    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-                    z-index: 3000;
-                    max-width: 500px;
-                    text-align: center;
-                `;
-                
-                popup.innerHTML = `
-                    <h2 style="color: #667eea; margin-bottom: 20px;">¡Espera! 🎁</h2>
-                    <p style="margin-bottom: 20px;">Antes de irte, obtén un 10% de descuento adicional</p>
-                    <p style="font-size: 2rem; color: #4caf50; font-weight: bold;">Solo $42 USD</p>
-                    <p style="text-decoration: line-through; color: #999;">Precio regular: $97</p>
-                    <button onclick="processPurchase()" style="
-                        background: linear-gradient(135deg, #667eea, #764ba2);
-                        color: white;
-                        padding: 15px 40px;
-                        border: none;
-                        border-radius: 50px;
-                        font-size: 1.1rem;
-                        font-weight: bold;
-                        cursor: pointer;
-                        margin-top: 20px;
-                    ">Aprovechar Descuento Extra</button>
-                    <p style="margin-top: 15px; color: #666; cursor: pointer;" onclick="this.parentElement.remove()">
-                        No gracias, prefiero pagar el precio completo
-                    </p>
-                `;
-                
-                // Add overlay
-                const overlay = document.createElement('div');
-                overlay.style.cssText = `
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background: rgba(0,0,0,0.5);
-                    z-index: 2999;
-                `;
-                overlay.onclick = () => {
-                    popup.remove();
-                    overlay.remove();
-                };
-                
-                document.body.appendChild(overlay);
-                document.body.appendChild(popup);
-            }
-        });
 
         // Add trust badges
         function addTrustBadges() {
