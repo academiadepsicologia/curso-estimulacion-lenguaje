@@ -286,6 +286,12 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         .btn-secondary {
             background: #6c757d;
         }
@@ -298,41 +304,8 @@
             background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
         }
 
-        .situation-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin: 1rem 0;
-            border: 2px solid #e9ecef;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .situation-card:hover {
-            border-color: #f093fb;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .situation-card.completed {
-            background: #d4edda;
-            border-color: #28a745;
-        }
-
-        .interactive-game {
-            background: linear-gradient(135deg, #ffd93d 0%, #ffb300 100%);
-            padding: 2rem;
-            border-radius: 15px;
-            margin: 2rem 0;
-            color: #333;
-        }
-
-        .game-area {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin: 1rem 0;
-            min-height: 200px;
+        .btn-danger {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
         }
 
         .alert {
@@ -359,58 +332,30 @@
             color: #856404;
         }
 
-        .resource-box {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin: 1rem 0;
-            border: 2px solid #dee2e6;
-        }
-
-        .resource-content {
-            background: white;
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-            font-family: 'Courier New', monospace;
-            white-space: pre-wrap;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        .tabs {
-            display: flex;
-            background: white;
-            border-radius: 10px 10px 0 0;
-            overflow: hidden;
-            margin-bottom: 0;
-        }
-
-        .tab {
-            flex: 1;
-            padding: 1rem;
-            background: #f8f9fa;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .tab.active {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        .question-game {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
             color: white;
         }
 
-        .tab-content {
-            display: none;
+        .question-scenario {
             background: white;
-            padding: 2rem;
-            border-radius: 0 0 15px 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            color: #333;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #4facfe;
         }
 
-        .tab-content.active {
-            display: block;
+        .question-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin: 1rem 0;
         }
 
         .achievement-badge {
@@ -435,6 +380,25 @@
             50% { transform: translateY(-10px); }
         }
 
+        .resource-box {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border: 2px solid #dee2e6;
+        }
+
+        .resource-content {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
         .module-navigation {
             display: flex;
             justify-content: space-between;
@@ -445,6 +409,7 @@
             margin-top: 2rem;
         }
 
+        /* Responsive Design */
         @media (max-width: 768px) {
             .module-header h1 {
                 font-size: 2rem;
@@ -574,175 +539,179 @@
                 </div>
             </div>
 
-           <!-- Test Interactivo de Modelado MEJORADO -->
-<div class="practice-test">
-    <h3>🎮 Practica el Modelado - Test Interactivo</h3>
-    <p>Completa los ejercicios para dominar la técnica:</p>
-    <div id="modelado-progress" class="alert alert-info" style="margin: 1rem 0;">
-        Pregunta <span id="current-question">1</span> de <span id="total-questions">3</span>
-    </div>
-    
-    <!-- Test para edad 3 -->
-    <div class="test-question" id="modelado-test-age-3" style="display: none;">
-        <div id="question-3-1" class="question-content">
-            <p><strong>Tu hijo de 3 años dice: "Mi tete"</strong></p>
-            <p>¿Cuál es la mejor respuesta usando modelado?</p>
-            <div class="test-options">
-                <div class="test-option" onclick="checkModeladoAnswer(3, 1, 'a')">
-                    a) "No se dice tete, se dice leche"
+            <!-- Test Interactivo de Modelado CORREGIDO -->
+            <div class="practice-test">
+                <h3>🎮 Practica el Modelado - Test Interactivo</h3>
+                <p>Completa los ejercicios para dominar la técnica:</p>
+                <div id="modelado-progress" class="alert alert-info" style="margin: 1rem 0;">
+                    Pregunta <span id="current-question">1</span> de <span id="total-questions">3</span>
                 </div>
-                <div class="test-option" onclick="checkModeladoAnswer(3, 1, 'b')">
-                    b) "¿Quieres tu leche? Aquí está tu leche"
+                
+                <!-- Test para edad 3 -->
+                <div class="test-question" id="modelado-test-age-3" style="display: none;">
+                    <div id="question-3-1" class="question-content">
+                        <p><strong>Tu hijo de 3 años dice: "Mi tete"</strong></p>
+                        <p>¿Cuál es la mejor respuesta usando modelado?</p>
+                        <div class="test-options">
+                            <div class="test-option" onclick="checkModeladoAnswer(3, 1, 'a', this)">
+                                a) "No se dice tete, se dice leche"
+                            </div>
+                            <div class="test-option" onclick="checkModeladoAnswer(3, 1, 'b', this)">
+                                b) "¿Quieres tu leche? Aquí está tu leche"
+                            </div>
+                            <div class="test-option" onclick="checkModeladoAnswer(3, 1, 'c', this)">
+                                c) "Tete, tete, tete"
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="question-3-2" class="question-content" style="display: none;">
+                        <p><strong>Tu hijo dice: "Ota vez"</strong></p>
+                        <p>¿Cuál es la mejor respuesta usando modelado?</p>
+                        <div class="test-options">
+                            <div class="test-option" onclick="checkModeladoAnswer(3, 2, 'a', this)">
+                                a) "Se dice otra vez, no ota"
+                            </div>
+                            <div class="test-option" onclick="checkModeladoAnswer(3, 2, 'b', this)">
+                                b) "¿Quieres hacerlo otra vez? Vamos otra vez"
+                            </div>
+                            <div class="test-option" onclick="checkModeladoAnswer(3, 2, 'c', this)">
+                                c) "Repite: otra vez"
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="question-3-3" class="question-content" style="display: none;">
+                        <p><strong>Tu hijo dice: "Yo solo puedo"</strong></p>
+                        <p>¿Cuál es la mejor respuesta usando modelado?</p>
+                        <div class="test-options">
+                            <div class="test-option" onclick="checkModeladoAnswer(3, 3, 'a', this)">
+                                a) "¡Muy bien! Tú puedes solo, eres muy capaz"
+                            </div>
+                            <div class="test-option" onclick="checkModeladoAnswer(3, 3, 'b', this)">
+                                b) "No es 'yo solo puedo', es 'yo puedo solo'"
+                            </div>
+                            <div class="test-option" onclick="checkModeladoAnswer(3, 3, 'c', this)">
+                                c) "Di: yo puedo hacerlo solo"
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feedback-box" id="modelado-feedback-3"></div>
                 </div>
-                <div class="test-option" onclick="checkModeladoAnswer(3, 1, 'c')">
-                    c) "Tete, tete, tete"
-                </div>
-            </div>
-        </div>
-        
-        <div id="question-3-2" class="question-content" style="display: none;">
-            <p><strong>Tu hijo dice: "Ota vez"</strong></p>
-            <p>¿Cuál es la mejor respuesta usando modelado?</p>
-            <div class="test-options">
-                <div class="test-option" onclick="checkModeladoAnswer(3, 2, 'a')">
-                    a) "Se dice otra vez, no ota"
-                </div>
-                <div class="test-option" onclick="checkModeladoAnswer(3, 2, 'b')">
-                    b) "¿Quieres hacerlo otra vez? Vamos otra vez"
-                </div>
-                <div class="test-option" onclick="checkModeladoAnswer(3, 2, 'c')">
-                    c) "Repite: otra vez"
-                </div>
-            </div>
-        </div>
-        
-        <div id="question-3-3" class="question-content" style="display: none;">
-            <p><strong>Tu hijo dice: "Yo solo puedo"</strong></p>
-            <p>¿Cuál es la mejor respuesta usando modelado?</p>
-            <div class="test-options">
-                <div class="test-option" onclick="checkModeladoAnswer(3, 3, 'a')">
-                    a) "¡Muy bien! Tú puedes solo, eres muy capaz"
-                </div>
-                <div class="test-option" onclick="checkModeladoAnswer(3, 3, 'b')">
-                    b) "No es 'yo solo puedo', es 'yo puedo solo'"
-                </div>
-                <div class="test-option" onclick="checkModeladoAnswer(3, 3, 'c')">
-                    c) "Di: yo puedo hacerlo solo"
-                </div>
-            </div>
-        </div>
-        <div class="feedback-box" id="modelado-feedback-3"></div>
-    </div>
 
-    <!-- Test para edad 4 -->
-    <div class="test-question" id="modelado-test-age-4" style="display: none;">
-        <div id="question-4-1" class="question-content">
-            <p><strong>Tu hijo de 4 años dice: "Yo sabo nadar"</strong></p>
-            <p>¿Cuál es la mejor respuesta usando modelado?</p>
-            <div class="test-options">
-                <div class="test-option" onclick="checkModeladoAnswer(4, 1, 'a')">
-                    a) "¡Qué bien! Tú sabes nadar muy bien"
+                <!-- Test para edad 4 -->
+                <div class="test-question" id="modelado-test-age-4" style="display: none;">
+                    <div id="question-4-1" class="question-content">
+                        <p><strong>Tu hijo de 4 años dice: "Yo sabo nadar"</strong></p>
+                        <p>¿Cuál es la mejor respuesta usando modelado?</p>
+                        <div class="test-options">
+                            <div class="test-option" onclick="checkModeladoAnswer(4, 1, 'a', this)">
+                                a) "¡Qué bien! Tú sabes nadar muy bien"
+                            </div>
+                            <div class="test-option" onclick="checkModeladoAnswer(4, 1, 'b', this)">
+                                b) "No es sabo, es sé"
+                            </div>
+                            <div class="test-option" onclick="checkModeladoAnswer(4, 1, 'c', this)">
+                                c) "Repite: yo sé nadar"
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="question-4-2" class="question-content" style="display: none;">
+                        <p><strong>Tu hijo dice: "Se me ha rompido"</strong></p>
+                        <p>¿Cuál es la mejor respuesta usando modelado?</p>
+                        <div class="test-options">
+                            <div class="test-option" onclick="checkModeladoAnswer(4, 2, 'a', this)">
+                                a) "No es 'se me ha rompido', es 'se me rompió'"
+                            </div>
+                            <div class="test-option" onclick="checkModeladoAnswer(4, 2, 'b', this)">
+                                b) "Oh, se te rompió. ¿Qué se te rompió?"
+                            </div>
+                            <div class="test-option" onclick="checkModeladoAnswer(4, 2, 'c', this)">
+                                c) "Mal dicho"
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="question-4-3" class="question-content" style="display: none;">
+                        <p><strong>Tu hijo dice: "Yo no cabo aquí"</strong></p>
+                        <p>¿Cuál es la mejor respuesta usando modelado?</p>
+                        <div class="test-options">
+                            <div class="test-option" onclick="checkModeladoAnswer(4, 3, 'a', this)">
+                                a) "Es quepo, no cabo"
+                            </div>
+                            <div class="test-option" onclick="checkModeladoAnswer(4, 3, 'b', this)">
+                                b) "No cabes aquí. Busquemos un lugar más grande donde sí quepas"
+                            </div>
+                            <div class="test-option" onclick="checkModeladoAnswer(4, 3, 'c', this)">
+                                c) "Di correctamente: no quepo"
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feedback-box" id="modelado-feedback-4"></div>
                 </div>
-                <div class="test-option" onclick="checkModeladoAnswer(4, 1, 'b')">
-                    b) "No es sabo, es sé"
-                </div>
-                <div class="test-option" onclick="checkModeladoAnswer(4, 1, 'c')">
-                    c) "Repite: yo sé nadar"
-                </div>
-            </div>
-        </div>
-        
-        <div id="question-4-2" class="question-content" style="display: none;">
-            <p><strong>Tu hijo dice: "Se me ha rompido"</strong></p>
-            <p>¿Cuál es la mejor respuesta usando modelado?</p>
-            <div class="test-options">
-                <div class="test-option" onclick="checkModeladoAnswer(4, 2, 'a')">
-                    a) "No es 'se me ha rompido', es 'se me rompió'"
-                </div>
-                <div class="test-option" onclick="checkModeladoAnswer(4, 2, 'b')">
-                    b) "Oh, se te rompió. ¿Qué se te rompió?"
-                </div>
-                <div class="test-option" onclick="checkModeladoAnswer(4, 2, 'c')">
-                    c) "Mal dicho"
-                </div>
-            </div>
-        </div>
-        
-        <div id="question-4-3" class="question-content" style="display: none;">
-            <p><strong>Tu hijo dice: "Yo no cabo aquí"</strong></p>
-            <p>¿Cuál es la mejor respuesta usando modelado?</p>
-            <div class="test-options">
-                <div class="test-option" onclick="checkModeladoAnswer(4, 3, 'a')">
-                    a) "Es quepo, no cabo"
-                </div>
-                <div class="test-option" onclick="checkModeladoAnswer(4, 3, 'b')">
-                    b) "No cabes aquí. Busquemos un lugar más grande donde sí quepas"
-                </div>
-                <div class="test-option" onclick="checkModeladoAnswer(4, 3, 'c')">
-                    c) "Di correctamente: no quepo"
-                </div>
-            </div>
-        </div>
-        <div class="feedback-box" id="modelado-feedback-4"></div>
-    </div>
 
-    <!-- Test para edad 5 -->
-    <div class="test-question" id="modelado-test-age-5" style="display: none;">
-        <div id="question-5-1" class="question-content">
-            <p><strong>Tu hijo de 5 años dice: "Ayer comí mucho dulces"</strong></p>
-            <p>¿Cuál es la mejor respuesta usando modelado?</p>
-            <div class="test-options">
-                <div class="test-option" onclick="checkModeladoAnswer(5, 1, 'a')">
-                    a) "Se dice muchos dulces, no mucho dulces"
+                <!-- Test para edad 5 -->
+                <div class="test-question" id="modelado-test-age-5" style="display: none;">
+                    <div id="question-5-1" class="question-content">
+                        <p><strong>Tu hijo de 5 años dice: "Ayer comí mucho dulces"</strong></p>
+                        <p>¿Cuál es la mejor respuesta usando modelado?</p>
+                        <div class="test-options">
+                            <div class="test-option" onclick="checkModeladoAnswer(5, 1, 'a', this)">
+                                a) "Se dice muchos dulces, no mucho dulces"
+                            </div>
+                            <div class="test-option" onclick="checkModeladoAnswer(5, 1, 'b', this)">
+                                b) "¿Ayer comiste muchos dulces? ¿Cuáles te gustaron más?"
+                            </div>
+                            <div class="test-option" onclick="checkModeladoAnswer(5, 1, 'c', this)">
+                                c) "Mal dicho"
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="question-5-2" class="question-content" style="display: none;">
+                        <p><strong>Tu hijo dice: "Hubieron muchos niños"</strong></p>
+                        <p>¿Cuál es la mejor respuesta usando modelado?</p>
+                        <div class="test-options">
+                            <div class="test-option" onclick="checkModeladoAnswer(5, 2, 'a', this)">
+                                a) "Había muchos niños en el parque, ¿verdad?"
+                            </div>
+                            <div class="test-option" onclick="checkModeladoAnswer(5, 2, 'b', this)">
+                                b) "No es hubieron, es hubo"
+                            </div>
+                            <div class="test-option" onclick="checkModeladoAnswer(5, 2, 'c', this)">
+                                c) "Repite bien: hubo muchos niños"
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="question-5-3" class="question-content" style="display: none;">
+                        <p><strong>Tu hijo dice: "Me dijistes que sí"</strong></p>
+                        <p>¿Cuál es la mejor respuesta usando modelado?</p>
+                        <div class="test-options">
+                            <div class="test-option" onclick="checkModeladoAnswer(5, 3, 'a', this)">
+                                a) "No se dice dijistes"
+                            </div>
+                            <div class="test-option" onclick="checkModeladoAnswer(5, 3, 'b', this)">
+                                b) "Sí, te dije que sí podías hacerlo"
+                            </div>
+                            <div class="test-option" onclick="checkModeladoAnswer(5, 3, 'c', this)">
+                                c) "Es dijiste, no dijistes"
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feedback-box" id="modelado-feedback-5"></div>
                 </div>
-                <div class="test-option" onclick="checkModeladoAnswer(5, 1, 'b')">
-                    b) "¿Ayer comiste muchos dulces? ¿Cuáles te gustaron más?"
-                </div>
-                <div class="test-option" onclick="checkModeladoAnswer(5, 1, 'c')">
-                    c) "Mal dicho"
-                </div>
-            </div>
-        </div>
-        
-        <div id="question-5-2" class="question-content" style="display: none;">
-            <p><strong>Tu hijo dice: "Hubieron muchos niños"</strong></p>
-            <p>¿Cuál es la mejor respuesta usando modelado?</p>
-            <div class="test-options">
-                <div class="test-option" onclick="checkModeladoAnswer(5, 2, 'a')">
-                    a) "Había muchos niños en el parque, ¿verdad?"
-                </div>
-                <div class="test-option" onclick="checkModeladoAnswer(5, 2, 'b')">
-                    b) "No es hubieron, es hubo"
-                </div>
-                <div class="test-option" onclick="checkModeladoAnswer(5, 2, 'c')">
-                    c) "Repite bien: hubo muchos niños"
-                </div>
-            </div>
-        </div>
-        
-        <div id="question-5-3" class="question-content" style="display: none;">
-            <p><strong>Tu hijo dice: "Me dijistes que sí"</strong></p>
-            <p>¿Cuál es la mejor respuesta usando modelado?</p>
-            <div class="test-options">
-                <div class="test-option" onclick="checkModeladoAnswer(5, 3, 'a')">
-                    a) "No se dice dijistes"
-                </div>
-                <div class="test-option" onclick="checkModeladoAnswer(5, 3, 'b')">
-                    b) "Sí, te dije que sí podías hacerlo"
-                </div>
-                <div class="test-option" onclick="checkModeladoAnswer(5, 3, 'c')">
-                    c) "Es dijiste, no dijistes"
-                </div>
-            </div>
-        </div>
-        <div class="feedback-box" id="modelado-feedback-5"></div>
-    </div>
 
-    <button class="btn btn-warning" onclick="nextModeladoQuestion()" id="nextQuestionBtn">Siguiente Pregunta →</button>
-    <button class="btn btn-success" onclick="resetModeladoTest()" id="resetTestBtn" style="display: none;">Reiniciar Test</button>
-</div>
-
-                <button class="btn btn-warning" onclick="nextModeladoQuestion()">Siguiente Pregunta →</button>
+                <!-- Botones de control del test CORREGIDO -->
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="btn btn-warning" onclick="nextModeladoQuestion()" id="nextQuestionBtn" disabled>
+                        Siguiente Pregunta →
+                    </button>
+                    <button class="btn btn-danger" onclick="resetModeladoTest()" id="resetTestBtn" style="display: none;">
+                        🔄 Reiniciar Test
+                    </button>
+                </div>
             </div>
 
             <button class="btn btn-success" onclick="completeSection(1)">✓ He Dominado el Modelado</button>
@@ -827,25 +796,9 @@
                 </div>
             </div>
 
-            <!-- Test Interactivo de Expansión -->
-            <div class="practice-test">
-                <h3>🎮 Practica la Expansión - Ejercicio Interactivo</h3>
-                
-                <div id="expansion-exercise" style="display: none;">
-                    <p><strong>Tu hijo dice: "<span id="expansion-child-phrase"></span>"</strong></p>
-                    <p>Escribe cómo expandirías esta frase agregando más información:</p>
-                    <textarea id="expansion-answer" rows="3" style="width: 100%; padding: 1rem; border: 2px solid #ddd; border-radius: 8px;" 
-                        placeholder="Escribe tu expansión aquí..."></textarea>
-                    <button class="btn btn-warning" onclick="checkExpansion()">Verificar Mi Respuesta</button>
-                    <div class="feedback-box" id="expansion-feedback"></div>
-                    <button class="btn" onclick="nextExpansionExercise()">Siguiente Ejercicio →</button>
-                </div>
-            </div>
-
             <button class="btn btn-success" onclick="completeSection(2)">✓ He Dominado la Expansión</button>
         </div>
-
-        <!-- Sección 3: Preguntas Abiertas -->
+        <!-- Sección 3: Preguntas Abiertas CON JUEGO INTERACTIVO -->
         <div class="content-section" data-section="3">
             <h2 class="section-title">
                 <span>❓</span>
@@ -929,8 +882,40 @@
                 </div>
             </div>
 
+            <!-- NUEVO: Juego Interactivo de Preguntas Abiertas -->
+            <div class="question-game">
+                <h3>🎯 Juego: "Maestro de Preguntas"</h3>
+                <p>Practica convirtiendo preguntas cerradas en abiertas según la edad de tu hijo:</p>
+                
+                <div id="question-scenarios" style="display: none;">
+                    <div class="question-scenario" id="current-scenario">
+                        <h4 id="scenario-title">Escenario 1</h4>
+                        <p><strong>Situación:</strong> <span id="scenario-context"></span></p>
+                        <p><strong>Pregunta CERRADA:</strong> "<span id="closed-question"></span>"</p>
+                        <p><strong>Tu tarea:</strong> Convierte esta pregunta en una ABIERTA para un niño de <span id="scenario-age"></span> años.</p>
+                        
+                        <textarea id="open-question-input" rows="2" class="question-input" 
+                            placeholder="Escribe aquí tu pregunta abierta..."></textarea>
+                        
+                        <div style="text-align: center;">
+                            <button class="btn btn-warning" onclick="checkOpenQuestion()">✓ Verificar Pregunta</button>
+                            <button class="btn" onclick="nextQuestionScenario()">Siguiente Escenario →</button>
+                        </div>
+                        
+                        <div class="feedback-box" id="question-feedback"></div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center;">
+                    <button class="btn" onclick="startQuestionGame()" id="startQuestionGame">
+                        🎮 Comenzar Juego de Preguntas
+                    </button>
+                </div>
+            </div>
+
             <button class="btn btn-success" onclick="completeSection(3)">✓ He Dominado las Preguntas Abiertas</button>
         </div>
+
         <!-- Sección 4: Habla Paralela y Narración -->
         <div class="content-section" data-section="4">
             <h2 class="section-title">
@@ -940,61 +925,6 @@
             
             <div class="alert alert-info">
                 <strong>💡 ¿Qué es?</strong> Narras en voz alta lo que tú haces (auto-conversación) o lo que hace tu hijo (habla paralela). Es como ser un narrador deportivo de la vida diaria.
-            </div>
-
-            <div class="technique-card">
-                <h3>📚 Cómo Narrar Según la Edad</h3>
-                
-                <!-- Narración para 3 años -->
-                <div class="age-specific-examples" id="narracion-age-3">
-                    <h4>👶 Para 3 años - Narración Simple:</h4>
-                    <div class="example-box">
-                        <strong>🗣️ Narrando lo que HACE TU HIJO:</strong><br>
-                        "Estás poniendo el bloque azul arriba. Ahora el rojo. ¡Qué torre tan alta!"<br><br>
-                        
-                        <strong>💭 Narrando lo que HACES TÚ:</strong><br>
-                        "Mamá está cortando la manzana. Corto, corto. Ahora la pongo en el plato."<br><br>
-                        
-                        <strong>Momentos ideales para narrar:</strong><br>
-                        • Vistiéndose: "Primero la camiseta, luego el pantalón"<br>
-                        • Bañándose: "El agua está tibia, el jabón hace espuma"<br>
-                        • Jugando: "El carro va rápido, ahora se para"
-                    </div>
-                </div>
-
-                <!-- Narración para 4 años -->
-                <div class="age-specific-examples" id="narracion-age-4">
-                    <h4>👦 Para 4 años - Narración con Detalles:</h4>
-                    <div class="example-box">
-                        <strong>🗣️ Narrando actividades del niño:</strong><br>
-                        "Estás dibujando un sol amarillo brillante en la esquina. Ahora haces una casa con ventanas cuadradas."<br><br>
-                        
-                        <strong>💭 Narrando tus actividades:</strong><br>
-                        "Voy a preparar tu desayuno favorito. Primero caliento el pan, después unto la mermelada de fresa."<br><br>
-                        
-                        <strong>Agregando emociones y razones:</strong><br>
-                        • "Estás sonriendo porque encontraste tu juguete"<br>
-                        • "Guardamos los juguetes para que no se pierdan"<br>
-                        • "Caminamos despacio porque el piso está mojado"
-                    </div>
-                </div>
-
-                <!-- Narración para 5 años -->
-                <div class="age-specific-examples" id="narracion-age-5">
-                    <h4>👧 Para 5 años - Narración Compleja:</h4>
-                    <div class="example-box">
-                        <strong>🗣️ Narrando con predicciones:</strong><br>
-                        "Estás mezclando los colores. Cuando mezcles azul y amarillo, veremos qué color aparece."<br><br>
-                        
-                        <strong>💭 Narrando con explicaciones:</strong><br>
-                        "Tengo que medir exactamente dos tazas de harina para que el pastel quede esponjoso."<br><br>
-                        
-                        <strong>Conectando con aprendizajes:</strong><br>
-                        • "Esto me recuerda cuando fuimos al zoológico"<br>
-                        • "Es igual que en el cuento que leímos ayer"<br>
-                        • "Después de esto, haremos lo que planeamos"
-                    </div>
-                </div>
             </div>
 
             <button class="btn btn-success" onclick="completeSection(4)">✓ He Dominado la Narración</button>
@@ -1007,305 +937,23 @@
                 Aplicando las Técnicas en la Vida Diaria
             </h2>
 
-            <div class="tabs">
-                <button class="tab active" onclick="showTab('comida')">🍽️ Comidas</button>
-                <button class="tab" onclick="showTab('bano')">🛁 Baño</button>
-                <button class="tab" onclick="showTab('juego')">🧸 Juego</button>
-                <button class="tab" onclick="showTab('carro')">🚗 En el Carro</button>
-                <button class="tab" onclick="showTab('dormir')">🌙 Antes de Dormir</button>
-            </div>
-
-            <div id="comida" class="tab-content active">
-                <h3>🍽️ Durante las Comidas</h3>
-                
-                <div class="situation-card" onclick="toggleComplete(this)">
-                    <h4>Desayuno (5-10 minutos)</h4>
-                    <p><strong>Qué hacer:</strong></p>
-                    <ul>
-                        <li>Nombra cada alimento: "Tienes cereal con leche y plátano cortado"</li>
-                        <li>Describe: "La leche está fría, el cereal está crujiente"</li>
-                        <li>Pregunta: "¿Qué quieres comer primero?"</li>
-                        <li>Expande: Si dice "rico" → "Sí, el cereal con miel está muy rico"</li>
-                    </ul>
-                    <p style="margin-top: 1rem;"><strong>Meta:</strong> 10 intercambios de palabras durante el desayuno</p>
-                </div>
-
-                <div class="situation-card" onclick="toggleComplete(this)">
-                    <h4>Preparando la Comida Juntos</h4>
-                    <p><strong>Vocabulario a practicar:</strong></p>
-                    <ul>
-                        <li>Acciones: cortar, mezclar, servir, probar</li>
-                        <li>Conceptos: caliente/frío, mucho/poco, lleno/vacío</li>
-                        <li>Secuencias: primero, después, al final</li>
-                    </ul>
-                    <p><strong>Frase ejemplo:</strong> "Primero lavamos las verduras, después las cortamos, al final las cocinamos"</p>
-                </div>
-            </div>
-
-            <div id="bano" class="tab-content">
-                <h3>🛁 Durante el Baño</h3>
-                
-                <div class="situation-card" onclick="toggleComplete(this)">
-                    <h4>Rutina de Baño (10-15 minutos)</h4>
-                    <p><strong>Secuencia para narrar:</strong></p>
-                    <ol>
-                        <li>"Abrimos la llave, sale agua tibia"</li>
-                        <li>"El jabón hace burbujas blancas"</li>
-                        <li>"Lavamos los brazos, las piernas, la pancita"</li>
-                        <li>"El agua se lleva la espuma"</li>
-                        <li>"La toalla está suave y seca"</li>
-                    </ol>
-                    <p><strong>Juego de vocabulario:</strong> Hunde o flota - "El patito flota, la piedra se hunde"</p>
-                </div>
-            </div>
-
-            <div id="juego" class="tab-content">
-                <h3>🧸 Durante el Juego</h3>
-                
-                <div class="interactive-game">
-                    <h4>🎲 Juego: "El Restaurante"</h4>
-                    <div class="game-area">
-                        <p><strong>Cómo jugar:</strong></p>
-                        <ol>
-                            <li>Tu hijo es el cliente, tú eres el mesero (o al revés)</li>
-                            <li>Usar platos y comida de juguete (o imaginar)</li>
-                            <li>Practicar frases completas</li>
-                        </ol>
-                        
-                        <p><strong>Diálogos para practicar:</strong></p>
-                        <p>🧑‍🍳 "Buenos días, ¿qué desea comer?"</p>
-                        <p>👶 "Quiero pizza y jugo"</p>
-                        <p>🧑‍🍳 "¿Quiere pizza grande o pequeña?"</p>
-                        <p>👶 "Pizza grande por favor"</p>
-                        
-                        <button class="btn btn-warning" onclick="showMoreGames()">Ver Más Juegos</button>
-                    </div>
-                </div>
-
-                <div id="moreGames" style="display: none;">
-                    <div class="situation-card" onclick="toggleComplete(this)">
-                        <h4>🏥 Juego: "El Doctor"</h4>
-                        <p>Vocabulario: duele, medicina, curar, mejor, enfermo, sano</p>
-                        <p>Frases: "¿Dónde te duele?" "Necesitas medicina" "Ya te sientes mejor"</p>
-                    </div>
-                    
-                    <div class="situation-card" onclick="toggleComplete(this)">
-                        <h4>🏪 Juego: "La Tienda"</h4>
-                        <p>Vocabulario: comprar, pagar, caro, barato, dinero, cambio</p>
-                        <p>Frases: "¿Cuánto cuesta?" "Son 5 pesos" "Aquí está el cambio"</p>
-                    </div>
-                </div>
-            </div>
-
-            <div id="carro" class="tab-content">
-                <h3>🚗 En el Carro</h3>
-                
-                <div class="situation-card" onclick="toggleComplete(this)">
-                    <h4>Juegos de Observación</h4>
-                    <p><strong>"Veo, veo":</strong></p>
-                    <ul>
-                        <li>3 años: "Veo algo rojo" (colores básicos)</li>
-                        <li>4 años: "Veo algo que empieza con P" (sonidos iniciales)</li>
-                        <li>5 años: "Veo algo que sirve para..." (funciones)</li>
-                    </ul>
-                    
-                    <p><strong>Contar historias:</strong></p>
-                    <ul>
-                        <li>Sobre lo que ven: "Mira ese perro, ¿a dónde crees que va?"</li>
-                        <li>Inventar finales: "¿Y entonces qué pasó?"</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div id="dormir" class="tab-content">
-                <h3>🌙 Antes de Dormir</h3>
-                
-                <div class="situation-card" onclick="toggleComplete(this)">
-                    <h4>Rutina de Buenas Noches (10 minutos)</h4>
-                    <p><strong>Actividades de lenguaje:</strong></p>
-                    <ol>
-                        <li><strong>Resumen del día:</strong> "Hoy fuimos al parque, jugamos en los columpios..."</li>
-                        <li><strong>Tres cosas buenas:</strong> "Dime 3 cosas que te gustaron hoy"</li>
-                        <li><strong>Planes de mañana:</strong> "Mañana vamos a..."</li>
-                        <li><strong>Cuento corto:</strong> Leer o inventar una historia</li>
-                    </ol>
-                    
-                    <p><strong>Frases para cerrar:</strong></p>
-                    <p>"Que sueñes con..." (dejar que complete)</p>
-                    <p>"Mañana será un día..." (dejar que complete)</p>
-                </div>
-            </div>
+            <p>En esta sección aprenderás a aplicar todas las técnicas en situaciones cotidianas.</p>
 
             <button class="btn btn-success" onclick="completeSection(5)">✓ Practico en la Vida Diaria</button>
         </div>
 
-        <!-- Sección 6: Recursos y Plan Personal -->
+        <!-- Sección 6: Recursos con Canciones CORREGIDAS -->
         <div class="content-section" data-section="6">
             <h2 class="section-title">
                 <span>📋</span>
                 Tu Plan Personal y Recursos
             </h2>
 
-           <div class="resource-box">
-    <h3>📝 Guía Rápida de Referencia</h3>
-    <button class="btn btn-warning" onclick="showQuickGuide()">Ver Guía Rápida</button>
-    <div id="quickGuide" style="display: none;">
-        <div class="resource-content">
-📚 GUÍA RÁPIDA DE REFERENCIA - TÉCNICAS DE ESTIMULACIÓN
-
-═══════════════════════════════════════════════════════
-
-🗣️ TÉCNICA 1: MODELADO (Corregir sin corregir)
-────────────────────────────────────────────
-Qué es: Repetir correctamente sin decir "está mal"
-Cuándo: Cada vez que tu hijo dice algo incorrectamente
-
-EJEMPLOS POR EDAD:
-- 3 años: "Yo quelo" → "Ah, tú quieres esto"
-- 4 años: "Yo sabo" → "Sí, tú sabes hacerlo"  
-- 5 años: "Hubieron" → "Había muchos niños"
-
-CLAVE: Nunca digas "no", "mal" o "así no se dice"
-
-═══════════════════════════════════════════════════════
-
-📈 TÉCNICA 2: EXPANSIÓN (Agregar información)
-────────────────────────────────────────────
-Qué es: Tomar lo que dice y agregar más palabras
-Cuándo: Cuando dice frases muy cortas
-
-EJEMPLOS POR EDAD:
-- 3 años: "Agua" → "Agua fría en tu vaso azul"
-- 4 años: "El perro" → "El perro café corre en el parque"
-- 5 años: "Fui" → "Fuiste con la abuela al supermercado"
-
-CLAVE: Agrega colores, tamaños, lugares, acciones
-
-═══════════════════════════════════════════════════════
-
-❓ TÉCNICA 3: PREGUNTAS ABIERTAS
-────────────────────────────────────────────
-Qué es: Preguntas que no se responden con sí/no
-Cuándo: Para iniciar conversaciones
-
-MALO vs BUENO:
-❌ "¿Te gustó?" → ✅ "¿Qué te gustó más?"
-❌ "¿Tienes hambre?" → ✅ "¿Qué quieres comer?"
-❌ "¿Está bien?" → ✅ "¿Cómo te sientes?"
-
-POR EDAD:
-- 3 años: ¿Qué...? ¿Dónde...? ¿Quién...?
-- 4 años: ¿Cómo...? ¿Para qué...? ¿Cuándo...?
-- 5 años: ¿Por qué...? ¿Qué pasaría si...?
-
-═══════════════════════════════════════════════════════
-
-🎭 TÉCNICA 4: NARRACIÓN
-────────────────────────────────────────────
-Qué es: Narrar como locutor de radio lo que pasa
-Cuándo: Durante cualquier actividad
-
-HABLA PARALELA (lo que hace el niño):
-"Estás construyendo una torre muy alta con bloques rojos"
-
-AUTO-CONVERSACIÓN (lo que haces tú):
-"Mamá está cortando las zanahorias para la sopa"
-
-MOMENTOS IDEALES:
-- Bañándose • Vistiéndose • Cocinando • Jugando
-
-═══════════════════════════════════════════════════════
-
-⏰ MOMENTOS CLAVE DEL DÍA
-────────────────────────────────────────────
-MAÑANA: Modelado durante el desayuno (5 min)
-MEDIO DÍA: Expansión durante el almuerzo (5 min)
-TARDE: Preguntas durante el juego (10 min)
-NOCHE: Narración durante el baño (5 min)
-
-Total: Solo 25 minutos al día para cambiar su lenguaje
-
-═══════════════════════════════════════════════════════
-
-🚫 ERRORES COMUNES A EVITAR
-────────────────────────────────────────────
-❌ Corregir directamente: "No se dice así"
-❌ Presionar: "Di esta palabra"
-❌ Comparar: "Tu primo habla mejor"
-❌ Interrumpir cuando intenta hablar
-❌ Completar sus frases muy rápido
-❌ Hacer solo preguntas de sí/no
-
-═══════════════════════════════════════════════════════
-
-✅ SEÑALES DE PROGRESO
-────────────────────────────────────────────
-- Usa palabras nuevas espontáneamente
-- Sus frases son más largas
-- Inicia conversaciones
-- Cuenta experiencias
-- Hace preguntas
-- Se autocorrige a veces
-
-═══════════════════════════════════════════════════════
-
-💡 REGLA DE ORO
-────────────────────────────────────────────
-La PACIENCIA y la CONSTANCIA son más importantes
-que la perfección. Celebra cada pequeño avance.
-
-Recuerda: Tu hijo aprende mejor cuando se divierte
-y se siente seguro, no cuando se siente evaluado.
-        </div>
-    </div>
-</div>
-
             <div class="resource-box">
-    <h3>🎯 Registro de Práctica Diaria</h3>
-    <p>Marca cada día que practiques alguna técnica con tu hijo (meta: crear el hábito en 21 días)</p>
-
-    <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem; margin: 1.5rem 0;">
-        <div style="text-align: center; padding: 0.5rem; background: #f8f9fa; border-radius: 5px;">
-            <strong>L</strong><br>
-            <input type="checkbox" id="dia1" onchange="updatePracticeStreak()">
-        </div>
-        <div style="text-align: center; padding: 0.5rem; background: #f8f9fa; border-radius: 5px;">
-            <strong>M</strong><br>
-            <input type="checkbox" id="dia2" onchange="updatePracticeStreak()">
-        </div>
-        <div style="text-align: center; padding: 0.5rem; background: #f8f9fa; border-radius: 5px;">
-            <strong>M</strong><br>
-            <input type="checkbox" id="dia3" onchange="updatePracticeStreak()">
-        </div>
-        <div style="text-align: center; padding: 0.5rem; background: #f8f9fa; border-radius: 5px;">
-            <strong>J</strong><br>
-            <input type="checkbox" id="dia4" onchange="updatePracticeStreak()">
-        </div>
-        <div style="text-align: center; padding: 0.5rem; background: #f8f9fa; border-radius: 5px;">
-            <strong>V</strong><br>
-            <input type="checkbox" id="dia5" onchange="updatePracticeStreak()">
-        </div>
-        <div style="text-align: center; padding: 0.5rem; background: #f8f9fa; border-radius: 5px;">
-            <strong>S</strong><br>
-            <input type="checkbox" id="dia6" onchange="updatePracticeStreak()">
-        </div>
-        <div style="text-align: center; padding: 0.5rem; background: #f8f9fa; border-radius: 5px;">
-            <strong>D</strong><br>
-            <input type="checkbox" id="dia7" onchange="updatePracticeStreak()">
-        </div>
-    </div>
-
-    <div id="practiceStreak" class="alert alert-info">
-        <strong>Racha actual:</strong> <span id="streakCount">0</span> días consecutivos
-        <div id="streakMessage" style="margin-top: 0.5rem;"></div>
-    </div>
-
-    <div class="alert alert-success" style="margin-top: 1rem;">
-        <strong>💡 Tip:</strong> Practicar 5 minutos diarios es mejor que 30 minutos una vez por semana
-    </div>
-</div>
-
-            🎵 CANCIONES Y RIMAS PARA ESTIMULAR EL LENGUAJE
+                <h3>🎵 Canciones para Estimular el Lenguaje</h3>
+                <button class="btn btn-warning" onclick="showSongs()">Ver Canciones por Edad</button>
+                <div id="songsResources" style="display: none;">
+                    <div class="resource-content">🎵 CANCIONES PARA ESTIMULAR EL LENGUAJE
 
 ═══════════════════════════════════════════════════════
 
@@ -1338,20 +986,6 @@ Y aunque se dé tirones no llora ni hace así
 ACTIVIDAD: Mientras cantan, toquen cada parte
 "¿Dónde está tu cara?" "¿Con qué te lavas?"
 
-────────────────────────────────────────────
-
-🚌 "LAS RUEDAS DEL AUTOBÚS"
-Objetivo: Sonidos, acciones, personas
-Vocabulario: ruedas, puertas, bebés, mamás
-
-Las ruedas del autobús dan vueltas y vueltas
-Los bebés del autobús hacen guá guá guá
-Las mamás del autobús hacen shh shh shh
-El conductor dice "pasen para atrás"
-
-ACTIVIDAD: Imitar cada sonido y acción
-"¿Cómo hacen las ruedas?" "¿Qué dice el conductor?"
-
 ═══════════════════════════════════════════════════════
 
 👦 PARA 4 AÑOS - FRASES Y SECUENCIAS
@@ -1367,34 +1001,6 @@ Tolón tolón, tolón tolón
 
 ACTIVIDAD: "¿Cómo es tu vaca?" 
 "¿Qué otras cosas puede darnos una vaca?"
-
-────────────────────────────────────────────
-
-🍽️ "SOY UNA TAZA"
-Objetivo: Objetos de cocina, transformación
-Vocabulario: taza, tetera, cuchara, cucharón
-
-Soy una taza, una tetera
-Una cuchara, un cucharón
-Un plato hondo, un plato llano
-Un cuchillito, un tenedor
-
-ACTIVIDAD: Buscar cada objeto en la cocina
-"¿Para qué sirve la taza?" "¿Cuál es más grande?"
-
-────────────────────────────────────────────
-
-🐸 "CU CÚ CANTABA LA RANA"
-Objetivo: Secuencia narrativa, causa-efecto
-Vocabulario: rana, caballero, capa, sombrero
-
-Cu cú cantaba la rana
-Cu cú debajo del agua
-Cu cú pasó un caballero
-Cu cú con capa y sombrero
-
-ACTIVIDAD: Ordenar la historia
-"¿Dónde estaba la rana?" "¿Quién pasó después?"
 
 ═══════════════════════════════════════════════════════
 
@@ -1414,54 +1020,6 @@ ACTIVIDAD: Memorizar y cambiar palabras
 "¿Qué había debajo del botón?"
 "Inventa: Debajo de una mesa..."
 
-────────────────────────────────────────────
-
-🏠 "YO TENGO UNA CASITA"
-Objetivo: Comparación, descripción espacial
-Vocabulario: casita, pequeña, chimenea, ventana
-
-Yo tengo una casita que es así y así
-Que por la chimenea sale el humo así y así
-Que cuando quiero entrar yo golpeo así y así
-Me lustro los zapatos así así así
-
-ACTIVIDAD: Describir su propia casa
-"¿Cómo es tu casa?" "¿Qué tiene tu casa?"
-
-────────────────────────────────────────────
-
-🌙 "ESTRELLITA DÓNDE ESTÁS"
-Objetivo: Preguntas, ubicación, descripción
-Vocabulario: estrellita, brillas, cielo, diamante
-
-Estrellita dónde estás, me pregunto qué serás
-En el cielo o en el mar, un diamante de verdad
-Estrellita dónde estás, me pregunto qué serás
-
-ACTIVIDAD: Crear preguntas similares
-"¿Dónde más puede estar?" "¿A qué se parece?"
-
-═══════════════════════════════════════════════════════
-
-🎯 RIMAS PARA PRACTICAR SONIDOS
-────────────────────────────────────────────
-
-RIMAS FÁCILES (3 años):
-- Sol - caracol - girasol
-- Luna - cuna - una
-- Gato - pato - zapato
-- Pera - espera - escalera
-
-RIMAS MEDIAS (4 años):
-- Pelota - rebota - flota - gota
-- Camión - avión - león - melón
-- Ventana - manzana - campana - mañana
-
-RIMAS COMPLEJAS (5 años):
-- Mariposa - rosa - hermosa - cosa
-- Elefante - gigante - importante - elegante
-- Cocodrilo - tranquilo - amarillo - castillo
-
 ═══════════════════════════════════════════════════════
 
 💡 TIPS PARA USAR LAS CANCIONES
@@ -1471,26 +1029,9 @@ RIMAS COMPLEJAS (5 años):
 2. HAZ GESTOS para cada palabra importante
 3. PARA en palabras clave y deja que complete
 4. CAMBIA palabras para hacerlo divertido
-5. GRABA a tu hijo cantando para que se escuche
-6. USA objetos reales mientras cantan
-7. REPITE la favorita (la repetición es clave)
-
-═══════════════════════════════════════════════════════
-
-🎪 JUEGOS CON CANCIONES
-────────────────────────────────────────────
-
-"COMPLETA LA CANCIÓN": Paras y el niño continúa
-"CAMBIA LA PALABRA": Pin Pon es un... (robot)
-"INVENTA EL FINAL": Crea nuevas estrofas
-"CANTA RÁPIDO/LENTO": Varía la velocidad
-"VOZ DE PERSONAJES": Canta como oso, ratón, etc.
-
-Recuerda: No importa si desafinas, 
-¡lo importante es la interacción y diversión!
-        </div>
-    </div>
-</div>
+5. REPITE la favorita (la repetición es clave)</div>
+                </div>
+            </div>
 
             <button class="btn btn-success" onclick="completeSection(6)">✓ Tengo Mi Plan Personal</button>
         </div>
@@ -1504,127 +1045,263 @@ Recuerda: No importa si desafinas,
             </div>
         </div>
     </div>
- <script>
-    // Variables globales
-    let completedSections = new Set();
-    let totalSections = 6;
-    let selectedAge = null;
-    let currentModeladoQuestion = 1;
-    let modeladoQuestionsAnswered = new Set();
-    let currentExpansionExercise = 0;
-    let techniquesCompleted = new Set();
-    let situationsCompleted = new Set();
 
-    // Arrays de ejercicios
-    const expansionExercises = {
-        3: [
-            { phrase: "Agua", hint: "Agrega temperatura o cantidad", example: "Agua fría" },
-            { phrase: "Mamá fue", hint: "Agrega lugar", example: "Mamá fue al trabajo" },
-            { phrase: "Quiero jugar", hint: "Agrega con qué o con quién", example: "Quiero jugar con los bloques" }
-        ],
-        4: [
-            { phrase: "El gato duerme", hint: "Agrega dónde y cómo", example: "El gato duerme en el sofá tranquilo" },
-            { phrase: "Estoy feliz", hint: "Agrega por qué", example: "Estoy feliz porque vino la abuela" },
-            { phrase: "Vamos al parque", hint: "Agrega con quién y cuándo", example: "Vamos al parque con papá ahora" }
-        ],
-        5: [
-            { phrase: "Ayer fuimos", hint: "Agrega lugar, con quién y qué hicieron", example: "Ayer fuimos al zoológico con los primos y vimos leones" },
-            { phrase: "Mi amigo está triste", hint: "Agrega quién es y por qué", example: "Mi amigo Juan está triste porque perdió su juguete" },
-            { phrase: "Me gusta leer", hint: "Agrega qué tipo de libros y cuándo", example: "Me gusta leer cuentos de aventuras antes de dormir" }
-        ]
-    };
+    <script>
+        // Variables globales
+        let completedSections = new Set();
+        let totalSections = 6;
+        let selectedAge = null;
+        let currentModeladoQuestion = 1;
+        let modeladoQuestionsAnswered = new Set();
+        let answerSelected = false;
+        let currentQuestionScenario = 0;
+        let questionScenariosAnswered = 0;
 
-    // Respuestas correctas para modelado
-    const modeladoCorrectAnswers = {
-        '3-1': 'b', '3-2': 'b', '3-3': 'a',
-        '4-1': 'a', '4-2': 'b', '4-3': 'b',
-        '5-1': 'b', '5-2': 'a', '5-3': 'b'
-    };
+        // Respuestas correctas para modelado
+        const modeladoCorrectAnswers = {
+            '3-1': 'b', '3-2': 'b', '3-3': 'a',
+            '4-1': 'a', '4-2': 'b', '4-3': 'b',
+            '5-1': 'b', '5-2': 'a', '5-3': 'b'
+        };
 
-    // Inicialización cuando carga la página
-    window.addEventListener('DOMContentLoaded', function() {
-        checkModuleAccess();
-        loadSavedProgress();
-        updateQuestionCounter();
-        
-        if (!selectedAge) {
-            const ageMessage = document.createElement('div');
-            ageMessage.className = 'alert alert-warning';
-            ageMessage.style.margin = '1rem 0';
-            ageMessage.innerHTML = '👆 <strong>Importante:</strong> Selecciona primero la edad de tu hijo para ver el contenido adaptado';
+        // Escenarios para juego de preguntas por edad
+        const questionScenarios = {
+            3: [
+                {
+                    context: "Tu hijo está jugando con bloques",
+                    closedQuestion: "¿Te gusta el juguete?",
+                    openExamples: ["¿Qué estás construyendo?", "¿Qué color tiene el bloque?", "¿Dónde vas a poner este bloque?"]
+                },
+                {
+                    context: "Están comiendo juntos",
+                    closedQuestion: "¿Está rica la comida?",
+                    openExamples: ["¿Qué sabor tiene?", "¿Qué hay en tu plato?", "¿Cuál quieres comer primero?"]
+                },
+                {
+                    context: "Viendo un libro de animales",
+                    closedQuestion: "¿Ves el gato?",
+                    openExamples: ["¿Qué está haciendo el gato?", "¿Dónde está el gato?", "¿Qué sonido hace el gato?"]
+                }
+            ],
+            4: [
+                {
+                    context: "Acaban de regresar del parque",
+                    closedQuestion: "¿Te divertiste en el parque?",
+                    openExamples: ["¿Qué hiciste en el parque?", "¿Cuál fue tu juego favorito?", "¿Con quién jugaste?"]
+                },
+                {
+                    context: "Están leyendo un cuento",
+                    closedQuestion: "¿Te gusta el cuento?",
+                    openExamples: ["¿Qué está pasando en la historia?", "¿Cómo crees que se siente el personaje?", "¿Qué crees que va a pasar después?"]
+                },
+                {
+                    context: "Preparando una receta simple",
+                    closedQuestion: "¿Quieres ayudar?",
+                    openExamples: ["¿Cómo podemos mezclar esto?", "¿Qué ingrediente falta?", "¿Para qué sirve este utensilio?"]
+                }
+            ],
+            5: [
+                {
+                    context: "Tu hijo vio una película",
+                    closedQuestion: "¿Te gustó la película?",
+                    openExamples: ["¿Cuál fue tu parte favorita?", "¿Por qué crees que el personaje hizo eso?", "¿Qué habrías hecho tú en su lugar?"]
+                },
+                {
+                    context: "Están observando el clima",
+                    closedQuestion: "¿Va a llover?",
+                    openExamples: ["¿Qué crees que pasará si llueve?", "¿Por qué están grises las nubes?", "¿Cómo podemos prepararnos para la lluvia?"]
+                },
+                {
+                    context: "Resolviendo un problema juntos",
+                    closedQuestion: "¿Está difícil?",
+                    openExamples: ["¿Qué estrategia podríamos usar?", "¿Por qué crees que no funciona?", "¿Cómo te sientes cuando algo es desafiante?"]
+                }
+            ]
+        };
+
+        // Inicialización cuando carga la página
+        window.addEventListener('DOMContentLoaded', function() {
+            loadSavedProgress();
+            updateQuestionCounter();
+        });
+
+        // Selección de edad
+        function selectAge(age) {
+            selectedAge = age;
             
-            const firstSection = document.querySelector('.content-section');
-            if (firstSection) {
-                firstSection.insertBefore(ageMessage, firstSection.firstChild);
+            document.querySelectorAll('.age-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+            
+            const ageMessage = document.getElementById('ageMessage');
+            if (ageMessage) {
+                ageMessage.style.display = 'block';
+                const selectedAgeSpan = document.getElementById('selectedAge');
+                if (selectedAgeSpan) {
+                    selectedAgeSpan.textContent = age;
+                }
             }
+            
+            updateAgeContent();
+            localStorage.setItem('module2SelectedAge', age);
+            showNotification(`✅ Contenido adaptado para ${age} años`, 'success');
         }
-    });
 
-    // Verificar acceso al módulo
-    function checkModuleAccess() {
-        const courseProgress = JSON.parse(localStorage.getItem('courseProgress') || '[false,false,false,false,false]');
-        // Comentado para pruebas
-        // if (!courseProgress[0]) {
-        //     alert('⚠️ Debes completar el Módulo 1 primero');
-        //     window.location.href = '../modulo1/index.html';
-        // }
-    }
-
-    // Selección de edad
-    function selectAge(age) {
-        selectedAge = age;
-        
-        document.querySelectorAll('.age-btn').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        
-        document.querySelectorAll('.age-btn').forEach(btn => {
-            if (btn.onclick && btn.onclick.toString().includes(age)) {
-                btn.classList.add('active');
+        // Actualizar contenido según edad
+        function updateAgeContent() {
+            if (!selectedAge) return;
+            
+            document.querySelectorAll('.age-specific-examples').forEach(elem => {
+                elem.style.display = 'none';
+                elem.classList.remove('active');
+            });
+            
+            const ageElements = document.querySelectorAll(`[id*="-age-${selectedAge}"]`);
+            ageElements.forEach(elem => {
+                elem.style.display = 'block';
+                elem.classList.add('active');
+            });
+            
+            document.querySelectorAll('[id^="modelado-test-age-"]').forEach(elem => {
+                elem.style.display = 'none';
+            });
+            
+            const ageTest = document.getElementById(`modelado-test-age-${selectedAge}`);
+            if (ageTest) {
+                ageTest.style.display = 'block';
+                
+                for (let i = 1; i <= 3; i++) {
+                    const questionDiv = document.getElementById(`question-${selectedAge}-${i}`);
+                    if (questionDiv) {
+                        questionDiv.style.display = i === 1 ? 'block' : 'none';
+                    }
+                }
             }
-        });
-        
-        const ageMessage = document.getElementById('ageMessage');
-        if (ageMessage) {
-            ageMessage.style.display = 'block';
-            const selectedAgeSpan = document.getElementById('selectedAge');
-            if (selectedAgeSpan) {
-                selectedAgeSpan.textContent = age;
-            }
+            
+            updateQuestionCounter();
         }
-        
-        updateAgeContent();
-        localStorage.setItem('module2SelectedAge', age);
-        showNotification(`✅ Contenido adaptado para ${age} años`, 'success');
-        
-        const warningMessage = document.querySelector('.alert-warning');
-        if (warningMessage && warningMessage.innerHTML.includes('Selecciona primero')) {
-            warningMessage.remove();
-        }
-    }
 
-    // Actualizar contenido según edad
-    function updateAgeContent() {
-        if (!selectedAge) return;
-        
-        document.querySelectorAll('.age-specific-examples').forEach(elem => {
-            elem.style.display = 'none';
-            elem.classList.remove('active');
-        });
-        
-        const ageElements = document.querySelectorAll(`[id*="-age-${selectedAge}"]`);
-        ageElements.forEach(elem => {
-            elem.style.display = 'block';
-            elem.classList.add('active');
-        });
-        
-        document.querySelectorAll('[id^="modelado-test-age-"]').forEach(elem => {
-            elem.style.display = 'none';
-        });
-        
-        const ageTest = document.getElementById(`modelado-test-age-${selectedAge}`);
-        if (ageTest) {
-            ageTest.style.display = 'block';
+        // Verificar respuesta del test de modelado CORREGIDO
+        function checkModeladoAnswer(age, questionNum, answer, element) {
+            if (!selectedAge) {
+                showNotification('⚠️ Primero selecciona la edad de tu hijo', 'warning');
+                return;
+            }
+            
+            // Marcar como seleccionado y deshabilitar otras opciones
+            const allOptions = element.parentElement.querySelectorAll('.test-option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+                opt.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            
+            const key = `${age}-${questionNum}`;
+            const feedbackDiv = document.getElementById(`modelado-feedback-${age}`);
+            
+            if (!feedbackDiv) return;
+            
+            modeladoQuestionsAnswered.add(key);
+            answerSelected = true;
+            
+            const isCorrect = answer === modeladoCorrectAnswers[key];
+            
+            // Habilitar botón "Siguiente"
+            const nextBtn = document.getElementById('nextQuestionBtn');
+            if (nextBtn) {
+                nextBtn.disabled = false;
+            }
+            
+            feedbackDiv.style.display = 'block';
+            feedbackDiv.className = `feedback-box ${isCorrect ? 'feedback-correct' : 'feedback-incorrect'} show`;
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                feedbackDiv.innerHTML = '✅ ¡Correcto! Usaste el modelado perfectamente sin corregir directamente.';
+            } else {
+                element.classList.add('incorrect');
+                let feedback = '❌ ';
+                if (answer === 'a' && questionNum === 1) {
+                    feedback += 'Esta opción corrige directamente. Recuerda: modela sin decir "no se dice así".';
+                } else if (answer === 'c') {
+                    feedback += 'No repitas el error ni pidas que repita. Modela naturalmente la forma correcta.';
+                } else {
+                    feedback += 'Intenta otra vez. El modelado repite correctamente de forma natural.';
+                }
+                feedbackDiv.innerHTML = feedback;
+            }
+            
+            updateQuestionCounter();
+        }
+
+        // Siguiente pregunta de modelado CORREGIDO
+        function nextModeladoQuestion() {
+            if (!selectedAge) {
+                showNotification('⚠️ Primero selecciona la edad de tu hijo', 'warning');
+                return;
+            }
+            
+            if (!answerSelected) {
+                showNotification('⚠️ Debes seleccionar una respuesta primero', 'warning');
+                return;
+            }
+            
+            const currentQuestionDiv = document.getElementById(`question-${selectedAge}-${currentModeladoQuestion}`);
+            if (currentQuestionDiv) {
+                currentQuestionDiv.style.display = 'none';
+            }
+            
+            currentModeladoQuestion++;
+            answerSelected = false;
+            
+            // Deshabilitar botón hasta que responda
+            const nextBtn = document.getElementById('nextQuestionBtn');
+            if (nextBtn) {
+                nextBtn.disabled = true;
+            }
+            
+            if (currentModeladoQuestion > 3) {
+                const resetBtn = document.getElementById('resetTestBtn');
+                const nextBtn = document.getElementById('nextQuestionBtn');
+                if (resetBtn) resetBtn.style.display = 'inline-block';
+                if (nextBtn) nextBtn.style.display = 'none';
+                
+                showNotification('✅ Has completado todas las preguntas', 'success');
+                return;
+            }
+            
+            const nextQuestionDiv = document.getElementById(`question-${selectedAge}-${currentModeladoQuestion}`);
+            if (nextQuestionDiv) {
+                nextQuestionDiv.style.display = 'block';
+                // Rehabilitar opciones para nueva pregunta
+                const allOptions = nextQuestionDiv.querySelectorAll('.test-option');
+                allOptions.forEach(opt => {
+                    opt.style.pointerEvents = 'auto';
+                    opt.classList.remove('selected', 'correct', 'incorrect');
+                });
+            }
+            
+            const feedbackDiv = document.getElementById(`modelado-feedback-${selectedAge}`);
+            if (feedbackDiv) {
+                feedbackDiv.style.display = 'none';
+            }
+            
+            updateQuestionCounter();
+        }
+
+        // Reiniciar test
+        function resetModeladoTest() {
+            currentModeladoQuestion = 1;
+            modeladoQuestionsAnswered.clear();
+            answerSelected = false;
+            
+            // Rehabilitar todas las opciones
+            document.querySelectorAll('.test-option').forEach(opt => {
+                opt.style.pointerEvents = 'auto';
+                opt.classList.remove('selected', 'correct', 'incorrect');
+            });
             
             for (let i = 1; i <= 3; i++) {
                 const questionDiv = document.getElementById(`question-${selectedAge}-${i}`);
@@ -1632,728 +1309,155 @@ Recuerda: No importa si desafinas,
                     questionDiv.style.display = i === 1 ? 'block' : 'none';
                 }
             }
-        }
-        
-        updateQuestionCounter();
-        
-        const exerciseDiv = document.getElementById('expansion-exercise');
-        if (exerciseDiv) {
-            exerciseDiv.style.display = 'block';
-            loadExpansionExercise();
-        }
-    }
-
-    // Verificar respuesta del test de modelado
-    function checkModeladoAnswer(age, questionNum, answer) {
-        if (!selectedAge) {
-            showNotification('⚠️ Primero selecciona la edad de tu hijo', 'warning');
-            return;
-        }
-        
-        const key = `${age}-${questionNum}`;
-        const feedbackDiv = document.getElementById(`modelado-feedback-${age}`);
-        
-        if (!feedbackDiv) return;
-        
-        modeladoQuestionsAnswered.add(key);
-        
-        const isCorrect = answer === modeladoCorrectAnswers[key];
-        
-        feedbackDiv.style.display = 'block';
-        feedbackDiv.className = `feedback-box ${isCorrect ? 'feedback-correct' : 'feedback-incorrect'} show`;
-        
-        if (isCorrect) {
-            feedbackDiv.innerHTML = '✅ ¡Correcto! Usaste el modelado perfectamente sin corregir directamente.';
             
-            const ageQuestions = [`${age}-1`, `${age}-2`, `${age}-3`];
-            const answeredForAge = ageQuestions.filter(q => modeladoQuestionsAnswered.has(q));
-            
-            if (answeredForAge.length >= 2) {
-                techniquesCompleted.add('modelado');
-                updateAchievements();
-                
-                setTimeout(() => {
-                    showNotification('🎉 ¡Has dominado la técnica del Modelado!', 'success');
-                }, 500);
+            const feedbackDiv = document.getElementById(`modelado-feedback-${selectedAge}`);
+            if (feedbackDiv) {
+                feedbackDiv.style.display = 'none';
             }
-        } else {
-            let feedback = '❌ ';
-            if (answer === 'a' && questionNum === 1) {
-                feedback += 'Esta opción corrige directamente. Recuerda: modela sin decir "no se dice así".';
-            } else if (answer === 'c') {
-                feedback += 'No repitas el error ni pidas que repita. Modela naturalmente la forma correcta.';
-            } else {
-                feedback += 'Intenta otra vez. El modelado repite correctamente de forma natural.';
-            }
-            feedbackDiv.innerHTML = feedback;
-        }
-        
-        updateQuestionCounter();
-    }
-
-    // Siguiente pregunta de modelado
-    function nextModeladoQuestion() {
-        if (!selectedAge) {
-            showNotification('⚠️ Primero selecciona la edad de tu hijo', 'warning');
-            return;
-        }
-        
-        const currentQuestionDiv = document.getElementById(`question-${selectedAge}-${currentModeladoQuestion}`);
-        if (currentQuestionDiv) {
-            currentQuestionDiv.style.display = 'none';
-        }
-        
-        currentModeladoQuestion++;
-        
-        if (currentModeladoQuestion > 3) {
-            currentModeladoQuestion = 1;
             
             const resetBtn = document.getElementById('resetTestBtn');
             const nextBtn = document.getElementById('nextQuestionBtn');
-            if (resetBtn) resetBtn.style.display = 'inline-block';
-            if (nextBtn) nextBtn.style.display = 'none';
+            if (resetBtn) resetBtn.style.display = 'none';
+            if (nextBtn) {
+                nextBtn.style.display = 'inline-block';
+                nextBtn.disabled = true;
+            }
             
-            showNotification('✅ Has completado todas las preguntas', 'success');
+            updateQuestionCounter();
+            showNotification('Test reiniciado', 'info');
         }
-        
-        const nextQuestionDiv = document.getElementById(`question-${selectedAge}-${currentModeladoQuestion}`);
-        if (nextQuestionDiv) {
-            nextQuestionDiv.style.display = 'block';
-        }
-        
-        const feedbackDiv = document.getElementById(`modelado-feedback-${selectedAge}`);
-        if (feedbackDiv) {
-            feedbackDiv.style.display = 'none';
-        }
-        
-        updateQuestionCounter();
-    }
 
-    // Reiniciar test
-    function resetModeladoTest() {
-        currentModeladoQuestion = 1;
-        modeladoQuestionsAnswered.clear();
-        
-        for (let i = 1; i <= 3; i++) {
-            const questionDiv = document.getElementById(`question-${selectedAge}-${i}`);
-            if (questionDiv) {
-                questionDiv.style.display = i === 1 ? 'block' : 'none';
+        // Actualizar contador de preguntas
+        function updateQuestionCounter() {
+            const currentSpan = document.getElementById('current-question');
+            const totalSpan = document.getElementById('total-questions');
+            
+            if (currentSpan) currentSpan.textContent = currentModeladoQuestion;
+            if (totalSpan) totalSpan.textContent = '3';
+        }
+
+        // NUEVO: Iniciar juego de preguntas
+        function startQuestionGame() {
+            if (!selectedAge) {
+                showNotification('⚠️ Primero selecciona la edad de tu hijo', 'warning');
+                return;
+            }
+            
+            currentQuestionScenario = 0;
+            questionScenariosAnswered = 0;
+            
+            document.getElementById('question-scenarios').style.display = 'block';
+            document.getElementById('startQuestionGame').style.display = 'none';
+            
+            loadQuestionScenario();
+        }
+
+        // NUEVO: Cargar escenario de pregunta
+        function loadQuestionScenario() {
+            const scenarios = questionScenarios[selectedAge];
+            if (!scenarios || currentQuestionScenario >= scenarios.length) {
+                showNotification('🎉 ¡Completaste todos los escenarios!', 'success');
+                document.getElementById('startQuestionGame').style.display = 'inline-block';
+                document.getElementById('question-scenarios').style.display = 'none';
+                return;
+            }
+            
+            const scenario = scenarios[currentQuestionScenario];
+            
+            document.getElementById('scenario-title').textContent = `Escenario ${currentQuestionScenario + 1}`;
+            document.getElementById('scenario-context').textContent = scenario.context;
+            document.getElementById('closed-question').textContent = scenario.closedQuestion;
+            document.getElementById('scenario-age').textContent = selectedAge;
+            document.getElementById('open-question-input').value = '';
+            
+            const feedbackDiv = document.getElementById('question-feedback');
+            if (feedbackDiv) {
+                feedbackDiv.style.display = 'none';
             }
         }
-        
-        const feedbackDiv = document.getElementById(`modelado-feedback-${selectedAge}`);
-        if (feedbackDiv) {
-            feedbackDiv.style.display = 'none';
-        }
-        
-        const resetBtn = document.getElementById('resetTestBtn');
-        const nextBtn = document.getElementById('nextQuestionBtn');
-        if (resetBtn) resetBtn.style.display = 'none';
-        if (nextBtn) nextBtn.style.display = 'inline-block';
-        
-        updateQuestionCounter();
-        showNotification('Test reiniciado', 'info');
-    }
 
-    // Actualizar contador de preguntas
-    function updateQuestionCounter() {
-        const currentSpan = document.getElementById('current-question');
-        const totalSpan = document.getElementById('total-questions');
-        
-        if (currentSpan) currentSpan.textContent = currentModeladoQuestion;
-        if (totalSpan) totalSpan.textContent = '3';
-    }
-
-    // Actualizar racha de práctica
-    function updatePracticeStreak() {
-        const days = ['dia1', 'dia2', 'dia3', 'dia4', 'dia5', 'dia6', 'dia7'];
-        let consecutiveDays = 0;
-        let totalDays = 0;
-        
-        for (let day of days) {
-            const checkbox = document.getElementById(day);
-            if (checkbox && checkbox.checked) {
-                consecutiveDays++;
-                totalDays++;
-            } else {
-                break;
+        // NUEVO: Verificar pregunta abierta
+        function checkOpenQuestion() {
+            const input = document.getElementById('open-question-input').value.trim();
+            if (!input) {
+                showNotification('Escribe una pregunta primero', 'warning');
+                return;
             }
-        }
-        
-        const streakCount = document.getElementById('streakCount');
-        const streakMessage = document.getElementById('streakMessage');
-        
-        if (streakCount) streakCount.textContent = consecutiveDays;
-        
-        if (streakMessage) {
-            if (consecutiveDays >= 7) {
-                streakMessage.innerHTML = '🔥 ¡Semana completa! El hábito se está formando';
-                streakMessage.style.color = '#28a745';
-            } else if (consecutiveDays >= 5) {
-                streakMessage.innerHTML = '⭐ ¡Excelente constancia! Sigue así';
-                streakMessage.style.color = '#ffc107';
-            } else if (consecutiveDays >= 3) {
-                streakMessage.innerHTML = '💪 ¡Buen inicio! La consistencia es clave';
-                streakMessage.style.color = '#17a2b8';
-            } else if (consecutiveDays >= 1) {
-                streakMessage.innerHTML = '👍 ¡Primer paso dado!';
-                streakMessage.style.color = '#6c757d';
-            } else {
-                streakMessage.innerHTML = 'Marca los días que practiques';
-                streakMessage.style.color = '#6c757d';
-            }
-        }
-        
-        const practiceData = {
-            days: days.map(d => document.getElementById(d).checked),
-            lastUpdate: new Date().toISOString()
-        };
-        localStorage.setItem('module2PracticeStreak', JSON.stringify(practiceData));
-        
-        if (totalDays >= 3) {
-            techniquesCompleted.add('practica-constante');
-            updateAchievements();
-        }
-    }
-
-    // Cargar racha guardada
-    function loadPracticeStreak() {
-        const saved = localStorage.getItem('module2PracticeStreak');
-        if (saved) {
-            const data = JSON.parse(saved);
-            const days = ['dia1', 'dia2', 'dia3', 'dia4', 'dia5', 'dia6', 'dia7'];
             
-            days.forEach((day, index) => {
-                const checkbox = document.getElementById(day);
-                if (checkbox && data.days[index]) {
-                    checkbox.checked = true;
-                }
-            });
+            const scenarios = questionScenarios[selectedAge];
+            const scenario = scenarios[currentQuestionScenario];
+            const feedbackDiv = document.getElementById('question-feedback');
             
-            updatePracticeStreak();
-        }
-    }
-
-    // Verificar respuesta (función antigua para compatibilidad)
-    function checkAnswer(technique, questionNum, answer) {
-        // Redirigir a la nueva función
-        if (selectedAge) {
-            checkModeladoAnswer(selectedAge, questionNum, answer);
-        } else {
-            showNotification('⚠️ Primero selecciona la edad de tu hijo', 'warning');
-        }
-    }
-
-    // Cargar ejercicio de expansión
-    function loadExpansionExercise() {
-        if (!selectedAge) return;
-        
-        const exercises = expansionExercises[selectedAge];
-        if (!exercises || exercises.length === 0) return;
-        
-        const exercise = exercises[currentExpansionExercise % exercises.length];
-        
-        const phraseElement = document.getElementById('expansion-child-phrase');
-        const answerElement = document.getElementById('expansion-answer');
-        
-        if (phraseElement) {
-            phraseElement.textContent = exercise.phrase;
-        }
-        
-        if (answerElement) {
-            answerElement.value = '';
-            answerElement.placeholder = `Pista: ${exercise.hint}`;
-        }
-        
-        const feedbackDiv = document.getElementById('expansion-feedback');
-        if (feedbackDiv) {
-            feedbackDiv.style.display = 'none';
-        }
-    }
-
-    // Verificar expansión
-    function checkExpansion() {
-        if (!selectedAge) {
-            showNotification('⚠️ Primero selecciona la edad de tu hijo', 'warning');
-            return;
-        }
-        
-        const answerElement = document.getElementById('expansion-answer');
-        if (!answerElement) return;
-        
-        const answer = answerElement.value.trim();
-        const feedbackDiv = document.getElementById('expansion-feedback');
-        
-        if (!answer) {
-            showNotification('Escribe tu expansión primero', 'warning');
-            return;
-        }
-        
-        const exercises = expansionExercises[selectedAge];
-        const exercise = exercises[currentExpansionExercise % exercises.length];
-        
-        const originalWords = exercise.phrase.split(' ').length;
-        const expandedWords = answer.split(' ').length;
-        
-        if (feedbackDiv) {
+            // Verificar si es una pregunta abierta
+            const isOpen = !input.toLowerCase().includes('¿sí') && 
+                          !input.toLowerCase().includes('¿no') &&
+                          (input.includes('¿qué') || input.includes('¿cómo') || 
+                           input.includes('¿dónde') || input.includes('¿cuál') || 
+                           input.includes('¿por qué') || input.includes('¿cuándo') ||
+                           input.includes('¿quién'));
+            
             feedbackDiv.style.display = 'block';
             
-            if (expandedWords > originalWords) {
+            if (isOpen) {
                 feedbackDiv.className = 'feedback-box feedback-correct show';
-                feedbackDiv.innerHTML = `✅ ¡Excelente! Agregaste ${expandedWords - originalWords} palabras. Tu expansión "${answer}" enriquece la frase original. Ejemplo modelo: "${exercise.example}"`;
-                
-                techniquesCompleted.add('expansion');
-                updateAchievements();
+                feedbackDiv.innerHTML = `✅ ¡Excelente! Tu pregunta "${input}" es abierta y estimula al niño a pensar y expresarse más.`;
+                questionScenariosAnswered++;
             } else {
                 feedbackDiv.className = 'feedback-box feedback-incorrect show';
-                feedbackDiv.innerHTML = `⚠️ Intenta agregar más información. ${exercise.hint}. Ejemplo: "${exercise.example}"`;
+                feedbackDiv.innerHTML = `⚠️ Tu pregunta aún parece cerrada. Intenta usar palabras como "¿Qué...?", "¿Cómo...?", "¿Dónde...?" 
+                <br><br><strong>Ejemplos:</strong> ${scenario.openExamples.slice(0, 2).join(' o ')}`;
             }
         }
-    }
 
-    // Siguiente ejercicio de expansión
-    function nextExpansionExercise() {
-        if (!selectedAge) {
-            showNotification('⚠️ Primero selecciona la edad de tu hijo', 'warning');
-            return;
+        // NUEVO: Siguiente escenario de pregunta
+        function nextQuestionScenario() {
+            currentQuestionScenario++;
+            loadQuestionScenario();
         }
-        
-        currentExpansionExercise++;
-        loadExpansionExercise();
-        showNotification('Nuevo ejercicio de expansión', 'info');
-    }
 
-    // Mostrar tab
-    function showTab(tabName) {
-        document.querySelectorAll('.tab-content').forEach(content => {
-            content.classList.remove('active');
-        });
-        
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.classList.remove('active');
-        });
-        
-        const selectedTab = document.getElementById(tabName);
-        if (selectedTab) {
-            selectedTab.classList.add('active');
-        }
-        
-        document.querySelectorAll('.tab').forEach(tab => {
-            if (tab.onclick && tab.onclick.toString().includes(tabName)) {
-                tab.classList.add('active');
-            }
-        });
-    }
-
-    // Toggle situación completada
-    function toggleComplete(card) {
-        if (!card) return;
-        
-        card.classList.toggle('completed');
-        
-        const title = card.querySelector('h4');
-        if (title) {
-            if (card.classList.contains('completed')) {
-                situationsCompleted.add(title.textContent);
-                showNotification('✅ Situación practicada', 'success');
+        // Mostrar canciones
+        function showSongs() {
+            const songs = document.getElementById('songsResources');
+            if (!songs) return;
+            
+            const button = event.target;
+            
+            if (songs.style.display === 'none' || songs.style.display === '') {
+                songs.style.display = 'block';
+                if (button) button.textContent = 'Ocultar Canciones';
             } else {
-                situationsCompleted.delete(title.textContent);
+                songs.style.display = 'none';
+                if (button) button.textContent = 'Ver Canciones por Edad';
             }
         }
-        
-        updateAchievements();
-    }
 
-    // Mostrar más juegos
-    function showMoreGames() {
-        const moreGames = document.getElementById('moreGames');
-        if (!moreGames) return;
-        
-        const button = event.target;
-        
-        if (moreGames.style.display === 'none' || moreGames.style.display === '') {
-            moreGames.style.display = 'block';
-            if (button) button.textContent = 'Ocultar Juegos';
-        } else {
-            moreGames.style.display = 'none';
-            if (button) button.textContent = 'Ver Más Juegos';
-        }
-    }
-
-    // Mostrar guía rápida
-    function showQuickGuide() {
-        const guide = document.getElementById('quickGuide');
-        if (!guide) return;
-        
-        const button = event.target;
-        
-        if (guide.style.display === 'none' || guide.style.display === '') {
-            guide.style.display = 'block';
-            if (button) button.textContent = 'Ocultar Guía';
-        } else {
-            guide.style.display = 'none';
-            if (button) button.textContent = 'Ver Guía Rápida';
-        }
-    }
-
-    // Mostrar canciones
-    function showSongs() {
-        const songs = document.getElementById('songsResources');
-        if (!songs) return;
-        
-        const button = event.target;
-        
-        if (songs.style.display === 'none' || songs.style.display === '') {
-            songs.style.display = 'block';
-            if (button) button.textContent = 'Ocultar Canciones';
-        } else {
-            songs.style.display = 'none';
-            if (button) button.textContent = 'Ver Canciones';
-        }
-    }
-
-    // Completar sección
-    function completeSection(sectionNumber) {
-        if (!selectedAge && sectionNumber !== 6) {
-            showNotification('⚠️ Primero selecciona la edad de tu hijo', 'warning');
-            return;
-        }
-        
-        completedSections.add(sectionNumber);
-        updateProgressBar();
-        saveProgress();
-        
-        const section = document.querySelector(`[data-section="${sectionNumber}"]`);
-        if (section) {
-            section.style.border = '3px solid #28a745';
-            section.style.background = 'linear-gradient(to right, #d4edda 0%, white 5%)';
-            section.style.transition = 'all 0.3s ease';
-        }
-        
-        showNotification(`✅ Sección ${sectionNumber} completada`, 'success');
-        
-        if (completedSections.size === totalSections) {
-            completeModule();
-        }
-    }
-
-    // Actualizar barra de progreso
-    function updateProgressBar() {
-        const progress = (completedSections.size / totalSections) * 100;
-        
-        const progressFill = document.getElementById('progressFill');
-        const progressText = document.getElementById('progressText');
-        const completedSectionsText = document.getElementById('completedSections');
-        
-        if (progressFill) {
-            progressFill.style.width = progress + '%';
-        }
-        if (progressText) {
-            progressText.textContent = Math.round(progress) + '% completado';
-        }
-        if (completedSectionsText) {
-            completedSectionsText.textContent = `${completedSections.size} de ${totalSections} secciones`;
-        }
-    }
-
-    // Actualizar achievements
-    function updateAchievements() {
-        const techniques = techniquesCompleted.size;
-        
-        if (techniques >= 1) {
-            const badge1 = document.getElementById('badge1');
-            if (badge1 && !badge1.classList.contains('unlocked')) {
-                badge1.classList.add('unlocked');
-                showNotification('🎯 ¡Logro desbloqueado: Primera Técnica!', 'success');
-            }
-        }
-        
-        if (techniques >= 3 || (techniques >= 2 && techniquesCompleted.has('practica-constante'))) {
-            const badge2 = document.getElementById('badge2');
-            if (badge2 && !badge2.classList.contains('unlocked')) {
-                badge2.classList.add('unlocked');
-                showNotification('💪 ¡Logro desbloqueado: 3 Técnicas!', 'success');
-            }
-        }
-        
-        if (techniques >= 4) {
-            const badge3 = document.getElementById('badge3');
-            if (badge3 && !badge3.classList.contains('unlocked')) {
-                badge3.classList.add('unlocked');
-                showNotification('🌟 ¡Logro desbloqueado: Todas las Técnicas!', 'success');
-            }
-        }
-        
-        if (completedSections.size === totalSections) {
-            const badge4 = document.getElementById('badge4');
-            if (badge4 && !badge4.classList.contains('unlocked')) {
-                badge4.classList.add('unlocked');
-                showNotification('🏆 ¡Logro desbloqueado: Módulo Completo!', 'success');
-            }
-        }
-    }
-
-    // Completar módulo
-    function completeModule() {
-        const certificateBtn = document.getElementById('certificateBtn');
-        const nextModuleBtn = document.getElementById('nextModuleBtn');
-        
-        if (certificateBtn) {
-            certificateBtn.style.display = 'inline-block';
-        }
-        if (nextModuleBtn) {
-            nextModuleBtn.style.display = 'inline-block';
-        }
-        
-        let courseProgress = JSON.parse(localStorage.getItem('courseProgress') || '[false,false,false,false,false]');
-        courseProgress[1] = true;
-        localStorage.setItem('courseProgress', JSON.stringify(courseProgress));
-        
-        showNotification('🎉 ¡FELICITACIONES! Has completado el Módulo 2', 'success');
-        
-        setTimeout(() => {
-            alert('🏆 ¡Módulo 2 Completado!\n\n' +
-                  '✅ Dominas 4 técnicas fundamentales\n' +
-                  '✅ Sabes aplicarlas en situaciones diarias\n' +
-                  '✅ Tienes tu plan personal\n\n' +
-                  '¡Continúa al Módulo 3 para aprender soluciones específicas!');
-        }, 1000);
-    }
-
-    // Generar certificado
-    function generateCertificate() {
-        const userName = prompt('¿Cuál es tu nombre para el certificado?') || 'Estudiante';
-        
-        const certificate = `
-╔════════════════════════════════════════════════════╗
-║                                                    ║
-║         🏆 CERTIFICADO DE COMPLETACIÓN 🏆          ║
-║                                                    ║
-║      ESTIMULACIÓN DEL LENGUAJE INFANTIL           ║
-║                                                    ║
-╠════════════════════════════════════════════════════╣
-║                                                    ║
-║  Certificamos que:                                 ║
-║                                                    ║
-║            ${userName.toUpperCase().padEnd(40, ' ')}║
-║                                                    ║
-║  Ha completado exitosamente el MÓDULO 2:          ║
-║                                                    ║
-║      "TÉCNICAS PRÁCTICAS PARA PADRES"             ║
-║                                                    ║
-║  Competencias Adquiridas:                         ║
-║  ✅ Modelado lingüístico sin corrección directa   ║
-║  ✅ Expansión del lenguaje con ejemplos           ║
-║  ✅ Preguntas abiertas para estimular             ║
-║  ✅ Narración paralela y auto-conversación        ║
-║  ✅ Aplicación práctica en vida diaria            ║
-║                                                    ║
-║  Edad de aplicación: ${(selectedAge || 'General').padEnd(26, ' ')}║
-║  Técnicas dominadas: ${techniquesCompleted.size}/4                     ║
-║  Situaciones practicadas: ${situationsCompleted.size}                  ║
-║                                                    ║
-║  Fecha: ${new Date().toLocaleDateString('es-ES').padEnd(43, ' ')}║
-║                                                    ║
-║  ID Certificado: MOD2-${Date.now()}      ║
-║                                                    ║
-╚════════════════════════════════════════════════════╝
-        `;
-        
-        const blob = new Blob([certificate], { type: 'text/plain;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `Certificado_Modulo2_${userName.replace(/\s/g, '_')}.txt`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        
-        showNotification('🎉 Certificado descargado exitosamente', 'success');
-    }
-
-    // Mostrar progreso
-    function showProgress() {
-        const progress = (completedSections.size / totalSections) * 100;
-        
-        let techniquesList = Array.from(techniquesCompleted).join(', ') || 'Ninguna aún';
-        let situationsList = situationsCompleted.size > 0 ? 
-            `${situationsCompleted.size} situaciones` : 'Ninguna aún';
-        
-        const progressMessage = `
-📊 TU PROGRESO EN MÓDULO 2:
-
-📈 Progreso general: ${Math.round(progress)}%
-📚 Secciones completadas: ${completedSections.size} de ${totalSections}
-👶 Edad seleccionada: ${selectedAge ? selectedAge + ' años' : 'No seleccionada'}
-
-🎯 Técnicas practicadas: ${techniquesCompleted.size} de 4
-   ${techniquesList}
-
-🏠 Situaciones practicadas: ${situationsList}
-
-${progress === 100 ? '🎉 ¡MÓDULO COMPLETADO! Descarga tu certificado.' : '💪 ¡Sigue practicando! Cada día cuenta.'}
-        `;
-        
-        alert(progressMessage);
-    }
-
-    // Guardar progreso
-    function saveProgress() {
-        const progress = {
-            completedSections: Array.from(completedSections),
-            selectedAge: selectedAge,
-            techniquesCompleted: Array.from(techniquesCompleted),
-            situationsCompleted: Array.from(situationsCompleted),
-            currentExpansionExercise: currentExpansionExercise,
-            lastAccess: new Date().toISOString()
-        };
-        
-        localStorage.setItem('module2Progress', JSON.stringify(progress));
-    }
-
-    // Cargar progreso guardado
-    function loadSavedProgress() {
-        try {
-            const saved = localStorage.getItem('module2Progress');
-            if (saved) {
-                const progress = JSON.parse(saved);
-                
-                if (progress.completedSections && Array.isArray(progress.completedSections)) {
-                    progress.completedSections.forEach(section => {
-                        completedSections.add(section);
-                        const sectionElem = document.querySelector(`[data-section="${section}"]`);
-                        if (sectionElem) {
-                            sectionElem.style.border = '3px solid #28a745';
-                            sectionElem.style.background = 'linear-gradient(to right, #d4edda 0%, white 5%)';
-                        }
-                    });
-                }
-                
-                if (progress.selectedAge) {
-                    selectedAge = progress.selectedAge;
-                    setTimeout(() => {
-                        selectAge(selectedAge);
-                    }, 500);
-                }
-                
-                if (progress.techniquesCompleted && Array.isArray(progress.techniquesCompleted)) {
-                    progress.techniquesCompleted.forEach(tech => techniquesCompleted.add(tech));
-                }
-                
-                if (progress.situationsCompleted && Array.isArray(progress.situationsCompleted)) {
-                    progress.situationsCompleted.forEach(sit => situationsCompleted.add(sit));
-                }
-                
-                if (progress.currentExpansionExercise) {
-                    currentExpansionExercise = progress.currentExpansionExercise;
-                }
-                
-                updateProgressBar();
-                updateAchievements();
-                
-                if (completedSections.size === totalSections) {
-                    const certificateBtn = document.getElementById('certificateBtn');
-                    const nextModuleBtn = document.getElementById('nextModuleBtn');
-                    if (certificateBtn) certificateBtn.style.display = 'inline-block';
-                    if (nextModuleBtn) nextModuleBtn.style.display = 'inline-block';
-                }
+        // Completar sección
+        function completeSection(sectionNumber) {
+            if (!selectedAge && sectionNumber !== 6) {
+                showNotification('⚠️ Primero selecciona la edad de tu hijo', 'warning');
+                return;
             }
             
-            // Cargar racha de práctica
-            loadPracticeStreak();
-            
-        } catch (error) {
-            console.error('Error cargando progreso:', error);
-        }
-    }
-
-    // Logout
-    function logout() {
-        if (confirm('¿Estás seguro que quieres salir? Tu progreso se guardará automáticamente.')) {
+            completedSections.add(sectionNumber);
+            updateProgressBar();
             saveProgress();
-            window.location.href = '../index.html';
+            
+            const section = document.querySelector(`[data-section="${sectionNumber}"]`);
+            if (section) {
+                section.style.border = '3px solid #28a745';
+                section.style.background = 'linear-gradient(to right, #d4edda 0%, white 5%)';
+            }
+            
+            showNotification(`✅ Sección ${sectionNumber} completada`, 'success');
+            
+            if (completedSections.size === totalSections) {
+                completeModule();
+            }
         }
-    }
 
-    // Sistema de notificaciones mejorado
-    function showNotification(message, type = 'info') {
-        const existingNotifications = document.querySelectorAll('.notification-custom');
-        existingNotifications.forEach(notif => notif.remove());
-        
-        const notification = document.createElement('div');
-        notification.className = `alert alert-${type} notification-custom`;
-        notification.style.cssText = `
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            z-index: 9999;
-            min-width: 300px;
-            max-width: 400px;
-            animation: slideInNotification 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        `;
-        notification.innerHTML = message;
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.style.animation = 'slideOutNotification 0.3s ease';
-            setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.remove();
-                }
-            }, 300);
-        }, 3000);
-    }
-
-    // Agregar estilos de animación si no existen
-    if (!document.getElementById('notification-styles')) {
-        const style = document.createElement('style');
-        style.id = 'notification-styles';
-        style.textContent = `
-            @keyframes slideInNotification {
-                from { 
-                    transform: translateX(100%); 
-                    opacity: 0; 
-                }
-                to { 
-                    transform: translateX(0); 
-                    opacity: 1; 
-                }
-            }
-            @keyframes slideOutNotification {
-                from { 
-                    transform: translateX(0); 
-                    opacity: 1; 
-                }
-                to { 
-                    transform: translateX(100%); 
-                    opacity: 0; 
-                }
-            }
-            .notification-custom {
-                transition: all 0.3s ease;
-            }
-            .question-content {
-                transition: all 0.3s ease;
-            }
-            .achievement-badge {
-                transition: all 0.3s ease;
-            }
-            .achievement-badge.unlocked {
-                animation: bounceIn 0.5s ease;
-            }
-            @keyframes bounceIn {
-                0% { transform: scale(0); }
-                50% { transform: scale(1.1); }
-                100% { transform: scale(1); }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    // Log de inicio
-    console.log('🎯 Módulo 2: Técnicas Prácticas para Padres - Versión 2.1');
-    console.log('📚 Todas las funciones cargadas correctamente');
-    console.log('👶 Recuerda seleccionar la edad de tu hijo para comenzar');
-</script>
+        // Actualizar barra de progreso
+        function updateProgressBar() {
+            const progress = (completedSections.size / totalSections) * 100;
+            
+            const progressFill = document.getElementById('progressFill');
+            const progressText
