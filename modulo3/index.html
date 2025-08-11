@@ -1,13 +1,3568 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Módulo 3 - Cuentos y Canciones</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 3: Actividades y Juegos - Estimulación del Lenguaje</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 2rem 2rem;
+        }
+
+        .progress-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .module-header {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .module-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .age-selector {
+            background: linear-gradient(135deg, #f093fb20 0%, #f5576c20 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border: 2px solid #f093fb;
+        }
+
+        .age-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .age-btn {
+            background: white;
+            color: #764ba2;
+            padding: 1rem 2rem;
+            border: 2px solid #764ba2;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .age-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.3);
+        }
+
+        .age-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .content-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .activity-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(118, 75, 162, 0.4);
+        }
+
+        .activity-card.completed {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        }
+
+        .activity-card.completed::after {
+            content: '✓';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 2rem;
+            opacity: 0.5;
+        }
+
+        .activity-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .activity-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .activity-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .game-container {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border: 3px solid #667eea;
+        }
+
+        .game-area {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            min-height: 300px;
+            position: relative;
+        }
+
+        .interactive-element {
+            display: inline-block;
+            padding: 1rem;
+            margin: 0.5rem;
+            background: linear-gradient(135deg, #ffd93d 0%, #ffb300 100%);
+            color: #333;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .interactive-element:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 183, 0, 0.4);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 1rem 0.5rem 1rem 0;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
+        }
+
+        .btn-info {
+            background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+        }
+
+        .quiz-container {
+            background: #f0f8ff;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border: 2px solid #4a90e2;
+        }
+
+        .quiz-question {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .quiz-option {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            background: #e9ecef;
+            border-color: #4a90e2;
+        }
+
+        .quiz-option.selected {
+            background: #d1ecf1;
+            border-color: #0c5460;
+        }
+
+        .quiz-option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .quiz-option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .feedback-box {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        .feedback-box.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        .feedback-correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .feedback-incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .achievement-badge {
+            display: inline-block;
+            background: #ffd700;
+            color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin: 0.5rem;
+            font-weight: 600;
+            opacity: 0.3;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-badge.unlocked {
+            opacity: 1;
+            animation: bounce 0.5s ease;
+        }
+
+        .timer {
+            background: #fff;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin: 1rem 0;
+        }
+
+        .score-display {
+            background: linear-gradient(135deg, #ffd93d 0%, #ffb300 100%);
+            color: #333;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .drag-item {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            margin: 0.5rem;
+            background: #fff;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            cursor: move;
+            transition: all 0.3s ease;
+        }
+
+        .drag-item.dragging {
+            opacity: 0.5;
+        }
+
+        .drop-zone {
+            min-height: 100px;
+            padding: 1rem;
+            border: 3px dashed #667eea;
+            border-radius: 10px;
+            margin: 1rem 0;
+            background: #f8f9fa;
+            text-align: center;
+        }
+
+        .drop-zone.drag-over {
+            background: #e8f4f8;
+            border-color: #28a745;
+        }
+
+        .module-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .age-specific-content {
+            display: none;
+        }
+
+        .age-specific-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .module-header h1 {
+                font-size: 2rem;
+            }
+            
+            .age-buttons {
+                flex-direction: column;
+            }
+            
+            .activity-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .module-navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Módulo 3: Cómo usar cuentos y canciones</h1>
-  <p>Aquí podrás descargar el PDF con estrategias y cuentos ilustrados.</p>
-  <p><strong>Contenido próximamente disponible.</strong></p>
-  <a href="../index.html">← Volver al inicio</a>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <span>🎮</span>
+                <span>Módulo 3: Actividades y Juegos</span>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html">← Dashboard</a>
+                <a href="../modulo2/index.html">Módulo 2</a>
+                <a href="#" onclick="showProgress()">Mi Progreso</a>
+                <a href="#" onclick="logout()">Salir</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="progress-section">
+            <h3>Tu Progreso en el Módulo 3</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p><span id="progressText">0% completado</span> • <span id="activitiesCompleted">0 de 12 actividades</span></p>
+            <div id="achievementsList" style="margin-top: 1rem;">
+                <span class="achievement-badge" id="badge1">🎯 Primera Actividad</span>
+                <span class="achievement-badge" id="badge2">🎮 5 Juegos</span>
+                <span class="achievement-badge" id="badge3">🎵 Maestro Musical</span>
+                <span class="achievement-badge" id="badge4">📚 Contador de Cuentos</span>
+                <span class="achievement-badge" id="badge5">🏆 Módulo Completo</span>
+            </div>
+        </div>
+
+        <div class="module-header">
+            <h1>🎮 Actividades y Juegos para Estimular el Lenguaje</h1>
+            <p>Descubre actividades lúdicas diseñadas científicamente para cada edad</p>
+            
+            <div class="age-selector">
+                <h3>📌 Selecciona la edad de tu hijo para ver actividades personalizadas:</h3>
+                <div class="age-buttons">
+                    <button class="age-btn" onclick="selectAge(3)">3 años</button>
+                    <button class="age-btn" onclick="selectAge(4)">4 años</button>
+                    <button class="age-btn" onclick="selectAge(5)">5 años</button>
+                </div>
+                <p id="ageMessage" style="margin-top: 1rem; display: none; text-align: center; font-weight: bold; color: #667eea;">
+                    ✨ Actividades adaptadas para <span id="selectedAge"></span> años
+                </p>
+            </div>
+        </div>
+        <!-- Contenido para 3 años -->
+        <div id="content-age-3" class="age-specific-content">
+            
+            <!-- Sección 1: Juegos de Vocabulario -->
+            <div class="content-section" data-section="vocab-3">
+                <h2 class="section-title">
+                    <span>🎯</span>
+                    Juegos de Vocabulario (3 años)
+                </h2>
+                
+                <div class="alert alert-info">
+                    <strong>🧠 Base científica:</strong> A los 3 años, los niños aprenden mejor a través de la repetición y asociación visual. Pueden aprender 5-10 palabras nuevas por día.
+                </div>
+
+                <div class="activity-grid">
+                    <!-- Actividad 1 -->
+                    <div class="activity-card" onclick="startVocabGame3()" data-activity="vocab-game-3">
+                        <div class="activity-icon">🖼️</div>
+                        <div class="activity-title">Veo-Veo de Colores</div>
+                        <div class="activity-description">Identifica objetos por su color y aprende vocabulario nuevo</div>
+                    </div>
+
+                    <!-- Actividad 2 -->
+                    <div class="activity-card" onclick="startAnimalSounds3()" data-activity="animal-sounds-3">
+                        <div class="activity-icon">🐶</div>
+                        <div class="activity-title">Sonidos de Animales</div>
+                        <div class="activity-description">Asocia animales con sus sonidos y nombres</div>
+                    </div>
+
+                    <!-- Actividad 3 -->
+                    <div class="activity-card" onclick="startBodyParts3()" data-activity="body-parts-3">
+                        <div class="activity-icon">👶</div>
+                        <div class="activity-title">Mi Cuerpo</div>
+                        <div class="activity-description">Aprende las partes del cuerpo con movimientos</div>
+                    </div>
+                </div>
+
+                <!-- Juego Interactivo: Veo-Veo -->
+                <div id="veoVeoGame3" class="game-container hidden">
+                    <h3>🎮 Juego: Veo-Veo de Colores</h3>
+                    <div class="score-display">Puntos: <span id="veoVeoScore">0</span></div>
+                    
+                    <div class="game-area">
+                        <p id="veoVeoInstruction" style="font-size: 1.2rem; font-weight: bold; margin-bottom: 1rem;">
+                            Veo, veo... algo de color <span id="targetColor" style="color: red;">ROJO</span>
+                        </p>
+                        <div id="veoVeoObjects" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
+                            <!-- Se llenarán dinámicamente -->
+                        </div>
+                    </div>
+                    
+                    <div class="feedback-box" id="veoVeoFeedback"></div>
+                    <button class="btn btn-warning" onclick="nextVeoVeoRound()">Siguiente Ronda</button>
+                    <button class="btn" onclick="closeVeoVeoGame()">Cerrar Juego</button>
+                </div>
+
+                <!-- Juego de Sonidos de Animales -->
+                <div id="animalSoundsGame3" class="game-container hidden">
+                    <h3>🐾 Juego: ¿Qué Animal Soy?</h3>
+                    <div class="game-area">
+                        <div style="text-align: center;">
+                            <div id="animalImage" style="font-size: 5rem; margin: 1rem;">🐮</div>
+                            <p style="font-size: 1.2rem; margin: 1rem;">Escucha el sonido y adivina el animal</p>
+                            <button class="btn btn-info" onclick="playAnimalSound()">🔊 Reproducir Sonido</button>
+                        </div>
+                        <div id="animalOptions" style="display: flex; justify-content: center; gap: 1rem; margin: 2rem 0;">
+                            <!-- Se llenarán dinámicamente -->
+                        </div>
+                    </div>
+                    <div class="feedback-box" id="animalFeedback"></div>
+                    <button class="btn" onclick="closeAnimalSoundsGame()">Cerrar Juego</button>
+                </div>
+            </div>
+
+            <!-- Sección 2: Cuentos Interactivos -->
+            <div class="content-section" data-section="stories-3">
+                <h2 class="section-title">
+                    <span>📚</span>
+                    Cuentos Interactivos (3 años)
+                </h2>
+
+                <div class="alert alert-info">
+                    <strong>🧠 Base científica:</strong> Los cuentos con repetición y sonidos onomatopéyicos mejoran la memoria auditiva y la comprensión narrativa.
+                </div>
+
+                <div class="activity-grid">
+                    <div class="activity-card" onclick="startStory3_1()" data-activity="story-3-1">
+                        <div class="activity-icon">🐰</div>
+                        <div class="activity-title">El Conejito Saltarín</div>
+                        <div class="activity-description">Cuento con movimientos y sonidos</div>
+                    </div>
+
+                    <div class="activity-card" onclick="startStory3_2()" data-activity="story-3-2">
+                        <div class="activity-icon">🌙</div>
+                        <div class="activity-title">La Luna y las Estrellas</div>
+                        <div class="activity-description">Cuento para completar frases</div>
+                    </div>
+                </div>
+
+                <!-- Cuento Interactivo -->
+                <div id="interactiveStory3" class="game-container hidden">
+                    <h3>📖 El Conejito Saltarín</h3>
+                    <div class="game-area">
+                        <div id="storyContent" style="font-size: 1.1rem; line-height: 1.8;">
+                            <!-- Contenido del cuento -->
+                        </div>
+                        <div id="storyInteraction" style="margin-top: 2rem;">
+                            <!-- Elementos interactivos -->
+                        </div>
+                    </div>
+                    <button class="btn btn-warning" onclick="nextStoryPage()">Siguiente Página →</button>
+                    <button class="btn" onclick="closeStory()">Cerrar Cuento</button>
+                </div>
+            </div>
+
+            <!-- Sección 3: Canciones Educativas -->
+            <div class="content-section" data-section="songs-3">
+                <h2 class="section-title">
+                    <span>🎵</span>
+                    Canciones Educativas (3 años)
+                </h2>
+
+                <div class="alert alert-info">
+                    <strong>🧠 Base científica:</strong> El ritmo y la melodía facilitan la memorización de palabras y mejoran la pronunciación.
+                </div>
+
+                <div class="activity-grid">
+                    <div class="activity-card" onclick="startSong3_1()" data-activity="song-3-1">
+                        <div class="activity-icon">🎶</div>
+                        <div class="activity-title">Los Números Bailarines</div>
+                        <div class="activity-description">Aprende a contar del 1 al 10</div>
+                    </div>
+
+                    <div class="activity-card" onclick="startSong3_2()" data-activity="song-3-2">
+                        <div class="activity-icon">🌈</div>
+                        <div class="activity-title">El Arcoíris Musical</div>
+                        <div class="activity-description">Aprende los colores cantando</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 4: Actividades Diarias -->
+            <div class="content-section" data-section="daily-3">
+                <h2 class="section-title">
+                    <span>🏠</span>
+                    Actividades Diarias (3 años)
+                </h2>
+
+                <div class="activity-grid">
+                    <div class="activity-card" onclick="startDailyActivity3()" data-activity="daily-3">
+                        <div class="activity-icon">🍎</div>
+                        <div class="activity-title">Hora de la Merienda</div>
+                        <div class="activity-description">Vocabulario de alimentos y acciones</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenido para 4 años -->
+        <div id="content-age-4" class="age-specific-content">
+            
+            <!-- Sección 1: Juegos de Construcción de Frases -->
+            <div class="content-section" data-section="sentences-4">
+                <h2 class="section-title">
+                    <span>🏗️</span>
+                    Construcción de Frases (4 años)
+                </h2>
+                
+                <div class="alert alert-info">
+                    <strong>🧠 Base científica:</strong> A los 4 años, los niños pueden formar frases de 4-5 palabras y comprenden estructuras gramaticales básicas.
+                </div>
+
+                <div class="activity-grid">
+                    <div class="activity-card" onclick="startSentenceBuilder4()" data-activity="sentence-4">
+                        <div class="activity-icon">🧩</div>
+                        <div class="activity-title">Constructor de Oraciones</div>
+                        <div class="activity-description">Arrastra palabras para formar frases</div>
+                    </div>
+
+                    <div class="activity-card" onclick="startQuestionGame4()" data-activity="questions-4">
+                        <div class="activity-icon">❓</div>
+                        <div class="activity-title">¿Qué? ¿Dónde? ¿Cuándo?</div>
+                        <div class="activity-description">Aprende a hacer y responder preguntas</div>
+                    </div>
+
+                    <div class="activity-card" onclick="startSequenceGame4()" data-activity="sequence-4">
+                        <div class="activity-icon">📅</div>
+                        <div class="activity-title">Primero, Luego, Después</div>
+                        <div class="activity-description">Ordena secuencias de eventos</div>
+                    </div>
+                </div>
+
+                <!-- Juego Constructor de Oraciones -->
+                <div id="sentenceBuilder4" class="game-container hidden">
+                    <h3>🧩 Constructor de Oraciones</h3>
+                    <div class="game-area">
+                        <p style="font-size: 1.2rem; font-weight: bold;">Arrastra las palabras para formar una oración:</p>
+                        
+                        <div id="wordBank" style="background: #f8f9fa; padding: 1rem; border-radius: 10px; margin: 1rem 0;">
+                            <p>Banco de palabras:</p>
+                            <div id="availableWords" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                                <!-- Palabras draggables -->
+                            </div>
+                        </div>
+
+                        <div class="drop-zone" id="sentenceZone">
+                            <p style="color: #999;">Arrastra las palabras aquí para formar una oración</p>
+                        </div>
+
+                        <button class="btn btn-success" onclick="checkSentence()">Verificar Oración</button>
+                    </div>
+                    <div class="feedback-box" id="sentenceFeedback"></div>
+                    <button class="btn" onclick="closeSentenceBuilder()">Cerrar Juego</button>
+                </div>
+            </div>
+
+            <!-- Sección 2: Cuentos con Comprensión -->
+            <div class="content-section" data-section="comprehension-4">
+                <h2 class="section-title">
+                    <span>📖</span>
+                    Cuentos con Comprensión (4 años)
+                </h2>
+
+                <div class="alert alert-info">
+                    <strong>🧠 Base científica:</strong> Los niños de 4 años pueden seguir historias con 3-4 eventos y responder preguntas simples sobre ellas.
+                </div>
+
+                <div class="activity-grid">
+                    <div class="activity-card" onclick="startComprehensionStory4()" data-activity="comp-story-4">
+                        <div class="activity-icon">🦁</div>
+                        <div class="activity-title">El León y el Ratón</div>
+                        <div class="activity-description">Lee y responde preguntas</div>
+                    </div>
+                </div>
+
+                <!-- Quiz de Comprensión -->
+                <div id="comprehensionQuiz4" class="quiz-container hidden">
+                    <h3>📖 Comprensión del Cuento</h3>
+                    <div class="quiz-question">
+                        <p id="quizQuestion">Pregunta aparecerá aquí</p>
+                        <div class="quiz-options" id="quizOptions">
+                            <!-- Opciones -->
+                        </div>
+                    </div>
+                    <div class="feedback-box" id="quizFeedback"></div>
+                    <button class="btn btn-warning" onclick="nextQuizQuestion()">Siguiente Pregunta</button>
+                    <button class="btn" onclick="closeQuiz()">Cerrar Quiz</button>
+                </div>
+            </div>
+
+            <!-- Sección 3: Rimas y Trabalenguas -->
+            <div class="content-section" data-section="rhymes-4">
+                <h2 class="section-title">
+                    <span>🎭</span>
+                    Rimas y Trabalenguas (4 años)
+                </h2>
+
+                <div class="activity-grid">
+                    <div class="activity-card" onclick="startRhymeGame4()" data-activity="rhyme-4">
+                        <div class="activity-icon">🎪</div>
+                        <div class="activity-title">Encuentra la Rima</div>
+                        <div class="activity-description">Identifica palabras que riman</div>
+                    </div>
+
+                    <div class="activity-card" onclick="startTongueTwister4()" data-activity="tongue-4">
+                        <div class="activity-icon">👅</div>
+                        <div class="activity-title">Trabalenguas Fáciles</div>
+                        <div class="activity-description">Mejora la pronunciación</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenido para 5 años -->
+        <div id="content-age-5" class="age-specific-content">
+            
+            <!-- Sección 1: Narración y Creatividad -->
+            <div class="content-section" data-section="narration-5">
+                <h2 class="section-title">
+                    <span>🎨</span>
+                    Narración y Creatividad (5 años)
+                </h2>
+                
+                <div class="alert alert-info">
+                    <strong>🧠 Base científica:</strong> A los 5 años, los niños pueden crear historias simples con inicio, desarrollo y final, usando frases de 6-8 palabras.
+                </div>
+
+                <div class="activity-grid">
+                    <div class="activity-card" onclick="startStoryCreator5()" data-activity="create-story-5">
+                        <div class="activity-icon">✍️</div>
+                        <div class="activity-title">Crea tu Cuento</div>
+                        <div class="activity-description">Inventa una historia con imágenes</div>
+                    </div>
+
+                    <div class="activity-card" onclick="startDescriptionGame5()" data-activity="describe-5">
+                        <div class="activity-icon">🔍</div>
+                        <div class="activity-title">Describe y Adivina</div>
+                        <div class="activity-description">Describe objetos con detalles</div>
+                    </div>
+
+                    <div class="activity-card" onclick="startDialogGame5()" data-activity="dialog-5">
+                        <div class="activity-icon">💬</div>
+                        <div class="activity-title">Conversaciones</div>
+                        <div class="activity-description">Practica diálogos y roles</div>
+                    </div>
+                </div>
+
+                <!-- Creador de Historias -->
+                <div id="storyCreator5" class="game-container hidden">
+                    <h3>✍️ Crea tu Propia Historia</h3>
+                    <div class="game-area">
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1rem 0;">
+                            <div style="text-align: center;">
+                                <p><strong>Inicio</strong></p>
+                                <div id="storyBeginning" class="drop-zone" style="min-height: 150px;">
+                                    Arrastra una imagen aquí
+                                </div>
+                            </div>
+                            <div style="text-align: center;">
+                                <p><strong>Desarrollo</strong></p>
+                                <div id="storyMiddle" class="drop-zone" style="min-height: 150px;">
+                                    Arrastra una imagen aquí
+                                </div>
+                            </div>
+                            <div style="text-align: center;">
+                                <p><strong>Final</strong></p>
+                                <div id="storyEnd" class="drop-zone" style="min-height: 150px;">
+                                    Arrastra una imagen aquí
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: #f8f9fa; padding: 1rem; border-radius: 10px; margin: 1rem 0;">
+                            <p><strong>Banco de imágenes:</strong></p>
+                            <div id="imageBank" style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                                <!-- Imágenes draggables -->
+                            </div>
+                        </div>
+
+                        <button class="btn btn-success" onclick="tellStory()">Contar la Historia</button>
+                    </div>
+                    <div class="feedback-box" id="storyFeedback"></div>
+                    <button class="btn" onclick="closeStoryCreator()">Cerrar</button>
+                </div>
+            </div>
+
+            <!-- Sección 2: Juegos de Lógica Verbal -->
+            <div class="content-section" data-section="logic-5">
+                <h2 class="section-title">
+                    <span>🧠</span>
+                    Lógica Verbal (5 años)
+                </h2>
+
+                <div class="activity-grid">
+                    <div class="activity-card" onclick="startCategoryGame5()" data-activity="category-5">
+                        <div class="activity-icon">📦</div>
+                        <div class="activity-title">Categorías</div>
+                        <div class="activity-description">Agrupa palabras por categorías</div>
+                    </div>
+
+                    <div class="activity-card" onclick="startOppositeGame5()" data-activity="opposite-5">
+                        <div class="activity-icon">↔️</div>
+                        <div class="activity-title">Opuestos</div>
+                        <div class="activity-description">Encuentra palabras contrarias</div>
+                    </div>
+
+                    <div class="activity-card" onclick="startAnalogiesGame5()" data-activity="analogies-5">
+                        <div class="activity-icon">🔗</div>
+                        <div class="activity-title">Analogías Simples</div>
+                        <div class="activity-description">Completa relaciones lógicas</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 3: Teatro y Expresión -->
+            <div class="content-section" data-section="theater-5">
+                <h2 class="section-title">
+                    <span>🎭</span>
+                    Teatro y Expresión (5 años)
+                </h2>
+
+                <div class="activity-grid">
+                    <div class="activity-card" onclick="startRolePlay5()" data-activity="roleplay-5">
+                        <div class="activity-icon">👨‍👩‍👧</div>
+                        <div class="activity-title">Juego de Roles</div>
+                        <div class="activity-description">Actúa diferentes personajes</div>
+                    </div>
+
+                    <div class="activity-card" onclick="startEmotionsGame5()" data-activity="emotions-5">
+                        <div class="activity-icon">😊</div>
+                        <div class="activity-title">Expresando Emociones</div>
+                        <div class="activity-description">Identifica y expresa sentimientos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Quiz Final del Módulo -->
+        <div class="content-section">
+            <h2 class="section-title">
+                <span>🏆</span>
+                Evaluación Final del Módulo
+            </h2>
+            
+            <div class="alert alert-warning">
+                <strong>📝 Importante:</strong> Completa al menos 8 actividades antes de realizar la evaluación final.
+            </div>
+
+            <button class="btn btn-success" onclick="startFinalQuiz()" id="finalQuizBtn" disabled>
+                Comenzar Evaluación Final
+            </button>
+
+            <div id="finalQuizContainer" class="quiz-container hidden">
+                <h3>🏆 Evaluación Final</h3>
+                <div class="timer">Tiempo: <span id="quizTimer">05:00</span></div>
+                <div class="quiz-question" id="finalQuestion">
+                    <!-- Preguntas dinámicas según edad -->
+                </div>
+                <div class="feedback-box" id="finalFeedback"></div>
+                <button class="btn btn-warning" onclick="submitFinalQuiz()">Enviar Respuestas</button>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="module-navigation">
+            <a href="../modulo2/index.html" class="btn btn-secondary">← Módulo 2</a>
+            <div>
+                <button class="btn" onclick="generateCertificate()" id="certificateBtn" style="display: none;">🏆 Certificado</button>
+                <a href="../modulo4/index.html" class="btn" id="nextModuleBtn" style="display: none;">Módulo 4 →</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales
+        let selectedAge = null;
+        let completedActivities = new Set();
+        let totalActivities = 12;
+        let currentScore = 0;
+        let currentQuizQuestion = 0;
+        let quizTimer = null;
+        let storyPage = 0;
+        let achievements = new Set();
+
+        // Base de datos de contenido por edad
+        const contentDatabase = {
+            3: {
+                vocabulary: {
+                    colors: ['rojo', 'azul', 'amarillo', 'verde', 'naranja', 'rosa'],
+                    animals: ['perro', 'gato', 'vaca', 'pato', 'pollo', 'caballo'],
+                    bodyParts: ['cabeza', 'ojos', 'nariz', 'boca', 'manos', 'pies'],
+                    foods: ['manzana', 'plátano', 'leche', 'pan', 'agua', 'galleta'],
+                    actions: ['comer', 'dormir', 'jugar', 'correr', 'saltar', 'cantar']
+                },
+                stories: [
+                    {
+                        title: "El Conejito Saltarín",
+                        pages: [
+                            "Había una vez un conejito 🐰 que le gustaba saltar.",
+                            "Saltaba por aquí... HOP! Saltaba por allá... HOP!",
+                            "Un día encontró una zanahoria 🥕 muy grande.",
+                            "¡Ñam, ñam! Qué rica estaba la zanahoria.",
+                            "Y colorín colorado, este cuento se ha acabado."
+                        ]
+                    }
+                ],
+                songs: [
+                    {
+                        title: "Los Números Bailarines",
+                        lyrics: "Uno, dos, tres - mueve los pies\nCuatro, cinco, seis - salta otra vez\nSiete, ocho, nueve - el cuerpo se mueve\nDiez, diez, diez - ¡baila con los pies!"
+                    }
+                ]
+            },
+            4: {
+                sentences: {
+                    subjects: ['El niño', 'La niña', 'El perro', 'Mi mamá', 'Mi papá'],
+                    verbs: ['come', 'juega', 'corre', 'lee', 'canta'],
+                    objects: ['pelota', 'manzana', 'libro', 'canción', 'juguete'],
+                    places: ['en el parque', 'en casa', 'en la escuela', 'en el jardín']
+                },
+                rhymes: {
+                    words: [
+                        {word: 'gato', rhymes: ['pato', 'zapato', 'plato']},
+                        {word: 'casa', rhymes: ['pasa', 'masa', 'taza']},
+                        {word: 'pelota', rhymes: ['bota', 'flota', 'gota']}
+                    ]
+                },
+                tongueTwisters: [
+                    "Tres tristes tigres",
+                    "Pepe pica papas",
+                    "El perro de Rita"
+                ]
+            },
+            5: {
+                storyElements: {
+                    characters: ['👸 princesa', '🦸 superhéroe', '🧙 mago', '🐉 dragón', '🤖 robot'],
+                    settings: ['🏰 castillo', '🌳 bosque', '🏖️ playa', '🌙 espacio', '🏔️ montaña'],
+                    problems: ['perdió algo', 'necesita ayuda', 'está atrapado', 'busca un tesoro'],
+                    solutions: ['encuentra amigos', 'usa magia', 'resuelve acertijo', 'trabaja en equipo']
+                },
+                categories: {
+                    animals: ['león', 'tigre', 'elefante', 'jirafa', 'mono'],
+                    transport: ['auto', 'avión', 'barco', 'tren', 'bicicleta'],
+                    clothes: ['camisa', 'pantalón', 'zapatos', 'gorro', 'vestido']
+                },
+                opposites: [
+                    {word: 'grande', opposite: 'pequeño'},
+                    {word: 'alto', opposite: 'bajo'},
+                    {word: 'rápido', opposite: 'lento'},
+                    {word: 'caliente', opposite: 'frío'},
+                    {word: 'día', opposite: 'noche'}
+                ],
+                emotions: ['feliz', 'triste', 'enojado', 'asustado', 'sorprendido', 'emocionado']
+            }
+        };
+
+        // Inicialización
+        window.addEventListener('DOMContentLoaded', function() {
+            checkModuleAccess();
+            loadSavedProgress();
+            initializeDragAndDrop();
+        });
+
+        // Verificar acceso al módulo
+        function checkModuleAccess() {
+            const courseProgress = JSON.parse(localStorage.getItem('courseProgress') || '[false,false,false,false,false]');
+            // Descomentado para producción
+            // if (!courseProgress[1]) {
+            //     alert('⚠️ Debes completar el Módulo 2 primero');
+            //     window.location.href = '../modulo2/index.html';
+            // }
+        }
+
+        // Selección de edad
+        function selectAge(age) {
+            selectedAge = age;
+            
+            // Actualizar botones
+            document.querySelectorAll('.age-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Mostrar mensaje
+            document.getElementById('ageMessage').style.display = 'block';
+            document.getElementById('selectedAge').textContent = age;
+            
+            // Ocultar todo el contenido específico de edad
+            document.querySelectorAll('.age-specific-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Mostrar contenido de la edad seleccionada
+            const ageContent = document.getElementById(`content-age-${age}`);
+            if (ageContent) {
+                ageContent.classList.add('active');
+            }
+            
+            // Guardar selección
+            localStorage.setItem('module3SelectedAge', age);
+            
+            showNotification(`✅ Actividades adaptadas para ${age} años`, 'success');
+        }
+
+        // JUEGOS PARA 3 AÑOS
+        
+        // Juego Veo-Veo de Colores
+        function startVocabGame3() {
+            if (!checkAgeSelected()) return;
+            
+            document.getElementById('veoVeoGame3').classList.remove('hidden');
+            initializeVeoVeoGame();
+        }
+
+        function initializeVeoVeoGame() {
+            const colors = ['rojo', 'azul', 'amarillo', 'verde'];
+            const objects = {
+                rojo: ['🍎 manzana', '🍓 fresa', '❤️ corazón', '🌹 rosa'],
+                azul: ['🌊 agua', '🐟 pez', '👕 camisa', '🌌 cielo'],
+                amarillo: ['☀️ sol', '🌻 girasol', '🍌 plátano', '⭐ estrella'],
+                verde: ['🌳 árbol', '🥦 brócoli', '🐸 rana', '🌿 hoja']
+            };
+            
+            const targetColor = colors[Math.floor(Math.random() * colors.length)];
+            document.getElementById('targetColor').textContent = targetColor.toUpperCase();
+            document.getElementById('targetColor').style.color = getColorHex(targetColor);
+            
+            const objectsContainer = document.getElementById('veoVeoObjects');
+            objectsContainer.innerHTML = '';
+            
+            // Añadir objetos correctos
+            const correctObjects = objects[targetColor];
+            const selectedCorrect = correctObjects[Math.floor(Math.random() * correctObjects.length)];
+            
+            // Añadir objetos incorrectos
+            let allObjects = [selectedCorrect];
+            for (let color in objects) {
+                if (color !== targetColor) {
+                    const wrongObject = objects[color][Math.floor(Math.random() * objects[color].length)];
+                    allObjects.push(wrongObject);
+                }
+            }
+            
+            // Mezclar
+            allObjects.sort(() => Math.random() - 0.5);
+            
+            allObjects.forEach(obj => {
+                const div = document.createElement('div');
+                div.className = 'interactive-element';
+                div.textContent = obj;
+                div.onclick = () => checkVeoVeoAnswer(obj, targetColor, objects);
+                objectsContainer.appendChild(div);
+            });
+        }
+
+        function checkVeoVeoAnswer(selected, targetColor, objects) {
+            const feedback = document.getElementById('veoVeoFeedback');
+            const isCorrect = objects[targetColor].includes(selected);
+            
+            if (isCorrect) {
+                feedback.className = 'feedback-box feedback-correct show';
+                feedback.innerHTML = `✅ ¡Muy bien! ${selected} es de color ${targetColor}`;
+                updateScore(10);
+            } else {
+                feedback.className = 'feedback-box feedback-incorrect show';
+                feedback.innerHTML = `❌ Intenta otra vez. Ese no es de color ${targetColor}`;
+            }
+        }
+
+        function nextVeoVeoRound() {
+            initializeVeoVeoGame();
+            document.getElementById('veoVeoFeedback').className = 'feedback-box';
+        }
+
+        function closeVeoVeoGame() {
+            document.getElementById('veoVeoGame3').classList.add('hidden');
+            markActivityComplete('vocab-game-3');
+        }
+
+        function getColorHex(color) {
+            const colors = {
+                rojo: '#ff0000',
+                azul: '#0000ff',
+                amarillo: '#ffff00',
+                verde: '#00ff00'
+            };
+            return colors[color] || '#000000';
+        }
+
+        // Juego de Sonidos de Animales
+        function startAnimalSounds3() {
+            if (!checkAgeSelected()) return;
+            
+            document.getElementById('animalSoundsGame3').classList.remove('hidden');
+            initializeAnimalGame();
+        }
+
+        function initializeAnimalGame() {
+            const animals = [
+                {emoji: '🐮', name: 'vaca', sound: 'muuu'},
+                {emoji: '🐶', name: 'perro', sound: 'guau guau'},
+                {emoji: '🐱', name: 'gato', sound: 'miau'},
+                {emoji: '🐷', name: 'cerdo', sound: 'oink oink'},
+                {emoji: '🐔', name: 'pollo', sound: 'pío pío'}
+            ];
+            
+            const current = animals[Math.floor(Math.random() * animals.length)];
+            document.getElementById('animalImage').textContent = current.emoji;
+            
+            const optionsContainer = document.getElementById('animalOptions');
+            optionsContainer.innerHTML = '';
+            
+            // Crear opciones
+            let options = [current.name];
+            while (options.length < 3) {
+                const random = animals[Math.floor(Math.random() * animals.length)].name;
+                if (!options.includes(random)) {
+                    options.push(random);
+                }
+            }
+            
+            options.sort(() => Math.random() - 0.5);
+            
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'btn btn-info';
+                btn.textContent = opt;
+                btn.onclick = () => checkAnimalAnswer(opt, current.name);
+                optionsContainer.appendChild(btn);
+            });
+            
+            // Guardar el sonido actual
+            window.currentAnimalSound = current.sound;
+        }
+
+        function playAnimalSound() {
+            // Simulación de sonido con texto
+            const soundText = document.createElement('div');
+            soundText.style.cssText = 'font-size: 2rem; font-weight: bold; color: #f093fb; animation: pulse 1s;';
+            soundText.textContent = window.currentAnimalSound.toUpperCase();
+            
+            const gameArea = document.querySelector('#animalSoundsGame3 .game-area');
+            const existing = gameArea.querySelector('.sound-text');
+            if (existing) existing.remove();
+            
+            soundText.className = 'sound-text';
+            gameArea.insertBefore(soundText, gameArea.firstChild);
+            
+            setTimeout(() => soundText.remove(), 2000);
+        }
+
+        function checkAnimalAnswer(selected, correct) {
+            const feedback = document.getElementById('animalFeedback');
+            
+            if (selected === correct) {
+                feedback.className = 'feedback-box feedback-correct show';
+                feedback.innerHTML = `✅ ¡Correcto! Es un ${correct}`;
+                updateScore(10);
+                
+                setTimeout(() => {
+                    initializeAnimalGame();
+                    feedback.className = 'feedback-box';
+                }, 2000);
+            } else {
+                feedback.className = 'feedback-box feedback-incorrect show';
+                feedback.innerHTML = `❌ No es ${selected}. Escucha otra vez el sonido.`;
+            }
+        }
+
+        function closeAnimalSoundsGame() {
+            document.getElementById('animalSoundsGame3').classList.add('hidden');
+            markActivityComplete('animal-sounds-3');
+        }
+
+        // Juego de Partes del Cuerpo
+        function startBodyParts3() {
+            if (!checkAgeSelected()) return;
+            
+            const gameHTML = `
+                <div class="game-container">
+                    <h3>👶 Mi Cuerpo</h3>
+                    <div class="game-area" style="text-align: center;">
+                        <div style="font-size: 8rem;">👦</div>
+                        <p style="font-size: 1.3rem; font-weight: bold; margin: 1rem;">
+                            Simón dice: ¡Toca tu <span id="bodyPartTarget" style="color: #f093fb;">NARIZ</span>!
+                        </p>
+                        <div id="bodyPartsOptions" style="display: flex; justify-content: center; gap: 1rem; margin: 2rem 0;">
+                            <button class="btn btn-info" onclick="checkBodyPart('cabeza')">👤 Cabeza</button>
+                            <button class="btn btn-info" onclick="checkBodyPart('ojos')">👀 Ojos</button>
+                            <button class="btn btn-info" onclick="checkBodyPart('nariz')">👃 Nariz</button>
+                            <button class="btn btn-info" onclick="checkBodyPart('boca')">👄 Boca</button>
+                            <button class="btn btn-info" onclick="checkBodyPart('manos')">👐 Manos</button>
+                            <button class="btn btn-info" onclick="checkBodyPart('pies')">👣 Pies</button>
+                        </div>
+                    </div>
+                    <div class="feedback-box" id="bodyPartsFeedback"></div>
+                    <button class="btn" onclick="this.parentElement.remove(); markActivityComplete('body-parts-3')">Cerrar</button>
+                </div>
+            `;
+            
+            const container = document.createElement('div');
+            container.innerHTML = gameHTML;
+            document.querySelector('[data-activity="body-parts-3"]').parentElement.appendChild(container.firstElementChild);
+            
+            startSimonSays();
+        }
+
+        function startSimonSays() {
+            const parts = ['cabeza', 'ojos', 'nariz', 'boca', 'manos', 'pies'];
+            const target = parts[Math.floor(Math.random() * parts.length)];
+            document.getElementById('bodyPartTarget').textContent = target.toUpperCase();
+            window.currentBodyPart = target;
+        }
+
+        function checkBodyPart(selected) {
+            const feedback = document.getElementById('bodyPartsFeedback');
+            
+            if (selected === window.currentBodyPart) {
+                feedback.className = 'feedback-box feedback-correct show';
+                feedback.innerHTML = `✅ ¡Muy bien! Tocaste tu ${selected}`;
+                updateScore(10);
+                
+                setTimeout(() => {
+                    startSimonSays();
+                    feedback.className = 'feedback-box';
+                }, 1500);
+            } else {
+                feedback.className = 'feedback-box feedback-incorrect show';
+                feedback.innerHTML = `❌ Ese no es tu ${window.currentBodyPart}`;
+            }
+        }
+      // JUEGOS PARA 4 AÑOS
+
+        // Constructor de Oraciones
+        function startSentenceBuilder4() {
+            if (!checkAgeSelected()) return;
+            
+            document.getElementById('sentenceBuilder4').classList.remove('hidden');
+            initializeSentenceBuilder();
+        }
+
+        function initializeSentenceBuilder() {
+            const data = contentDatabase[4].sentences;
+            
+            // Crear una oración objetivo
+            const targetSentence = [
+                data.subjects[Math.floor(Math.random() * data.subjects.length)],
+                data.verbs[Math.floor(Math.random() * data.verbs.length)],
+                'la',
+                data.objects[Math.floor(Math.random() * data.objects.length)]
+            ];
+            
+            window.targetSentence = targetSentence.join(' ');
+            
+            // Mezclar las palabras
+            const mixedWords = [...targetSentence, 'el', 'un', 'con'].sort(() => Math.random() - 0.5);
+            
+            const wordBank = document.getElementById('availableWords');
+            wordBank.innerHTML = '';
+            
+            mixedWords.forEach((word, index) => {
+                const wordDiv = document.createElement('div');
+                wordDiv.className = 'drag-item';
+                wordDiv.draggable = true;
+                wordDiv.textContent = word;
+                wordDiv.id = `word-${index}`;
+                wordDiv.ondragstart = (e) => dragStart(e);
+                wordBank.appendChild(wordDiv);
+            });
+            
+            const sentenceZone = document.getElementById('sentenceZone');
+            sentenceZone.innerHTML = '<p style="color: #999;">Arrastra las palabras aquí para formar una oración</p>';
+        }
+
+        function checkSentence() {
+            const sentenceZone = document.getElementById('sentenceZone');
+            const words = Array.from(sentenceZone.querySelectorAll('.drag-item')).map(el => el.textContent);
+            const formed = words.join(' ');
+            
+            const feedback = document.getElementById('sentenceFeedback');
+            
+            // Verificar si la oración tiene sentido (simplificado)
+            if (words.length >= 3 && words.length <= 5) {
+                feedback.className = 'feedback-box feedback-correct show';
+                feedback.innerHTML = `✅ ¡Excelente! Formaste la oración: "${formed}"`;
+                updateScore(15);
+                
+                setTimeout(() => {
+                    initializeSentenceBuilder();
+                    feedback.className = 'feedback-box';
+                }, 2000);
+            } else if (words.length === 0) {
+                feedback.className = 'feedback-box feedback-incorrect show';
+                feedback.innerHTML = '❌ Arrastra palabras para formar una oración';
+            } else {
+                feedback.className = 'feedback-box feedback-incorrect show';
+                feedback.innerHTML = '❌ Intenta formar una oración más completa';
+            }
+        }
+
+        function closeSentenceBuilder() {
+            document.getElementById('sentenceBuilder4').classList.add('hidden');
+            markActivityComplete('sentence-4');
+        }
+
+        // Juego de Preguntas
+        function startQuestionGame4() {
+            if (!checkAgeSelected()) return;
+            
+            const gameHTML = `
+                <div class="game-container">
+                    <h3>❓ ¿Qué? ¿Dónde? ¿Cuándo?</h3>
+                    <div class="game-area">
+                        <div style="text-align: center;">
+                            <div style="font-size: 4rem; margin: 1rem;">🏖️</div>
+                            <p style="font-size: 1.2rem;">La familia fue a la playa el domingo</p>
+                        </div>
+                        <div style="margin: 2rem 0;">
+                            <p style="font-weight: bold;">Responde las preguntas:</p>
+                            <div class="quiz-question" style="margin: 1rem 0;">
+                                <p>¿DÓNDE fue la familia?</p>
+                                <div style="display: flex; gap: 1rem; margin: 1rem 0;">
+                                    <button class="btn btn-info" onclick="checkQuestionAnswer('playa', true)">A la playa</button>
+                                    <button class="btn btn-info" onclick="checkQuestionAnswer('parque', false)">Al parque</button>
+                                    <button class="btn btn-info" onclick="checkQuestionAnswer('casa', false)">A casa</button>
+                                </div>
+                            </div>
+                            <div class="quiz-question" style="margin: 1rem 0;">
+                                <p>¿CUÁNDO fueron?</p>
+                                <div style="display: flex; gap: 1rem; margin: 1rem 0;">
+                                    <button class="btn btn-info" onclick="checkQuestionAnswer('lunes', false)">El lunes</button>
+                                    <button class="btn btn-info" onclick="checkQuestionAnswer('domingo', true)">El domingo</button>
+                                    <button class="btn btn-info" onclick="checkQuestionAnswer('martes', false)">El martes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feedback-box" id="questionFeedback"></div>
+                    <button class="btn" onclick="this.parentElement.remove(); markActivityComplete('questions-4')">Cerrar</button>
+                </div>
+            `;
+            
+            const container = document.createElement('div');
+            container.innerHTML = gameHTML;
+            document.querySelector('[data-activity="questions-4"]').parentElement.appendChild(container.firstElementChild);
+        }
+
+        function checkQuestionAnswer(answer, isCorrect) {
+            const feedback = document.getElementById('questionFeedback');
+            
+            if (isCorrect) {
+                feedback.className = 'feedback-box feedback-correct show';
+                feedback.innerHTML = '✅ ¡Correcto! Muy bien respondido';
+                updateScore(10);
+            } else {
+                feedback.className = 'feedback-box feedback-incorrect show';
+                feedback.innerHTML = '❌ Intenta otra vez. Lee la oración con atención';
+            }
+        }
+
+        // Juego de Secuencias
+        function startSequenceGame4() {
+            if (!checkAgeSelected()) return;
+            
+            const gameHTML = `
+                <div class="game-container">
+                    <h3>📅 Ordena la Secuencia</h3>
+                    <div class="game-area">
+                        <p style="font-size: 1.2rem; font-weight: bold;">Ordena lo que hace María en la mañana:</p>
+                        <div id="sequenceItems" style="margin: 2rem 0;">
+                            <div class="drag-item" draggable="true" data-order="3">🍳 Desayuna</div>
+                            <div class="drag-item" draggable="true" data-order="1">🛏️ Se levanta</div>
+                            <div class="drag-item" draggable="true" data-order="4">🎒 Va a la escuela</div>
+                            <div class="drag-item" draggable="true" data-order="2">🪥 Se lava los dientes</div>
+                        </div>
+                        <div class="drop-zone" id="sequenceZone">
+                            <p>Arrastra aquí en el orden correcto</p>
+                        </div>
+                        <button class="btn btn-success" onclick="checkSequence()">Verificar Orden</button>
+                    </div>
+                    <div class="feedback-box" id="sequenceFeedback"></div>
+                    <button class="btn" onclick="this.parentElement.remove(); markActivityComplete('sequence-4')">Cerrar</button>
+                </div>
+            `;
+            
+            const container = document.createElement('div');
+            container.innerHTML = gameHTML;
+            document.querySelector('[data-activity="sequence-4"]').parentElement.appendChild(container.firstElementChild);
+            
+            // Inicializar drag and drop para esta actividad
+            initializeSequenceDrag();
+        }
+
+        function initializeSequenceDrag() {
+            const items = document.querySelectorAll('#sequenceItems .drag-item');
+            const zone = document.getElementById('sequenceZone');
+            
+            items.forEach(item => {
+                item.addEventListener('dragstart', dragStart);
+            });
+            
+            zone.addEventListener('dragover', dragOver);
+            zone.addEventListener('drop', drop);
+        }
+
+        function checkSequence() {
+            const zone = document.getElementById('sequenceZone');
+            const items = Array.from(zone.querySelectorAll('.drag-item'));
+            const feedback = document.getElementById('sequenceFeedback');
+            
+            if (items.length !== 4) {
+                feedback.className = 'feedback-box feedback-incorrect show';
+                feedback.innerHTML = '❌ Arrastra todas las actividades';
+                return;
+            }
+            
+            const order = items.map(item => parseInt(item.dataset.order));
+            const isCorrect = order.every((val, index) => val === index + 1);
+            
+            if (isCorrect) {
+                feedback.className = 'feedback-box feedback-correct show';
+                feedback.innerHTML = '✅ ¡Perfecto! Has ordenado correctamente la secuencia';
+                updateScore(20);
+            } else {
+                feedback.className = 'feedback-box feedback-incorrect show';
+                feedback.innerHTML = '❌ El orden no es correcto. Piensa: ¿qué hace María primero?';
+            }
+        }
+
+        // JUEGOS PARA 5 AÑOS
+
+        // Creador de Historias
+        function startStoryCreator5() {
+            if (!checkAgeSelected()) return;
+            
+            document.getElementById('storyCreator5').classList.remove('hidden');
+            initializeStoryCreator();
+        }
+
+        function initializeStoryCreator() {
+            const elements = contentDatabase[5].storyElements;
+            
+            const imageBank = document.getElementById('imageBank');
+            imageBank.innerHTML = '';
+            
+            // Crear elementos draggables
+            const allElements = [
+                ...elements.characters,
+                ...elements.settings,
+                { emoji: '❓', text: 'problema' },
+                { emoji: '💡', text: 'solución' }
+            ];
+            
+            allElements.forEach((element, index) => {
+                const div = document.createElement('div');
+                div.className = 'drag-item';
+                div.draggable = true;
+                div.id = `story-element-${index}`;
+                div.textContent = typeof element === 'string' ? element : element.emoji;
+                div.dataset.element = typeof element === 'string' ? element : element.text;
+                div.ondragstart = dragStart;
+                imageBank.appendChild(div);
+            });
+            
+            // Limpiar zonas
+            ['storyBeginning', 'storyMiddle', 'storyEnd'].forEach(id => {
+                const zone = document.getElementById(id);
+                zone.innerHTML = 'Arrastra una imagen aquí';
+                zone.ondragover = dragOver;
+                zone.ondrop = drop;
+            });
+        }
+
+        function tellStory() {
+            const beginning = document.getElementById('storyBeginning').querySelector('.drag-item');
+            const middle = document.getElementById('storyMiddle').querySelector('.drag-item');
+            const end = document.getElementById('storyEnd').querySelector('.drag-item');
+            
+            const feedback = document.getElementById('storyFeedback');
+            
+            if (!beginning || !middle || !end) {
+                feedback.className = 'feedback-box feedback-incorrect show';
+                feedback.innerHTML = '❌ Completa todas las partes de la historia';
+                return;
+            }
+            
+            const story = `
+                <strong>Tu historia:</strong><br>
+                Había una vez ${beginning.dataset.element}.<br>
+                Un día, ${middle.dataset.element}.<br>
+                Al final, ${end.dataset.element}.<br>
+                ¡Y todos fueron felices!
+            `;
+            
+            feedback.className = 'feedback-box feedback-correct show';
+            feedback.innerHTML = `✅ ¡Qué historia tan creativa!<br>${story}`;
+            updateScore(25);
+            
+            markActivityComplete('create-story-5');
+        }
+
+        function closeStoryCreator() {
+            document.getElementById('storyCreator5').classList.add('hidden');
+        }
+
+        // Juego de Descripción
+        function startDescriptionGame5() {
+            if (!checkAgeSelected()) return;
+            
+            const objects = ['🎈 globo', '🚗 carro', '🌳 árbol', '📚 libro', '⚽ pelota'];
+            const selected = objects[Math.floor(Math.random() * objects.length)];
+            
+            const gameHTML = `
+                <div class="game-container">
+                    <h3>🔍 Describe y Adivina</h3>
+                    <div class="game-area">
+                        <div style="text-align: center;">
+                            <div style="font-size: 5rem; margin: 1rem;">${selected.split(' ')[0]}</div>
+                            <p style="font-size: 1.2rem;">Describe este objeto usando estas palabras:</p>
+                            <div style="margin: 2rem 0;">
+                                <span class="interactive-element">color</span>
+                                <span class="interactive-element">tamaño</span>
+                                <span class="interactive-element">forma</span>
+                                <span class="interactive-element">para qué sirve</span>
+                                <span class="interactive-element">dónde lo encuentras</span>
+                            </div>
+                            <textarea id="description" rows="4" style="width: 100%; padding: 1rem; border: 2px solid #667eea; border-radius: 10px;" 
+                                placeholder="Escribe tu descripción aquí..."></textarea>
+                            <button class="btn btn-success" onclick="checkDescription('${selected}')">Verificar Descripción</button>
+                        </div>
+                    </div>
+                    <div class="feedback-box" id="descriptionFeedback"></div>
+                    <button class="btn" onclick="this.parentElement.remove(); markActivityComplete('describe-5')">Cerrar</button>
+                </div>
+            `;
+            
+            const container = document.createElement('div');
+            container.innerHTML = gameHTML;
+            document.querySelector('[data-activity="describe-5"]').parentElement.appendChild(container.firstElementChild);
+        }
+
+        function checkDescription(object) {
+            const description = document.getElementById('description').value.toLowerCase();
+            const feedback = document.getElementById('descriptionFeedback');
+            
+            const keywords = ['color', 'tamaño', 'forma', 'sirve', 'encuentr'];
+            const usedKeywords = keywords.filter(word => description.includes(word));
+            
+            if (description.length < 20) {
+                feedback.className = 'feedback-box feedback-incorrect show';
+                feedback.innerHTML = '❌ Tu descripción es muy corta. Agrega más detalles';
+            } else if (usedKeywords.length >= 3) {
+                feedback.className = 'feedback-box feedback-correct show';
+                feedback.innerHTML = `✅ ¡Excelente descripción! Usaste ${usedKeywords.length} características`;
+                updateScore(20);
+            } else {
+                feedback.className = 'feedback-box feedback-incorrect show';
+                feedback.innerHTML = `❌ Intenta usar más características. Solo usaste ${usedKeywords.length}`;
+            }
+        }
+
+        // Juego de Categorías
+        function startCategoryGame5() {
+            if (!checkAgeSelected()) return;
+            
+            const categories = contentDatabase[5].categories;
+            
+            const gameHTML = `
+                <div class="game-container">
+                    <h3>📦 Juego de Categorías</h3>
+                    <div class="game-area">
+                        <p style="font-size: 1.2rem; font-weight: bold;">Arrastra cada palabra a su categoría:</p>
+                        
+                        <div id="categoryWords" style="background: #f8f9fa; padding: 1rem; border-radius: 10px; margin: 1rem 0;">
+                            <!-- Palabras mezcladas -->
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0;">
+                            <div>
+                                <h4>🦁 Animales</h4>
+                                <div class="drop-zone" id="category-animals" data-category="animals">
+                                    Arrastra aquí
+                                </div>
+                            </div>
+                            <div>
+                                <h4>🚗 Transporte</h4>
+                                <div class="drop-zone" id="category-transport" data-category="transport">
+                                    Arrastra aquí
+                                </div>
+                            </div>
+                            <div>
+                                <h4>👕 Ropa</h4>
+                                <div class="drop-zone" id="category-clothes" data-category="clothes">
+                                    Arrastra aquí
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-success" onclick="checkCategories()">Verificar</button>
+                    </div>
+                    <div class="feedback-box" id="categoryFeedback"></div>
+                    <button class="btn" onclick="this.parentElement.remove(); markActivityComplete('category-5')">Cerrar</button>
+                </div>
+            `;
+            
+            const container = document.createElement('div');
+            container.innerHTML = gameHTML;
+            document.querySelector('[data-activity="category-5"]').parentElement.appendChild(container.firstElementChild);
+            
+            // Llenar con palabras
+            const wordsContainer = document.getElementById('categoryWords');
+            const allWords = [];
+            
+            for (let cat in categories) {
+                categories[cat].slice(0, 2).forEach(word => {
+                    allWords.push({ word: word, category: cat });
+                });
+            }
+            
+            allWords.sort(() => Math.random() - 0.5);
+            
+            allWords.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'drag-item';
+                div.draggable = true;
+                div.textContent = item.word;
+                div.dataset.category = item.category;
+                div.id = `cat-word-${index}`;
+                div.ondragstart = dragStart;
+                wordsContainer.appendChild(div);
+            });
+            
+            // Configurar drop zones
+            document.querySelectorAll('#category-animals, #category-transport, #category-clothes').forEach(zone => {
+                zone.ondragover = dragOver;
+                zone.ondrop = drop;
+            });
+        }
+
+        function checkCategories() {
+            const feedback = document.getElementById('categoryFeedback');
+            let correct = 0;
+            let total = 0;
+            
+            ['animals', 'transport', 'clothes'].forEach(cat => {
+                const zone = document.getElementById(`category-${cat}`);
+                const items = zone.querySelectorAll('.drag-item');
+                
+                items.forEach(item => {
+                    total++;
+                    if (item.dataset.category === cat) {
+                        correct++;
+                    }
+                });
+            });
+            
+            if (total === 0) {
+                feedback.className = 'feedback-box feedback-incorrect show';
+                feedback.innerHTML = '❌ Arrastra las palabras a sus categorías';
+            } else if (correct === total && total === 6) {
+                feedback.className = 'feedback-box feedback-correct show';
+                feedback.innerHTML = '✅ ¡Perfecto! Todas las palabras están en su categoría correcta';
+                updateScore(30);
+            } else {
+                feedback.className = 'feedback-box feedback-incorrect show';
+                feedback.innerHTML = `❌ ${correct} de ${total} correctas. Revisa las categorías`;
+            }
+        }
+      // FUNCIONES DE CUENTOS INTERACTIVOS
+
+        function startStory3_1() {
+            if (!checkAgeSelected()) return;
+            
+            document.getElementById('interactiveStory3').classList.remove('hidden');
+            storyPage = 0;
+            loadStoryPage();
+        }
+
+        function startStory3_2() {
+            if (!checkAgeSelected()) return;
+            
+            const storyHTML = `
+                <div class="game-container">
+                    <h3>🌙 La Luna y las Estrellas - Completa el Cuento</h3>
+                    <div class="game-area">
+                        <div style="font-size: 1.1rem; line-height: 2;">
+                            <p>La luna 🌙 brillaba en el <input type="text" placeholder="cielo" style="border-bottom: 2px solid #667eea; width: 100px;">.</p>
+                            <p>Las estrellas ⭐ eran muy <input type="text" placeholder="brillantes" style="border-bottom: 2px solid #667eea; width: 100px;">.</p>
+                            <p>El niño las miraba desde su <input type="text" placeholder="ventana" style="border-bottom: 2px solid #667eea; width: 100px;">.</p>
+                            <p>Y se quedó <input type="text" placeholder="dormido" style="border-bottom: 2px solid #667eea; width: 100px;"> soñando.</p>
+                        </div>
+                        <button class="btn btn-success" onclick="checkStoryCompletion()">Verificar Cuento</button>
+                    </div>
+                    <div class="feedback-box" id="storyCompletionFeedback"></div>
+                    <button class="btn" onclick="this.parentElement.remove(); markActivityComplete('story-3-2')">Cerrar</button>
+                </div>
+            `;
+            
+            const container = document.createElement('div');
+            container.innerHTML = storyHTML;
+            document.querySelector('[data-activity="story-3-2"]').parentElement.appendChild(container.firstElementChild);
+        }
+
+        function loadStoryPage() {
+            const story = contentDatabase[3].stories[0];
+            const content = document.getElementById('storyContent');
+            const interaction = document.getElementById('storyInteraction');
+            
+            if (storyPage < story.pages.length) {
+                content.innerHTML = `
+                    <div style="text-align: center;">
+                        <p style="font-size: 1.5rem; margin: 2rem 0;">${story.pages[storyPage]}</p>
+                    </div>
+                `;
+                
+                // Agregar interacción según la página
+                if (storyPage === 1) {
+                    interaction.innerHTML = `
+                        <div style="text-align: center;">
+                            <p>¡Salta como el conejito!</p>
+                            <button class="btn btn-warning" onclick="jumpLikeRabbit()">🐰 SALTAR</button>
+                        </div>
+                    `;
+                } else if (storyPage === 3) {
+                    interaction.innerHTML = `
+                        <div style="text-align: center;">
+                            <p>Haz el sonido de comer:</p>
+                            <button class="btn btn-warning" onclick="makeEatingSound()">🥕 ÑAM ÑAM</button>
+                        </div>
+                    `;
+                } else {
+                    interaction.innerHTML = '';
+                }
+            }
+        }
+
+        function nextStoryPage() {
+            storyPage++;
+            if (storyPage >= contentDatabase[3].stories[0].pages.length) {
+                closeStory();
+                markActivityComplete('story-3-1');
+                showNotification('🎉 ¡Cuento completado!', 'success');
+            } else {
+                loadStoryPage();
+            }
+        }
+
+        function closeStory() {
+            document.getElementById('interactiveStory3').classList.add('hidden');
+        }
+
+        function jumpLikeRabbit() {
+            const btn = event.target;
+            btn.style.animation = 'bounce 0.5s';
+            setTimeout(() => btn.style.animation = '', 500);
+            updateScore(5);
+            showNotification('🐰 ¡Hop! ¡Hop!', 'success');
+        }
+
+        function makeEatingSound() {
+            const btn = event.target;
+            btn.textContent = 'ÑAM ÑAM ÑAM!';
+            setTimeout(() => btn.textContent = '🥕 ÑAM ÑAM', 1000);
+            updateScore(5);
+            showNotification('🥕 ¡Qué rico!', 'success');
+        }
+
+        function checkStoryCompletion() {
+            const inputs = document.querySelectorAll('input[type="text"]');
+            const filled = Array.from(inputs).filter(input => input.value.trim().length > 0);
+            const feedback = document.getElementById('storyCompletionFeedback');
+            
+            if (filled.length === inputs.length) {
+                feedback.className = 'feedback-box feedback-correct show';
+                feedback.innerHTML = '✅ ¡Excelente! Completaste el cuento';
+                updateScore(15);
+            } else {
+                feedback.className = 'feedback-box feedback-incorrect show';
+                feedback.innerHTML = `❌ Completa todas las palabras (${filled.length}/${inputs.length})`;
+            }
+        }
+
+        // FUNCIONES DE CANCIONES
+
+        function startSong3_1() {
+            if (!checkAgeSelected()) return;
+            
+            const song = contentDatabase[3].songs[0];
+            const songHTML = `
+                <div class="game-container">
+                    <h3>🎵 ${song.title}</h3>
+                    <div class="game-area" style="text-align: center;">
+                        <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                            <pre style="font-size: 1.2rem; line-height: 2;">${song.lyrics}</pre>
+                        </div>
+                        <div style="margin: 2rem 0;">
+                            <button class="btn btn-warning" onclick="playSongAnimation()">🎶 Cantar y Bailar</button>
+                        </div>
+                        <p>Practica los números del 1 al 10 con movimientos</p>
+                    </div>
+                    <button class="btn" onclick="this.parentElement.remove(); markActivityComplete('song-3-1')">Cerrar</button>
+                </div>
+            `;
+            
+            const container = document.createElement('div');
+            container.innerHTML = songHTML;
+            document.querySelector('[data-activity="song-3-1"]').parentElement.appendChild(container.firstElementChild);
+        }
+
+        function startSong3_2() {
+            if (!checkAgeSelected()) return;
+            
+            const colors = ['🔴 rojo', '🟠 naranja', '🟡 amarillo', '🟢 verde', '🔵 azul', '🟣 morado'];
+            
+            const songHTML = `
+                <div class="game-container">
+                    <h3>🌈 El Arcoíris Musical</h3>
+                    <div class="game-area">
+                        <div style="text-align: center;">
+                            <div style="font-size: 3rem; margin: 2rem 0;">🌈</div>
+                            <p style="font-size: 1.2rem;">Canta los colores del arcoíris:</p>
+                            <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin: 2rem 0;">
+                                ${colors.map(color => `
+                                    <button class="interactive-element" onclick="singColor('${color}')">
+                                        ${color}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div id="colorSong" style="text-align: center; font-size: 1.5rem; margin: 2rem 0;"></div>
+                    </div>
+                    <button class="btn" onclick="this.parentElement.remove(); markActivityComplete('song-3-2')">Cerrar</button>
+                </div>
+            `;
+            
+            const container = document.createElement('div');
+            container.innerHTML = songHTML;
+            document.querySelector('[data-activity="song-3-2"]').parentElement.appendChild(container.firstElementChild);
+        }
+
+        function playSongAnimation() {
+            const btn = event.target;
+            let count = 1;
+            
+            const interval = setInterval(() => {
+                btn.textContent = `🎵 ${count} 🎵`;
+                count++;
+                if (count > 10) {
+                    clearInterval(interval);
+                    btn.textContent = '🎶 Cantar y Bailar';
+                    updateScore(10);
+                    showNotification('🎉 ¡Bravo! Cantaste hasta el 10', 'success');
+                }
+            }, 500);
+        }
+
+        function singColor(color) {
+            const display = document.getElementById('colorSong');
+            display.textContent = `¡${color.toUpperCase()}!`;
+            display.style.color = color.split(' ')[1];
+            
+            setTimeout(() => {
+                display.textContent = '';
+            }, 1000);
+            
+            updateScore(2);
+        }
+
+        // FUNCIONES PARA ACTIVIDADES DIARIAS
+
+        function startDailyActivity3() {
+            if (!checkAgeSelected()) return;
+            
+            const foods = contentDatabase[3].vocabulary.foods;
+            
+            const activityHTML = `
+                <div class="game-container">
+                    <h3>🍎 Hora de la Merienda</h3>
+                    <div class="game-area">
+                        <p style="font-size: 1.2rem; text-align: center;">¿Qué quieres comer hoy?</p>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0;">
+                            ${foods.map(food => {
+                                const emoji = {
+                                    'manzana': '🍎',
+                                    'plátano': '🍌',
+                                    'leche': '🥛',
+                                    'pan': '🍞',
+                                    'agua': '💧',
+                                    'galleta': '🍪'
+                                }[food];
+                                return `
+                                    <div class="interactive-element" onclick="selectFood('${food}', '${emoji}')">
+                                        <div style="font-size: 2rem;">${emoji}</div>
+                                        <div>${food}</div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                        <div id="mealPlan" style="background: #f8f9fa; padding: 1rem; border-radius: 10px; margin: 1rem 0;">
+                            <p><strong>Mi merienda:</strong></p>
+                            <div id="selectedFoods"></div>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="this.parentElement.remove(); markActivityComplete('daily-3')">Cerrar</button>
+                </div>
+            `;
+            
+            const container = document.createElement('div');
+            container.innerHTML = activityHTML;
+            document.querySelector('[data-activity="daily-3"]').parentElement.appendChild(container.firstElementChild);
+        }
+
+        function selectFood(food, emoji) {
+            const selected = document.getElementById('selectedFoods');
+            selected.innerHTML += `<span style="margin: 0.5rem;">${emoji} ${food}</span>`;
+            updateScore(5);
+            showNotification(`✅ Agregaste ${food} a tu merienda`, 'success');
+        }
+
+        // FUNCIONES ADICIONALES PARA 4 AÑOS
+
+        function startComprehensionStory4() {
+            if (!checkAgeSelected()) return;
+            
+            const storyHTML = `
+                <div class="game-container">
+                    <h3>🦁 El León y el Ratón</h3>
+                    <div class="game-area">
+                        <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px;">
+                            <p style="font-size: 1.1rem; line-height: 1.8;">
+                                Un día, un ratón pequeño 🐭 pasó cerca de un león dormido 🦁.<br>
+                                El león se despertó y atrapó al ratón.<br>
+                                "Por favor, no me comas", dijo el ratón. "Un día te ayudaré".<br>
+                                El león se rió pero lo dejó ir.<br>
+                                Días después, el león quedó atrapado en una red.<br>
+                                El ratón vino y mordió la red hasta liberarlo.<br>
+                                "Gracias, pequeño amigo", dijo el león.
+                            </p>
+                        </div>
+                    </div>
+                    <button class="btn btn-warning" onclick="startComprehensionQuiz()">Responder Preguntas</button>
+                    <button class="btn" onclick="this.parentElement.remove(); markActivityComplete('comp-story-4')">Cerrar</button>
+                </div>
+            `;
+            
+            const container = document.createElement('div');
+            container.innerHTML = storyHTML;
+            document.querySelector('[data-activity="comp-story-4"]').parentElement.appendChild(container.firstElementChild);
+        }
+
+        function startComprehensionQuiz() {
+            document.getElementById('comprehensionQuiz4').classList.remove('hidden');
+            currentQuizQuestion = 0;
+            loadQuizQuestion();
+        }
+
+        function loadQuizQuestion() {
+            const questions = [
+                {
+                    question: "¿Quién quedó atrapado primero?",
+                    options: ["El ratón", "El león", "Nadie"],
+                    correct: 0
+                },
+                {
+                    question: "¿Cómo ayudó el ratón al león?",
+                    options: ["Le trajo comida", "Mordió la red", "Llamó ayuda"],
+                    correct: 1
+                },
+                {
+                    question: "¿Qué aprendemos del cuento?",
+                    options: ["Los pequeños pueden ayudar", "Los leones son malos", "Los ratones son rápidos"],
+                    correct: 0
+                }
+            ];
+            
+            if (currentQuizQuestion < questions.length) {
+                const q = questions[currentQuizQuestion];
+                document.getElementById('quizQuestion').textContent = q.question;
+                
+                const optionsHTML = q.options.map((opt, idx) => `
+                    <div class="quiz-option" onclick="checkQuizAnswer(${idx}, ${q.correct})">
+                        ${opt}
+                    </div>
+                `).join('');
+                
+                document.getElementById('quizOptions').innerHTML = optionsHTML;
+            }
+        }
+
+        function checkQuizAnswer(selected, correct) {
+            const feedback = document.getElementById('quizFeedback');
+            
+            if (selected === correct) {
+                feedback.className = 'feedback-box feedback-correct show';
+                feedback.innerHTML = '✅ ¡Correcto!';
+                updateScore(10);
+            } else {
+                feedback.className = 'feedback-box feedback-incorrect show';
+                feedback.innerHTML = '❌ Intenta otra vez';
+            }
+        }
+
+        function nextQuizQuestion() {
+            currentQuizQuestion++;
+            if (currentQuizQuestion >= 3) {
+                closeQuiz();
+                showNotification('🎉 ¡Quiz completado!', 'success');
+            } else {
+                loadQuizQuestion();
+                document.getElementById('quizFeedback').className = 'feedback-box';
+            }
+        }
+
+        function closeQuiz() {
+            document.getElementById('comprehensionQuiz4').classList.add('hidden');
+        }
+
+        // FUNCIONES DE RIMAS Y TRABALENGUAS (4 AÑOS)
+
+        function startRhymeGame4() {
+            if (!checkAgeSelected()) return;
+            
+            const rhymes = contentDatabase[4].rhymes.words;
+            const current = rhymes[Math.floor(Math.random() * rhymes.length)];
+            
+            const gameHTML = `
+                <div class="game-container">
+                    <h3>🎪 Encuentra la Rima</h3>
+                    <div class="game-area">
+                        <div style="text-align: center;">
+                            <p style="font-size: 2rem; margin: 2rem 0;">
+                                Encuentra palabras que rimen con: <strong>${current.word}</strong>
+                            </p>
+                            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                                ${current.rhymes.map(rhyme => `
+                                    <button class="interactive-element" onclick="checkRhyme('${rhyme}', true)">
+                                        ${rhyme}
+                                    </button>
+                                `).join('')}
+                                <button class="interactive-element" onclick="checkRhyme('mesa', false)">
+                                    mesa
+                                </button>
+                                <button class="interactive-element" onclick="checkRhyme('libro', false)">
+                                    libro
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feedback-box" id="rhymeFeedback"></div>
+                    <button class="btn" onclick="this.parentElement.remove(); markActivityComplete('rhyme-4')">Cerrar</button>
+                </div>
+            `;
+            
+            const container = document.createElement('div');
+            container.innerHTML = gameHTML;
+            document.querySelector('[data-activity="rhyme-4"]').parentElement.appendChild(container.firstElementChild);
+        }
+
+        function checkRhyme(word, isRhyme) {
+            const feedback = document.getElementById('rhymeFeedback');
+            
+            if (isRhyme) {
+                feedback.className = 'feedback-box feedback-correct show';
+                feedback.innerHTML = `✅ ¡Sí! "${word}" rima perfectamente`;
+                updateScore(10);
+            } else {
+                feedback.className = 'feedback-box feedback-incorrect show';
+                feedback.innerHTML = `❌ "${word}" no rima. Busca palabras con el mismo sonido final`;
+            }
+        }
+
+        function startTongueTwister4() {
+            if (!checkAgeSelected()) return;
+            
+            const twisters = contentDatabase[4].tongueTwisters;
+            
+            const gameHTML = `
+                <div class="game-container">
+                    <h3>👅 Trabalenguas Fáciles</h3>
+                    <div class="game-area">
+                        <div style="text-align: center;">
+                            ${twisters.map((twister, idx) => `
+                                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                                    <p style="font-size: 1.3rem; font-weight: bold;">${twister}</p>
+                                    <button class="btn btn-info" onclick="practiceTwister(${idx})">
+                                        🎤 Practicar
+                                    </button>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div id="twisterFeedback" style="text-align: center; margin: 2rem 0;"></div>
+                    </div>
+                    <button class="btn" onclick="this.parentElement.remove(); markActivityComplete('tongue-4')">Cerrar</button>
+                </div>
+            `;
+            
+            const container = document.createElement('div');
+            container.innerHTML = gameHTML;
+            document.querySelector('[data-activity="tongue-4"]').parentElement.appendChild(container.firstElementChild);
+        }
+
+        function practiceTwister(index) {
+            const feedback = document.getElementById('twisterFeedback');
+            feedback.innerHTML = `
+                <div class="alert alert-success">
+                    ¡Excelente práctica! Intenta decirlo más rápido cada vez 🚀
+                </div>
+            `;
+            updateScore(10);
+        }
+
+        // FUNCIONES ADICIONALES PARA 5 AÑOS
+
+        function startDialogGame5() {
+            if (!checkAgeSelected()) return;
+            
+            const dialogHTML = `
+                <div class="game-container">
+                    <h3>💬 Practica Conversaciones</h3>
+                    <div class="game-area">
+                        <p style="font-size: 1.2rem; text-align: center;">Elige un escenario para practicar:</p>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 2rem 0;">
+                            <div class="interactive-element" onclick="startDialog('tienda')">
+                                🏪 En la Tienda
+                            </div>
+                            <div class="interactive-element" onclick="startDialog('doctor')">
+                                🏥 En el Doctor
+                            </div>
+                            <div class="interactive-element" onclick="startDialog('escuela')">
+                                🏫 En la Escuela
+                            </div>
+                            <div class="interactive-element" onclick="startDialog('restaurante')">
+                                🍽️ En el Restaurante
+                            </div>
+                        </div>
+                        <div id="dialogArea" style="display: none;">
+                            <!-- Área de diálogo -->
+                        </div>
+                    </div>
+                    <button class="btn" onclick="this.parentElement.remove(); markActivityComplete('dialog-5')">Cerrar</button>
+                </div>
+            `;
+            
+            const container = document.createElement('div');
+            container.innerHTML = dialogHTML;
+            document.querySelector('[data-activity="dialog-5"]').parentElement.appendChild(container.firstElementChild);
+        }
+
+        function startDialog(scenario) {
+            const dialogArea = document.getElementById('dialogArea');
+            
+            const dialogs = {
+                tienda: [
+                    "Cliente: Buenos días, ¿tiene manzanas?",
+                    "Vendedor: Sí, tenemos manzanas rojas y verdes",
+                    "Cliente: ¿Cuánto cuestan?",
+                    "Vendedor: 2 pesos cada una"
+                ],
+                doctor: [
+                    "Doctor: ¿Qué te duele?",
+                    "Paciente: Me duele la garganta",
+                    "Doctor: Abre la boca y di 'Ahhh'",
+                    "Paciente: Ahhhhh"
+                ],
+                escuela: [
+                    "Profesor: ¿Hiciste la tarea?",
+                    "Estudiante: Sí, está en mi mochila",
+                    "Profesor: Muy bien, sácala por favor",
+                    "Estudiante: Aquí está"
+                ],
+                restaurante: [
+                    "Mesero: ¿Qué desea ordenar?",
+                    "Cliente: Quiero espagueti, por favor",
+                    "Mesero: ¿Algo de beber?",
+                    "Cliente: Jugo de naranja, gracias"
+                ]
+            };
+            
+            dialogArea.style.display = 'block';
+            dialogArea.innerHTML = `
+                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;">
+                    <h4>Practica este diálogo:</h4>
+                    ${dialogs[scenario].map((line, idx) => `
+                        <p style="margin: 0.5rem 0; ${idx % 2 === 0 ? 'text-align: left;' : 'text-align: right; color: #667eea;'}">
+                            ${line}
+                        </p>
+                    `).join('')}
+                </div>
+                <div style="text-align: center;">
+                    <button class="btn btn-success" onclick="completeDialog()">
+                        ✅ Practiqué el Diálogo
+                    </button>
+                </div>
+            `;
+        }
+
+        function completeDialog() {
+            updateScore(15);
+            showNotification('🎭 ¡Excelente práctica de conversación!', 'success');
+        }
+
+        function startOppositeGame5() {
+            if (!checkAgeSelected()) return;
+            
+            const opposites = contentDatabase[5].opposites;
+            
+            const gameHTML = `
+                <div class="game-container">
+                    <h3>↔️ Encuentra el Opuesto</h3>
+                    <div class="game-area">
+                        ${opposites.map((pair, idx) => `
+                            <div style="margin: 1rem 0; padding: 1rem; background: #f8f9fa; border-radius: 10px;">
+                                <p style="font-size: 1.2rem;">
+                                    ${pair.word} ↔️ 
+                                    <input type="text" id="opposite-${idx}" placeholder="escribe el opuesto" 
+                                           style="border-bottom: 2px solid #667eea; width: 150px;">
+                                </p>
+                            </div>
+                        `).join('')}
+                        <button class="btn btn-success" onclick="checkOpposites()">Verificar Respuestas</button>
+                    </div>
+                    <div class="feedback-box" id="oppositesFeedback"></div>
+                    <button class="btn" onclick="this.parentElement.remove(); markActivityComplete('opposite-5')">Cerrar</button>
+                </div>
+            `;
+            
+            const container = document.createElement('div');
+            container.innerHTML = gameHTML;
+            document.querySelector('[data-activity="opposite-5"]').parentElement.appendChild(container.firstElementChild);
+        }
+
+        function checkOpposites() {
+            const opposites = contentDatabase[5].opposites;
+            let correct = 0;
+            
+            opposites.forEach((pair, idx) => {
+                const input = document.getElementById(`opposite-${idx}`);
+                if (input.value.toLowerCase().trim() === pair.opposite) {
+                    correct++;
+                    input.style.borderColor = '#28a745';
+                } else {
+                    input.style.borderColor = '#dc3545';
+                }
+            });
+            
+            const feedback = document.getElementById('oppositesFeedback');
+            
+            if (correct === opposites.length) {
+                feedback.className = 'feedback-box feedback-correct show';
+                feedback.innerHTML = '✅ ¡Perfecto! Conoces todos los opuestos';
+                updateScore(25);
+            } else {
+                feedback.className = 'feedback-box feedback-incorrect show';
+                feedback.innerHTML = `✅ ${correct}/${opposites.length} correctos. Sigue intentando`;
+            }
+        }
+
+        // SISTEMA DE UTILIDADES
+
+        function initializeDragAndDrop() {
+            // Configuración global de drag and drop
+            document.addEventListener('DOMContentLoaded', () => {
+                // Se inicializa cuando se necesita
+            });
+        }
+
+        function dragStart(e) {
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', e.target.innerHTML);
+            e.dataTransfer.setData('elementId', e.target.id);
+            e.target.classList.add('dragging');
+        }
+
+        function dragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            e.dataTransfer.dropEffect = 'move';
+            e.currentTarget.classList.add('drag-over');
+            return false;
+        }
+
+        function drop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+            e.preventDefault();
+            
+            const elementId = e.dataTransfer.getData('elementId');
+            const draggedElement = document.getElementById(elementId);
+            
+            if (draggedElement && e.currentTarget.classList.contains('drop-zone')) {
+                // Si es zona de párrafo, agregar al contenido existente
+                if (e.currentTarget.id === 'sentenceZone') {
+                    if (e.currentTarget.querySelector('p')) {
+                        e.currentTarget.querySelector('p').remove();
+                    }
+                    e.currentTarget.appendChild(draggedElement.cloneNode(true));
+                } else {
+                    e.currentTarget.innerHTML = '';
+                    e.currentTarget.appendChild(draggedElement.cloneNode(true));
+                }
+            }
+            
+            e.currentTarget.classList.remove('drag-over');
+            
+            // Remover clase dragging
+            const dragging = document.querySelector('.dragging');
+            if (dragging) {
+                dragging.classList.remove('dragging');
+            }
+            
+            return false;
+        }
+
+        function checkAgeSelected() {
+            if (!selectedAge) {
+                showNotification('⚠️ Por favor, selecciona primero la edad de tu hijo', 'warning');
+                return false;
+            }
+            return true;
+        }
+
+        function markActivityComplete(activityId) {
+            const card = document.querySelector(`[data-activity="${activityId}"]`);
+            if (card && !card.classList.contains('completed')) {
+                card.classList.add('completed');
+                completedActivities.add(activityId);
+                updateProgress();
+                checkAchievements();
+                saveProgress();
+            }
+        }
+
+        function updateScore(points) {
+            currentScore += points;
+            showNotification(`+${points} puntos`, 'success');
+        }
+
+        function updateProgress() {
+            const progress = (completedActivities.size / totalActivities) * 100;
+            
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            const activitiesText = document.getElementById('activitiesCompleted');
+            
+            if (progressFill) {
+                progressFill.style.width = progress + '%';
+            }
+            if (progressText) {
+                progressText.textContent = Math.round(progress) + '% completado';
+            }
+            if (activitiesText) {
+                activitiesText.textContent = `${completedActivities.size} de ${totalActivities} actividades`;
+            }
+            
+            // Habilitar evaluación final si se completaron suficientes actividades
+            if (completedActivities.size >= 8) {
+                const finalBtn = document.getElementById('finalQuizBtn');
+                if (finalBtn) {
+                    finalBtn.disabled = false;
+                    finalBtn.textContent = '🏆 Comenzar Evaluación Final (Desbloqueado)';
+                }
+            }
+            
+            // Completar módulo si todas las actividades están hechas
+            if (completedActivities.size >= totalActivities) {
+                completeModule();
+            }
+        }
+
+        function checkAchievements() {
+            const completed = completedActivities.size;
+            
+            // Primera actividad
+            if (completed >= 1 && !achievements.has('first')) {
+              achievements.add('first');
+                document.getElementById('badge1').classList.add('unlocked');
+                showNotification('🎯 ¡Logro desbloqueado: Primera Actividad!', 'success');
+            }
+            
+            // 5 Juegos
+            if (completed >= 5 && !achievements.has('games')) {
+                achievements.add('games');
+                document.getElementById('badge2').classList.add('unlocked');
+                showNotification('🎮 ¡Logro desbloqueado: 5 Juegos Completados!', 'success');
+            }
+            
+            // Maestro Musical (completar todas las canciones)
+            const songActivities = ['song-3-1', 'song-3-2'];
+            const songsCompleted = songActivities.every(act => completedActivities.has(act));
+            if (songsCompleted && !achievements.has('music')) {
+                achievements.add('music');
+                document.getElementById('badge3').classList.add('unlocked');
+                showNotification('🎵 ¡Logro desbloqueado: Maestro Musical!', 'success');
+            }
+            
+            // Contador de Cuentos (completar todos los cuentos)
+            const storyActivities = ['story-3-1', 'story-3-2', 'comp-story-4', 'create-story-5'];
+            const storiesCompleted = storyActivities.filter(act => completedActivities.has(act)).length >= 2;
+            if (storiesCompleted && !achievements.has('stories')) {
+                achievements.add('stories');
+                document.getElementById('badge4').classList.add('unlocked');
+                showNotification('📚 ¡Logro desbloqueado: Contador de Cuentos!', 'success');
+            }
+            
+            // Módulo Completo
+            if (completed >= totalActivities && !achievements.has('complete')) {
+                achievements.add('complete');
+                document.getElementById('badge5').classList.add('unlocked');
+                showNotification('🏆 ¡Logro desbloqueado: Módulo Completo!', 'success');
+            }
+        }
+
+        // EVALUACIÓN FINAL
+
+        function startFinalQuiz() {
+            if (!checkAgeSelected()) {
+                showNotification('⚠️ Selecciona la edad de tu hijo primero', 'warning');
+                return;
+            }
+            
+            if (completedActivities.size < 8) {
+                showNotification('⚠️ Completa al menos 8 actividades primero', 'warning');
+                return;
+            }
+            
+            document.getElementById('finalQuizContainer').classList.remove('hidden');
+            initializeFinalQuiz();
+            startQuizTimer();
+        }
+
+        function initializeFinalQuiz() {
+            const questions = getFinalQuizQuestions();
+            window.finalQuizQuestions = questions;
+            window.finalQuizAnswers = [];
+            window.currentFinalQuestion = 0;
+            
+            loadFinalQuestion();
+        }
+
+        function getFinalQuizQuestions() {
+            const questions = {
+                3: [
+                    {
+                        question: "¿Cuál es el color del sol?",
+                        options: ["Azul", "Amarillo", "Verde", "Rojo"],
+                        correct: 1
+                    },
+                    {
+                        question: "¿Qué animal hace 'miau'?",
+                        options: ["Perro", "Vaca", "Gato", "Pato"],
+                        correct: 2
+                    },
+                    {
+                        question: "¿Cuántas manos tienes?",
+                        options: ["Una", "Dos", "Tres", "Cuatro"],
+                        correct: 1
+                    },
+                    {
+                        question: "¿Qué comes en el desayuno?",
+                        options: ["Cena", "Almuerzo", "Pan y leche", "Dormir"],
+                        correct: 2
+                    },
+                    {
+                        question: "¿Dónde viven los peces?",
+                        options: ["En el agua", "En el árbol", "En la casa", "En el cielo"],
+                        correct: 0
+                    }
+                ],
+                4: [
+                    {
+                        question: "Completa: 'El perro ___ en el parque'",
+                        options: ["corre", "vuela", "nada", "duerme"],
+                        correct: 0
+                    },
+                    {
+                        question: "¿Qué va primero: desayuno o almuerzo?",
+                        options: ["Almuerzo", "Desayuno", "Cena", "Merienda"],
+                        correct: 1
+                    },
+                    {
+                        question: "¿Cuál palabra rima con 'gato'?",
+                        options: ["Perro", "Pato", "Casa", "Árbol"],
+                        correct: 1
+                    },
+                    {
+                        question: "¿Qué usas para escribir?",
+                        options: ["Cuchara", "Lápiz", "Plato", "Zapato"],
+                        correct: 1
+                    },
+                    {
+                        question: "¿Cuántos días tiene una semana?",
+                        options: ["5", "6", "7", "8"],
+                        correct: 2
+                    }
+                ],
+                5: [
+                    {
+                        question: "¿Cuál es el opuesto de 'grande'?",
+                        options: ["Alto", "Pequeño", "Gordo", "Largo"],
+                        correct: 1
+                    },
+                    {
+                        question: "¿En qué categoría va 'león'?",
+                        options: ["Transporte", "Animales", "Comida", "Ropa"],
+                        correct: 1
+                    },
+                    {
+                        question: "Ordena: 'niño El juega pelota la con'",
+                        options: [
+                            "La pelota juega con el niño",
+                            "El niño juega con la pelota",
+                            "Con la pelota el niño juega",
+                            "Juega el niño la pelota con"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "¿Qué emoción sientes cuando recibes un regalo?",
+                        options: ["Triste", "Enojado", "Feliz", "Asustado"],
+                        correct: 2
+                    },
+                    {
+                        question: "¿Cuál es el final típico de un cuento?",
+                        options: [
+                            "Había una vez",
+                            "Y colorín colorado",
+                            "En un lugar lejano",
+                            "Érase una vez"
+                        ],
+                        correct: 1
+                    }
+                ]
+            };
+            
+            return questions[selectedAge] || questions[3];
+        }
+
+        function loadFinalQuestion() {
+            const question = window.finalQuizQuestions[window.currentFinalQuestion];
+            const container = document.getElementById('finalQuestion');
+            
+            container.innerHTML = `
+                <p style="font-size: 1.2rem; font-weight: bold;">
+                    Pregunta ${window.currentFinalQuestion + 1} de ${window.finalQuizQuestions.length}
+                </p>
+                <p style="font-size: 1.1rem; margin: 1rem 0;">${question.question}</p>
+                <div class="quiz-options">
+                    ${question.options.map((opt, idx) => `
+                        <div class="quiz-option" onclick="selectFinalAnswer(${idx})">
+                            ${opt}
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function selectFinalAnswer(index) {
+            // Guardar respuesta
+            window.finalQuizAnswers[window.currentFinalQuestion] = index;
+            
+            // Marcar opción seleccionada
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            document.querySelectorAll('.quiz-option')[index].classList.add('selected');
+            
+            // Avanzar automáticamente después de 1 segundo
+            setTimeout(() => {
+                window.currentFinalQuestion++;
+                if (window.currentFinalQuestion < window.finalQuizQuestions.length) {
+                    loadFinalQuestion();
+                } else {
+                    submitFinalQuiz();
+                }
+            }, 1000);
+        }
+
+        function startQuizTimer() {
+            let timeLeft = 300; // 5 minutos
+            
+            quizTimer = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                
+                const display = document.getElementById('quizTimer');
+                if (display) {
+                    display.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }
+                
+                if (timeLeft <= 0) {
+                    clearInterval(quizTimer);
+                    submitFinalQuiz();
+                }
+            }, 1000);
+        }
+
+        function submitFinalQuiz() {
+            clearInterval(quizTimer);
+            
+            // Calcular puntuación
+            let correct = 0;
+            window.finalQuizQuestions.forEach((q, idx) => {
+                if (window.finalQuizAnswers[idx] === q.correct) {
+                    correct++;
+                }
+            });
+            
+            const percentage = (correct / window.finalQuizQuestions.length) * 100;
+            
+            const feedback = document.getElementById('finalFeedback');
+            feedback.className = 'feedback-box show';
+            
+            if (percentage >= 80) {
+                feedback.classList.add('feedback-correct');
+                feedback.innerHTML = `
+                    <h3>🎉 ¡EXCELENTE!</h3>
+                    <p>Puntuación: ${correct}/${window.finalQuizQuestions.length} (${Math.round(percentage)}%)</p>
+                    <p>Has dominado las actividades de estimulación del lenguaje para ${selectedAge} años.</p>
+                `;
+                
+                // Marcar módulo como completado
+                completeModule();
+            } else if (percentage >= 60) {
+                feedback.classList.add('feedback-correct');
+                feedback.innerHTML = `
+                    <h3>👍 ¡Muy Bien!</h3>
+                    <p>Puntuación: ${correct}/${window.finalQuizQuestions.length} (${Math.round(percentage)}%)</p>
+                    <p>Buen trabajo. Practica un poco más las actividades.</p>
+                `;
+            } else {
+                feedback.classList.add('feedback-incorrect');
+                feedback.innerHTML = `
+                    <h3>📚 Sigue Practicando</h3>
+                    <p>Puntuación: ${correct}/${window.finalQuizQuestions.length} (${Math.round(percentage)}%)</p>
+                    <p>Te recomendamos repasar las actividades antes de continuar.</p>
+                `;
+            }
+            
+            // Ocultar el contenedor del quiz después de mostrar resultados
+            setTimeout(() => {
+                document.getElementById('finalQuizContainer').innerHTML = feedback.outerHTML;
+            }, 1000);
+        }
+
+        // FUNCIONES DE SISTEMA
+
+        function completeModule() {
+            // Mostrar botones de navegación
+            document.getElementById('certificateBtn').style.display = 'inline-block';
+            document.getElementById('nextModuleBtn').style.display = 'inline-block';
+            
+            // Actualizar progreso del curso
+            let courseProgress = JSON.parse(localStorage.getItem('courseProgress') || '[false,false,false,false,false]');
+            courseProgress[2] = true; // Módulo 3 completado
+            localStorage.setItem('courseProgress', JSON.stringify(courseProgress));
+            
+            // Logro final
+            if (!achievements.has('complete')) {
+                achievements.add('complete');
+                document.getElementById('badge5').classList.add('unlocked');
+            }
+            
+            showNotification('🎉 ¡FELICITACIONES! Has completado el Módulo 3', 'success');
+            
+            setTimeout(() => {
+                alert(`
+🏆 ¡Módulo 3 Completado!
+
+✅ Has explorado ${completedActivities.size} actividades
+✅ Dominas juegos para ${selectedAge} años
+✅ Conoces canciones y cuentos educativos
+✅ Puedes crear actividades personalizadas
+
+¡Continúa al Módulo 4 para identificar dificultades comunes!
+                `);
+            }, 1000);
+        }
+
+        function generateCertificate() {
+            const userName = prompt('¿Cuál es tu nombre para el certificado?') || 'Estudiante';
+            const currentDate = new Date().toLocaleDateString('es-ES');
+            
+            const certificate = `
+╔════════════════════════════════════════════════════╗
+║                                                    ║
+║         🏆 CERTIFICADO DE COMPLETACIÓN 🏆          ║
+║                                                    ║
+║      ESTIMULACIÓN DEL LENGUAJE INFANTIL           ║
+║                                                    ║
+╠════════════════════════════════════════════════════╣
+║                                                    ║
+║  Certificamos que:                                 ║
+║                                                    ║
+║            ${userName.toUpperCase().padEnd(40, ' ')}║
+║                                                    ║
+║  Ha completado exitosamente el MÓDULO 3:          ║
+║                                                    ║
+║        "ACTIVIDADES Y JUEGOS"                     ║
+║                                                    ║
+║  Competencias Adquiridas:                         ║
+║  ✅ Juegos de vocabulario y construcción          ║
+║  ✅ Cuentos interactivos por edad                 ║
+║  ✅ Canciones educativas                          ║
+║  ✅ Actividades de la vida diaria                 ║
+║  ✅ Ejercicios de comprensión y creatividad       ║
+║                                                    ║
+║  Edad trabajada: ${(selectedAge ? selectedAge + ' años' : 'General').padEnd(32, ' ')}║
+║  Actividades completadas: ${completedActivities.size.toString().padEnd(24, ' ')}║
+║  Puntuación total: ${currentScore.toString().padEnd(31, ' ')}║
+║                                                    ║
+║  Fecha: ${currentDate.padEnd(43, ' ')}║
+║                                                    ║
+║  ID Certificado: MOD3-${Date.now()}      ║
+║                                                    ║
+╚════════════════════════════════════════════════════╝
+            `;
+            
+            // Crear y descargar el archivo
+            const blob = new Blob([certificate], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Certificado_Modulo3_${userName.replace(/\s/g, '_')}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showNotification('🎉 Certificado descargado exitosamente', 'success');
+        }
+
+        function showProgress() {
+            const progress = (completedActivities.size / totalActivities) * 100;
+            
+            let activitiesList = Array.from(completedActivities).join('\n• ') || 'Ninguna aún';
+            let achievementsList = Array.from(achievements).join(', ') || 'Ninguno aún';
+            
+            const progressMessage = `
+📊 TU PROGRESO EN MÓDULO 3:
+
+📈 Progreso general: ${Math.round(progress)}%
+🎮 Actividades completadas: ${completedActivities.size} de ${totalActivities}
+👶 Edad seleccionada: ${selectedAge ? selectedAge + ' años' : 'No seleccionada'}
+🎯 Puntuación total: ${currentScore} puntos
+
+🏆 Logros desbloqueados:
+${achievementsList}
+
+📚 Actividades realizadas:
+- ${activitiesList}
+
+${progress === 100 ? '🎉 ¡MÓDULO COMPLETADO! Descarga tu certificado.' : '💪 ¡Sigue jugando y aprendiendo!'}
+            `;
+            
+            alert(progressMessage);
+        }
+
+        function saveProgress() {
+            const progress = {
+                selectedAge: selectedAge,
+                completedActivities: Array.from(completedActivities),
+                achievements: Array.from(achievements),
+                currentScore: currentScore,
+                lastAccess: new Date().toISOString()
+            };
+            
+            localStorage.setItem('module3Progress', JSON.stringify(progress));
+        }
+
+        function loadSavedProgress() {
+            try {
+                const saved = localStorage.getItem('module3Progress');
+                if (saved) {
+                    const progress = JSON.parse(saved);
+                    
+                    // Restaurar edad
+                    if (progress.selectedAge) {
+                        selectedAge = progress.selectedAge;
+                        setTimeout(() => {
+                            const ageBtn = document.querySelector(`.age-btn[onclick*="${selectedAge}"]`);
+                            if (ageBtn) {
+                                ageBtn.click();
+                            }
+                        }, 500);
+                    }
+                    
+                    // Restaurar actividades completadas
+                    if (progress.completedActivities && Array.isArray(progress.completedActivities)) {
+                        progress.completedActivities.forEach(activity => {
+                            completedActivities.add(activity);
+                            const card = document.querySelector(`[data-activity="${activity}"]`);
+                            if (card) {
+                                card.classList.add('completed');
+                            }
+                        });
+                    }
+                    
+                    // Restaurar logros
+                    if (progress.achievements && Array.isArray(progress.achievements)) {
+                        progress.achievements.forEach(achievement => {
+                            achievements.add(achievement);
+                        });
+                        
+                        // Actualizar badges visualmente
+                        achievements.forEach(ach => {
+                            const badgeMap = {
+                                'first': 'badge1',
+                                'games': 'badge2',
+                                'music': 'badge3',
+                                'stories': 'badge4',
+                                'complete': 'badge5'
+                            };
+                            
+                            if (badgeMap[ach]) {
+                                const badge = document.getElementById(badgeMap[ach]);
+                                if (badge) {
+                                    badge.classList.add('unlocked');
+                                }
+                            }
+                        });
+                    }
+                    
+                    // Restaurar puntuación
+                    if (progress.currentScore) {
+                        currentScore = progress.currentScore;
+                    }
+                    
+                    // Actualizar interfaz
+                    updateProgress();
+                    
+                    // Mostrar botones si está completo
+                    if (completedActivities.size >= totalActivities) {
+                        document.getElementById('certificateBtn').style.display = 'inline-block';
+                        document.getElementById('nextModuleBtn').style.display = 'inline-block';
+                    }
+                }
+            } catch (error) {
+                console.error('Error cargando progreso:', error);
+            }
+        }
+
+        function logout() {
+            if (confirm('¿Estás seguro que quieres salir? Tu progreso se guardará automáticamente.')) {
+                saveProgress();
+                window.location.href = '../index.html';
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            // Remover notificaciones existentes
+            const existingNotifications = document.querySelectorAll('.notification-custom');
+            existingNotifications.forEach(notif => notif.remove());
+            
+            // Crear nueva notificación
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type} notification-custom`;
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                z-index: 9999;
+                min-width: 300px;
+                max-width: 400px;
+                animation: slideInNotification 0.3s ease;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            `;
+            notification.innerHTML = message;
+            document.body.appendChild(notification);
+            
+            // Auto-ocultar después de 3 segundos
+            setTimeout(() => {
+                notification.style.animation = 'slideOutNotification 0.3s ease';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Agregar estilos de animación
+        if (!document.getElementById('notification-styles')) {
+            const style = document.createElement('style');
+            style.id = 'notification-styles';
+            style.textContent = `
+                @keyframes slideInNotification {
+                    from { 
+                        transform: translateX(100%); 
+                        opacity: 0; 
+                    }
+                    to { 
+                        transform: translateX(0); 
+                        opacity: 1; 
+                    }
+                }
+                @keyframes slideOutNotification {
+                    from { 
+                        transform: translateX(0); 
+                        opacity: 1; 
+                    }
+                    to { 
+                        transform: translateX(100%); 
+                        opacity: 0; 
+                    }
+                }
+                .notification-custom {
+                    transition: all 0.3s ease;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Función adicional para juegos de analogías (5 años)
+        function startAnalogiesGame5() {
+            if (!checkAgeSelected()) return;
+            
+            const analogies = [
+                {
+                    text: "Pájaro es a volar como pez es a ___",
+                    answer: "nadar",
+                    options: ["caminar", "nadar", "correr", "saltar"]
+                },
+                {
+                    text: "Día es a sol como noche es a ___",
+                    answer: "luna",
+                    options: ["estrella", "sol", "luna", "nube"]
+                },
+                {
+                    text: "Frío es a invierno como calor es a ___",
+                    answer: "verano",
+                    options: ["primavera", "verano", "otoño", "lluvia"]
+                }
+            ];
+            
+            const current = analogies[Math.floor(Math.random() * analogies.length)];
+            
+            const gameHTML = `
+                <div class="game-container">
+                    <h3>🔗 Analogías Simples</h3>
+                    <div class="game-area">
+                        <p style="font-size: 1.3rem; text-align: center; margin: 2rem 0;">
+                            ${current.text}
+                        </p>
+                        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                            ${current.options.map(opt => `
+                                <button class="interactive-element" onclick="checkAnalogy('${opt}', '${current.answer}')">
+                                    ${opt}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div class="feedback-box" id="analogyFeedback"></div>
+                    <button class="btn" onclick="this.parentElement.remove(); markActivityComplete('analogies-5')">Cerrar</button>
+                </div>
+            `;
+            
+            const container = document.createElement('div');
+            container.innerHTML = gameHTML;
+            document.querySelector('[data-activity="analogies-5"]').parentElement.appendChild(container.firstElementChild);
+        }
+
+        function checkAnalogy(selected, correct) {
+            const feedback = document.getElementById('analogyFeedback');
+            
+            if (selected === correct) {
+                feedback.className = 'feedback-box feedback-correct show';
+                feedback.innerHTML = '✅ ¡Correcto! Entiendes las relaciones lógicas';
+                updateScore(20);
+            } else {
+                feedback.className = 'feedback-box feedback-incorrect show';
+                feedback.innerHTML = '❌ Piensa en la relación entre las primeras palabras';
+            }
+        }
+
+        // Funciones para juegos de roles y emociones (5 años)
+        function startRolePlay5() {
+            if (!checkAgeSelected()) return;
+            
+            const roles = [
+                { emoji: '👨‍⚕️', role: 'Doctor', action: 'Examinar pacientes' },
+                { emoji: '👩‍🏫', role: 'Profesor', action: 'Enseñar la clase' },
+                { emoji: '👨‍🍳', role: 'Chef', action: 'Cocinar comida' },
+                { emoji: '👮', role: 'Policía', action: 'Ayudar a la gente' }
+            ];
+            
+            const gameHTML = `
+                <div class="game-container">
+                    <h3>👨‍👩‍👧 Juego de Roles</h3>
+                    <div class="game-area">
+                        <p style="font-size: 1.2rem; text-align: center;">Elige un personaje y actúa su rol:</p>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 2rem 0;">
+                            ${roles.map(r => `
+                                <div class="interactive-element" onclick="playRole('${r.role}', '${r.action}')">
+                                    <div style="font-size: 3rem;">${r.emoji}</div>
+                                    <div>${r.role}</div>
+                                    <div style="font-size: 0.9rem; opacity: 0.8;">${r.action}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div id="rolePlayArea" style="display: none;">
+                            <!-- Área de rol -->
+                        </div>
+                    </div>
+                    <button class="btn" onclick="this.parentElement.remove(); markActivityComplete('roleplay-5')">Cerrar</button>
+                </div>
+            `;
+            
+            const container = document.createElement('div');
+            container.innerHTML = gameHTML;
+            document.querySelector('[data-activity="roleplay-5"]').parentElement.appendChild(container.firstElementChild);
+        }
+
+        function playRole(role, action) {
+            const area = document.getElementById('rolePlayArea');
+            area.style.display = 'block';
+            
+            const prompts = {
+                'Doctor': [
+                    "Di: '¿Dónde te duele?'",
+                    "Di: 'Voy a revisar tu temperatura'",
+                    "Di: 'Toma esta medicina'"
+                ],
+                'Profesor': [
+                    "Di: 'Buenos días, clase'",
+                    "Di: '¿Quién sabe la respuesta?'",
+                    "Di: 'Muy bien, excelente trabajo'"
+                ],
+                'Chef': [
+                    "Di: '¿Qué quieres comer?'",
+                    "Di: 'Voy a cocinar algo delicioso'",
+                    "Di: 'La comida está lista'"
+                ],
+                'Policía': [
+                    "Di: '¿Necesita ayuda?'",
+                    "Di: 'Voy a protegerlos'",
+                    "Di: 'Todo está seguro'"
+                ]
+            };
+            
+            area.innerHTML = `
+                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 10px; text-align: center;">
+                    <h4>Eres un ${role}</h4>
+                    <p>Practica estas frases:</p>
+                    ${prompts[role].map(prompt => `
+                        <div style="margin: 1rem; padding: 1rem; background: white; border-radius: 10px;">
+                            ${prompt}
+                        </div>
+                    `).join('')}
+                    <button class="btn btn-success" onclick="completeRole()">
+                        ✅ Practiqué mi Rol
+                    </button>
+                </div>
+            `;
+        }
+
+        function completeRole() {
+            updateScore(15);
+            showNotification('🎭 ¡Excelente actuación!', 'success');
+        }
+
+        function startEmotionsGame5() {
+            if (!checkAgeSelected()) return;
+            
+            const emotions = [
+                { emoji: '😊', name: 'feliz', situation: 'cuando recibes un regalo' },
+                { emoji: '😢', name: 'triste', situation: 'cuando pierdes algo' },
+                { emoji: '😡', name: 'enojado', situation: 'cuando algo no sale bien' },
+                { emoji: '😨', name: 'asustado', situation: 'cuando hay truenos' },
+                { emoji: '😲', name: 'sorprendido', situation: 'cuando pasa algo inesperado' },
+                { emoji: '🤗', name: 'emocionado', situation: 'cuando vas de paseo' }
+            ];
+            
+            const gameHTML = `
+                <div class="game-container">
+                    <h3>😊 Expresando Emociones</h3>
+                    <div class="game-area">
+                        <p style="font-size: 1.2rem; text-align: center;">¿Cómo te sientes...?</p>
+                        <div id="emotionScenario" style="background: #f8f9fa; padding: 1.5rem; border-radius: 10px; margin: 2rem 0; text-align: center;">
+                            <p style="font-size: 1.3rem;">${emotions[0].situation}</p>
+                        </div>
+                        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                            ${emotions.map(e => `
+                                <button class="interactive-element" onclick="selectEmotion('${e.name}', '${emotions[0].name}')">
+                                    <div style="font-size: 2rem;">${e.emoji}</div>
+                                    <div>${e.name}</div>
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div class="feedback-box" id="emotionFeedback"></div>
+                    <button class="btn" onclick="this.parentElement.remove(); markActivityComplete('emotions-5')">Cerrar</button>
+                </div>
+            `;
+            
+            const container = document.createElement('div');
+            container.innerHTML = gameHTML;
+            document.querySelector('[data-activity="emotions-5"]').parentElement.appendChild(container.firstElementChild);
+        }
+
+        function selectEmotion(selected, correct) {
+            const feedback = document.getElementById('emotionFeedback');
+            
+            if (selected === correct) {
+                feedback.className = 'feedback-box feedback-correct show';
+                feedback.innerHTML = `✅ ¡Correcto! Te sientes ${selected} en esa situación`;
+                updateScore(10);
+                
+                // Cargar siguiente emoción después de 2 segundos
+                setTimeout(() => {
+                    nextEmotionScenario();
+                }, 2000);
+            } else {
+                feedback.className = 'feedback-box feedback-incorrect show';
+                feedback.innerHTML = `❌ Piensa: ¿cómo te sentirías tú en esa situación?`;
+            }
+        }
+
+        function nextEmotionScenario() {
+            const emotions = [
+                { emoji: '😊', name: 'feliz', situation: 'cuando recibes un regalo' },
+                { emoji: '😢', name: 'triste', situation: 'cuando pierdes algo' },
+                { emoji: '😡', name: 'enojado', situation: 'cuando algo no sale bien' },
+                { emoji: '😨', name: 'asustado', situation: 'cuando hay truenos' },
+                { emoji: '😲', name: 'sorprendido', situation: 'cuando pasa algo inesperado' },
+                { emoji: '🤗', name: 'emocionado', situation: 'cuando vas de paseo' }
+            ];
+            
+            // Seleccionar una emoción aleatoria
+            const randomEmotion = emotions[Math.floor(Math.random() * emotions.length)];
+            
+            const scenarioDiv = document.getElementById('emotionScenario');
+            if (scenarioDiv) {
+                scenarioDiv.innerHTML = `<p style="font-size: 1.3rem;">${randomEmotion.situation}</p>`;
+            }
+            
+            // Actualizar la respuesta correcta para el próximo intento
+            const buttons = document.querySelectorAll('.interactive-element');
+            buttons.forEach(btn => {
+                const emotionName = btn.querySelector('div:last-child').textContent;
+                btn.onclick = () => selectEmotion(emotionName, randomEmotion.name);
+            });
+            
+            // Limpiar feedback
+            const feedback = document.getElementById('emotionFeedback');
+            if (feedback) {
+                feedback.className = 'feedback-box';
+            }
+        }
+
+        // Auto-guardado periódico
+        setInterval(() => {
+            if (completedActivities.size > 0) {
+                saveProgress();
+            }
+        }, 30000); // Guardar cada 30 segundos
+
+        // Guardar al cerrar/recargar la página
+        window.addEventListener('beforeunload', () => {
+            saveProgress();
+        });
+
+        // Función de depuración (solo para desarrollo)
+        function debugReset() {
+            if (confirm('¿Estás seguro de que quieres reiniciar todo el progreso del módulo?')) {
+                localStorage.removeItem('module3Progress');
+                location.reload();
+            }
+        }
+
+        // Log de inicio
+        console.log('🎮 Módulo 3: Actividades y Juegos - Cargado correctamente');
+        console.log('📚 Base científica integrada para cada edad');
+        console.log('🎯 Total de actividades disponibles:', totalActivities);
+        console.log('💡 Selecciona la edad de tu hijo para comenzar');
+
+        // Verificar si hay progreso guardado al cargar
+        if (localStorage.getItem('module3Progress')) {
+            console.log('📥 Progreso anterior detectado y cargado');
+        }
+
+        // Easter egg: código secreto para desbloquear todas las actividades (solo desarrollo)
+        let secretCode = [];
+        document.addEventListener('keydown', (e) => {
+            secretCode.push(e.key);
+            secretCode = secretCode.slice(-6);
+            if (secretCode.join('') === 'unlock') {
+                if (confirm('🔓 ¿Desbloquear todas las actividades? (Modo desarrollo)')) {
+                    document.querySelectorAll('.activity-card').forEach(card => {
+                        card.classList.add('completed');
+                        completedActivities.add(card.dataset.activity);
+                    });
+                    updateProgress();
+                    showNotification('🔓 Todas las actividades desbloqueadas', 'success');
+                }
+            }
+        });
+
+        // Función de ayuda contextual
+        function showHelp() {
+            const helpMessage = `
+📖 GUÍA DEL MÓDULO 3
+
+🎯 OBJETIVO:
+Practicar actividades lúdicas diseñadas científicamente para estimular el lenguaje según la edad.
+
+📋 INSTRUCCIONES:
+1. Selecciona la edad de tu hijo (3, 4 o 5 años)
+2. Explora las actividades adaptadas a esa edad
+3. Completa al menos 8 actividades para desbloquear la evaluación final
+4. Obtén los 5 logros disponibles
+
+🎮 TIPOS DE ACTIVIDADES:
+- Juegos de vocabulario
+- Cuentos interactivos
+- Canciones educativas
+- Construcción de frases
+- Ejercicios de comprensión
+- Actividades creativas
+
+💡 CONSEJOS:
+- Practica diariamente por 15-20 minutos
+- Repite las actividades que más le gusten a tu hijo
+- Celebra cada pequeño logro
+- Adapta el ritmo según el interés del niño
+
+🏆 LOGROS DISPONIBLES:
+- Primera Actividad
+- 5 Juegos Completados
+- Maestro Musical
+- Contador de Cuentos
+- Módulo Completo
+
+¿Necesitas más ayuda? Contacta al instructor del curso.
+            `;
+            
+            alert(helpMessage);
+        }
+
+        // Agregar botón de ayuda al header (opcional)
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks) {
+                const helpLink = document.createElement('a');
+                helpLink.href = '#';
+                helpLink.textContent = 'Ayuda';
+                helpLink.onclick = (e) => {
+                    e.preventDefault();
+                    showHelp();
+                };
+                navLinks.appendChild(helpLink);
+            }
+        });
+
+        // Validación de edad mínima para continuar
+        function validateProgress() {
+            if (!selectedAge) {
+                showNotification('⚠️ Debes seleccionar una edad para continuar', 'warning');
+                return false;
+            }
+            
+            if (completedActivities.size < 3) {
+                showNotification('⚠️ Completa al menos 3 actividades antes de continuar', 'warning');
+                return false;
+            }
+            
+            return true;
+        }
+
+        // Función para exportar progreso (útil para padres)
+        function exportProgress() {
+            const data = {
+                module: 'Módulo 3 - Actividades y Juegos',
+                age: selectedAge,
+                completedActivities: Array.from(completedActivities),
+                score: currentScore,
+                achievements: Array.from(achievements),
+                date: new Date().toISOString()
+            };
+            
+            const json = JSON.stringify(data, null, 2);
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `progreso_modulo3_${selectedAge}años.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showNotification('📥 Progreso exportado exitosamente', 'success');
+        }
+
+        // Función para imprimir actividades recomendadas
+        function printActivities() {
+            if (!selectedAge) {
+                showNotification('⚠️ Selecciona primero la edad de tu hijo', 'warning');
+                return;
+            }
+            
+            const printWindow = window.open('', '_blank');
+            const activities = {
+                3: [
+                    'Juego Veo-Veo de Colores: 10 minutos diarios',
+                    'Sonidos de Animales: 5 minutos',
+                    'Canciones con números: 10 minutos',
+                    'Cuento antes de dormir: 15 minutos'
+                ],
+                4: [
+                    'Constructor de Oraciones: 15 minutos',
+                    'Juego de secuencias: 10 minutos',
+                    'Rimas y trabalenguas: 10 minutos',
+                    'Cuentos con preguntas: 15 minutos'
+                ],
+                5: [
+                    'Crear historias propias: 20 minutos',
+                    'Juego de categorías: 15 minutos',
+                    'Teatro y roles: 20 minutos',
+                    'Analogías y opuestos: 15 minutos'
+                ]
+            };
+            
+            const content = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Plan de Actividades - ${selectedAge} años</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; padding: 20px; }
+                        h1 { color: #667eea; }
+                        h2 { color: #764ba2; }
+                        ul { line-height: 2; }
+                        .footer { margin-top: 30px; padding-top: 20px; border-top: 2px solid #ccc; }
+                    </style>
+                </head>
+                <body>
+                    <h1>Plan de Actividades de Lenguaje</h1>
+                    <h2>Edad: ${selectedAge} años</h2>
+                    
+                    <h3>Actividades Diarias Recomendadas:</h3>
+                    <ul>
+                        ${activities[selectedAge].map(act => `<li>☐ ${act}</li>`).join('')}
+                    </ul>
+                    
+                    <h3>Horario Sugerido:</h3>
+                    <ul>
+                        <li>☐ Mañana (10 min): Juego de vocabulario</li>
+                        <li>☐ Tarde (15 min): Actividad creativa</li>
+                        <li>☐ Noche (10 min): Cuento o canción</li>
+                    </ul>
+                    
+                    <h3>Registro Semanal:</h3>
+                    <table border="1" style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <th>Día</th>
+                            <th>Actividad Realizada</th>
+                            <th>Tiempo</th>
+                            <th>Observaciones</th>
+                        </tr>
+                        ${['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'].map(dia => `
+                            <tr>
+                                <td style="padding: 10px;">${dia}</td>
+                                <td style="padding: 10px;"></td>
+                                <td style="padding: 10px;"></td>
+                                <td style="padding: 10px;"></td>
+                            </tr>
+                        `).join('')}
+                    </table>
+                    
+                    <div class="footer">
+                        <p><strong>Fecha de impresión:</strong> ${new Date().toLocaleDateString('es-ES')}</p>
+                        <p><strong>Módulo:</strong> 3 - Actividades y Juegos</p>
+                        <p><strong>Progreso actual:</strong> ${completedActivities.size} actividades completadas</p>
+                    </div>
+                </body>
+                </html>
+            `;
+            
+            printWindow.document.write(content);
+            printWindow.document.close();
+            printWindow.print();
+        }
+
+        // Función para compartir progreso (simulado)
+        function shareProgress() {
+            const shareText = `
+🎉 ¡Mi hijo de ${selectedAge} años está progresando en el Módulo 3 de Estimulación del Lenguaje!
+
+📊 Progreso:
+- Actividades completadas: ${completedActivities.size}/${totalActivities}
+- Puntuación: ${currentScore} puntos
+- Logros: ${achievements.size}/5
+
+#EstimulaciónDelLenguaje #DesarrolloInfantil #Aprendizaje
+            `;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Mi progreso en Estimulación del Lenguaje',
+                    text: shareText
+                }).then(() => {
+                    showNotification('✅ Compartido exitosamente', 'success');
+                }).catch((error) => {
+                    console.log('Error al compartir:', error);
+                });
+            } else {
+                // Copiar al portapapeles como alternativa
+                navigator.clipboard.writeText(shareText).then(() => {
+                    showNotification('📋 Texto copiado al portapapeles', 'success');
+                });
+            }
+        }
+
+        // Mensajes motivacionales aleatorios
+        const motivationalMessages = [
+            "¡Excelente trabajo! Cada actividad cuenta 🌟",
+            "¡Sigue así! Tu hijo está aprendiendo mucho 📚",
+            "¡Increíble progreso! La constancia es clave 💪",
+            "¡Muy bien! El juego es la mejor forma de aprender 🎮",
+            "¡Genial! Cada palabra nueva es un logro 🎯"
+        ];
+
+        function showRandomMotivation() {
+            if (completedActivities.size > 0 && completedActivities.size % 3 === 0) {
+                const message = motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)];
+                showNotification(message, 'success');
+            }
+        }
+
+        // Llamar a motivación después de completar actividades
+        const originalMarkComplete = markActivityComplete;
+        markActivityComplete = function(activityId) {
+            originalMarkComplete(activityId);
+            showRandomMotivation();
+        };
+
+        // Fin del script
+        console.log('✅ Módulo 3 completamente cargado y funcional');
+    </script>
 </body>
 </html>
