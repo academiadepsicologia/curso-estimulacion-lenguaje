@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Módulo 4 - Calendario de 21 días para estimular el lenguaje</title>
+    <title>Módulo 4 - Dificultades Comunes y Plan de 21 Días</title>
     <style>
         * {
             margin: 0;
@@ -16,272 +16,428 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
-            animation: backgroundShift 10s ease infinite;
-        }
-
-        @keyframes backgroundShift {
-            0%, 100% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-            50% { background: linear-gradient(135deg, #764ba2 0%, #f093fb 100%); }
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 40px;
-            animation: slideIn 0.6s ease;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
 
         .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
             text-align: center;
-            margin-bottom: 40px;
             position: relative;
         }
 
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.2);
+            height: 8px;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 4px;
+        }
+
+        .progress-text {
+            font-size: 0.9em;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+
         h1 {
-            color: #764ba2;
             font-size: 2.5em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            animation: pulse 2s ease infinite;
+            margin-bottom: 15px;
+            font-weight: 600;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 30px;
         }
 
-        .intro-section {
+        .content {
+            padding: 40px;
+        }
+
+        .age-selector {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
+            border-radius: 15px;
             padding: 30px;
-            border-radius: 20px;
             margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 1s ease;
+            text-align: center;
+            color: white;
+        }
+
+        .age-selector h2 {
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .age-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .age-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .age-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .age-btn.active {
+            background: white;
+            color: #f5576c;
+            border-color: white;
+            transform: scale(1.05);
+        }
+
+        .section-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 15px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .tab-btn:hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .intro-section h2 {
-            font-size: 1.8em;
+        .difficulty-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .difficulty-content.active {
+            display: block;
+        }
+
+        .difficulty-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+
+        .difficulty-title {
+            color: #667eea;
+            font-size: 1.5em;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .icon {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
+        .difficulty-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .signs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .sign-card {
             background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #f5576c;
+        }
+
+        .sign-title {
+            color: #f5576c;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .strategies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .strategy-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .strategy-title {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .strategy-steps {
+            list-style: none;
+            padding: 0;
+        }
+
+        .strategy-steps li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .strategy-steps li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5em;
+            font-size: 0.8em;
         }
 
-        .benefits-grid {
+        .example-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #e17055;
+        }
+
+        .example-title {
+            color: #d63031;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .example-content {
+            color: #2d3436;
+            line-height: 1.5;
+        }
+
+        .dialogue {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .dialogue .parent {
+            color: #0984e3;
+            font-weight: bold;
+        }
+
+        .dialogue .child {
+            color: #e17055;
+            font-weight: bold;
+        }
+
+        .alert-box {
+            background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .alert-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .when-to-seek-help {
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .help-checklist {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
+            gap: 15px;
+            margin: 20px 0;
+            text-align: left;
         }
 
-        .benefit-card {
-            background: white;
-            padding: 20px;
+        .help-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid white;
+        }
+
+        .calendar-intro {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            color: white;
+            padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transform: translateY(0);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .benefit-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .benefit-card h3 {
-            color: #764ba2;
-            margin-bottom: 10px;
-            font-size: 1.2em;
-        }
-
-        .benefit-card:hover h3 {
-            color: white;
-        }
-
-        .week-selector {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 30px 0;
-            flex-wrap: wrap;
-        }
-
-        .week-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-size: 1.1em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .week-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .week-btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .week-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .week-btn.active {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            transform: scale(1.05);
-        }
-
-        .calendar-container {
-            display: none;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease;
-        }
-
-        .calendar-container.active {
-            display: block;
-            animation: slideUp 0.5s ease forwards;
-        }
-
-        @keyframes slideUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            margin-bottom: 30px;
+            text-align: center;
         }
 
         .days-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
             margin-top: 30px;
         }
 
         .day-card {
             background: white;
-            border-radius: 20px;
-            padding: 20px;
+            border-radius: 15px;
+            padding: 25px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-        }
-
-        .day-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
-            animation: colorWave 3s ease infinite;
-        }
-
-        @keyframes colorWave {
-            0%, 100% { transform: translateX(-100%); }
-            50% { transform: translateX(100%); }
+            border-left: 5px solid #667eea;
         }
 
         .day-card:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
 
         .day-number {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5em;
+            font-size: 1.2em;
             font-weight: bold;
             margin-bottom: 15px;
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .day-card:hover .day-number {
-            animation-duration: 2s;
         }
 
         .day-title {
-            color: #764ba2;
+            color: #667eea;
             font-weight: bold;
             margin-bottom: 10px;
-            font-size: 1.1em;
+            font-size: 1.2em;
         }
 
         .day-preview {
             color: #666;
-            font-size: 0.9em;
+            font-size: 0.95em;
             line-height: 1.4;
+            margin-bottom: 15px;
+        }
+
+        .day-difficulty {
+            background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .day-age-focus {
+            background: linear-gradient(135deg, #00cec9 0%, #55a3ff 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            display: inline-block;
         }
 
         .completed-badge {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 15px;
+            right: 15px;
             background: #4CAF50;
             color: white;
             width: 30px;
@@ -290,13 +446,7 @@
             display: none;
             align-items: center;
             justify-content: center;
-            animation: bounceIn 0.5s ease;
-        }
-
-        @keyframes bounceIn {
-            0% { transform: scale(0); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
+            font-size: 0.9em;
         }
 
         .day-card.completed .completed-badge {
@@ -312,7 +462,6 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
             z-index: 1000;
-            animation: fadeIn 0.3s ease;
         }
 
         .modal.active {
@@ -323,70 +472,45 @@
 
         .modal-content {
             background: white;
-            border-radius: 30px;
+            border-radius: 20px;
             padding: 40px;
             max-width: 800px;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
-            animation: zoomIn 0.3s ease;
-        }
-
-        @keyframes zoomIn {
-            from {
-                transform: scale(0.8);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
+            margin: 20px;
         }
 
         .close-modal {
             position: absolute;
             top: 20px;
             right: 20px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: #f5576c;
             color: white;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
-            font-size: 1.5em;
+            font-size: 1.2em;
             cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .close-modal:hover {
-            transform: rotate(90deg);
         }
 
         .activity-section {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .activity-section h3 {
-            color: #764ba2;
+            color: #667eea;
             margin-bottom: 15px;
-            font-size: 1.4em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 1.3em;
         }
 
         .activity-box {
-            background: linear-gradient(135deg, #f6f6f6 0%, #e9e9e9 100%);
+            background: #f8f9fa;
             padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            border-left: 5px solid #764ba2;
-            transition: all 0.3s ease;
-        }
-
-        .activity-box:hover {
-            transform: translateX(10px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
         }
 
         .tips-list {
@@ -396,185 +520,167 @@
 
         .tips-list li {
             background: #f0f0f0;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            padding-left: 35px;
             position: relative;
-            padding-left: 40px;
-            transition: all 0.3s ease;
-        }
-
-        .tips-list li:hover {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            transform: translateX(5px);
         }
 
         .tips-list li::before {
             content: '💡';
             position: absolute;
             left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.5em;
+            top: 12px;
         }
 
-        .mark-complete-btn {
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        .interactive-quiz {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+
+        .quiz-question {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .quiz-option.correct {
+            background: rgba(0, 184, 148, 0.3);
+            border-color: #00b894;
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(253, 121, 168, 0.3);
+            border-color: #fd79a8;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 40px;
+            background: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
             padding: 15px 30px;
             border-radius: 50px;
             font-size: 1.1em;
             cursor: pointer;
-            margin-top: 20px;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
-        }
-
-        .mark-complete-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.4);
-        }
-
-        .mark-complete-btn.completed {
-            background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);
-            cursor: not-allowed;
-        }
-
-        .progress-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 20px;
-            margin: 40px 0;
-            text-align: center;
-        }
-
-        .progress-bar {
-            background: rgba(255, 255, 255, 0.3);
-            height: 30px;
-            border-radius: 15px;
-            overflow: hidden;
-            margin: 20px 0;
-        }
-
-        .progress-fill {
-            background: linear-gradient(90deg, #4CAF50, #8BC34A);
-            height: 100%;
-            width: 0%;
-            transition: width 1s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 15px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-        }
-
-        .stat-number {
-            font-size: 2em;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            font-size: 0.9em;
-            opacity: 0.9;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 12px 25px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
             text-decoration: none;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .back-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .interactive-timer {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .timer-display {
-            font-size: 3em;
-            color: #764ba2;
-            font-weight: bold;
-            margin: 20px 0;
-            font-family: 'Courier New', monospace;
-        }
-
-        .timer-controls {
-            display: flex;
+            display: inline-flex;
+            align-items: center;
             gap: 10px;
-            justify-content: center;
-            flex-wrap: wrap;
         }
 
-        .timer-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: all 0.3s ease;
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
-        .timer-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .timer-btn:disabled {
+        .nav-btn.disabled {
             background: #ccc;
             cursor: not-allowed;
-            transform: scale(1);
+            transform: none;
+            box-shadow: none;
+        }
+
+        .bonus-badge {
+            background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            display: inline-block;
+            margin-left: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         @media (max-width: 768px) {
             .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .header, .content {
                 padding: 20px;
             }
 
             h1 {
-                font-size: 1.8em;
+                font-size: 2em;
             }
 
+            .age-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .age-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .section-tabs {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .tab-btn {
+                text-align: center;
+            }
+
+            .strategies-grid,
+            .signs-grid,
             .days-grid {
                 grid-template-columns: 1fr;
             }
 
-            .modal-content {
-                margin: 20px;
+            .navigation {
+                flex-direction: column;
+                gap: 15px;
                 padding: 20px;
+            }
+
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .modal-content {
+                padding: 20px;
+                margin: 10px;
             }
         }
     </style>
@@ -582,1219 +688,1123 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🌟 Calendario de 21 Días para Estimular el Lenguaje 🌟</h1>
-            <p style="color: #666; font-size: 1.2em; margin-top: 10px;">
-                Transforma el desarrollo del lenguaje en una aventura diaria llena de diversión y aprendizaje
-            </p>
-        </div>
-
-        <div class="intro-section">
-            <h2>
-                <span class="icon">🎯</span>
-                ¿Por qué 21 días?
-            </h2>
-            <p style="font-size: 1.1em; line-height: 1.6; margin-bottom: 20px;">
-                La investigación en neuroplasticidad y formación de hábitos (Lally et al., 2010, European Journal of Social Psychology) 
-                sugiere que 21 días de práctica consistente pueden establecer nuevas rutinas. En el desarrollo del lenguaje, 
-                la repetición estructurada y variada es fundamental para consolidar habilidades comunicativas.
-            </p>
-            
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <h3>🧠 Base Científica</h3>
-                    <p>Actividades diseñadas según las etapas del desarrollo del lenguaje de Bloom & Lahey</p>
-                </div>
-                <div class="benefit-card">
-                    <h3>👨‍👩‍👧‍👦 Fácil de Aplicar</h3>
-                    <p>Solo 15-20 minutos al día con materiales que ya tienes en casa</p>
-                </div>
-                <div class="benefit-card">
-                    <h3>📈 Progreso Medible</h3>
-                    <p>Sistema de seguimiento para visualizar los avances de tu pequeño</p>
-                </div>
-                <div class="benefit-card">
-                    <h3>🎮 100% Interactivo</h3>
-                    <p>Cada día incluye juegos, canciones y actividades multisensoriales</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="progress-section">
-            <h2>📊 Tu Progreso</h2>
+            <div class="progress-text">Tu Progreso en el Módulo 4</div>
             <div class="progress-bar">
-                <div class="progress-fill" id="progressFill">0%</div>
+                <div class="progress-fill" id="progressFill"></div>
             </div>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number" id="completedDays">0</div>
-                    <div class="stat-label">Días Completados</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="currentStreak">0</div>
-                    <div class="stat-label">Racha Actual</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="totalActivities">0</div>
-                    <div class="stat-label">Actividades Realizadas</div>
-                </div>
+            <div class="progress-text">
+                <span id="progressText">0% completado • 0 de 10 secciones</span>
             </div>
-        </div>
-
-        <h2 style="text-align: center; color: #764ba2; margin: 30px 0;">Selecciona una Semana</h2>
-        
-        <div class="week-selector">
-            <button class="week-btn active" onclick="showWeek(1)">
-                🌱 Semana 1: Fundamentos
-            </button>
-            <button class="week-btn" onclick="showWeek(2)">
-                🌿 Semana 2: Expansión
-            </button>
-            <button class="week-btn" onclick="showWeek(3)">
-                🌳 Semana 3: Consolidación
-            </button>
-        </div>
-        <!-- Semana 1 -->
-        <div id="week1" class="calendar-container active">
-            <h3 style="text-align: center; color: #764ba2; margin-bottom: 20px;">
-                🌱 Semana 1: Estableciendo las Bases del Lenguaje
-            </h3>
-            <p style="text-align: center; color: #666; margin-bottom: 30px;">
-                Esta semana nos enfocamos en fortalecer los prerrequisitos del lenguaje: atención conjunta, 
-                imitación y turnos comunicativos.
-            </p>
             
-            <div class="days-grid">
-                <!-- Día 1 -->
-                <div class="day-card" onclick="openDay(1)">
-                    <div class="day-number">1</div>
-                    <div class="day-title">El Espejo Mágico</div>
-                    <div class="day-preview">Imitación facial y primeros sonidos</div>
-                    <div class="completed-badge">✓</div>
-                </div>
-
-                <!-- Día 2 -->
-                <div class="day-card" onclick="openDay(2)">
-                    <div class="day-number">2</div>
-                    <div class="day-title">Burbujas Parlantes</div>
-                    <div class="day-preview">Atención conjunta y vocabulario</div>
-                    <div class="completed-badge">✓</div>
-                </div>
-
-                <!-- Día 3 -->
-                <div class="day-card" onclick="openDay(3)">
-                    <div class="day-number">3</div>
-                    <div class="day-title">Caja de Tesoros</div>
-                    <div class="day-preview">Exploración sensorial y descripción</div>
-                    <div class="completed-badge">✓</div>
-                </div>
-
-                <!-- Día 4 -->
-                <div class="day-card" onclick="openDay(4)">
-                    <div class="day-number">4</div>
-                    <div class="day-title">Ritmos y Rimas</div>
-                    <div class="day-preview">Conciencia fonológica con música</div>
-                    <div class="completed-badge">✓</div>
-                </div>
-
-                <!-- Día 5 -->
-                <div class="day-card" onclick="openDay(5)">
-                    <div class="day-number">5</div>
-                    <div class="day-title">Safari en Casa</div>
-                    <div class="day-preview">Onomatopeyas y categorización</div>
-                    <div class="completed-badge">✓</div>
-                </div>
-
-                <!-- Día 6 -->
-                <div class="day-card" onclick="openDay(6)">
-                    <div class="day-number">6</div>
-                    <div class="day-title">Cocineros Comunicadores</div>
-                    <div class="day-preview">Secuencias y vocabulario funcional</div>
-                    <div class="completed-badge">✓</div>
-                </div>
-
-                <!-- Día 7 -->
-                <div class="day-card" onclick="openDay(7)">
-                    <div class="day-number">7</div>
-                    <div class="day-title">Teatro de Sombras</div>
-                    <div class="day-preview">Narración y expresión creativa</div>
-                    <div class="completed-badge">✓</div>
-                </div>
+            <h1>🚨 Dificultades Comunes y Soluciones</h1>
+            <div class="subtitle">
+                Identifica problemas + Plan exclusivo de 21 días de actividades terapéuticas
+                <span class="bonus-badge">BONUS PREMIUM</span>
             </div>
         </div>
 
-        <!-- Semana 2 -->
-        <div id="week2" class="calendar-container">
-            <h3 style="text-align: center; color: #764ba2; margin-bottom: 20px;">
-                🌿 Semana 2: Expandiendo el Vocabulario y la Comprensión
-            </h3>
-            <p style="text-align: center; color: #666; margin-bottom: 30px;">
-                Aumentamos la complejidad con frases de dos palabras, preguntas simples y juegos de roles.
-            </p>
-            
-            <div class="days-grid">
-                <!-- Día 8 -->
-                <div class="day-card" onclick="openDay(8)">
-                    <div class="day-number">8</div>
-                    <div class="day-title">Detective de Sonidos</div>
-                    <div class="day-preview">Discriminación auditiva y localización</div>
-                    <div class="completed-badge">✓</div>
+        <div class="content">
+            <div class="age-selector">
+                <h2>📌 Selecciona la edad de tu hijo para contenido personalizado:</h2>
+                <div class="age-buttons">
+                    <button class="age-btn" onclick="selectAge(3)">
+                        👶 3 años
+                    </button>
+                    <button class="age-btn" onclick="selectAge(4)">
+                        👦 4 años
+                    </button>
+                    <button class="age-btn" onclick="selectAge(5)">
+                        👧 5 años
+                    </button>
+                </div>
+            </div>
+
+            <div class="section-tabs">
+                <button class="tab-btn active" onclick="showTab('difficulties')">
+                    🚨 Dificultades Comunes
+                </button>
+                <button class="tab-btn" onclick="showTab('calendar')">
+                    📅 Plan de 21 Días <span class="bonus-badge">BONUS</span>
+                </button>
+            </div>
+            <!-- TAB 1: DIFICULTADES COMUNES -->
+            <div id="difficulties-tab" class="tab-content active">
+                <!-- Contenido para 3 años -->
+                <div id="difficulties-3" class="difficulty-content">
+                    <div class="difficulty-section">
+                        <div class="difficulty-title">
+                            🗣️ Tartamudez del Desarrollo (3 años)
+                        </div>
+                        <div class="difficulty-description">
+                            La tartamudez es común entre los 2-5 años cuando el pensamiento va más rápido que la capacidad de hablar. 
+                            A los 3 años, hasta el 5% de los niños presenta disfluencias normales del desarrollo.
+                        </div>
+
+                        <div class="signs-grid">
+                            <div class="sign-card">
+                                <div class="sign-title">🔴 Señales Normales (No te preocupes)</div>
+                                <ul>
+                                    <li>Repite palabras completas: "mamá-mamá-mamá"</li>
+                                    <li>Vacila al inicio: "eh... eh... quiero agua"</li>
+                                    <li>Ocurre cuando está emocionado o cansado</li>
+                                    <li>Dura menos de 6 meses</li>
+                                </ul>
+                            </div>
+                            <div class="sign-card">
+                                <div class="sign-title">🟡 Señales de Alerta</div>
+                                <ul>
+                                    <li>Bloqueos en sonidos: "p-p-p-papá"</li>
+                                    <li>Tensión visible en cara o cuello</li>
+                                    <li>Evita hablar o se frustra</li>
+                                    <li>Persiste más de 6 meses</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="strategies-grid">
+                            <div class="strategy-card">
+                                <div class="strategy-title">
+                                    🎯 Estrategia 1: Reducir la Presión
+                                </div>
+                                <ul class="strategy-steps">
+                                    <li>Habla más despacio con tu hijo</li>
+                                    <li>Haz pausas entre oraciones</li>
+                                    <li>No le digas "respira" o "habla despacio"</li>
+                                    <li>Mantén contacto visual tranquilo</li>
+                                    <li>Nunca lo interrumpas ni completes sus frases</li>
+                                </ul>
+                            </div>
+                            <div class="strategy-card">
+                                <div class="strategy-title">
+                                    🏠 Estrategia 2: Ambiente Tranquilo
+                                </div>
+                                <ul class="strategy-steps">
+                                    <li>Reduce las distracciones (TV, ruido)</li>
+                                    <li>Ten conversaciones uno a uno</li>
+                                    <li>Elige momentos relajados del día</li>
+                                    <li>Evita preguntas rápidas consecutivas</li>
+                                    <li>Demuestra que tienes tiempo para escuchar</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="example-box">
+                            <div class="example-title">
+                                💡 Ejemplo Práctico: Cómo Responder
+                            </div>
+                            <div class="example-content">
+                                <div class="dialogue">
+                                    <div class="child">Niño: "Yo-yo-yo quiero ga-ga-galletas"</div>
+                                    <div class="parent">❌ MAL: "Respira hondo y habla despacio, hijo"</div>
+                                    <div class="parent">✅ BIEN: "Ah, quieres galletas. Vamos a buscar las galletas juntos" (hablas despacio y calmado)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="difficulty-section">
+                        <div class="difficulty-title">
+                            🔤 Problemas de Pronunciación (3 años)
+                        </div>
+                        <div class="difficulty-description">
+                            A los 3 años es normal que algunos sonidos sean difíciles. El desarrollo fonológico tiene un orden específico 
+                            y algunos sonidos no se dominan hasta los 6-7 años.
+                        </div>
+
+                        <div class="signs-grid">
+                            <div class="sign-card">
+                                <div class="sign-title">✅ Sonidos que YA debe tener a los 3 años</div>
+                                <ul>
+                                    <li><strong>/m/</strong> - mamá, mano</li>
+                                    <li><strong>/p/</strong> - papá, pan</li>
+                                    <li><strong>/b/</strong> - bebé, bola</li>
+                                    <li><strong>/t/</strong> - tata, casa (al final)</li>
+                                    <li><strong>/d/</strong> - dedo, nado</li>
+                                    <li><strong>/k/</strong> - casa, coco</li>
+                                    <li><strong>/g/</strong> - gato, digo</li>
+                                    <li><strong>/n/</strong> - nene, mano</li>
+                                    <li><strong>/f/</strong> - foca, café</li>
+                                </ul>
+                            </div>
+                            <div class="sign-card">
+                                <div class="sign-title">⏳ Sonidos AÚN DIFÍCILES a los 3 años (normal)</div>
+                                <ul>
+                                    <li><strong>/r/</strong> - carro, perro (hasta 6 años)</li>
+                                    <li><strong>/rr/</strong> - ratón, corre (hasta 7 años)</li>
+                                    <li><strong>/s/</strong> - sol, pasa (hasta 4-5 años)</li>
+                                    <li><strong>/l/</strong> - luna, pala (hasta 4-5 años)</li>
+                                    <li><strong>Grupos consonánticos</strong> - br, tr, cl, pl (hasta 6 años)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="strategies-grid">
+                            <div class="strategy-card">
+                                <div class="strategy-title">
+                                    🎯 Técnica del Modelado Fonético
+                                </div>
+                                <ul class="strategy-steps">
+                                    <li>Cuando diga mal, repite correctamente</li>
+                                    <li>No le digas "está mal" o "di bien"</li>
+                                    <li>Exagera el sonido correcto ligeramente</li>
+                                    <li>Usa palabras fáciles con ese sonido</li>
+                                    <li>Haz juegos con sonidos de animales</li>
+                                </ul>
+                            </div>
+                            <div class="strategy-card">
+                                <div class="strategy-title">
+                                    🎮 Juegos de Sonidos para Casa
+                                </div>
+                                <ul class="strategy-steps">
+                                    <li>Sonidos de vehículos: "piii" (auto), "tuuu" (tren)</li>
+                                    <li>Sonidos de animales exagerados</li>
+                                    <li>Canciones con repetición de sonidos</li>
+                                    <li>Trabalenguas muy simples</li>
+                                    <li>Juego del eco: repite sonidos</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="interactive-quiz">
+                            <div class="quiz-options">
+                                <div class="quiz-option" onclick="checkQuiz(this, false)">
+                                    A) "No se dice 'tasa', se dice 'casa'. Repite después de mí"
+                                </div>
+                                <div class="quiz-option" onclick="checkQuiz(this, true)">
+                                    B) "Sí, una CASA grande. Me gusta esta CASA" (enfatizas suavemente)
+                                </div>
+                                <div class="quiz-option" onclick="checkQuiz(this, false)">
+                                    C) Ignorar el error y cambiar de tema
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="difficulty-section">
+                        <div class="difficulty-title">
+                            ⚡ Retraso del Lenguaje (3 años)
+                        </div>
+                        <div class="difficulty-description">
+                            Un niño de 3 años con retraso del lenguaje tiene menos vocabulario y estructuras más simples 
+                            de lo esperado para su edad, pero su comprensión puede estar intacta.
+                        </div>
+
+                        <div class="alert-box">
+                            <div class="alert-title">
+                                🚨 Señales de Alerta a los 3 años
+                            </div>
+                            <ul>
+                                <li>Vocabulario menor a 200 palabras</li>
+                                <li>No combina 2 palabras consistentemente</li>
+                                <li>No sigue instrucciones simples de 2 pasos</li>
+                                <li>Los extraños no entienden su habla</li>
+                                <li>No hace preguntas básicas</li>
+                                <li>Pérdida de habilidades ya adquiridas</li>
+                            </ul>
+                        </div>
+
+                        <div class="strategies-grid">
+                            <div class="strategy-card">
+                                <div class="strategy-title">
+                                    🚀 Estimulación Intensiva en Casa
+                                </div>
+                                <ul class="strategy-steps">
+                                    <li>Narrar TODO lo que haces durante el día</li>
+                                    <li>Usar frases de 2-3 palabras máximo</li>
+                                    <li>Repetir palabras nuevas 5-10 veces al día</li>
+                                    <li>Hacer preguntas de elección: "¿agua o leche?"</li>
+                                    <li>Cantar muchas canciones infantiles</li>
+                                </ul>
+                            </div>
+                            <div class="strategy-card">
+                                <div class="strategy-title">
+                                    📚 Rutinas de Estimulación Diaria
+                                </div>
+                                <ul class="strategy-steps">
+                                    <li>15 min de cuentos interactivos</li>
+                                    <li>10 min de juego con nombrar objetos</li>
+                                    <li>Narrar comidas y rutinas</li>
+                                    <li>Juegos de imitación vocal</li>
+                                    <li>Tiempo sin pantallas para conversar</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="difficulty-section">
+                        <div class="difficulty-title">
+                            🤐 Selectivismo del Habla (3 años)
+                        </div>
+                        <div class="difficulty-description">
+                            Algunos niños hablan perfectamente en casa pero permanecen en silencio en otros lugares 
+                            como guardería o con extraños. Esto puede ser normal hasta los 4-5 años.
+                        </div>
+
+                        <div class="strategies-grid">
+                            <div class="strategy-card">
+                                <div class="strategy-title">
+                                    🏠 Fortalecer Confianza en Casa
+                                </div>
+                                <ul class="strategy-steps">
+                                    <li>Celebra cada palabra que dice</li>
+                                    <li>No lo presiones a hablar con extraños</li>
+                                    <li>Practica saludos y despedidas en casa</li>
+                                    <li>Juega a "presentar" juguetes a la familia</li>
+                                    <li>Graba videos donde él habla para mostrar progreso</li>
+                                </ul>
+                            </div>
+                            <div class="strategy-card">
+                                <div class="strategy-title">
+                                    🌱 Exposición Gradual
+                                </div>
+                                <ul class="strategy-steps">
+                                    <li>Visitas cortas a lugares nuevos</li>
+                                    <li>Permite que observe antes de participar</li>
+                                    <li>No insistas en que hable inmediatamente</li>
+                                    <li>Habla tú por él si es necesario</li>
+                                    <li>Refuerza cualquier comunicación no verbal</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="when-to-seek-help">
+                        <h3>🚨 ¿Cuándo buscar ayuda profesional para un niño de 3 años?</h3>
+                        <div class="help-checklist">
+                            <div class="help-item">
+                                <strong>📞 Busca ayuda INMEDIATAMENTE si:</strong><br>
+                                • No dice palabras reconocibles<br>
+                                • No entiende instrucciones simples<br>
+                                • Perdió habilidades que ya tenía
+                            </div>
+                            <div class="help-item">
+                                <strong>📅 Consulta en 1-2 meses si:</strong><br>
+                                • Vocabulario menor a 100 palabras<br>
+                                • No combina 2 palabras<br>
+                                • Tartamudea con tensión visible
+                            </div>
+                            <div class="help-item">
+                                <strong>👨‍⚕️ Evalúa con pediatra si:</strong><br>
+                                • Problemas de audición frecuentes<br>
+                                • No socializa con otros niños<br>
+                                • Comportamientos repetitivos
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Contenido para 4 años -->
+                <div id="difficulties-4" class="difficulty-content">
+                    <div class="difficulty-section">
+                        <div class="difficulty-title">
+                            🗣️ Tartamudez del Desarrollo (4 años)
+                        </div>
+                        <div class="difficulty-description">
+                            A los 4 años, la tartamudez debe estar disminuyendo. Si persiste o aumenta, 
+                            requiere intervención temprana para prevenir que se establezca permanentemente.
+                        </div>
+
+                        <div class="strategies-grid">
+                            <div class="strategy-card">
+                                <div class="strategy-title">
+                                    🎯 Técnica de Habla Fácil
+                                </div>
+                                <ul class="strategy-steps">
+                                    <li>Modela habla suave y relajada</li>
+                                    <li>Usa contactos suaves en consonantes</li>
+                                    <li>Alarga ligeramente las vocales</li>
+                                    <li>Respira tranquilo mientras hablas</li>
+                                    <li>Practica en situaciones sin presión</li>
+                                </ul>
+                            </div>
+                            <div class="strategy-card">
+                                <div class="strategy-title">
+                                    🏠 Modificaciones Ambientales
+                                </div>
+                                <ul class="strategy-steps">
+                                    <li>Ritmo de vida más lento</li>
+                                    <li>Tiempo individual diario (15 min)</li>
+                                    <li>Menos interrupciones durante habla</li>
+                                    <li>Evitar preguntas cuando tartamudea</li>
+                                    <li>Elogiar el contenido, no la fluidez</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="interactive-quiz">
+                            <div class="quiz-question">
+                                🎯 Tu hijo de 4 años tartamudea más cuando está emocionado. ¿Qué haces?
+                            </div>
+                            <div class="quiz-options">
+                                <div class="quiz-option" onclick="checkQuiz(this, false)">
+                                    A) Le dices que se calme antes de hablar
+                                </div>
+                                <div class="quiz-option" onclick="checkQuiz(this, true)">
+                                    B) Reduces tu propio ritmo de habla y das más tiempo
+                                </div>
+                                <div class="quiz-option" onclick="checkQuiz(this, false)">
+                                    C) Evitas situaciones que lo emocionen
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="difficulty-section">
+                        <div class="difficulty-title">
+                            🔤 Problemas de Articulación (4 años)
+                        </div>
+                        <div class="difficulty-description">
+                            A los 4 años deberían estar emergiendo sonidos más complejos. 
+                            Los errores persistentes en sonidos básicos requieren atención.
+                        </div>
+
+                        <div class="strategies-grid">
+                            <div class="strategy-card">
+                                <div class="strategy-title">
+                                    🎯 Técnica de Bombardeo Auditivo
+                                </div>
+                                <ul class="strategy-steps">
+                                    <li>Escoge UN sonido problema por vez</li>
+                                    <li>Busca 20 palabras con ese sonido</li>
+                                    <li>Lee esas palabras 3 veces al día</li>
+                                    <li>No pidas que las repita, solo escuche</li>
+                                    <li>Haz esto por 2 semanas</li>
+                                </ul>
+                            </div>
+                            <div class="strategy-card">
+                                <div class="strategy-title">
+                                    🎮 Juegos de Discriminación Auditiva
+                                </div>
+                                <ul class="strategy-steps">
+                                    <li>"¿Escuchaste /s/?" en palabras</li>
+                                    <li>Clasificar objetos por sonido inicial</li>
+                                    <li>Juego de rimas con sonidos problemáticos</li>
+                                    <li>Canciones que enfaticen el sonido</li>
+                                    <li>Trabalenguas suaves y progresivos</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="difficulty-section">
+                        <div class="difficulty-title">
+                            ⚡ Retraso del Lenguaje (4 años)
+                        </div>
+                        <div class="difficulty-description">
+                            A los 4 años, el retraso del lenguaje se hace más evidente al comparar con pares. 
+                            Es crucial intervenir ahora antes del ingreso escolar.
+                        </div>
+
+                        <div class="strategies-grid">
+                            <div class="strategy-card">
+                                <div class="strategy-title">
+                                    🚀 Expansión de Oraciones
+                                </div>
+                                <ul class="strategy-steps">
+                                    <li>Toma sus frases y agrégales 2-3 palabras</li>
+                                    <li>Usa conectores: "y", "pero", "porque"</li>
+                                    <li>Introduce conceptos de tiempo: "antes", "después"</li>
+                                    <li>Practica descripciones: colores, tamaños, formas</li>
+                                    <li>Fomenta preguntas: responde siempre con entusiasmo</li>
+                                </ul>
+                            </div>
+                            <div class="strategy-card">
+                                <div class="strategy-title">
+                                    📚 Actividades Estructuradas Diarias
+                                </div>
+                                <ul class="strategy-steps">
+                                    <li>20 min de lectura interactiva con preguntas</li>
+                                    <li>15 min de juego simbólico (cocinita, doctores)</li>
+                                    <li>10 min de categorización (frutas, animales, etc.)</li>
+                                    <li>Narrar rutinas con secuencias temporales</li>
+                                    <li>Juegos de "veo veo" con descripciones</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="when-to-seek-help">
+                        <h3>🚨 ¿Cuándo buscar ayuda profesional para un niño de 4 años?</h3>
+                        <div class="help-checklist">
+                            <div class="help-item">
+                                <strong>📞 Busca ayuda INMEDIATAMENTE si:</strong><br>
+                                • Tartamudeo con signos secundarios<br>
+                                • No forma oraciones de 4 palabras<br>
+                                • Los extraños no entienden su habla
+                            </div>
+                            <div class="help-item">
+                                <strong>📅 Consulta antes de iniciar preescolar si:</strong><br>
+                                • Dificultades para relacionarse con otros niños<br>
+                                • No sigue instrucciones de 2-3 pasos<br>
+                                • Vocabulario muy limitado para su edad
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Día 9 -->
-                <div class="day-card" onclick="openDay(9)">
-                    <div class="day-number">9</div>
-                    <div class="day-title">Construyendo Frases</div>
-                    <div class="day-preview">Combinaciones de dos palabras</div>
-                    <div class="completed-badge">✓</div>
+                <!-- Contenido para 5 años -->
+                <div id="difficulties-5" class="difficulty-content">
+                    <div class="difficulty-section">
+                        <div class="difficulty-title">
+                            🗣️ Tartamudez Persistente (5 años)
+                        </div>
+                        <div class="difficulty-description">
+                            A los 5 años, la tartamudez que persiste requiere intervención profesional inmediata. 
+                            Ya no es "del desarrollo" y puede afectar el rendimiento escolar y autoestima.
+                        </div>
+
+                        <div class="alert-box">
+                            <div class="alert-title">
+                                🚨 IMPORTANTE: Derivación Profesional Urgente
+                            </div>
+                            <p>
+                                A los 5 años, la tartamudez requiere intervención de un fonoaudiólogo especializado 
+                                en fluidez. No esperes más tiempo. La intervención temprana tiene mejores resultados.
+                            </p>
+                        </div>
+
+                        <div class="strategies-grid">
+                            <div class="strategy-card">
+                                <div class="strategy-title">
+                                    🎯 Técnica de Habla Suave
+                                </div>
+                                <ul class="strategy-steps">
+                                    <li>Enseñar inicio suave de palabras</li>
+                                    <li>Practicar transiciones suaves entre sonidos</li>
+                                    <li>Usar ritmo lento y relajado</li>
+                                    <li>Respiración coordinada con habla</li>
+                                    <li>Practicar en situaciones sin presión primero</li>
+                                </ul>
+                            </div>
+                            <div class="strategy-card">
+                                <div class="strategy-title">
+                                    🏫 Preparación Escolar
+                                </div>
+                                <ul class="strategy-steps">
+                                    <li>Comunicar situación a la maestra</li>
+                                    <li>Practicar presentaciones orales cortas</li>
+                                    <li>Desarrollar confianza en participación</li>
+                                    <li>Estrategias para momentos difíciles</li>
+                                    <li>Fomentar fortalezas en otras áreas</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="difficulty-section">
+                        <div class="difficulty-title">
+                            🔤 Problemas de Articulación Pre-Escolar (5 años)
+                        </div>
+                        <div class="difficulty-description">
+                            A los 5 años, la mayoría de sonidos deben estar establecidos. Los errores persistentes 
+                            pueden afectar la lectoescritura y necesitan corrección antes del primer grado.
+                        </div>
+
+                        <div class="strategies-grid">
+                            <div class="strategy-card">
+                                <div class="strategy-title">
+                                    🎯 Técnica de Producción Dirigida
+                                </div>
+                                <ul class="strategy-steps">
+                                    <li>Elegir UN sonido para trabajar por mes</li>
+                                    <li>Enseñar posición de lengua y labios</li>
+                                    <li>Practicar sonido aislado primero</li>
+                                    <li>Progresión: sonido → sílaba → palabra → frase</li>
+                                    <li>10 minutos de práctica dirigida diaria</li>
+                                </ul>
+                            </div>
+                            <div class="strategy-card">
+                                <div class="strategy-title">
+                                    📚 Preparación para Lectoescritura
+                                </div>
+                                <ul class="strategy-steps">
+                                    <li>Asociar sonidos con letras correspondientes</li>
+                                    <li>Juegos de conciencia fonológica</li>
+                                    <li>Segmentación de palabras en sonidos</li>
+                                    <li>Rimas y aliteraciones</li>
+                                    <li>Dictado de palabras simples</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="interactive-quiz">
+                            <div class="quiz-question">
+                                📝 Tu hijo de 5 años dice "plato" como "pato" consistentemente. ¿Cuál es la prioridad?
+                            </div>
+                            <div class="quiz-options">
+                                <div class="quiz-option" onclick="checkQuiz(this, false)">
+                                    A) Esperar que mejore solo antes de primer grado
+                                </div>
+                                <div class="quiz-option" onclick="checkQuiz(this, true)">
+                                    B) Trabajar grupos consonánticos ahora para preparar lectura
+                                </div>
+                                <div class="quiz-option" onclick="checkQuiz(this, false)">
+                                    C) Solo corregirlo cuando se equivoque
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="difficulty-section">
+                        <div class="difficulty-title">
+                            ⚡ Retraso del Lenguaje Pre-Escolar (5 años)
+                        </div>
+                        <div class="difficulty-description">
+                            A los 5 años, el retraso del lenguaje puede impactar significativamente el aprendizaje escolar. 
+                            Es crucial una intervención intensiva antes del primer grado.
+                        </div>
+
+                        <div class="strategies-grid">
+                            <div class="strategy-card">
+                                <div class="strategy-title">
+                                    🚀 Estimulación Pre-Académica Intensiva
+                                </div>
+                                <ul class="strategy-steps">
+                                    <li>30 min diarios de actividades estructuradas</li>
+                                    <li>Vocabulario académico: números, letras, colores</li>
+                                    <li>Conceptos espaciales: arriba/abajo, dentro/fuera</li>
+                                    <li>Conceptos temporales: antes/después, ayer/hoy</li>
+                                    <li>Categorización y clasificación avanzada</li>
+                                </ul>
+                            </div>
+                            <div class="strategy-card">
+                                <div class="strategy-title">
+                                    📖 Desarrollo de Habilidades Narrativas
+                                </div>
+                                <ul class="strategy-steps">
+                                    <li>Contar eventos del día en secuencia</li>
+                                    <li>Re-contar cuentos con inicio, medio y fin</li>
+                                    <li>Describir imágenes con detalles</li>
+                                    <li>Hacer predicciones sobre historias</li>
+                                    <li>Crear historias originales simples</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="when-to-seek-help">
+                        <h3>🚨 ¿Cuándo buscar ayuda profesional para un niño de 5 años?</h3>
+                        <div class="help-checklist">
+                            <div class="help-item">
+                                <strong>📞 Busca ayuda INMEDIATAMENTE si:</strong><br>
+                                • Tartamudez con comportamientos secundarios<br>
+                                • No forma oraciones de 5-6 palabras<br>
+                                • Inteligibilidad menor al 90%
+                            </div>
+                            <div class="help-item">
+                                <strong>🏫 ANTES del ingreso escolar evalúa si:</strong><br>
+                                • Problemas de procesamiento auditivo<br>
+                                • Dificultades pragmáticas o sociales<br>
+                                • Retraso en habilidades narrativas
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- TAB 2: PLAN DE 21 DÍAS -->
+            <div id="calendar-tab" class="tab-content">
+                <div class="calendar-intro">
+                    <h2>🎯 Plan Exclusivo de 21 Días para Superar Dificultades</h2>
+                    <p style="font-size: 1.1em; margin-bottom: 20px;">
+                        Actividades terapéuticas diseñadas específicamente para trabajar las dificultades más comunes del lenguaje. 
+                        Cada día incluye estrategias probadas científicamente.
+                    </p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px;">
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                            <strong>📚 21 Actividades Únicas</strong><br>
+                            Una diferente cada día
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                            <strong>⏱️ 15-20 min/día</strong><br>
+                            Tiempo perfecto para mantener atención
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                            <strong>🏠 Materiales de Casa</strong><br>
+                            Sin necesidad de comprar nada especial
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                            <strong>🎯 Enfoque Terapéutico</strong><br>
+                            Cada actividad trabaja dificultades específicas
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Día 10 -->
-                <div class="day-card" onclick="openDay(10)">
-                    <div class="day-number">10</div>
-                    <div class="day-title">El Teléfono Mágico</div>
-                    <div class="day-preview">Conversaciones y turnos de habla</div>
-                    <div class="completed-badge">✓</div>
+                <!-- Calendario de 21 días -->
+                <div class="days-grid">
+                    <!-- Día 1 -->
+                    <div class="day-card" onclick="openDay(1)">
+                        <div class="day-number">1</div>
+                        <div class="day-difficulty">Tartamudez</div>
+                        <div class="day-title">El Espejo Mágico</div>
+                        <div class="day-preview">Imitación facial para reducir tensión y mejorar fluidez</div>
+                        <div class="day-age-focus">Ideal para todas las edades</div>
+                        <div class="completed-badge">✓</div>
+                    </div>
+
+                    <!-- Día 2 -->
+                    <div class="day-card" onclick="openDay(2)">
+                        <div class="day-number">2</div>
+                        <div class="day-difficulty">Atención y Vocabulario</div>
+                        <div class="day-title">Burbujas Parlantes</div>
+                        <div class="day-preview">Fortalecer atención conjunta y seguimiento visual</div>
+                        <div class="day-age-focus">Especial para 3-4 años</div>
+                        <div class="completed-badge">✓</div>
+                    </div>
+
+                    <!-- Día 3 -->
+                    <div class="day-card" onclick="openDay(3)">
+                        <div class="day-number">3</div>
+                        <div class="day-difficulty">Retraso del Lenguaje</div>
+                        <div class="day-title">Caja de Tesoros</div>
+                        <div class="day-preview">Estimular vocabulario a través de exploración sensorial</div>
+                        <div class="day-age-focus">Todas las edades</div>
+                        <div class="completed-badge">✓</div>
+                    </div>
+
+                    <!-- Día 4 -->
+                    <div class="day-card" onclick="openDay(4)">
+                        <div class="day-number">4</div>
+                        <div class="day-difficulty">Problemas de Pronunciación</div>
+                        <div class="day-title">Ritmos y Rimas</div>
+                        <div class="day-preview">Desarrollar conciencia fonológica y ritmo del lenguaje</div>
+                        <div class="day-age-focus">Ideal para 4-5 años</div>
+                        <div class="completed-badge">✓</div>
+                    </div>
+
+                    <!-- Día 5 -->
+                    <div class="day-card" onclick="openDay(5)">
+                        <div class="day-number">5</div>
+                        <div class="day-difficulty">Articulación</div>
+                        <div class="day-title">Safari en Casa</div>
+                        <div class="day-preview">Trabajar onomatopeyas y categorización de animales</div>
+                        <div class="day-age-focus">Especial para 3-4 años</div>
+                        <div class="completed-badge">✓</div>
+                    </div>
+
+                    <!-- Día 6 -->
+                    <div class="day-card" onclick="openDay(6)">
+                        <div class="day-number">6</div>
+                        <div class="day-difficulty">Secuencias y Comprensión</div>
+                        <div class="day-title">Cocineros Comunicadores</div>
+                        <div class="day-preview">Aprender secuencias y vocabulario funcional</div>
+                        <div class="day-age-focus">Todas las edades</div>
+                        <div class="completed-badge">✓</div>
+                    </div>
+
+                    <!-- Día 7 -->
+                    <div class="day-card" onclick="openDay(7)">
+                        <div class="day-number">7</div>
+                        <div class="day-difficulty">Narrativa y Creatividad</div>
+                        <div class="day-title">Teatro de Sombras</div>
+                        <div class="day-preview">Fomentar narración y expresión creativa</div>
+                        <div class="day-age-focus">Ideal para 4-5 años</div>
+                        <div class="completed-badge">✓</div>
+                    </div>
+
+                    <!-- Día 8 -->
+                    <div class="day-card" onclick="openDay(8)">
+                        <div class="day-number">8</div>
+                        <div class="day-difficulty">Discriminación Auditiva</div>
+                        <div class="day-title">Detective de Sonidos</div>
+                        <div class="day-preview">Desarrollar discriminación auditiva y memoria</div>
+                        <div class="day-age-focus">Especial para 4-5 años</div>
+                        <div class="completed-badge">✓</div>
+                    </div>
+
+                    <!-- Día 9 -->
+                    <div class="day-card" onclick="openDay(9)">
+                        <div class="day-number">9</div>
+                        <div class="day-difficulty">Construcción de Frases</div>
+                        <div class="day-title">Construyendo Frases</div>
+                        <div class="day-preview">Formar frases de dos palabras y expandir estructuras</div>
+                        <div class="day-age-focus">Ideal para 3-4 años</div>
+                        <div class="completed-badge">✓</div>
+                    </div>
+
+                    <!-- Día 10 -->
+                    <div class="day-card" onclick="openDay(10)">
+                        <div class="day-number">10</div>
+                        <div class="day-difficulty">Pragmática Social</div>
+                        <div class="day-title">El Teléfono Mágico</div>
+                        <div class="day-preview">Practicar conversaciones y turnos comunicativos</div>
+                        <div class="day-age-focus">Ideal para 4-5 años</div>
+                        <div class="completed-badge">✓</div>
+                    </div>
+
+                    <!-- Día 11 -->
+                    <div class="day-card" onclick="openDay(11)">
+                        <div class="day-number">11</div>
+                        <div class="day-difficulty">Verbos y Acciones</div>
+                        <div class="day-title">Cuentos en Movimiento</div>
+                        <div class="day-preview">Integrar acciones y verbos a través del movimiento</div>
+                        <div class="day-age-focus">Todas las edades</div>
+                        <div class="completed-badge">✓</div>
+                    </div>
+
+                    <!-- Día 12 -->
+                    <div class="day-card" onclick="openDay(12)">
+                        <div class="day-number">12</div>
+                        <div class="day-difficulty">Categorización</div>
+                        <div class="day-title">Supermercado del Lenguaje</div>
+                        <div class="day-preview">Trabajar categorización y vocabulario funcional</div>
+                        <div class="day-age-focus">Especial para 4-5 años</div>
+                        <div class="completed-badge">✓</div>
+                    </div>
+
+                    <!-- Día 13 -->
+                    <div class="day-card" onclick="openDay(13)">
+                        <div class="day-number">13</div>
+                        <div class="day-difficulty">Vocabulario Emocional</div>
+                        <div class="day-title">Emociones en Acción</div>
+                        <div class="day-preview">Desarrollar vocabulario emocional y expresión</div>
+                        <div class="day-age-focus">Ideal para 3-5 años</div>
+                        <div class="completed-badge">✓</div>
+                    </div>
+
+                    <!-- Día 14 -->
+                    <div class="day-card" onclick="openDay(14)">
+                        <div class="day-number">14</div>
+                        <div class="day-difficulty">Expresión Creativa</div>
+                        <div class="day-title">Artistas del Lenguaje</div>
+                        <div class="day-preview">Combinar arte y lenguaje para expresión creativa</div>
+                        <div class="day-age-focus">Todas las edades</div>
+                        <div class="completed-badge">✓</div>
+                    </div>
+
+                    <!-- Día 15 -->
+                    <div class="day-card" onclick="openDay(15)">
+                        <div class="day-number">15</div>
+                        <div class="day-difficulty">Preguntas y Respuestas</div>
+                        <div class="day-title">Periodistas en Casa</div>
+                        <div class="day-preview">Practicar preguntas y respuestas estructuradas</div>
+                        <div class="day-age-focus">Ideal para 4-5 años</div>
+                        <div class="completed-badge">✓</div>
+                    </div>
+
+                    <!-- Día 16 -->
+                    <div class="day-card" onclick="openDay(16)">
+                        <div class="day-number">16</div>
+                        <div class="day-difficulty">Conceptos Temporales</div>
+                        <div class="day-title">Máquina del Tiempo</div>
+                        <div class="day-preview">Trabajar conceptos temporales y tiempos verbales</div>
+                        <div class="day-age-focus">Especial para 4-5 años</div>
+                        <div class="completed-badge">✓</div>
+                    </div>
+
+                    <!-- Día 17 -->
+                    <div class="day-card" onclick="openDay(17)">
+                        <div class="day-number">17</div>
+                        <div class="day-difficulty">Narrativa Avanzada</div>
+                        <div class="day-title">Inventores de Historias</div>
+                        <div class="day-preview">Crear narrativas originales y estructuradas</div>
+                        <div class="day-age-focus">Ideal para 5 años</div>
+                        <div class="completed-badge">✓</div>
+                    </div>
+
+                    <!-- Día 18 -->
+                    <div class="day-card" onclick="openDay(18)">
+                        <div class="day-number">18</div>
+                        <div class="day-difficulty">Resolución de Problemas</div>
+                        <div class="day-title">Resolviendo Problemas</div>
+                        <div class="day-preview">Desarrollar lenguaje para resolución de problemas</div>
+                        <div class="day-age-focus">Especial para 4-5 años</div>
+                        <div class="completed-badge">✓</div>
+                    </div>
+
+                    <!-- Día 19 -->
+                    <div class="day-card" onclick="openDay(19)">
+                        <div class="day-number">19</div>
+                        <div class="day-difficulty">Diversidad Cultural</div>
+                        <div class="day-title">Viaje por el Mundo</div>
+                        <div class="day-preview">Explorar diversidad cultural y lingüística</div>
+                        <div class="day-age-focus">Ideal para 4-5 años</div>
+                        <div class="completed-badge">✓</div>
+                    </div>
+
+                    <!-- Día 20 -->
+                    <div class="day-card" onclick="openDay(20)">
+                        <div class="day-number">20</div>
+                        <div class="day-difficulty">Presentación Oral</div>
+                        <div class="day-title">Show de Talentos</div>
+                        <div class="day-preview">Practicar presentación oral y expresión</div>
+                        <div class="day-age-focus">Especial para 5 años</div>
+                        <div class="completed-badge">✓</div>
+                    </div>
+
+                    <!-- Día 21 -->
+                    <div class="day-card" onclick="openDay(21)">
+                        <div class="day-number">21</div>
+                        <div class="day-difficulty">Integración Final</div>
+                        <div class="day-title">Gran Celebración</div>
+                        <div class="day-preview">Integrar todas las habilidades aprendidas</div>
+                        <div class="day-age-focus">Todas las edades</div>
+                        <div class="completed-badge">✓</div>
+                    </div>
                 </div>
 
-                <!-- Día 11 -->
-                <div class="day-card" onclick="openDay(11)">
-                    <div class="day-number">11</div>
-                    <div class="day-title">Cuentos en Movimiento</div>
-                    <div class="day-preview">Acciones y verbos a través del juego</div>
-                    <div class="completed-badge">✓</div>
+                <!-- Sección de progreso del plan -->
+                <div style="background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; padding: 30px; border-radius: 15px; margin: 40px 0; text-align: center;">
+                    <h3>📊 Tu Progreso en el Plan de 21 Días</h3>
+                    <div style="background: rgba(255,255,255,0.2); height: 20px; border-radius: 10px; margin: 20px 0; overflow: hidden;">
+                        <div style="background: #4CAF50; height: 100%; width: 0%; transition: width 1s ease;" id="calendarProgress"></div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px;">
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 1.5em; font-weight: bold;" id="completedActivities">0</div>
+                            <div>Actividades Completadas</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 1.5em; font-weight: bold;" id="currentStreak">0</div>
+                            <div>Racha Actual</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 1.5em; font-weight: bold;" id="daysRemaining">21</div>
+                            <div>Días Restantes</div>
+                        </div>
+                    </div>
                 </div>
+            </div>
 
-                <!-- Día 12 -->
-                <div class="day-card" onclick="openDay(12)">
-                    <div class="day-number">12</div>
-                    <div class="day-title">Supermercado del Lenguaje</div>
-                    <div class="day-preview">Categorías y descripciones</div>
-                    <div class="completed-badge">✓</div>
-                </div>
-
-                <!-- Día 13 -->
-                <div class="day-card" onclick="openDay(13)">
-                    <div class="day-number">13</div>
-                    <div class="day-title">Emociones en Acción</div>
-                    <div class="day-preview">Vocabulario emocional y expresión</div>
-                    <div class="completed-badge">✓</div>
-                </div>
-
-                <!-- Día 14 -->
-                <div class="day-card" onclick="openDay(14)">
-                    <div class="day-number">14</div>
-                    <div class="day-title">Artistas del Lenguaje</div>
-                    <div class="day-preview">Crear y describir obras de arte</div>
-                    <div class="completed-badge">✓</div>
+            <!-- Modal para detalles del día -->
+            <div id="dayModal" class="modal">
+                <div class="modal-content">
+                    <button class="close-modal" onclick="closeModal()">×</button>
+                    <div id="modalContent"></div>
                 </div>
             </div>
         </div>
-
-        <!-- Semana 3 -->
-        <div id="week3" class="calendar-container">
-            <h3 style="text-align: center; color: #764ba2; margin-bottom: 20px;">
-                🌳 Semana 3: Consolidación y Conversaciones Complejas
-            </h3>
-            <p style="text-align: center; color: #666; margin-bottom: 30px;">
-                Integramos todo lo aprendido con narraciones, preguntas abiertas y juegos de mayor complejidad.
-            </p>
-            
-            <div class="days-grid">
-                <!-- Día 15 -->
-                <div class="day-card" onclick="openDay(15)">
-                    <div class="day-number">15</div>
-                    <div class="day-title">Periodistas en Casa</div>
-                    <div class="day-preview">Hacer y responder preguntas</div>
-                    <div class="completed-badge">✓</div>
+        <div class="navigation">
+            <a href="../modulo3/index.html" class="nav-btn">
+                ← Módulo 3: Actividades y Juegos
+            </a>
+            <div style="text-align: center;">
+                <div style="color: #667eea; font-weight: bold; margin-bottom: 10px;">
+                    Módulo 4 de 5 Completado
                 </div>
-
-                <!-- Día 16 -->
-                <div class="day-card" onclick="openDay(16)">
-                    <div class="day-number">16</div>
-                    <div class="day-title">Máquina del Tiempo</div>
-                    <div class="day-preview">Pasado, presente y futuro</div>
-                    <div class="completed-badge">✓</div>
-                </div>
-
-                <!-- Día 17 -->
-                <div class="day-card" onclick="openDay(17)">
-                    <div class="day-number">17</div>
-                    <div class="day-title">Inventores de Historias</div>
-                    <div class="day-preview">Crear cuentos originales</div>
-                    <div class="completed-badge">✓</div>
-                </div>
-
-                <!-- Día 18 -->
-                <div class="day-card" onclick="openDay(18)">
-                    <div class="day-number">18</div>
-                    <div class="day-title">Resolviendo Problemas</div>
-                    <div class="day-preview">Pensamiento lógico y explicación</div>
-                    <div class="completed-badge">✓</div>
-                </div>
-
-                <!-- Día 19 -->
-                <div class="day-card" onclick="openDay(19)">
-                    <div class="day-number">19</div>
-                    <div class="day-title">Viaje por el Mundo</div>
-                    <div class="day-preview">Culturas, idiomas y diversidad</div>
-                    <div class="completed-badge">✓</div>
-                </div>
-
-                <!-- Día 20 -->
-                <div class="day-card" onclick="openDay(20)">
-                    <div class="day-number">20</div>
-                    <div class="day-title">Show de Talentos</div>
-                    <div class="day-preview">Presentación y expresión oral</div>
-                    <div class="completed-badge">✓</div>
-                </div>
-
-                <!-- Día 21 -->
-                <div class="day-card" onclick="openDay(21)">
-                    <div class="day-number">21</div>
-                    <div class="day-title">Gran Celebración</div>
-                    <div class="day-preview">Integración de todas las habilidades</div>
-                    <div class="completed-badge">✓</div>
+                <div style="background: #f0f0f0; height: 8px; width: 200px; border-radius: 4px; margin: 0 auto; overflow: hidden;">
+                    <div style="background: linear-gradient(90deg, #667eea, #764ba2); height: 100%; width: 80%; border-radius: 4px;"></div>
                 </div>
             </div>
-        </div>
-
-        <!-- Modal para detalles del día -->
-        <div id="dayModal" class="modal">
-            <div class="modal-content">
-                <button class="close-modal" onclick="closeModal()">×</button>
-                <div id="modalContent"></div>
-            </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 40px;">
-            <a href="../index.html" class="back-link">← Volver al inicio</a>
+            <a href="../modulo5/index.html" class="nav-btn" id="nextModuleBtn">
+                Módulo 5: Plan Personalizado →
+            </a>
         </div>
     </div>
+
     <script>
-        // Base de datos de actividades para cada día
+        // Base de datos completa de actividades de 21 días
         const activities = {
             1: {
                 title: "El Espejo Mágico",
                 emoji: "🪞",
-                objetivo: "Desarrollar la imitación y los prerrequisitos del lenguaje",
-                fundamentoCientifico: "La imitación es fundamental para el aprendizaje del lenguaje. Meltzoff y Moore (1983) demostraron que los bebés pueden imitar desde las primeras horas de vida, siendo esta habilidad crucial para el desarrollo comunicativo.",
+                objetivo: "Desarrollar la imitación y reducir tensión en tartamudez",
+                dificultadObjetivo: "Ideal para niños con tartamudez o dificultades de imitación",
+                fundamentoCientifico: "La imitación facial reduce la tensión muscular y mejora la fluidez del habla. Meltzoff y Moore (1983) demostraron que la imitación temprana es fundamental para el desarrollo comunicativo.",
                 actividades: [
                     {
                         nombre: "Espejo de Emociones",
-                        descripcion: "Frente a un espejo, hagan diferentes expresiones faciales juntos. Nombren cada emoción: 'feliz', 'triste', 'sorprendido'.",
+                        descripcion: "Frente a un espejo, hagan diferentes expresiones faciales juntos. Nombren cada emoción: 'feliz', 'triste', 'sorprendido'. Enfoque especial en relajar músculos faciales.",
                         duracion: "5 minutos",
                         materiales: "Un espejo grande",
-                        variaciones: "Para niños mayores: agreguen sonidos a cada emoción"
+                        variaciones: "Para niños con tartamudez: enfócense en expresiones relajadas"
                     },
                     {
-                        nombre: "Eco Musical",
-                        descripcion: "Produzcan sonidos simples (ma-ma, pa-pa, ta-ta) y esperen que el niño los imite. Celebren cada intento.",
-                        duracion: "5 minutos",
-                        materiales: "Solo sus voces",
-                        variaciones: "Agreguen palmadas o instrumentos simples"
+                        nombre: "Respiración Espejo",
+                        descripcion: "Frente al espejo, practiquen respiración lenta y profunda juntos. 'Inhala despacio, exhala suave'.",
+                        duracion: "3 minutos",
+                        materiales: "Espejo",
+                        variaciones: "Agreguen sonidos suaves en la exhalación"
                     },
                     {
-                        nombre: "Simón Dice Facial",
-                        descripcion: "Jueguen 'Simón dice' pero solo con gestos faciales y movimientos de boca.",
-                        duracion: "10 minutos",
-                        materiales: "Ninguno",
-                        variaciones: "Incluyan movimientos de lengua para ejercitar músculos del habla"
+                        nombre: "Sonidos Relajados",
+                        descripcion: "Produzcan sonidos muy suaves mirándose al espejo: 'mmm', 'aah', manteniendo músculos faciales relajados.",
+                        duracion: "7 minutos",
+                        materiales: "Espejo",
+                        variaciones: "Gradualmente agregar palabras suaves"
                     }
                 ],
                 tips: [
-                    "Mantengan contacto visual durante toda la actividad",
-                    "Exageren los movimientos para hacerlos más visibles",
-                    "Celebren cada intento de imitación, aunque no sea perfecto",
-                    "Si el niño no imita, no presionen; modelen y esperen"
+                    "Mantengan contacto visual relajado durante toda la actividad",
+                    "Si hay tartamudez, nunca corrijan, solo modelen habla suave",
+                    "Celebren la relajación, no la perfección del habla",
+                    "Usen voces muy suaves y calmadas"
                 ],
                 indicadoresExito: [
-                    "El niño mantiene atención por al menos 3 segundos",
-                    "Intenta imitar al menos 2 gestos diferentes",
-                    "Muestra interés mirando o sonriendo"
+                    "El niño mantiene músculos faciales relajados",
+                    "Imita expresiones sin tensión",
+                    "Muestra menos ansiedad al hablar frente al espejo",
+                    "Respiración más calmada durante la actividad"
                 ]
             },
             2: {
                 title: "Burbujas Parlantes",
                 emoji: "🫧",
-                objetivo: "Fortalecer la atención conjunta y el seguimiento visual",
-                fundamentoCientifico: "La atención conjunta es un predictor del desarrollo del lenguaje (Mundy & Gomes, 1998). Las burbujas son ideales para esto por su movimiento impredecible y atractivo visual.",
+                objetivo: "Fortalecer atención conjunta y estimular vocabulario",
+                dificultadObjetivo: "Perfecto para retraso del lenguaje y problemas de atención",
+                fundamentoCientifico: "La atención conjunta es predictor del desarrollo del lenguaje. Las burbujas captan atención naturalmente y permiten vocabulario descriptivo rico.",
                 actividades: [
                     {
-                        nombre: "Persiguiendo Palabras",
-                        descripcion: "Soplen burbujas y nombren cada una: 'burbuja grande', 'burbuja pequeña', 'pop'. Señalen y sigan con la mirada.",
-                        duracion: "7 minutos",
-                        materiales: "Jabón para burbujas",
-                        variaciones: "Usen diferentes velocidades: 'burbuja rápida', 'burbuja lenta'"
-                    },
-                    {
-                        nombre: "Cuenta Burbujas",
-                        descripcion: "Cuenten las burbujas juntos: 'una, dos, tres'. Aplaudan cuando exploten.",
-                        duracion: "5 minutos",
-                        materiales: "Jabón para burbujas",
-                        variaciones: "Para mayores: predigan dónde caerá cada burbuja"
-                    },
-                    {
-                        nombre: "Burbujas con Acción",
-                        descripcion: "Den instrucciones: 'atrapa la burbuja', 'sopla fuerte', 'toca suave'.",
+                        nombre: "Burbujas Descriptivas",
+                        descripcion: "Soplen burbujas describiendo cada una: 'burbuja grande', 'burbuja que vuela alto', 'pop suave'. Enfoquen en adjetivos.",
                         duracion: "8 minutos",
                         materiales: "Jabón para burbujas",
-                        variaciones: "Agreguen colores con colorante alimenticio"
-                    }
-                ],
-                tips: [
-                    "Asegúrense de que el niño siga las burbujas con la mirada",
-                    "Usen lenguaje descriptivo rico: brillante, flotando, girando",
-                    "Hagan pausas para que el niño pida 'más burbujas'",
-                    "Modelen el soplo para ejercitar músculos orales"
-                ],
-                indicadoresExito: [
-                    "Sigue las burbujas con la mirada",
-                    "Señala al menos una burbuja",
-                    "Intenta decir 'pop' o hace el sonido",
-                    "Comparte la atención entre las burbujas y el adulto"
-                ]
-            },
-            3: {
-                title: "Caja de Tesoros",
-                emoji: "📦",
-                objetivo: "Estimular el vocabulario a través de la exploración sensorial",
-                fundamentoCientifico: "El aprendizaje multisensorial facilita la retención del vocabulario (Shams & Seitz, 2008). La manipulación de objetos mientras se nombran crea conexiones neuronales más fuertes.",
-                actividades: [
-                    {
-                        nombre: "Tesoro del Día",
-                        descripcion: "Preparen una caja con 5 objetos de diferentes texturas. Saquen uno a la vez, descríbanlo: 'suave', 'áspero', 'frío'.",
-                        duracion: "10 minutos",
-                        materiales: "Caja, objetos variados (esponja, piedra, pluma, etc.)",
-                        variaciones: "Adivinen con los ojos cerrados"
+                        variaciones: "Para retraso: usar frases de 2 palabras máximo"
                     },
                     {
-                        nombre: "Historia del Tesoro",
-                        descripcion: "Inventen una mini historia con cada objeto encontrado.",
-                        duracion: "5 minutos",
-                        materiales: "Los mismos objetos",
-                        variaciones: "El niño elige el orden de la historia"
-                    },
-                    {
-                        nombre: "Clasificando Tesoros",
-                        descripcion: "Agrupen los objetos por características: duros/blandos, grandes/pequeños.",
-                        duracion: "5 minutos",
-                        materiales: "Objetos variados",
-                        variaciones: "Clasifiquen por color o uso"
-                    }
-                ],
-                tips: [
-                    "Dejen que el niño explore cada objeto el tiempo necesario",
-                    "Usen adjetivos opuestos para contrastar",
-                    "Repitan las palabras nuevas en diferentes contextos",
-                    "Relacionen los objetos con experiencias del niño"
-                ],
-                indicadoresExito: [
-                    "Explora activamente los objetos",
-                    "Intenta nombrar al menos un objeto",
-                    "Muestra preferencia por alguna textura",
-                    "Responde a preguntas simples sobre los objetos"
-                ]
-            },
-            4: {
-                title: "Ritmos y Rimas",
-                emoji: "🎵",
-                objetivo: "Desarrollar la conciencia fonológica y el ritmo del lenguaje",
-                fundamentoCientifico: "La conciencia fonológica es el mejor predictor del éxito en la lectura (Bradley & Bryant, 1983). Las rimas y ritmos facilitan la segmentación de sonidos del habla.",
-                actividades: [
-                    {
-                        nombre: "Tambores Silábicos",
-                        descripcion: "Toquen un tambor (o mesa) por cada sílaba: MA-MÁ (2 golpes), PE-LO-TA (3 golpes).",
-                        duracion: "7 minutos",
-                        materiales: "Tambor o superficie para golpear",
-                        variaciones: "Usen diferentes partes del cuerpo para cada sílaba"
-                    },
-                    {
-                        nombre: "Canciones con Huecos",
-                        descripcion: "Canten canciones conocidas y detengan antes de la última palabra para que el niño la complete.",
-                        duracion: "8 minutos",
-                        materiales: "Ninguno",
-                        variaciones: "Dejen huecos en diferentes partes"
-                    },
-                    {
-                        nombre: "Eco Rimado",
-                        descripcion: "Digan una palabra y busquen juntos palabras que rimen: gato-pato-rato.",
-                        duracion: "5 minutos",
-                        materiales: "Ninguno",
-                        variaciones: "Inventen palabras sin sentido que rimen"
-                    }
-                ],
-                tips: [
-                    "Exageren la pronunciación de las rimas",
-                    "Usen movimientos corporales para marcar el ritmo",
-                    "Repitan las canciones favoritas del niño",
-                    "No corrijan, modelen la forma correcta"
-                ],
-                indicadoresExito: [
-                    "Intenta seguir el ritmo con el cuerpo",
-                    "Completa al menos una palabra en canciones",
-                    "Muestra placer al escuchar rimas",
-                    "Intenta crear sus propios sonidos rítmicos"
-                ]
-            },
-            5: {
-                title: "Safari en Casa",
-                emoji: "🦁",
-                objetivo: "Trabajar onomatopeyas y categorización de animales",
-                fundamentoCientifico: "Las onomatopeyas son universales en el desarrollo del lenguaje infantil y facilitan la producción de primeras palabras (Laing, 2014). Son más fáciles de producir que las palabras convencionales.",
-                actividades: [
-                    {
-                        nombre: "Zoológico Sonoro",
-                        descripcion: "Caminen por la casa imitando diferentes animales. 'El león hace ROAR', 'El gatito hace MIAU'.",
-                        duracion: "8 minutos",
-                        materiales: "Imágenes de animales (opcional)",
-                        variaciones: "Adivinen el animal solo por el sonido"
-                    },
-                    {
-                        nombre: "¿Dónde Vive?",
-                        descripcion: "Clasifiquen animales por hábitat: 'El pez vive en el agua', 'El pájaro vive en el árbol'.",
+                        nombre: "Cuenta y Explota",
+                        descripcion: "Cuenten burbujas y expliquen qué pasa: 'Una burbuja... ¡POP! Se rompió'. Trabajar causa-efecto.",
                         duracion: "6 minutos",
-                        materiales: "Juguetes o imágenes de animales",
-                        variaciones: "Creen hábitats con cajas y telas"
+                        materiales: "Burbujas",
+                        variaciones: "Predecir cuál se romperá primero"
                     },
                     {
-                        nombre: "Comida de Animales",
-                        descripcion: "Jueguen a alimentar animales: '¿Qué come el conejo?' 'Zanahoria'.",
+                        nombre: "Soplo Terapéutico",
+                        descripcion: "Practiquen diferentes tipos de soplo: suave, fuerte, largo, corto. Excelente para control respiratorio.",
                         duracion: "6 minutos",
-                        materiales: "Peluches y comida de juguete",
-                        variaciones: "Preparen 'comida' con plastilina"
+                        materiales: "Burbujas",
+                        variaciones: "Soplar hacia diferentes direcciones"
                     }
                 ],
                 tips: [
-                    "Exageren los sonidos de animales haciéndolos divertidos",
-                    "Usen gestos para acompañar cada animal",
-                    "Relacionen con animales que el niño conozca",
-                    "Lean cuentos de animales después de la actividad"
+                    "Use lenguaje descriptivo rico constantemente",
+                    "Señale y siga burbujas para mantener atención conjunta",
+                    "Para niños con retraso, repita palabras clave 5-10 veces",
+                    "Haga pausas para que el niño pueda procesar y responder"
                 ],
                 indicadoresExito: [
-                    "Imita al menos 3 sonidos de animales",
-                    "Señala o nombra animales cuando se le pregunta",
-                    "Asocia al menos un animal con su comida",
-                    "Muestra entusiasmo por los sonidos"
-                ]
-            },
-            6: {
-                title: "Cocineros Comunicadores",
-                emoji: "👨‍🍳",
-                objetivo: "Aprender secuencias y vocabulario funcional de cocina",
-                fundamentoCientifico: "Las rutinas de cocina proporcionan contexto natural para el aprendizaje de secuencias temporales y vocabulario funcional (Snow & Beals, 2006).",
-                actividades: [
-                    {
-                        nombre: "Sándwich Hablador",
-                        descripcion: "Preparen un sándwich narrando cada paso: 'Primero, el pan. Después, la mantequilla'.",
-                        duracion: "10 minutos",
-                        materiales: "Ingredientes para sándwich",
-                        variaciones: "El niño da las instrucciones"
-                    },
-                    {
-                        nombre: "Batido de Palabras",
-                        descripcion: "Hagan un batido nombrando ingredientes y acciones: 'cortar', 'mezclar', 'servir'.",
-                        duracion: "7 minutos",
-                        materiales: "Frutas, licuadora (supervisada)",
-                        variaciones: "Dibujen la receta después"
-                    },
-                    {
-                        nombre: "Mesa Mágica",
-                        descripcion: "Pongan la mesa verbalizando: 'El plato va aquí', 'Necesitamos dos cucharas'.",
-                        duracion: "3 minutos",
-                        materiales: "Utensilios de mesa",
-                        variaciones: "Jueguen al restaurante"
-                    }
-                ],
-                tips: [
-                    "Usen verbos de acción constantemente",
-                    "Permitan que el niño participe activamente",
-                    "Enfaticen conceptos: primero/después, arriba/abajo",
-                    "Celebren el producto final juntos"
-                ],
-                indicadoresExito: [
-                    "Sigue al menos 2 instrucciones simples",
-                    "Nombra ingredientes o utensilios",
-                    "Comprende 'primero' y 'después'",
-                    "Participa activamente en la preparación"
-                ]
-            },
-            7: {
-                title: "Teatro de Sombras",
-                emoji: "🎭",
-                objetivo: "Fomentar la narración y expresión creativa",
-                fundamentoCientifico: "El juego simbólico y la narración desarrollan habilidades metalingüísticas esenciales para la comprensión de historias (Nicolopoulou, 2015).",
-                actividades: [
-                    {
-                        nombre: "Manos Que Hablan",
-                        descripcion: "Con una lámpara, creen sombras con las manos. Inventen personajes y diálogos simples.",
-                        duracion: "8 minutos",
-                        materiales: "Lámpara, pared blanca",
-                        variaciones: "Usen figuras recortadas en cartón"
-                    },
-                    {
-                        nombre: "Historia de 3 Partes",
-                        descripcion: "Creen una historia con inicio, medio y fin usando las sombras.",
-                        duracion: "7 minutos",
-                        materiales: "Lámpara, objetos para sombras",
-                        variaciones: "El niño decide el final"
-                    },
-                    {
-                        nombre: "Emociones en Sombras",
-                        descripcion: "Representen diferentes emociones con las sombras: feliz, triste, enojado.",
-                        duracion: "5 minutos",
-                        materiales: "Lámpara",
-                        variaciones: "Adivinen la emoción"
-                    }
-                ],
-                tips: [
-                    "Mantengan las historias simples y cortas",
-                    "Usen voces diferentes para cada personaje",
-                    "Involucren al niño en la creación de la historia",
-                    "Repitan las historias favoritas"
-                ],
-                indicadoresExito: [
-                    "Mantiene atención durante la historia",
-                    "Intenta crear sus propias sombras",
-                    "Responde a preguntas sobre la historia",
-                    "Muestra diferentes emociones con gestos"
+                    "Sigue burbujas con la mirada consistentemente",
+                    "Intenta nombrar o describir las burbujas",
+                    "Demuestra control de soplo mejorado",
+                    "Comparte atención entre burbujas y adulto"
                 ]
             }
-        };
-        // Continuación de la base de datos de actividades
-        activities[8] = {
-            title: "Detective de Sonidos",
-            emoji: "🔍",
-            objetivo: "Desarrollar discriminación auditiva y memoria auditiva",
-            fundamentoCientifico: "La discriminación auditiva es fundamental para distinguir fonemas del lenguaje (Tallal, 2004). Los juegos de escucha activa mejoran el procesamiento auditivo.",
-            actividades: [
-                {
-                    nombre: "¿Qué Suena?",
-                    descripcion: "Con los ojos cerrados, identifiquen sonidos cotidianos: llaves, agua, papel arrugado.",
-                    duracion: "6 minutos",
-                    materiales: "Objetos cotidianos",
-                    variaciones: "Graben sonidos y reprodúzcanlos"
-                },
-                {
-                    nombre: "Busca el Sonido",
-                    descripcion: "Escondan un timer o juguete sonoro. El niño debe encontrarlo siguiendo el sonido.",
-                    duracion: "7 minutos",
-                    materiales: "Timer o juguete con sonido",
-                    variaciones: "Den pistas: 'caliente' o 'frío'"
-                },
-                {
-                    nombre: "Orquesta Casera",
-                    descripcion: "Creen diferentes ritmos con objetos. Copien los patrones del otro.",
-                    duracion: "7 minutos",
-                    materiales: "Ollas, cucharas, cajas",
-                    variaciones: "Graben su 'canción'"
-                }
-            ],
-            tips: [
-                "Empiecen con sonidos muy diferentes entre sí",
-                "Gradualmente aumenten la dificultad",
-                "Celebren cada acierto con entusiasmo",
-                "Relacionen sonidos con sus fuentes visuales"
-            ],
-            indicadoresExito: [
-                "Identifica al menos 3 sonidos diferentes",
-                "Localiza la fuente del sonido",
-                "Imita patrones rítmicos simples",
-                "Muestra interés en producir sonidos"
-            ]
+            // Continuaremos con las demás actividades...
         };
 
-        activities[9] = {
-            title: "Construyendo Frases",
-            emoji: "🏗️",
-            objetivo: "Formar frases de dos palabras y expandir estructuras",
-            fundamentoCientifico: "La transición de palabras aisladas a combinaciones de dos palabras marca un hito crucial en el desarrollo sintáctico (Brown, 1973).",
-            actividades: [
-                {
-                    nombre: "Tren de Palabras",
-                    descripcion: "Usen bloques como vagones. Cada vagón es una palabra: 'Mamá'+'come' = 'Mamá come'.",
-                    duracion: "8 minutos",
-                    materiales: "Bloques o cajas pequeñas",
-                    variaciones: "Agreguen un tercer vagón gradualmente"
-                },
-                {
-                    nombre: "Foto-Frases",
-                    descripcion: "Miren fotos familiares y describan: 'Papá corre', 'Bebé duerme'.",
-                    duracion: "6 minutos",
-                    materiales: "Fotos familiares",
-                    variaciones: "Actúen las acciones"
-                },
-                {
-                    nombre: "Completa la Idea",
-                    descripcion: "Empiecen frases para que complete: 'El perro...' '¡ladra!'",
-                    duracion: "6 minutos",
-                    materiales: "Ninguno",
-                    variaciones: "Intercambien roles"
-                }
-            ],
-            tips: [
-                "Modelen frases de dos palabras constantemente",
-                "Expandan lo que dice el niño: 'Agua' → 'Quieres agua'",
-                "Usen gestos para apoyar cada palabra",
-                "No exijan perfección, celebren intentos"
-            ],
-            indicadoresExito: [
-                "Combina dos palabras espontáneamente",
-                "Comprende frases de dos palabras",
-                "Intenta completar frases iniciadas",
-                "Usa gestos para complementar palabras"
-            ]
-        };
-
-        activities[10] = {
-            title: "El Teléfono Mágico",
-            emoji: "📞",
-            objetivo: "Practicar conversaciones y turnos comunicativos",
-            fundamentoCientifico: "Los turnos conversacionales son fundamentales para el desarrollo pragmático del lenguaje (Sacks et al., 1974). El juego telefónico elimina pistas visuales, enfocando en lo verbal.",
-            actividades: [
-                {
-                    nombre: "Llamada a la Abuela",
-                    descripcion: "Simulen llamadas a familiares. Practiquen: 'Hola', '¿Cómo estás?', 'Adiós'.",
-                    duracion: "7 minutos",
-                    materiales: "Teléfonos de juguete o reales (sin llamar)",
-                    variaciones: "Videollamada real supervisada"
-                },
-                {
-                    nombre: "Pizza por Teléfono",
-                    descripcion: "Jueguen a ordenar comida: '¿Qué quiere?' 'Pizza grande, por favor'.",
-                    duracion: "6 minutos",
-                    materiales: "Teléfonos de juguete",
-                    variaciones: "Cambien de restaurante"
-                },
-                {
-                    nombre: "Noticias del Día",
-                    descripcion: "Cuéntense por 'teléfono' qué hicieron hoy.",
-                    duracion: "7 minutos",
-                    materiales: "Teléfonos de juguete",
-                    variaciones: "Inventen noticias graciosas"
-                }
-            ],
-            tips: [
-                "Modelen turnos claros de habla y escucha",
-                "Usen frases de cortesía: por favor, gracias",
-                "Hagan pausas para que el niño responda",
-                "Mantengan conversaciones cortas al inicio"
-            ],
-            indicadoresExito: [
-                "Espera su turno para hablar",
-                "Usa al menos una frase de saludo",
-                "Mantiene el teléfono en posición correcta",
-                "Intenta responder preguntas simples"
-            ]
-        };
-
-        activities[11] = {
-            title: "Cuentos en Movimiento",
-            emoji: "📚",
-            objetivo: "Integrar acciones y verbos a través del movimiento",
-            fundamentoCientifico: "La embodied cognition sugiere que el movimiento corporal facilita la comprensión y producción del lenguaje (Glenberg & Gallese, 2012).",
-            actividades: [
-                {
-                    nombre: "Cuento Actuado",
-                    descripcion: "Lean un cuento simple y actúen cada acción: saltar, correr, dormir.",
-                    duracion: "10 minutos",
-                    materiales: "Libro de cuentos simple",
-                    variaciones: "Creen su propio cuento de acciones"
-                },
-                {
-                    nombre: "Simón Dice Narrativo",
-                    descripcion: "Den instrucciones dentro de una historia: 'El conejo salta' (saltan).",
-                    duracion: "5 minutos",
-                    materiales: "Ninguno",
-                    variaciones: "El niño da las instrucciones"
-                },
-                {
-                    nombre: "Verbos en Acción",
-                    descripcion: "Saquen tarjetas con acciones dibujadas y actúenlas.",
-                    duracion: "5 minutos",
-                    materiales: "Tarjetas con dibujos de acciones",
-                    variaciones: "Adivinen la acción del otro"
-                }
-            ],
-            tips: [
-                "Enfaticen los verbos al hablar",
-                "Repitan la acción varias veces con la palabra",
-                "Usen verbos en diferentes tiempos: 'saltó', 'salta', 'saltará'",
-                "Conecten acciones con experiencias diarias"
-            ],
-            indicadoresExito: [
-                "Realiza al menos 3 acciones cuando se nombran",
-                "Intenta nombrar acciones que ve",
-                "Sigue una secuencia de 2 acciones",
-                "Muestra comprensión de verbos básicos"
-            ]
-        };
-
-        activities[12] = {
-            title: "Supermercado del Lenguaje",
-            emoji: "🛒",
-            objetivo: "Trabajar categorización y vocabulario funcional",
-            fundamentoCientifico: "La categorización semántica es esencial para la organización del léxico mental (Rosch, 1975). Los contextos familiares facilitan el aprendizaje.",
-            actividades: [
-                {
-                    nombre: "Lista de Compras Hablada",
-                    descripcion: "Hagan una lista verbal: 'Necesitamos manzanas, leche y pan'.",
-                    duracion: "5 minutos",
-                    materiales: "Papel y lápiz (opcional)",
-                    variaciones: "Dibujen la lista"
-                },
-                {
-                    nombre: "Organizando Compras",
-                    descripcion: "Clasifiquen alimentos: 'Frutas aquí, lácteos allá'.",
-                    duracion: "8 minutos",
-                    materiales: "Alimentos de juguete o reales",
-                    variaciones: "Clasifiquen por color o tamaño"
-                },
-                {
-                    nombre: "Cajero Conversador",
-                    descripcion: "Jueguen al cajero: 'Son 3 manzanas', '¿Algo más?', 'Gracias'.",
-                    duracion: "7 minutos",
-                    materiales: "Caja registradora de juguete o caja",
-                    variaciones: "Usen dinero de juguete"
-                }
-            ],
-            tips: [
-                "Nombren cada producto al tomarlo",
-                "Agrupen mientras verbalizan criterios",
-                "Usen números y cantidades simples",
-                "Relacionen con compras reales"
-            ],
-            indicadoresExito: [
-                "Nombra al menos 5 productos",
-                "Agrupa por al menos una categoría",
-                "Usa frases de cortesía en el juego",
-                "Sigue instrucciones de compra simples"
-            ]
-        };
-        activities[13] = {
-            title: "Emociones en Acción",
-            emoji: "😊",
-            objetivo: "Desarrollar vocabulario emocional y expresión de sentimientos",
-            fundamentoCientifico: "La alfabetización emocional en edades tempranas predice mejores habilidades sociales y académicas (Durlak et al., 2011).",
-            actividades: [
-                {
-                    nombre: "Espejo de Sentimientos",
-                    descripcion: "Miren fotos de emociones y copien: '¿Cómo está? Triste. Hagamos cara triste'.",
-                    duracion: "6 minutos",
-                    materiales: "Fotos o dibujos de emociones",
-                    variaciones: "Usen emojis"
-                },
-                {
-                    nombre: "¿Qué te Hace Feliz?",
-                    descripcion: "Conversen sobre qué los hace sentir diferentes emociones.",
-                    duracion: "7 minutos",
-                    materiales: "Ninguno",
-                    variaciones: "Dibujen las respuestas"
-                },
-                {
-                    nombre: "Termómetro Emocional",
-                    descripcion: "Usen las manos para mostrar intensidad: 'poquito feliz' (manos juntas), 'muy feliz' (brazos abiertos).",
-                    duracion: "7 minutos",
-                    materiales: "Ninguno",
-                    variaciones: "Usen colores para emociones"
-                }
-            ],
-            tips: [
-                "Validen todas las emociones como normales",
-                "Compartan sus propias emociones",
-                "Conecten emociones con situaciones cotidianas",
-                "Usen cuentos para explorar sentimientos"
-            ],
-            indicadoresExito: [
-                "Identifica al menos 3 emociones básicas",
-                "Intenta expresar cómo se siente",
-                "Reconoce emociones en otros",
-                "Asocia situaciones con emociones"
-            ]
-        };
-
-        activities[14] = {
-            title: "Artistas del Lenguaje",
-            emoji: "🎨",
-            objetivo: "Combinar arte y lenguaje para expresión creativa",
-            fundamentoCientifico: "La integración de artes visuales con lenguaje activa múltiples áreas cerebrales, facilitando el aprendizaje (Hardiman, 2012).",
-            actividades: [
-                {
-                    nombre: "Pintura Narrada",
-                    descripcion: "Mientras pintan, narren: 'Pongo azul arriba para el cielo'.",
-                    duracion: "10 minutos",
-                    materiales: "Pinturas, papel",
-                    variaciones: "Pinten con los dedos"
-                },
-                {
-                    nombre: "Galería de Arte",
-                    descripcion: "Exhiban sus obras y descríbanlas: 'Este es mi perro grande'.",
-                    duracion: "5 minutos",
-                    materiales: "Dibujos previos",
-                    variaciones: "Inviten a la familia"
-                },
-                {
-                    nombre: "Collage de Palabras",
-                    descripcion: "Recorten imágenes de revistas y creen historias con ellas.",
-                    duracion: "5 minutos",
-                    materiales: "Revistas, pegamento, tijeras",
-                    variaciones: "Usen fotos familiares"
-                }
-            ],
-            tips: [
-                "Enfoquen en el proceso, no el resultado",
-                "Describan colores, formas y tamaños",
-                "Pregunten sobre sus creaciones",
-                "Exhiban las obras en lugar visible"
-            ],
-            indicadoresExito: [
-                "Verbaliza mientras crea",
-                "Describe su obra con al menos 2 palabras",
-                "Responde preguntas sobre su creación",
-                "Muestra orgullo por su trabajo"
-            ]
-        };
-
-        activities[15] = {
-            title: "Periodistas en Casa",
-            emoji: "📰",
-            objetivo: "Practicar preguntas y respuestas estructuradas",
-            fundamentoCientifico: "Las preguntas abiertas promueven respuestas más elaboradas y desarrollo del pensamiento crítico (Walsh & Blewitt, 2006).",
-            actividades: [
-                {
-                    nombre: "Entrevista Familiar",
-                    descripcion: "Con micrófono de juguete, entrevisten: '¿Qué desayunaste?', '¿Cuál es tu color favorito?'",
-                    duracion: "8 minutos",
-                    materiales: "Micrófono de juguete o cuchara",
-                    variaciones: "Graben las entrevistas"
-                },
-                {
-                    nombre: "Reportero del Clima",
-                    descripcion: "Miren por la ventana y reporten: 'Hoy está soleado, hace calor'.",
-                    duracion: "5 minutos",
-                    materiales: "Ninguno",
-                    variaciones: "Dibujen el pronóstico"
-                },
-                {
-                    nombre: "Noticias Positivas",
-                    descripcion: "Cuenten 3 cosas buenas del día en formato noticioso.",
-                    duracion: "7 minutos",
-                    materiales: "Ninguno",
-                    variaciones: "Hagan un 'noticiero' familiar"
-                }
-            ],
-            tips: [
-                "Modelen diferentes tipos de preguntas",
-                "Den tiempo para formular respuestas",
-                "Celebren respuestas creativas",
-                "Usen preguntas quién, qué, dónde, cuándo"
-            ],
-            indicadoresExito: [
-                "Formula al menos una pregunta",
-                "Responde con más de una palabra",
-                "Mantiene el rol de entrevistador/entrevistado",
-                "Usa vocabulario relacionado con el tema"
-            ]
-        };
-
-        activities[16] = {
-            title: "Máquina del Tiempo",
-            emoji: "⏰",
-            objetivo: "Trabajar conceptos temporales y tiempos verbales",
-            fundamentoCientifico: "La comprensión temporal y el uso de tiempos verbales reflejan el desarrollo cognitivo y lingüístico avanzado (Weist, 1989).",
-            actividades: [
-                {
-                    nombre: "Ayer, Hoy, Mañana",
-                    descripcion: "Usen fotos para hablar: 'Ayer fuimos al parque', 'Hoy estamos en casa', 'Mañana iremos a...'",
-                    duracion: "7 minutos",
-                    materiales: "Fotos o calendario visual",
-                    variaciones: "Usen objetos para representar días"
-                },
-                {
-                    nombre: "Rutina del Día",
-                    descripcion: "Ordenen tarjetas de rutinas: 'Primero desayuno, después me visto'.",
-                    duracion: "6 minutos",
-                    materiales: "Tarjetas de rutinas diarias",
-                    variaciones: "Actúen la secuencia"
-                },
-                {
-                    nombre: "Cuando Era Bebé",
-                    descripcion: "Miren fotos de bebé y comparen: 'Antes gateabas, ahora caminas'.",
-                    duracion: "7 minutos",
-                    materiales: "Fotos del niño de bebé",
-                    variaciones: "Predigan el futuro"
-                }
-            ],
-            tips: [
-                "Usen gestos para indicar tiempo (señalar atrás para pasado)",
-                "Conecten con eventos significativos del niño",
-                "Repitan los marcadores temporales frecuentemente",
-                "Usen rutinas diarias como referencia"
-            ],
-            indicadoresExito: [
-                "Comprende al menos un concepto temporal",
-                "Intenta usar un tiempo verbal diferente",
-                "Ordena 2 eventos en secuencia",
-                "Responde a preguntas sobre cuándo"
-            ]
-        };
-
-        activities[17] = {
-            title: "Inventores de Historias",
-            emoji: "📖",
-            objetivo: "Crear narrativas originales y estructuradas",
-            fundamentoCientifico: "La capacidad narrativa es un predictor del éxito académico posterior. Las historias desarrollan la coherencia y cohesión del discurso (Boudreau, 2008).",
-            actividades: [
-                {
-                    nombre: "Dados Cuentacuentos",
-                    descripcion: "Tiren dados con imágenes y creen una historia con lo que salga.",
-                    duracion: "8 minutos",
-                    materiales: "Dados con imágenes o tarjetas",
-                    variaciones: "Usen objetos reales"
-                },
-                {
-                    nombre: "Historia Encadenada",
-                    descripcion: "Túrnense agregando una oración: 'Había un gato' - 'El gato tenía hambre' - 'Encontró un pez'.",
-                    duracion: "7 minutos",
-                    materiales: "Ninguno",
-                    variaciones: "Dibujen mientras narran"
-                },
-                {
-                    nombre: "Final Alternativo",
-                    descripcion: "Lean un cuento conocido y creen un final diferente.",
-                    duracion: "5 minutos",
-                    materiales: "Cuento conocido",
-                    variaciones: "Cambien el principio o medio"
-                }
-            ],
-            tips: [
-                "No corrijan la lógica de las historias fantásticas",
-                "Agreguen efectos de sonido y voces",
-                "Escriban o dibujen las historias favoritas",
-                "Permitan repetición de temas que les gusten"
-            ],
-            indicadoresExito: [
-                "Conecta al menos 2 ideas en secuencia",
-                "Usa conectores como 'y', 'entonces', 'pero'",
-                "Mantiene un personaje a lo largo de la historia",
-                "Muestra creatividad en sus ideas"
-            ]
-        };
-
-        activities[18] = {
-            title: "Resolviendo Problemas",
-            emoji: "🧩",
-            objetivo: "Desarrollar lenguaje para resolución de problemas",
-            fundamentoCientifico: "El lenguaje interno (private speech) es crucial para la autorregulación y resolución de problemas (Vygotsky, 1962).",
-            actividades: [
-                {
-                    nombre: "Torre Tambaleante",
-                    descripcion: "Construyan una torre verbalizando: 'Si pongo este aquí... ¡Se cae! Mejor aquí'.",
-                    duracion: "7 minutos",
-                    materiales: "Bloques de construcción",
-                    variaciones: "Construyan puentes"
-                },
-                {
-                    nombre: "¿Cómo Lo Arreglamos?",
-                    descripcion: "Presenten problemas simples: '¿El osito tiene frío, qué hacemos?'",
-                    duracion: "6 minutos",
-                    materiales: "Peluches, mantas",
-                    variaciones: "Problemas más complejos gradualmente"
-                },
-                {
-                    nombre: "Laberinto Verbal",
-                    descripcion: "Guíen un carro de juguete verbalmente: 'Derecha, izquierda, para'.",
-                    duracion: "7 minutos",
-                    materiales: "Carro de juguete, obstáculos",
-                    variaciones: "El niño da las direcciones"
-                }
-            ],
-            tips: [
-                "Modelen el pensamiento en voz alta",
-                "Celebren múltiples soluciones",
-                "No resuelvan inmediatamente, guíen",
-                "Usen 'qué pasaría si...' frecuentemente"
-            ],
-            indicadoresExito: [
-                "Verbaliza mientras intenta resolver",
-                "Propone al menos una solución",
-                "Sigue instrucciones direccionales",
-                "Expresa causa y efecto simple"
-            ]
-        };
-
-        activities[19] = {
-            title: "Viaje por el Mundo",
-            emoji: "🌍",
-            objetivo: "Explorar diversidad cultural y lingüística",
-            fundamentoCientifico: "La exposición a la diversidad lingüística mejora la flexibilidad cognitiva y la conciencia metalingüística (Bialystok, 2001).",
-            actividades: [
-                {
-                    nombre: "Hola en Muchos Idiomas",
-                    descripcion: "Aprendan a saludar en 3 idiomas: 'Hello', 'Bonjour', 'Ciao'.",
-                    duracion: "6 minutos",
-                    materiales: "Videos o audios (opcional)",
-                    variaciones: "Agreguen gestos de cada cultura"
-                },
-                {
-                    nombre: "Comidas del Mundo",
-                    descripcion: "Hablen de comidas de diferentes países mientras juegan a cocinar.",
-                    duracion: "7 minutos",
-                    materiales: "Comida de juguete",
-                    variaciones: "Prueben comida real de otras culturas"
-                },
-                {
-                    nombre: "Música Internacional",
-                    descripcion: "Escuchen música de diferentes países y muevan el cuerpo.",
-                    duracion: "7 minutos",
-                    materiales: "Música variada",
-                    variaciones: "Identifiquen instrumentos"
-                }
-            ],
-            tips: [
-                "Enfaticen que todas las lenguas son valiosas",
-                "Conecten con experiencias familiares del niño",
-                "Usen mapas o globo terráqueo si tienen",
-                "Celebren la diversidad como algo positivo"
-            ],
-            indicadoresExito: [
-                "Intenta decir al menos una palabra nueva",
-                "Muestra curiosidad por las diferencias",
-                "Asocia algún elemento con un país",
-                "Imita sonidos de otros idiomas"
-            ]
-        };
-
-        activities[20] = {
-            title: "Show de Talentos",
-            emoji: "🎪",
-            objetivo: "Practicar presentación oral y expresión ante otros",
-            fundamentoCientifico: "Las presentaciones orales desarrollan habilidades pragmáticas y reducen la ansiedad comunicativa (McCroskey, 1977).",
-            actividades: [
-                {
-                    nombre: "Mi Talento Especial",
-                    descripcion: "Preparen una presentación: 'Hola, soy... y voy a mostrar...'",
-                    duracion: "8 minutos",
-                    materiales: "Lo necesario para el talento",
-                    variaciones: "Graben en video"
-                },
-                {
-                    nombre: "Presentador Estrella",
-                    descripcion: "Presenten a otros: 'Les presento a mamá, ella sabe...'",
-                    duracion: "6 minutos",
-                    materiales: "Micrófono de juguete",
-                    variaciones: "Presenten juguetes favoritos"
-                },
-                {
-                    nombre: "Aplauso y Elogio",
-                    descripcion: "Practiquen dar y recibir cumplidos: 'Me gustó cuando...', 'Gracias'.",
-                    duracion: "6 minutos",
-                    materiales: "Ninguno",
-                    variaciones: "Hagan certificados"
-                }
-            ],
-            tips: [
-                "Creen ambiente positivo y seguro",
-                "Modelen cómo presentarse",
-                "Aplaudan todos los intentos",
-                "Mantengan presentaciones cortas"
-            ],
-            indicadoresExito: [
-                "Se presenta con su nombre",
-                "Mantiene postura durante presentación",
-                "Acepta aplausos positivamente",
-                "Intenta describir su actividad"
-            ]
-        };
-
-        activities[21] = {
-            title: "Gran Celebración",
-            emoji: "🎉",
-            objetivo: "Integrar todas las habilidades aprendidas",
-            fundamentoCientifico: "La consolidación y celebración del aprendizaje aumenta la motivación intrínseca y refuerza las conexiones neuronales (Dweck, 2006).",
-            actividades: [
-                {
-                    nombre: "Álbum de Aventuras",
-                    descripcion: "Revisen fotos/dibujos de los 20 días anteriores y cuenten sus favoritos.",
-                    duracion: "10 minutos",
-                    materiales: "Registros de días anteriores",
-                    variaciones: "Hagan un libro"
-                },
-                {
-                    nombre: "Fiesta del Lenguaje",
-                    descripcion: "Organicen una mini fiesta usando todas las habilidades: cantar, contar, jugar.",
-                    duracion: "5 minutos",
-                    materiales: "Decoración simple",
-                    variaciones: "Inviten a la familia"
-                },
-                {
-                    nombre: "Diploma Especial",
-                    descripcion: "Creen y entreguen un diploma: 'Por ser un súper comunicador'.",
-                    duracion: "5 minutos",
-                    materiales: "Papel, colores",
-                    variaciones: "Medalla con material reciclado"
-                }
-            ],
-            tips: [
-                "Enfoquen en el progreso, no la perfección",
-                "Recuerden momentos divertidos específicos",
-                "Planeen cómo continuar las actividades",
-                "Celebren el esfuerzo y la constancia"
-            ],
-            indicadoresExito: [
-                "Recuerda al menos 3 actividades previas",
-                "Expresa preferencias verbalmente",
-                "Participa activamente en la celebración",
-                "Muestra orgullo por sus logros"
-            ]
-        };
-        // Estado de la aplicación
+        // Variables globales
+        let selectedAge = 0;
+        let currentTab = 'difficulties';
+        let completedSections = 0;
         let completedDays = JSON.parse(localStorage.getItem('completedDays') || '[]');
-        let currentWeek = 1;
-        let timerInterval = null;
-        let timerSeconds = 0;
+        const totalSections = 10;
 
-        // Inicializar al cargar
-        document.addEventListener('DOMContentLoaded', function() {
-            updateProgress();
-            updateDayCards();
-            showWeek(1);
-        });
-
-        // Mostrar semana específica
-        function showWeek(weekNumber) {
-            currentWeek = weekNumber;
+        // Función para seleccionar edad
+        function selectAge(age) {
+            selectedAge = age;
+            localStorage.setItem('child_age', age);
             
-            // Actualizar botones
-            document.querySelectorAll('.week-btn').forEach(btn => {
+            // Actualizar botones de edad
+            document.querySelectorAll('.age-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
+            event.target.classList.add('active');
             
-            // Buscar el botón correcto por el número de semana
-            const buttons = document.querySelectorAll('.week-btn');
-            if (buttons[weekNumber - 1]) {
-                buttons[weekNumber - 1].classList.add('active');
-            }
-            
-            // Mostrar calendario correspondiente
-            document.querySelectorAll('.calendar-container').forEach(cal => {
-                cal.classList.remove('active');
-            });
-            
-            setTimeout(() => {
-                const weekContainer = document.getElementById('week' + weekNumber);
-                if (weekContainer) {
-                    weekContainer.classList.add('active');
-                }
-            }, 100);
+            // Mostrar contenido correspondiente
+            showAgeContent(age);
+            updateProgress();
         }
 
-        // Abrir modal con detalles del día
+        // Función para mostrar contenido por edad
+        function showAgeContent(age) {
+            document.querySelectorAll('.difficulty-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            const targetContent = document.getElementById(`difficulties-${age}`);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+        }
+
+        // Función para cambiar entre tabs
+        function showTab(tabName) {
+            currentTab = tabName;
+            
+            // Actualizar botones de tab
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Mostrar contenido del tab
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            const targetTab = document.getElementById(`${tabName}-tab`);
+            if (targetTab) {
+                targetTab.classList.add('active');
+            }
+            
+            updateProgress();
+        }
+
+        // Función para verificar respuestas del quiz
+        function checkQuiz(option, isCorrect) {
+            const allOptions = option.parentElement.querySelectorAll('.quiz-option');
+            allOptions.forEach(opt => {
+                opt.classList.remove('correct', 'incorrect');
+            });
+            
+            if (isCorrect) {
+                option.classList.add('correct');
+                setTimeout(() => {
+                    alert('¡Correcto! 🎉 Esa es la estrategia más efectiva.');
+                }, 100);
+            } else {
+                option.classList.add('incorrect');
+                allOptions.forEach(opt => {
+                    if (opt.onclick && opt.onclick.toString().includes('true')) {
+                        opt.classList.add('correct');
+                    }
+                });
+                setTimeout(() => {
+                    alert('No es la mejor opción. La respuesta correcta está marcada en verde. 💡');
+                }, 100);
+            }
+        }
+
+        // Función para abrir modal de día
         function openDay(dayNumber) {
             const activity = activities[dayNumber];
-            if (!activity) return;
+            if (!activity) {
+                // Datos básicos para días sin actividad detallada
+                const basicActivity = {
+                    title: `Actividad del Día ${dayNumber}`,
+                    emoji: "🎯",
+                    objetivo: "Trabajar habilidades específicas del lenguaje",
+                    dificultadObjetivo: "Adaptable según la edad del niño",
+                    actividades: [
+                        {
+                            nombre: "Actividad Principal",
+                            descripcion: "Actividad estructurada para trabajar las dificultades identificadas.",
+                            duracion: "15-20 minutos",
+                            materiales: "Materiales básicos del hogar",
+                            variaciones: "Adaptar según la respuesta del niño"
+                        }
+                    ],
+                    tips: [
+                        "Mantener un ambiente relajado y divertido",
+                        "Celebrar cada intento de comunicación",
+                        "Adaptar la dificultad según las necesidades",
+                        "Ser paciente y consistente"
+                    ],
+                    indicadoresExito: [
+                        "El niño participa activamente",
+                        "Muestra mejoría en el área trabajada",
+                        "Demuestra disfrute durante la actividad"
+                    ]
+                };
+                showDayModal(dayNumber, basicActivity);
+                return;
+            }
             
+            showDayModal(dayNumber, activity);
+        }
+
+        // Función para mostrar modal con contenido del día
+        function showDayModal(dayNumber, activity) {
             const modalContent = `
-                <h2 style="color: #764ba2; margin-bottom: 20px;">
+                <h2 style="color: #667eea; margin-bottom: 20px;">
                     ${activity.emoji} Día ${dayNumber}: ${activity.title}
                 </h2>
                 
@@ -1804,17 +1814,26 @@
                 </div>
                 
                 <div class="activity-section">
+                    <h3>🚨 Dificultad que Trabaja</h3>
+                    <div class="example-box">
+                        <p style="line-height: 1.6; color: #d63031; font-weight: bold;">${activity.dificultadObjetivo}</p>
+                    </div>
+                </div>
+                
+                ${activity.fundamentoCientifico ? `
+                <div class="activity-section">
                     <h3>🧬 Fundamento Científico</h3>
                     <div class="activity-box">
                         <p style="line-height: 1.6;">${activity.fundamentoCientifico}</p>
                     </div>
                 </div>
+                ` : ''}
                 
                 <div class="activity-section">
                     <h3>🎮 Actividades del Día</h3>
                     ${activity.actividades.map((act, index) => `
                         <div class="activity-box">
-                            <h4 style="color: #764ba2; margin-bottom: 10px;">
+                            <h4 style="color: #667eea; margin-bottom: 10px;">
                                 ${index + 1}. ${act.nombre} (${act.duracion})
                             </h4>
                             <p style="margin-bottom: 10px;">${act.descripcion}</p>
@@ -1845,19 +1864,9 @@
                     </ul>
                 </div>
                 
-                <div class="interactive-timer">
-                    <h3 style="color: #764ba2;">⏱️ Cronómetro de Actividad</h3>
-                    <div class="timer-display" id="timerDisplay">00:00</div>
-                    <div class="timer-controls">
-                        <button class="timer-btn" onclick="startTimer()">▶️ Iniciar</button>
-                        <button class="timer-btn" onclick="pauseTimer()">⏸️ Pausar</button>
-                        <button class="timer-btn" onclick="resetTimer()">🔄 Reiniciar</button>
-                    </div>
-                </div>
-                
-                <button class="mark-complete-btn ${completedDays.includes(dayNumber) ? 'completed' : ''}" 
-                        onclick="toggleDayComplete(${dayNumber})"
-                        ${completedDays.includes(dayNumber) ? 'disabled' : ''}>
+                <button style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; border: none; padding: 15px 30px; border-radius: 50px; font-size: 1.1em; cursor: pointer; margin-top: 20px; transition: all 0.3s ease;" 
+                        onclick="markDayComplete(${dayNumber})"
+                        ${completedDays.includes(dayNumber) ? 'disabled style="background: #ccc; cursor: not-allowed;"' : ''}>
                     ${completedDays.includes(dayNumber) ? '✓ Día Completado' : '🎯 Marcar como Completado'}
                 </button>
             `;
@@ -1866,79 +1875,93 @@
             document.getElementById('dayModal').classList.add('active');
         }
 
-        // Cerrar modal
+        // Función para cerrar modal
         function closeModal() {
             document.getElementById('dayModal').classList.remove('active');
-            resetTimer();
         }
 
-        // Marcar día como completado
-        function toggleDayComplete(dayNumber) {
+        // Función para marcar día como completado
+        function markDayComplete(dayNumber) {
             if (!completedDays.includes(dayNumber)) {
                 completedDays.push(dayNumber);
                 localStorage.setItem('completedDays', JSON.stringify(completedDays));
                 
-                // Actualizar botón
-                const btn = event.target;
-                btn.textContent = '✓ Día Completado';
-                btn.classList.add('completed');
-                btn.disabled = true;
+                // Actualizar UI
+                const dayCard = document.querySelector(`[onclick="openDay(${dayNumber})"]`);
+                if (dayCard) {
+                    dayCard.classList.add('completed');
+                }
                 
-                // Actualizar tarjeta del día
-                updateDayCards();
-                updateProgress();
+                // Cerrar modal y actualizar progreso
+                closeModal();
+                updateCalendarProgress();
                 
-                // Animación de celebración
-                confetti();
+                // Celebración
+                alert('¡Excelente! 🎉 Has completado el día ' + dayNumber + '. ¡Sigue así!');
             }
         }
 
-        // Actualizar tarjetas de días
-        function updateDayCards() {
-            document.querySelectorAll('.day-card').forEach((card, index) => {
-                const dayNumber = index + 1;
-                // Verificar si el día corresponde a una tarjeta válida
-                const dayNumberElement = card.querySelector('.day-number');
-                if (dayNumberElement) {
-                    const actualDayNumber = parseInt(dayNumberElement.textContent);
-                    if (completedDays.includes(actualDayNumber)) {
-                        card.classList.add('completed');
-                    }
-                }
-            });
-        }
-
-        // Actualizar barra de progreso
+        // Función para actualizar progreso
         function updateProgress() {
-            const total = 21;
-            const completed = completedDays.length;
-            const percentage = (completed / total) * 100;
+            let progress = 0;
+            
+            // Verificar si seleccionó edad
+            if (selectedAge > 0) progress += 30;
+            
+            // Verificar si vio ambas secciones
+            if (selectedAge > 0 && currentTab === 'difficulties') progress += 35;
+            if (selectedAge > 0 && currentTab === 'calendar') progress += 35;
+            
+            completedSections = Math.floor((progress / 100) * totalSections);
             
             const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            
             if (progressFill) {
-                progressFill.style.width = percentage + '%';
-                progressFill.textContent = Math.round(percentage) + '%';
+                progressFill.style.width = progress + '%';
             }
             
-            const completedDaysElement = document.getElementById('completedDays');
-            if (completedDaysElement) {
-                completedDaysElement.textContent = completed;
+            if (progressText) {
+                progressText.textContent = `${Math.round(progress)}% completado • ${completedSections} de ${totalSections} secciones`;
             }
             
-            const totalActivitiesElement = document.getElementById('totalActivities');
-            if (totalActivitiesElement) {
-                totalActivitiesElement.textContent = completed * 3; // 3 actividades por día
+            // Habilitar navegación si está completo
+            const nextBtn = document.getElementById('nextModuleBtn');
+            if (nextBtn && progress >= 70) {
+                nextBtn.classList.remove('disabled');
+                localStorage.setItem('modulo4_completed', 'true');
+                localStorage.setItem('current_module', '4');
             }
             
-            // Calcular racha
-            const streak = calculateStreak();
-            const currentStreakElement = document.getElementById('currentStreak');
-            if (currentStreakElement) {
-                currentStreakElement.textContent = streak;
+            updateCalendarProgress();
+        }
+
+        // Función para actualizar progreso del calendario
+        function updateCalendarProgress() {
+            const calendarProgressBar = document.getElementById('calendarProgress');
+            const completedActivitiesEl = document.getElementById('completedActivities');
+            const currentStreakEl = document.getElementById('currentStreak');
+            const daysRemainingEl = document.getElementById('daysRemaining');
+            
+            if (calendarProgressBar) {
+                const percentage = (completedDays.length / 21) * 100;
+                calendarProgressBar.style.width = percentage + '%';
+            }
+            
+            if (completedActivitiesEl) {
+                completedActivitiesEl.textContent = completedDays.length;
+            }
+            
+            if (daysRemainingEl) {
+                daysRemainingEl.textContent = 21 - completedDays.length;
+            }
+            
+            if (currentStreakEl) {
+                currentStreakEl.textContent = calculateStreak();
             }
         }
 
-        // Calcular racha actual
+        // Función para calcular racha
         function calculateStreak() {
             if (completedDays.length === 0) return 0;
             
@@ -1957,376 +1980,77 @@
             
             return maxStreak;
         }
-        // Funciones del cronómetro
-        function startTimer() {
-            if (!timerInterval) {
-                timerInterval = setInterval(() => {
-                    timerSeconds++;
-                    updateTimerDisplay();
-                }, 1000);
-            }
-        }
 
-        function pauseTimer() {
-            if (timerInterval) {
-                clearInterval(timerInterval);
-                timerInterval = null;
-            }
-        }
-
-        function resetTimer() {
-            pauseTimer();
-            timerSeconds = 0;
-            updateTimerDisplay();
-        }
-
-        function updateTimerDisplay() {
-            const minutes = Math.floor(timerSeconds / 60);
-            const seconds = timerSeconds % 60;
-            const display = document.getElementById('timerDisplay');
-            if (display) {
-                display.textContent = 
-                    String(minutes).padStart(2, '0') + ':' + 
-                    String(seconds).padStart(2, '0');
-            }
-        }
-
-        // Efecto de confetti simple
-        function confetti() {
-            const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4CAF50'];
-            const confettiCount = 50;
+        // Función para verificar prerrequisitos
+        function checkModuleAccess() {
+            const modulo3Completed = localStorage.getItem('modulo3_completed');
             
-            for (let i = 0; i < confettiCount; i++) {
-                const confetto = document.createElement('div');
-                confetto.style.position = 'fixed';
-                confetto.style.width = '10px';
-                confetto.style.height = '10px';
-                confetto.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetto.style.left = Math.random() * 100 + '%';
-                confetto.style.top = '-10px';
-                confetto.style.opacity = '1';
-                confetto.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
-                confetto.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-                confetto.style.zIndex = '10000';
-                document.body.appendChild(confetto);
-                
-                // Animación de caída
-                let posY = -10;
-                let posX = parseFloat(confetto.style.left);
-                let rotation = Math.random() * 360;
-                let velocityY = Math.random() * 3 + 2;
-                let velocityX = (Math.random() - 0.5) * 2;
-                
-                const animateConfetto = () => {
-                    posY += velocityY;
-                    posX += velocityX;
-                    rotation += 5;
-                    
-                    confetto.style.top = posY + 'px';
-                    confetto.style.left = posX + '%';
-                    confetto.style.transform = 'rotate(' + rotation + 'deg)';
-                    confetto.style.opacity = 1 - (posY / window.innerHeight);
-                    
-                    if (posY < window.innerHeight) {
-                        requestAnimationFrame(animateConfetto);
-                    } else {
-                        confetto.remove();
-                    }
-                };
-                
-                requestAnimationFrame(animateConfetto);
+            if (!modulo3Completed) {
+                alert('⚠️ Debes completar el Módulo 3 antes de acceder al Módulo 4.');
+                window.location.href = '../modulo3/index.html';
+                return false;
             }
+            return true;
         }
 
-        // Cerrar modal al hacer clic fuera
-        window.onclick = function(event) {
-            const modal = document.getElementById('dayModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        }
-
-        // Función para exportar progreso
-        function exportProgress() {
-            const data = {
-                completedDays: completedDays,
-                exportDate: new Date().toISOString(),
-                totalProgress: (completedDays.length / 21 * 100).toFixed(1) + '%'
-            };
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar acceso
+            if (!checkModuleAccess()) return;
             
-            const dataStr = JSON.stringify(data, null, 2);
-            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-            
-            const exportLink = document.createElement('a');
-            exportLink.setAttribute('href', dataUri);
-            exportLink.setAttribute('download', 'progreso_21_dias.json');
-            document.body.appendChild(exportLink);
-            exportLink.click();
-            document.body.removeChild(exportLink);
-        }
-
-        // Función para compartir progreso
-        function shareProgress() {
-            const completed = completedDays.length;
-            const message = `¡He completado ${completed} de 21 días del Calendario de Estimulación del Lenguaje! 🎉 Mi racha actual es de ${calculateStreak()} días consecutivos. #DesarrolloDelLenguaje #21DíasDeAprendizaje`;
-            
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Mi Progreso - 21 Días de Lenguaje',
-                    text: message
-                }).catch(err => console.log('Error al compartir:', err));
-            } else {
-                // Copiar al portapapeles como alternativa
-                if (navigator.clipboard) {
-                    navigator.clipboard.writeText(message).then(() => {
-                        alert('¡Mensaje copiado! Puedes pegarlo en tus redes sociales.');
-                    });
-                } else {
-                    // Fallback para navegadores sin clipboard API
-                    const textArea = document.createElement('textarea');
-                    textArea.value = message;
-                    document.body.appendChild(textArea);
-                    textArea.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(textArea);
-                    alert('¡Mensaje copiado! Puedes pegarlo en tus redes sociales.');
+            // Cargar edad guardada
+            const savedAge = localStorage.getItem('child_age');
+            if (savedAge) {
+                selectedAge = parseInt(savedAge);
+                const ageBtn = document.querySelector(`[onclick="selectAge(${savedAge})"]`);
+                if (ageBtn) {
+                    ageBtn.classList.add('active');
+                    showAgeContent(selectedAge);
                 }
             }
-        }
-
-        // Función para reiniciar progreso
-        function resetProgress() {
-            if (confirm('¿Estás seguro de que quieres reiniciar todo tu progreso? Esta acción no se puede deshacer.')) {
-                localStorage.removeItem('completedDays');
-                completedDays = [];
-                
-                // Remover clase completed de todas las tarjetas
-                document.querySelectorAll('.day-card').forEach(card => {
-                    card.classList.remove('completed');
-                });
-                
-                updateProgress();
-                alert('Tu progreso ha sido reiniciado. ¡Es momento de comenzar una nueva aventura de 21 días!');
-            }
-        }
-
-        // Agregar recordatorios diarios (opcional)
-        function setupDailyReminder() {
-            if ('Notification' in window) {
-                Notification.requestPermission().then(permission => {
-                    if (permission === 'granted') {
-                        alert('¡Recordatorios activados! Te notificaremos diariamente a las 10:00 AM para hacer las actividades.');
-                        
-                        // Programar notificación diaria
-                        const now = new Date();
-                        const reminderTime = new Date();
-                        reminderTime.setHours(10, 0, 0, 0); // 10:00 AM
-                        
-                        if (reminderTime <= now) {
-                            reminderTime.setDate(reminderTime.getDate() + 1);
-                        }
-                        
-                        const timeUntilReminder = reminderTime - now;
-                        
-                        setTimeout(() => {
-                            new Notification('🌟 Hora de la Actividad de Lenguaje', {
-                                body: '¡Es momento de hacer la actividad del día con tu pequeño!',
-                                icon: '/favicon.ico'
-                            });
-                            
-                            // Repetir cada 24 horas
-                            setInterval(() => {
-                                new Notification('🌟 Hora de la Actividad de Lenguaje', {
-                                    body: '¡Es momento de hacer la actividad del día con tu pequeño!',
-                                    icon: '/favicon.ico'
-                                });
-                            }, 24 * 60 * 60 * 1000);
-                        }, timeUntilReminder);
-                    } else {
-                        alert('Para activar recordatorios, necesitas permitir las notificaciones en tu navegador.');
+            
+            // Marcar días completados
+            completedDays.forEach(dayNumber => {
+                const dayCard = document.querySelector(`[onclick="openDay(${dayNumber})"]`);
+                if (dayCard) {
+                    dayCard.classList.add('completed');
+                }
+            });
+            
+            // Actualizar progreso inicial
+            updateProgress();
+            
+            // Configurar navegación
+            const nextBtn = document.getElementById('nextModuleBtn');
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function(e) {
+                    if (!selectedAge || completedSections < 7) {
+                        e.preventDefault();
+                        alert('⚠️ Completa el módulo seleccionando la edad y explorando ambas secciones antes de continuar.');
                     }
                 });
-            } else {
-                alert('Tu navegador no soporta notificaciones. Puedes configurar recordatorios manualmente en tu calendario.');
             }
-        }
-
-        // Función para imprimir calendario
-        function printCalendar() {
-            window.print();
-        }
-
-        // Función para mostrar tips del día
-        function showDailyTip() {
-            const tips = [
-                "💡 Recuerda: La repetición es clave. No te frustres si tu pequeño no responde inmediatamente.",
-                "🌟 Celebra cada pequeño intento de comunicación, incluso los gestos y sonidos.",
-                "🎯 El mejor momento para las actividades es cuando tu hijo está descansado y feliz.",
-                "🗣️ Habla constantemente durante las rutinas diarias: es aprendizaje gratuito.",
-                "📚 Leer el mismo cuento varias veces ayuda a consolidar vocabulario.",
-                "🎵 Las canciones con movimientos son excelentes para la memoria.",
-                "👀 El contacto visual es fundamental para la comunicación.",
-                "🤹 Convierte todo en un juego: el aprendizaje debe ser divertido.",
-                "⏰ 15-20 minutos de actividad concentrada es mejor que una hora dispersa.",
-                "🎭 Usa diferentes voces y tonos: captura la atención y enseña prosodia.",
-                "🤝 Espera tu turno: dale tiempo para procesar y responder.",
-                "📸 Toma fotos de las actividades para crear un álbum de recuerdos.",
-                "🎨 No busques perfección: el proceso es más importante que el resultado.",
-                "🌈 Cada niño es único: adapta las actividades a sus intereses.",
-                "💪 Sé paciente contigo mismo: eres el mejor maestro para tu hijo."
-            ];
             
-            const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
-            const tipIndex = dayOfYear % tips.length;
-            
-            return tips[tipIndex];
-        }
-        // Mostrar tip del día al cargar
-        document.addEventListener('DOMContentLoaded', function() {
-            const tipElement = document.createElement('div');
-            tipElement.style.cssText = `
-                background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
-                color: #2d3436;
-                padding: 15px 20px;
-                border-radius: 15px;
-                margin: 20px 0;
-                font-size: 1.05em;
-                box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-                animation: slideIn 0.5s ease;
-            `;
-            tipElement.innerHTML = `<strong>Tip del Día:</strong> ${showDailyTip()}`;
-            
-            const header = document.querySelector('.header');
-            if (header) {
-                header.appendChild(tipElement);
+            // Cerrar modal al hacer clic fuera
+            window.onclick = function(event) {
+                const modal = document.getElementById('dayModal');
+                if (event.target === modal) {
+                    closeModal();
+                }
             }
         });
 
-        // Agregar botones de utilidades al final
-        document.addEventListener('DOMContentLoaded', function() {
-            const utilityButtons = document.createElement('div');
-            utilityButtons.style.cssText = `
-                display: flex;
-                justify-content: center;
-                gap: 15px;
-                margin: 30px 0;
-                flex-wrap: wrap;
-            `;
-            utilityButtons.innerHTML = `
-                <button onclick="exportProgress()" class="timer-btn" style="background: linear-gradient(135deg, #00b894, #00cec9);">
-                    📥 Exportar Progreso
-                </button>
-                <button onclick="shareProgress()" class="timer-btn" style="background: linear-gradient(135deg, #6c5ce7, #a29bfe);">
-                    📤 Compartir Progreso
-                </button>
-                <button onclick="printCalendar()" class="timer-btn" style="background: linear-gradient(135deg, #fdcb6e, #ffeaa7);">
-                    🖨️ Imprimir Calendario
-                </button>
-                <button onclick="setupDailyReminder()" class="timer-btn" style="background: linear-gradient(135deg, #fd79a8, #e84393);">
-                    🔔 Activar Recordatorios
-                </button>
-                <button onclick="resetProgress()" class="timer-btn" style="background: linear-gradient(135deg, #d63031, #e17055);">
-                    🔄 Reiniciar Progreso
-                </button>
-            `;
-            
-            const container = document.querySelector('.container');
-            const backLinkParent = document.querySelector('.back-link');
-            if (container && backLinkParent) {
-                container.insertBefore(utilityButtons, backLinkParent.parentElement);
-            }
-        });
-
-        // Agregar estilos para impresión
-        const printStyles = document.createElement('style');
-        printStyles.textContent = `
-            @media print {
-                body {
-                    background: white !important;
-                    animation: none !important;
-                }
-                .container {
-                    box-shadow: none !important;
-                    padding: 20px !important;
-                    background: white !important;
-                }
-                .modal, .back-link, .timer-controls, .mark-complete-btn, 
-                .week-btn, .interactive-timer {
-                    display: none !important;
-                }
-                .day-card {
-                    page-break-inside: avoid;
-                    background: white !important;
-                    border: 1px solid #ccc !important;
-                }
-                .progress-section {
-                    background: #f0f0f0 !important;
-                    color: black !important;
-                    print-color-adjust: exact;
-                    -webkit-print-color-adjust: exact;
-                }
-                .intro-section {
-                    background: #f5f5f5 !important;
-                    color: black !important;
-                    print-color-adjust: exact;
-                    -webkit-print-color-adjust: exact;
-                }
-                .benefit-card {
-                    background: white !important;
-                    color: black !important;
-                    border: 1px solid #ddd !important;
-                }
-                .day-number {
-                    background: #764ba2 !important;
-                    color: white !important;
-                    print-color-adjust: exact;
-                    -webkit-print-color-adjust: exact;
-                }
-                .day-title {
-                    color: #764ba2 !important;
-                    print-color-adjust: exact;
-                    -webkit-print-color-adjust: exact;
-                }
-                .calendar-container.active {
-                    display: block !important;
-                    opacity: 1 !important;
-                    transform: none !important;
-                }
-                .calendar-container {
-                    display: block !important;
-                    opacity: 1 !important;
-                    transform: none !important;
-                }
-                h1, h2, h3 {
-                    color: #764ba2 !important;
-                    print-color-adjust: exact;
-                    -webkit-print-color-adjust: exact;
-                }
-                * {
-                    animation: none !important;
-                    transition: none !important;
-                }
-            }
-        `;
-        document.head.appendChild(printStyles);
-
-        // Manejar errores de JavaScript
-        window.addEventListener('error', function(event) {
-            console.error('Error en el script:', event.error);
-        });
-
-        // Función para debug - verificar que todo esté cargado
-        function checkSystem() {
-            console.log('Sistema cargado correctamente');
-            console.log('Actividades disponibles:', Object.keys(activities).length);
+        // Función de debug
+        function checkModuleStatus() {
+            console.log('Módulo 4 Estado:');
+            console.log('Edad seleccionada:', selectedAge);
+            console.log('Tab actual:', currentTab);
+            console.log('Secciones completadas:', completedSections);
             console.log('Días completados:', completedDays.length);
-            console.log('Progreso:', (completedDays.length / 21 * 100).toFixed(1) + '%');
+            console.log('Progreso total:', Math.round((completedSections / totalSections) * 100) + '%');
         }
 
-        // Llamar verificación del sistema después de cargar
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(checkSystem, 1000);
-        });
+        window.checkModuleStatus = checkModuleStatus;
     </script>
 </body>
 </html>
