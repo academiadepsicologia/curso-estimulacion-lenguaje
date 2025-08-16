@@ -493,20 +493,21 @@
             <div class="age-selector">
                 <h2>📌 Selecciona la edad de tu hijo:</h2>
                 <div class="age-buttons">
-                    <button class="age-btn" onclick="selectAge(3)">👶 3 años</button>
-                    <button class="age-btn" onclick="selectAge(4)">👦 4 años</button>
-                    <button class="age-btn" onclick="selectAge(5)">👧 5 años</button>
+                    <button class="age-btn" onclick="selectAge(3, this)">👶 3 años</button>
+                    <button class="age-btn" onclick="selectAge(4, this)">👦 4 años</button>
+                    <button class="age-btn" onclick="selectAge(5, this)">👧 5 años</button>
                 </div>
             </div>
 
             <div class="section-tabs">
-                <button class="tab-btn active" onclick="showTab('difficulties')">
+                <button class="tab-btn active" onclick="showTab('difficulties', this)">
                     🚨 Dificultades Comunes
                 </button>
-                <button class="tab-btn" onclick="showTab('calendar')">
+                <button class="tab-btn" onclick="showTab('calendar', this)">
                     📅 Plan de 21 Días <span class="bonus-badge">BONUS</span>
                 </button>
             </div>
+            
             <!-- TAB 1: DIFICULTADES COMUNES -->
             <div id="difficulties-tab" class="tab-content active">
                 <div class="difficulty-section">
@@ -519,154 +520,6 @@
                     </div>
 
                     <div class="strategies-grid">
-                        <div class="strategy-card">
-                            <div class="strategy-title">
-                                🟢 Señales Normales (3-4 años)
-                            </div>
-                            <ul class="strategy-steps">
-                                <li>Repite palabras completas: "mamá-mamá-mamá"</li>
-                                <li>Vacila al inicio: "eh... eh... quiero agua"</li>
-                                <li>Ocurre cuando está emocionado o cansado</li>
-                                <li>Dura menos de 6 meses</li>
-                                <li>No hay tensión muscular visible</li>
-                            </ul>
-                        </div>
-                        <div class="strategy-card">
-                            <div class="strategy-title">
-                                🚨 Señales de Alerta
-                            </div>
-                            <ul class="strategy-steps">
-                                <li>Bloqueos en sonidos: "p-p-p-papá"</li>
-                                <li>Tensión visible en cara o cuello</li>
-                                <li>Evita hablar o se frustra</li>
-                                <li>Persiste más de 6 meses</li>
-                                <li>Comportamientos secundarios (parpadeo, gestos)</li>
-                            </ul>
-                        </div>
-                        <div class="strategy-card">
-                            <div class="strategy-title">
-                                💡 Qué Hacer en Casa
-                            </div>
-                            <ul class="strategy-steps">
-                                <li>Habla más despacio con tu hijo</li>
-                                <li>Haz pausas entre oraciones</li>
-                                <li>No le digas "respira" o "habla despacio"</li>
-                                <li>Mantén contacto visual tranquilo</li>
-                                <li>Nunca lo interrumpas ni completes sus frases</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="example-box">
-                        <div class="example-title">
-                            💡 Ejemplo Práctico: Cómo Responder
-                        </div>
-                        <div class="example-content">
-                            <div class="dialogue">
-                                <div class="child">Niño: "Yo-yo-yo quiero ga-ga-galletas"</div>
-                                <div class="parent">❌ MAL: "Respira hondo y habla despacio, hijo"</div>
-                                <div class="parent">✅ BIEN: "Ah, quieres galletas. Vamos a buscar las galletas juntos" (hablas despacio y calmado)</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="difficulty-section">
-                    <div class="difficulty-title">
-                        🔤 Problemas de Pronunciación
-                    </div>
-                    <div class="difficulty-description">
-                        Cada sonido tiene una edad esperada de desarrollo. Es normal que algunos sonidos sean difíciles 
-                        hasta los 6-7 años, pero otros deben estar establecidos desde temprano.
-                    </div>
-
-                    <div class="strategies-grid">
-                        <div class="strategy-card">
-                            <div class="strategy-title">
-                                ✅ Sonidos por Edad
-                            </div>
-                            <ul class="strategy-steps">
-                                <li><strong>3 años:</strong> m, p, b, t, d, k, g, n, f</li>
-                                <li><strong>4 años:</strong> + s, l, ch, j, ñ, y</li>
-                                <li><strong>5 años:</strong> + grupos pl, bl, cl, gl</li>
-                                <li><strong>6-7 años:</strong> r, rr, grupos tr, br, dr</li>
-                                <li><strong>Inteligibilidad:</strong> 90% a los 5 años</li>
-                            </ul>
-                        </div>
-                        <div class="strategy-card">
-                            <div class="strategy-title">
-                                🎯 Técnica del Modelado
-                            </div>
-                            <ul class="strategy-steps">
-                                <li>Cuando diga mal, repite correctamente</li>
-                                <li>No le digas "está mal" o "di bien"</li>
-                                <li>Exagera el sonido correcto ligeramente</li>
-                                <li>Usa palabras fáciles con ese sonido</li>
-                                <li>Haz juegos con sonidos de animales</li>
-                            </ul>
-                        </div>
-                        <div class="strategy-card">
-                            <div class="strategy-title">
-                                🎮 Actividades en Casa
-                            </div>
-                            <ul class="strategy-steps">
-                                <li>Sonidos de vehículos y animales</li>
-                                <li>Canciones con repetición de sonidos</li>
-                                <li>Trabalenguas muy simples</li>
-                                <li>Juego del eco: repite sonidos</li>
-                                <li>Bombardeo auditivo: muchas palabras con el sonido</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="example-box">
-                        <div class="example-title">
-                            💡 Cómo Corregir Sin Corregir
-                        </div>
-                        <div class="example-content">
-                            <div class="dialogue">
-                                <div class="child">Niño: "Quero tomer awa" (quiere tomar agua)</div>
-                                <div class="parent">❌ MAL: "No se dice 'tomer', se dice 'to-mar'. Repite después de mí"</div>
-                                <div class="parent">✅ BIEN: "Ah, quieres TOMAR AGUA. Vamos a TOMAR AGUA fresquita" (enfatizas sutilmente)</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="difficulty-section">
-                    <div class="difficulty-title">
-                        ⚡ Retraso del Lenguaje
-                    </div>
-                    <div class="difficulty-description">
-                        Un niño con retraso del lenguaje tiene menos vocabulario y estructuras más simples de lo esperado 
-                        para su edad, pero su comprensión puede estar intacta.
-                    </div>
-
-                    <div class="alert-box">
-                        <div class="alert-title">
-                            🚨 Señales de Alerta por Edad
-                        </div>
-                        <ul style="margin-top: 15px;">
-                            <li><strong>3 años:</strong> Menos de 200 palabras, no combina 2 palabras consistentemente</li>
-                            <li><strong>4 años:</strong> Menos de 1000 palabras, no forma oraciones de 4 palabras</li>
-                            <li><strong>5 años:</strong> Menos de 2000 palabras, no cuenta historias simples</li>
-                            <li><strong>Cualquier edad:</strong> Pérdida de habilidades ya adquiridas</li>
-                        </ul>
-                    </div>
-
-                    <div class="strategies-grid">
-                        <div class="strategy-card">
-                            <div class="strategy-title">
-                                🚀 Estimulación Intensiva
-                            </div>
-                            <ul class="strategy-steps">
-                                <li>Narrar TODO lo que haces durante el día</li>
-                                <li>Usar frases simples apropiadas para su edad</li>
-                                <li>Repetir palabras nuevas 5-10 veces al día</li>
-                                <li>Hacer preguntas de elección: "¿agua o leche?"</li>
-                                <li>Cantar muchas canciones infantiles</li>
-                            </ul>
-                        </div>
                         <div class="strategy-card">
                             <div class="strategy-title">
                                 📚 Rutinas Diarias
@@ -925,20 +778,20 @@
         </div>
 
         <div class="navigation">
-            <a href="../modulo3/index.html" class="nav-btn">
-                ← Módulo 3: Actividades y Juegos
+            <a href="../dashboard/index.html" class="nav-btn">
+                ← Volver al Dashboard
             </a>
             <div style="text-align: center;">
                 <div style="color: #667eea; font-weight: bold; margin-bottom: 10px;">
-                    Módulo 4 de 5 Completado
+                    Módulo 4 de 5
                 </div>
                 <div style="background: #f0f0f0; height: 8px; width: 200px; border-radius: 4px; margin: 0 auto; overflow: hidden;">
                     <div style="background: linear-gradient(90deg, #667eea, #764ba2); height: 100%; width: 80%; border-radius: 4px;"></div>
                 </div>
             </div>
-            <a href="../modulo5/index.html" class="nav-btn" id="nextModuleBtn">
-                Módulo 5: Plan Personalizado →
-            </a>
+            <button class="nav-btn" onclick="completeModule()">
+                Completar Módulo →
+            </button>
         </div>
     </div>
 
@@ -946,7 +799,7 @@
         let selectedAge = 0;
         let currentTab = 'difficulties';
 
-        function selectAge(age) {
+        function selectAge(age, button) {
             selectedAge = age;
             localStorage.setItem('child_age', age);
             
@@ -954,20 +807,20 @@
             document.querySelectorAll('.age-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-            event.target.classList.add('active');
+            button.classList.add('active');
             
             // Mostrar mensaje personalizado
             alert(`✅ Perfecto! Has seleccionado ${age} años. El contenido ahora está personalizado para tu hijo de ${age} años.`);
         }
 
-        function showTab(tabName) {
+        function showTab(tabName, button) {
             currentTab = tabName;
             
             // Actualizar botones de tab
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-            event.target.classList.add('active');
+            button.classList.add('active');
             
             // Mostrar contenido del tab
             document.querySelectorAll('.tab-content').forEach(content => {
@@ -982,14 +835,26 @@
         }
 
         function checkModuleAccess() {
-            const modulo3Completed = localStorage.getItem('modulo3_completed');
+            // Verificar que el módulo 3 esté completado
+            const modulo3Completed = localStorage.getItem('modulo3_completed') === 'true';
             
             if (!modulo3Completed) {
                 alert('⚠️ Debes completar el Módulo 3 antes de acceder al Módulo 4.');
-                window.location.href = '../modulo3/index.html';
+                window.location.href = '../dashboard/index.html';
                 return false;
             }
             return true;
+        }
+
+        function completeModule() {
+            // Marcar el módulo como completado
+            localStorage.setItem('modulo4_completed', 'true');
+            
+            // Mostrar mensaje de éxito
+            alert('🎉 ¡Felicitaciones! Has completado el Módulo 4.\n\nAhora puedes acceder al Módulo 5: Plan Personalizado');
+            
+            // Redirigir al dashboard
+            window.location.href = '../dashboard/index.html';
         }
 
         // Inicialización
@@ -1001,29 +866,172 @@
             const savedAge = localStorage.getItem('child_age');
             if (savedAge) {
                 selectedAge = parseInt(savedAge);
-                const ageBtn = document.querySelector(`[onclick="selectAge(${savedAge})"]`);
+                const ageBtn = document.querySelector(`.age-btn:nth-child(${savedAge - 2})`);
                 if (ageBtn) {
                     ageBtn.classList.add('active');
                 }
             }
             
-            // Marcar módulo como completado al cargar
-            localStorage.setItem('modulo4_completed', 'true');
+            // Establecer módulo actual
             localStorage.setItem('current_module', '4');
             
-            // Configurar navegación
-            const nextBtn = document.getElementById('nextModuleBtn');
-            if (nextBtn) {
-                nextBtn.addEventListener('click', function(e) {
-                    // Permitir navegación - el módulo se considera completado al visualizar
-                    localStorage.setItem('modulo4_completed', 'true');
-                });
-            }
-
             console.log('✅ Módulo 4 cargado correctamente');
-            console.log('📊 Estado: Completado automáticamente');
-            console.log('🎯 Navegación al Módulo 5: Habilitada');
+            console.log('📊 Estado del curso:', {
+                modulo1: localStorage.getItem('modulo1_completed'),
+                modulo2: localStorage.getItem('modulo2_completed'),
+                modulo3: localStorage.getItem('modulo3_completed'),
+                modulo4: localStorage.getItem('modulo4_completed'),
+                modulo5: localStorage.getItem('modulo5_completed')
+            });
         });
     </script>
 </body>
-</html>
+</html>title">
+                                🟢 Señales Normales (3-4 años)
+                            </div>
+                            <ul class="strategy-steps">
+                                <li>Repite palabras completas: "mamá-mamá-mamá"</li>
+                                <li>Vacila al inicio: "eh... eh... quiero agua"</li>
+                                <li>Ocurre cuando está emocionado o cansado</li>
+                                <li>Dura menos de 6 meses</li>
+                                <li>No hay tensión muscular visible</li>
+                            </ul>
+                        </div>
+                        <div class="strategy-card">
+                            <div class="strategy-title">
+                                🚨 Señales de Alerta
+                            </div>
+                            <ul class="strategy-steps">
+                                <li>Bloqueos en sonidos: "p-p-p-papá"</li>
+                                <li>Tensión visible en cara o cuello</li>
+                                <li>Evita hablar o se frustra</li>
+                                <li>Persiste más de 6 meses</li>
+                                <li>Comportamientos secundarios (parpadeo, gestos)</li>
+                            </ul>
+                        </div>
+                        <div class="strategy-card">
+                            <div class="strategy-title">
+                                💡 Qué Hacer en Casa
+                            </div>
+                            <ul class="strategy-steps">
+                                <li>Habla más despacio con tu hijo</li>
+                                <li>Haz pausas entre oraciones</li>
+                                <li>No le digas "respira" o "habla despacio"</li>
+                                <li>Mantén contacto visual tranquilo</li>
+                                <li>Nunca lo interrumpas ni completes sus frases</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="example-box">
+                        <div class="example-title">
+                            💡 Ejemplo Práctico: Cómo Responder
+                        </div>
+                        <div class="example-content">
+                            <div class="dialogue">
+                                <div class="child">Niño: "Yo-yo-yo quiero ga-ga-galletas"</div>
+                                <div class="parent">❌ MAL: "Respira hondo y habla despacio, hijo"</div>
+                                <div class="parent">✅ BIEN: "Ah, quieres galletas. Vamos a buscar las galletas juntos" (hablas despacio y calmado)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="difficulty-section">
+                    <div class="difficulty-title">
+                        🔤 Problemas de Pronunciación
+                    </div>
+                    <div class="difficulty-description">
+                        Cada sonido tiene una edad esperada de desarrollo. Es normal que algunos sonidos sean difíciles 
+                        hasta los 6-7 años, pero otros deben estar establecidos desde temprano.
+                    </div>
+
+                    <div class="strategies-grid">
+                        <div class="strategy-card">
+                            <div class="strategy-title">
+                                ✅ Sonidos por Edad
+                            </div>
+                            <ul class="strategy-steps">
+                                <li><strong>3 años:</strong> m, p, b, t, d, k, g, n, f</li>
+                                <li><strong>4 años:</strong> + s, l, ch, j, ñ, y</li>
+                                <li><strong>5 años:</strong> + grupos pl, bl, cl, gl</li>
+                                <li><strong>6-7 años:</strong> r, rr, grupos tr, br, dr</li>
+                                <li><strong>Inteligibilidad:</strong> 90% a los 5 años</li>
+                            </ul>
+                        </div>
+                        <div class="strategy-card">
+                            <div class="strategy-title">
+                                🎯 Técnica del Modelado
+                            </div>
+                            <ul class="strategy-steps">
+                                <li>Cuando diga mal, repite correctamente</li>
+                                <li>No le digas "está mal" o "di bien"</li>
+                                <li>Exagera el sonido correcto ligeramente</li>
+                                <li>Usa palabras fáciles con ese sonido</li>
+                                <li>Haz juegos con sonidos de animales</li>
+                            </ul>
+                        </div>
+                        <div class="strategy-card">
+                            <div class="strategy-title">
+                                🎮 Actividades en Casa
+                            </div>
+                            <ul class="strategy-steps">
+                                <li>Sonidos de vehículos y animales</li>
+                                <li>Canciones con repetición de sonidos</li>
+                                <li>Trabalenguas muy simples</li>
+                                <li>Juego del eco: repite sonidos</li>
+                                <li>Bombardeo auditivo: muchas palabras con el sonido</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="example-box">
+                        <div class="example-title">
+                            💡 Cómo Corregir Sin Corregir
+                        </div>
+                        <div class="example-content">
+                            <div class="dialogue">
+                                <div class="child">Niño: "Quero tomer awa" (quiere tomar agua)</div>
+                                <div class="parent">❌ MAL: "No se dice 'tomer', se dice 'to-mar'. Repite después de mí"</div>
+                                <div class="parent">✅ BIEN: "Ah, quieres TOMAR AGUA. Vamos a TOMAR AGUA fresquita" (enfatizas sutilmente)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="difficulty-section">
+                    <div class="difficulty-title">
+                        ⚡ Retraso del Lenguaje
+                    </div>
+                    <div class="difficulty-description">
+                        Un niño con retraso del lenguaje tiene menos vocabulario y estructuras más simples de lo esperado 
+                        para su edad, pero su comprensión puede estar intacta.
+                    </div>
+
+                    <div class="alert-box">
+                        <div class="alert-title">
+                            🚨 Señales de Alerta por Edad
+                        </div>
+                        <ul style="margin-top: 15px;">
+                            <li><strong>3 años:</strong> Menos de 200 palabras, no combina 2 palabras consistentemente</li>
+                            <li><strong>4 años:</strong> Menos de 1000 palabras, no forma oraciones de 4 palabras</li>
+                            <li><strong>5 años:</strong> Menos de 2000 palabras, no cuenta historias simples</li>
+                            <li><strong>Cualquier edad:</strong> Pérdida de habilidades ya adquiridas</li>
+                        </ul>
+                    </div>
+
+                    <div class="strategies-grid">
+                        <div class="strategy-card">
+                            <div class="strategy-title">
+                                🚀 Estimulación Intensiva
+                            </div>
+                            <ul class="strategy-steps">
+                                <li>Narrar TODO lo que haces durante el día</li>
+                                <li>Usar frases simples apropiadas para su edad</li>
+                                <li>Repetir palabras nuevas 5-10 veces al día</li>
+                                <li>Hacer preguntas de elección: "¿agua o leche?"</li>
+                                <li>Cantar muchas canciones infantiles</li>
+                            </ul>
+                        </div>
+                        <div class="strategy-card">
+                            <div class="strategy-
