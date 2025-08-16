@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -507,7 +508,6 @@
                     📅 Plan de 21 Días <span class="bonus-badge">BONUS</span>
                 </button>
             </div>
-
             <!-- TAB 1: DIFICULTADES COMUNES -->
             <div id="difficulties-tab" class="tab-content active">
                 <div class="difficulty-section">
@@ -982,39 +982,19 @@
             alert(`📅 DÍA ${day}: ${title}\n\n🎯 Trabaja: ${difficulty}\n\n📝 Descripción: ${description}\n\n💡 Esta actividad está diseñada específicamente para abordar esta dificultad de manera terapéutica y divertida.`);
         }
 
-        // FUNCIÓN CORREGIDA - VERIFICACIÓN DE ACCESO
         function checkModuleAccess() {
-            console.log('🔍 Verificando acceso al Módulo 4...');
+            const modulo3Completed = localStorage.getItem('modulo3_completed');
             
-            // Verificar que el usuario está logueado
-            const isLoggedIn = localStorage.getItem('isLoggedIn');
-            if (!isLoggedIn) {
-                console.log('❌ Usuario no logueado');
-                alert('⚠️ Debes estar logueado para acceder a este módulo.');
-                window.location.href = '../index.html';
-                return false;
-            }
-            
-            // Verificar progreso del curso
-            const courseProgress = JSON.parse(localStorage.getItem('courseProgress') || '[false,false,false,false,false]');
-            console.log('📊 Progreso del curso:', courseProgress);
-            
-            // CORREGIDO: Verificar que el Módulo 3 (índice 2) esté completado
-            if (!courseProgress[2]) {
-                console.log('❌ Módulo 3 no completado');
+            if (!modulo3Completed) {
                 alert('⚠️ Debes completar el Módulo 3 antes de acceder al Módulo 4.');
                 window.location.href = '../modulo3/index.html';
                 return false;
             }
-            
-            console.log('✅ Acceso permitido al Módulo 4');
             return true;
         }
 
         // Inicialización
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 Inicializando Módulo 4...');
-            
             // Verificar acceso
             if (!checkModuleAccess()) return;
             
@@ -1028,17 +1008,16 @@
                 }
             }
             
-            // CORREGIDO: Marcar módulo como completado automáticamente
-            let courseProgress = JSON.parse(localStorage.getItem('courseProgress') || '[false,false,false,false,false]');
-            courseProgress[3] = true; // Módulo 4 completado (índice 3)
-            localStorage.setItem('courseProgress', JSON.stringify(courseProgress));
-            console.log('✅ Módulo 4 marcado como completado');
+            // Marcar módulo como completado al cargar
+            localStorage.setItem('modulo4_completed', 'true');
+            localStorage.setItem('current_module', '4');
             
             // Configurar navegación
             const nextBtn = document.getElementById('nextModuleBtn');
             if (nextBtn) {
                 nextBtn.addEventListener('click', function(e) {
-                    console.log('🔄 Navegando al Módulo 5...');
+                    // Permitir navegación - el módulo se considera completado al visualizar
+                    localStorage.setItem('modulo4_completed', 'true');
                 });
             }
 
