@@ -407,7 +407,7 @@
             <div class="user-info">
                 <span id="userName">👤 Estudiante</span> | 
                 <span id="currentDate"></span>
-                <a href="../index.html" class="logout-btn">← Salir</a>
+                <a href="../index.html" class="logout-btn" onclick="logout()">← Salir</a>
             </div>
         </div>
 
@@ -579,32 +579,59 @@
             month: 'short'
         });
 
-        // Load progress from localStorage
-        let courseProgress = JSON.parse(localStorage.getItem('courseProgress') || '[false,false,false,false,false]');
-        
+        // Initialize user
+        const userEmail = localStorage.getItem('userEmail');
+        if (userEmail) {
+            document.getElementById('userName').textContent = '👤 ' + userEmail.split('@')[0];
+        }
+
+        // FUNCIÓN MEJORADA PARA MANEJAR EL PROGRESO
         function updateUI() {
             let completedCount = 0;
             
-            courseProgress.forEach((completed, index) => {
-                const moduleCard = document.getElementById(`module${index + 1}`);
-                if (moduleCard) {
-                    if (completed) {
-                        moduleCard.classList.add('completed');
+            // Verificar cada módulo individualmente
+            for (let i = 1; i <= 5; i++) {
+                const moduleCard = document.getElementById(`module${i}`);
+                const btn = moduleCard.querySelector('.btn');
+                const isCompleted = localStorage.getItem(`modulo${i}_completed`) === 'true';
+                
+                if (isCompleted) {
+                    // Módulo completado
+                    moduleCard.classList.add('completed');
+                    moduleCard.classList.remove('locked');
+                    btn.textContent = '✓ Completado';
+                    btn.disabled = false;
+                    completedCount++;
+                    
+                    // Desbloquear el siguiente módulo si existe
+                    if (i < 5) {
+                        const nextModule = document.getElementById(`module${i + 1}`);
+                        if (nextModule) {
+                            nextModule.classList.remove('locked');
+                            const nextBtn = nextModule.querySelector('.btn');
+                            nextBtn.disabled = false;
+                            nextBtn.textContent = 'Comenzar Módulo';
+                        }
+                    }
+                } else if (i === 1) {
+                    // Primer módulo siempre accesible
+                    moduleCard.classList.remove('locked');
+                    btn.disabled = false;
+                    btn.textContent = 'Comenzar Módulo';
+                } else {
+                    // Verificar si el módulo anterior está completado
+                    const prevCompleted = localStorage.getItem(`modulo${i - 1}_completed`) === 'true';
+                    if (prevCompleted) {
                         moduleCard.classList.remove('locked');
-                        completedCount++;
-                        const btn = moduleCard.querySelector('.btn');
-                        btn.textContent = '✓ Completado';
-                        btn.disabled = false;
-                    } else if (index > 0 && !courseProgress[index - 1]) {
-                        moduleCard.classList.add('locked');
-                    } else if (index > 0) {
-                        moduleCard.classList.remove('locked');
-                        const btn = moduleCard.querySelector('.btn');
                         btn.disabled = false;
                         btn.textContent = 'Comenzar Módulo';
+                    } else {
+                        moduleCard.classList.add('locked');
+                        btn.disabled = true;
+                        btn.textContent = '🔒 Bloqueado';
                     }
                 }
-            });
+            }
 
             // Update progress bar
             const progress = (completedCount / 5) * 100;
@@ -628,18 +655,32 @@
         }
 
         function startModule(moduleNumber) {
-            // Check if previous module is completed
-            if (moduleNumber > 1 && !courseProgress[moduleNumber - 2]) {
-                alert('Debes completar el módulo anterior primero');
-                return;
+            // Verificar si el módulo anterior está completado (excepto para el módulo 1)
+            if (moduleNumber > 1) {
+                const prevCompleted = localStorage.getItem(`modulo${moduleNumber - 1}_completed`) === 'true';
+                if (!prevCompleted) {
+                    alert(`⚠️ Debes completar el Módulo ${moduleNumber - 1} antes de acceder al Módulo ${moduleNumber}.`);
+                    return;
+                }
             }
 
-            // Redirect to module page
+            // Guardar el módulo actual
+            localStorage.setItem('current_module', moduleNumber.toString());
+
+            // Redirigir al módulo
             window.location.href = `../modulo${moduleNumber}/index.html`;
         }
 
         function getCertificate() {
-            if (courseProgress.every(module => module === true)) {
+            let allCompleted = true;
+            for (let i = 1; i <= 5; i++) {
+                if (localStorage.getItem(`modulo${i}_completed`) !== 'true') {
+                    allCompleted = false;
+                    break;
+                }
+            }
+
+            if (allCompleted) {
                 alert('🎉 ¡Felicitaciones! Descargando tu certificado...');
                 generateCertificate();
             } else {
@@ -650,27 +691,64 @@
         function generateCertificate() {
             const userName = prompt('¿Cuál es tu nombre completo para el certificado?') || 'Estudiante';
             alert(`Certificado generado para: ${userName}\n\n¡Felicitaciones por completar el curso!`);
+            
+            // Aquí podrías generar un PDF real o redirigir a una página de certificado
+            localStorage.setItem('certificate_name', userName);
+            localStorage.setItem('certificate_date', new Date().toISOString());
         }
 
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Initialize UI on load
-        updateUI();
-
-        // Simulate streak
-        const lastVisit = localStorage.getItem('lastVisit');
-        const today = new Date().toDateString();
-        let streak = parseInt(localStorage.getItem('streak') || '0');
-
-        if (lastVisit !== today) {
-            streak = lastVisit === new Date(Date.now() - 86400000).toDateString() ? streak + 1 : 1;
-            localStorage.setItem('streak', streak);
-            localStorage.setItem('lastVisit', today);
+        function logout() {
+            if (confirm('¿Estás seguro de que quieres salir?')) {
+                // No borrar el progreso del curso al salir
+                localStorage.removeItem('isLoggedIn');
+                window.location.href = '../index.html';
+            }
         }
 
-        document.getElementById('currentStreak').textContent = streak;
+        // Verificar si el usuario está logueado
+        function checkAuth() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (!isLoggedIn) {
+                alert('Debes iniciar sesión para acceder al dashboard');
+                window.location.href = '../index.html';
+            }
+        }
+
+        // Simulate streak
+        function updateStreak() {
+            const lastVisit = localStorage.getItem('lastVisit');
+            const today = new Date().toDateString();
+            let streak = parseInt(localStorage.getItem('streak') || '0');
+
+            if (lastVisit !== today) {
+                const yesterday = new Date(Date.now() - 86400000).toDateString();
+                streak = lastVisit === yesterday ? streak + 1 : 1;
+                localStorage.setItem('streak', streak);
+                localStorage.setItem('lastVisit', today);
+            }
+
+            document.getElementById('currentStreak').textContent = streak;
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+            updateUI();
+            updateStreak();
+            
+            console.log('Dashboard cargado correctamente');
+            console.log('Módulos completados:', {
+                modulo1: localStorage.getItem('modulo1_completed'),
+                modulo2: localStorage.getItem('modulo2_completed'),
+                modulo3: localStorage.getItem('modulo3_completed'),
+                modulo4: localStorage.getItem('modulo4_completed'),
+                modulo5: localStorage.getItem('modulo5_completed')
+            });
+        });
     </script>
 </body>
 </html>
