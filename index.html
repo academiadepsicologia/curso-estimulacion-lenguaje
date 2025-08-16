@@ -623,6 +623,7 @@
             <button class="mobile-menu-btn" onclick="openLogin()">☰</button>
         </div>
     </header>
+    
     <!-- Hero Section -->
     <section class="hero">
         <h1>Transforma el Lenguaje de Tu Hijo en Solo 30 Días</h1>
@@ -771,6 +772,7 @@
             </div>
         </div>
     </section>
+    
     <!-- Pricing Section -->
     <section class="pricing" id="precio">
         <div class="container">
@@ -848,7 +850,7 @@
                     <div class="faq-question" onclick="toggleFaq(this)">
                         ¿Cuándo veré resultados?
                         <span class="faq-icon">▼</span>
-                        </div>
+                    </div>
                     <div class="faq-answer">
                         <p>La mayoría de padres reportan mejoras notables en las primeras 2-3 semanas. Los resultados dependen de la consistencia y la edad del niño.</p>
                     </div>
@@ -937,7 +939,7 @@
             }
         }
 
-        // Process Purchase - FUNCIÓN CORREGIDA
+        // Process Purchase - FUNCIÓN COMPLETAMENTE CORREGIDA
         function processPurchase() {
             // In a real application, this would integrate with a payment processor
             alert('¡Excelente decisión! Serás redirigido al proceso de pago seguro...');
@@ -953,8 +955,20 @@
                         localStorage.setItem('userEmail', userEmail);
                         localStorage.setItem('isPurchased', 'true');
                         
-                        // CORREGIDO: Inicializar progreso del curso correctamente
-                        localStorage.setItem('courseProgress', JSON.stringify([true, false, false, false, false]));
+                        // INICIALIZAR CORRECTAMENTE EL PROGRESO DEL CURSO
+                        // Primer módulo desbloqueado (true), resto bloqueados (false)
+                        const initialProgress = [false, false, false, false, false];
+                        localStorage.setItem('courseProgress', JSON.stringify(initialProgress));
+                        
+                        // Guardar módulos completados individualmente para mejor control
+                        localStorage.setItem('modulo1_completed', 'false');
+                        localStorage.setItem('modulo2_completed', 'false');
+                        localStorage.setItem('modulo3_completed', 'false');
+                        localStorage.setItem('modulo4_completed', 'false');
+                        localStorage.setItem('modulo5_completed', 'false');
+                        
+                        // Establecer módulo actual
+                        localStorage.setItem('current_module', '1');
                         
                         alert('¡Compra exitosa! Te llevaremos a tu curso...');
                         
