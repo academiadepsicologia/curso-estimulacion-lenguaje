@@ -565,13 +565,8 @@
             // Guardar el módulo actual
             localStorage.setItem('current_module', moduleNumber.toString());
 
-            // Redirigir al módulo correcto - AQUÍ ESTÁ LA CORRECCIÓN PRINCIPAL
-            if (moduleNumber === 4) {
-                // Para módulo 4, usar la ruta correcta
-                window.location.href = `../modulo4/index.html`;
-            } else {
-                window.location.href = `../modulo${moduleNumber}/index.html`;
-            }
+            // CORRECCIÓN PRINCIPAL: Ruta unificada para todos los módulos
+            window.location.href = `../modulo${moduleNumber}/index.html`;
         }
 
         function getCertificate() {
