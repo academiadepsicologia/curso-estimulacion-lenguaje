@@ -67,149 +67,6 @@
             background: rgba(255,255,255,0.3);
         }
 
-        /* Banner de Progreso de Módulos */
-        .modules-progress-banner {
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .progress-steps {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            padding: 0 20px;
-        }
-
-        .step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .step:hover {
-            transform: scale(1.05);
-        }
-
-        .step-circle {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: #e9ecef;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            transition: all 0.3s ease;
-            border: 3px solid #dee2e6;
-        }
-
-        .step.active .step-circle {
-            background: linear-gradient(135deg, #ffd93d 0%, #ffb300 100%);
-            border-color: #ffb300;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 179, 0, 0.7); }
-            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 179, 0, 0); }
-        }
-
-        .step.completed .step-circle {
-            background: linear-gradient(135deg, #4caf50 0%, #81c784 100%);
-            border-color: #4caf50;
-        }
-
-        .step.available .step-circle {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-color: #667eea;
-        }
-
-        .step-number {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #666;
-        }
-
-        .step.active .step-number,
-        .step.completed .step-number,
-        .step.available .step-number {
-            color: white;
-        }
-
-        .step-check {
-            font-size: 1.8rem;
-            color: white;
-            position: absolute;
-            display: none;
-        }
-
-        .step.completed .step-number {
-            display: none;
-        }
-
-        .step.completed .step-check {
-            display: block !important;
-        }
-
-        .step-info {
-            margin-top: 10px;
-            text-align: center;
-        }
-
-        .step-title {
-            font-weight: bold;
-            color: #333;
-            font-size: 0.9rem;
-        }
-
-        .step-status {
-            font-size: 0.75rem;
-            color: #999;
-            margin-top: 3px;
-        }
-
-        .step.active .step-status {
-            color: #ffb300;
-            font-weight: bold;
-        }
-
-        .step.completed .step-status {
-            color: #4caf50;
-        }
-
-        .step.available .step-status {
-            color: #667eea;
-        }
-
-        .step-line {
-            flex: 1;
-            height: 3px;
-            background: #e9ecef;
-            margin: 0 -20px;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .step-line.completed {
-            background: linear-gradient(90deg, #4caf50 0%, #81c784 100%);
-        }
-
-        .current-module-message {
-            text-align: center;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
-            border-radius: 10px;
-            color: #667eea;
-            font-weight: 600;
-        }
-
         .modules-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -442,25 +299,6 @@
                 grid-template-columns: 1fr;
                 gap: 15px;
             }
-
-            .progress-steps {
-                padding: 0;
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-
-            .step-line {
-                display: none;
-            }
-
-            .step-circle {
-                width: 50px;
-                height: 50px;
-            }
-
-            .step-title {
-                font-size: 0.8rem;
-            }
         }
     </style>
 </head>
@@ -473,78 +311,6 @@
                 <span id="userName">👤 Estudiante</span> | 
                 <span id="currentDate"></span>
                 <a href="../index.html" class="logout-btn" onclick="logout()">← Salir</a>
-            </div>
-        </div>
-
-        <!-- BANNER DE PROGRESO DE MÓDULOS -->
-        <div class="modules-progress-banner">
-            <div class="progress-steps">
-                <div class="step" id="step1" onclick="goToModule(1)">
-                    <div class="step-circle">
-                        <span class="step-number">1</span>
-                        <span class="step-check">✓</span>
-                    </div>
-                    <div class="step-info">
-                        <div class="step-title">Fundamentos</div>
-                        <div class="step-status">No iniciado</div>
-                    </div>
-                </div>
-                
-                <div class="step-line" id="line1"></div>
-                
-                <div class="step" id="step2" onclick="goToModule(2)">
-                    <div class="step-circle">
-                        <span class="step-number">2</span>
-                        <span class="step-check">✓</span>
-                    </div>
-                    <div class="step-info">
-                        <div class="step-title">Técnicas</div>
-                        <div class="step-status">Bloqueado</div>
-                    </div>
-                </div>
-                
-                <div class="step-line" id="line2"></div>
-                
-                <div class="step" id="step3" onclick="goToModule(3)">
-                    <div class="step-circle">
-                        <span class="step-number">3</span>
-                        <span class="step-check">✓</span>
-                    </div>
-                    <div class="step-info">
-                        <div class="step-title">Actividades</div>
-                        <div class="step-status">Bloqueado</div>
-                    </div>
-                </div>
-                
-                <div class="step-line" id="line3"></div>
-                
-                <div class="step" id="step4" onclick="goToModule(4)">
-                    <div class="step-circle">
-                        <span class="step-number">4</span>
-                        <span class="step-check">✓</span>
-                    </div>
-                    <div class="step-info">
-                        <div class="step-title">Dificultades</div>
-                        <div class="step-status">Bloqueado</div>
-                    </div>
-                </div>
-                
-                <div class="step-line" id="line4"></div>
-                
-                <div class="step" id="step5" onclick="goToModule(5)">
-                    <div class="step-circle">
-                        <span class="step-number">5</span>
-                        <span class="step-check">✓</span>
-                    </div>
-                    <div class="step-info">
-                        <div class="step-title">Plan Personal</div>
-                        <div class="step-status">Bloqueado</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="current-module-message">
-                <span id="currentModuleMessage">👉 Comienza con el Módulo 1: Fundamentos del Desarrollo del Lenguaje</span>
             </div>
         </div>
 
@@ -572,7 +338,6 @@
                 </div>
             </div>
         </div>
-
         <div class="modules-grid">
             <!-- Módulo 1 -->
             <div class="module-card" id="module1">
@@ -639,6 +404,7 @@
                 </div>
                 <button class="btn" disabled onclick="startModule(3)">🔒 Bloqueado</button>
             </div>
+
             <!-- Módulo 4 -->
             <div class="module-card locked" id="module4">
                 <div class="module-number">4</div>
@@ -700,7 +466,6 @@
             </div>
         </div>
     </div>
-
     <script>
         // Initialize date
         document.getElementById('currentDate').textContent = new Date().toLocaleDateString('es-ES', {
@@ -715,16 +480,14 @@
             document.getElementById('userName').textContent = '👤 ' + userEmail.split('@')[0];
         }
 
-        // FUNCIÓN MEJORADA PARA ACTUALIZAR BANNER Y UI
+        // FUNCIÓN CORREGIDA PARA MANEJAR EL PROGRESO
         function updateUI() {
             let completedCount = 0;
-            let currentModule = 1;
             
             // Verificar cada módulo individualmente
             for (let i = 1; i <= 5; i++) {
                 const moduleCard = document.getElementById(`module${i}`);
                 const btn = moduleCard.querySelector('.btn');
-                const stepElement = document.getElementById(`step${i}`);
                 const isCompleted = localStorage.getItem(`modulo${i}_completed`) === 'true';
                 
                 if (isCompleted) {
@@ -736,21 +499,6 @@
                     btn.onclick = () => startModule(i);
                     completedCount++;
                     
-                    // Actualizar banner
-                    if (stepElement) {
-                        stepElement.classList.add('completed');
-                        stepElement.classList.remove('active', 'available');
-                        stepElement.querySelector('.step-status').textContent = 'Completado';
-                    }
-                    
-                    // Actualizar línea
-                    if (i > 1) {
-                        const lineElement = document.getElementById(`line${i-1}`);
-                        if (lineElement) {
-                            lineElement.classList.add('completed');
-                        }
-                    }
-                    
                     // Desbloquear el siguiente módulo si existe
                     if (i < 5) {
                         const nextModule = document.getElementById(`module${i + 1}`);
@@ -761,27 +509,12 @@
                             nextBtn.textContent = 'Comenzar Módulo';
                             nextBtn.onclick = () => startModule(i + 1);
                         }
-                        
-                        // Actualizar siguiente paso en banner
-                        const nextStep = document.getElementById(`step${i + 1}`);
-                        if (nextStep && !localStorage.getItem(`modulo${i + 1}_completed`)) {
-                            nextStep.classList.add('available');
-                            nextStep.querySelector('.step-status').textContent = 'Disponible';
-                            currentModule = i + 1;
-                        }
                     }
                 } else if (i === 1) {
                     // Primer módulo siempre accesible
                     moduleCard.classList.remove('locked');
                     btn.disabled = false;
                     btn.textContent = 'Comenzar Módulo';
-                    
-                    // Actualizar banner
-                    if (!isCompleted && stepElement) {
-                        stepElement.classList.add('active');
-                        stepElement.querySelector('.step-status').textContent = 'En progreso';
-                        currentModule = 1;
-                    }
                 } else {
                     // Verificar si el módulo anterior está completado
                     const prevCompleted = localStorage.getItem(`modulo${i - 1}_completed`) === 'true';
@@ -790,23 +523,10 @@
                         btn.disabled = false;
                         btn.textContent = 'Comenzar Módulo';
                         btn.onclick = () => startModule(i);
-                        
-                        // Actualizar banner
-                        if (stepElement && !isCompleted) {
-                            stepElement.classList.add('available');
-                            stepElement.querySelector('.step-status').textContent = 'Disponible';
-                            if (currentModule === 1) currentModule = i;
-                        }
                     } else {
                         moduleCard.classList.add('locked');
                         btn.disabled = true;
                         btn.textContent = '🔒 Bloqueado';
-                        
-                        // Actualizar banner
-                        if (stepElement) {
-                            stepElement.classList.remove('active', 'available', 'completed');
-                            stepElement.querySelector('.step-status').textContent = 'Bloqueado';
-                        }
                     }
                 }
             }
@@ -822,9 +542,6 @@
             document.getElementById('totalHours').textContent = (completedCount * 0.8).toFixed(1);
             document.getElementById('certificates').textContent = completedCount === 5 ? 1 : 0;
 
-            // Update current module message
-            updateCurrentModuleMessage(currentModule, completedCount);
-
             // Update certificate card
             if (completedCount === 5) {
                 const certCard = document.getElementById('certificate-card');
@@ -832,35 +549,6 @@
                 const certBtn = certCard.querySelector('.btn');
                 certBtn.disabled = false;
                 certBtn.textContent = '🏆 Descargar Certificado';
-            }
-        }
-        function updateCurrentModuleMessage(currentModule, completedCount) {
-            const messageElement = document.getElementById('currentModuleMessage');
-            if (!messageElement) return;
-            
-            if (completedCount === 5) {
-                messageElement.textContent = '🎉 ¡Felicitaciones! Has completado todo el curso. Descarga tu certificado.';
-            } else if (completedCount === 0) {
-                messageElement.textContent = '👉 Comienza con el Módulo 1: Fundamentos del Desarrollo del Lenguaje';
-            } else {
-                const moduleNames = {
-                    2: 'Técnicas de Estimulación',
-                    3: 'Actividades y Juegos',
-                    4: 'Dificultades Comunes',
-                    5: 'Plan Personalizado'
-                };
-                messageElement.textContent = `👉 Continúa con el Módulo ${currentModule}: ${moduleNames[currentModule] || 'Siguiente módulo'}`;
-            }
-        }
-
-        function goToModule(moduleNumber) {
-            const isCompleted = localStorage.getItem(`modulo${moduleNumber}_completed`) === 'true';
-            const prevCompleted = moduleNumber === 1 || localStorage.getItem(`modulo${moduleNumber - 1}_completed`) === 'true';
-            
-            if (isCompleted || prevCompleted) {
-                startModule(moduleNumber);
-            } else {
-                alert(`⚠️ Debes completar el Módulo ${moduleNumber - 1} antes de acceder al Módulo ${moduleNumber}.`);
             }
         }
 
@@ -877,21 +565,13 @@
             // Guardar el módulo actual
             localStorage.setItem('current_module', moduleNumber.toString());
 
-            // Marcar el módulo como "en progreso" en el banner
-            const stepElement = document.getElementById(`step${moduleNumber}`);
-            if (stepElement && !stepElement.classList.contains('completed')) {
-                // Remover clase active de otros pasos
-                document.querySelectorAll('.step').forEach(step => {
-                    if (!step.classList.contains('completed')) {
-                        step.classList.remove('active');
-                    }
-                });
-                stepElement.classList.add('active');
-                stepElement.querySelector('.step-status').textContent = 'En progreso';
+            // Redirigir al módulo correcto - AQUÍ ESTÁ LA CORRECCIÓN PRINCIPAL
+            if (moduleNumber === 4) {
+                // Para módulo 4, usar la ruta correcta
+                window.location.href = `../modulo4/index.html`;
+            } else {
+                window.location.href = `../modulo${moduleNumber}/index.html`;
             }
-
-            // Redirigir al módulo
-            window.location.href = `../modulo${moduleNumber}/index.html`;
         }
 
         function getCertificate() {
@@ -913,71 +593,10 @@
 
         function generateCertificate() {
             const userName = prompt('¿Cuál es tu nombre completo para el certificado?') || 'Estudiante';
-            const completedDate = new Date().toLocaleDateString('es-ES', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-            });
+            alert(`Certificado generado para: ${userName}\n\n¡Felicitaciones por completar el curso!`);
             
-            const certificateContent = `
-╔════════════════════════════════════════════════════════════════╗
-║                                                                ║
-║              🏆 CERTIFICADO DE COMPLETACIÓN 🏆                ║
-║                                                                ║
-║          ESTIMULACIÓN DEL LENGUAJE INFANTIL                   ║
-║                                                                ║
-╠════════════════════════════════════════════════════════════════╣
-║                                                                ║
-║  La Academia de Psicología certifica que:                     ║
-║                                                                ║
-║                    ${userName.toUpperCase().padEnd(40, ' ')}  ║
-║                                                                ║
-║  Ha completado exitosamente el curso completo de:             ║
-║                                                                ║
-║     "ESTIMULACIÓN DEL LENGUAJE INFANTIL EN CASA"              ║
-║                                                                ║
-║  Contenido completado:                                        ║
-║  ✅ Módulo 1: Fundamentos del Desarrollo del Lenguaje         ║
-║  ✅ Módulo 2: Técnicas de Estimulación Profesional            ║
-║  ✅ Módulo 3: Actividades y Juegos por Edad                   ║
-║  ✅ Módulo 4: Dificultades Comunes y Soluciones               ║
-║  ✅ Módulo 5: Plan Personalizado de 30 Días                   ║
-║                                                                ║
-║  Total de horas: 4.5 horas de contenido profesional           ║
-║                                                                ║
-║  Competencias adquiridas:                                     ║
-║  • Identificación de señales de alerta en el desarrollo       ║
-║  • Aplicación de técnicas terapéuticas en casa                ║
-║  • Diseño de actividades lúdicas educativas                   ║
-║  • Manejo de dificultades comunes del lenguaje                ║
-║  • Creación de planes personalizados de estimulación          ║
-║                                                                ║
-║  Fecha de completación: ${completedDate.padEnd(37, ' ')}      ║
-║                                                                ║
-║  ID del Certificado: ACEL-${Date.now()}                       ║
-║                                                                ║
-╚════════════════════════════════════════════════════════════════╝
-
-              Academia de Psicología - Educación Profesional
-                    www.academiadepsicologia.com
-            `;
-            
-            // Crear y descargar el archivo
-            const blob = new Blob([certificateContent], { type: 'text/plain;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `Certificado_EstimulacionLenguaje_${userName.replace(/\s/g, '_')}.txt`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            
-            // Guardar registro del certificado
             localStorage.setItem('certificate_name', userName);
             localStorage.setItem('certificate_date', new Date().toISOString());
-            
-            alert(`Certificado generado para: ${userName}\n\n¡Felicitaciones por completar el curso!`);
         }
 
         function logout() {
@@ -1013,56 +632,13 @@
             document.getElementById('currentStreak').textContent = streak;
         }
 
-        // Función para actualizar el módulo actual en el banner cuando regresa de un módulo
-        function updateCurrentModuleFromStorage() {
-            const currentModuleNum = parseInt(localStorage.getItem('current_module') || '1');
-            
-            // Si hay un módulo en progreso, actualizar el banner
-            if (currentModuleNum && currentModuleNum <= 5) {
-                const isCompleted = localStorage.getItem(`modulo${currentModuleNum}_completed`) === 'true';
-                
-                if (!isCompleted) {
-                    // Remover clase active de todos
-                    document.querySelectorAll('.step').forEach(step => {
-                        if (!step.classList.contains('completed')) {
-                            step.classList.remove('active');
-                        }
-                    });
-                    
-                    // Agregar clase active al módulo actual
-                    const currentStep = document.getElementById(`step${currentModuleNum}`);
-                    if (currentStep && !currentStep.classList.contains('completed')) {
-                        currentStep.classList.add('active');
-                        currentStep.querySelector('.step-status').textContent = 'En progreso';
-                    }
-                }
-            }
-        }
-
         // Initialize on load
         document.addEventListener('DOMContentLoaded', function() {
             checkAuth();
             updateUI();
             updateStreak();
-            updateCurrentModuleFromStorage();
             
-            // Auto-save progress every 30 seconds
-            setInterval(() => {
-                const progressData = {
-                    lastAccess: new Date().toISOString(),
-                    currentModule: localStorage.getItem('current_module'),
-                    modules: {
-                        1: localStorage.getItem('modulo1_completed'),
-                        2: localStorage.getItem('modulo2_completed'),
-                        3: localStorage.getItem('modulo3_completed'),
-                        4: localStorage.getItem('modulo4_completed'),
-                        5: localStorage.getItem('modulo5_completed')
-                    }
-                };
-                localStorage.setItem('dashboardState', JSON.stringify(progressData));
-            }, 30000);
-            
-            console.log('Dashboard con banner de progreso cargado correctamente');
+            console.log('Dashboard cargado correctamente');
             console.log('Módulos completados:', {
                 modulo1: localStorage.getItem('modulo1_completed'),
                 modulo2: localStorage.getItem('modulo2_completed'),
@@ -1070,33 +646,6 @@
                 modulo4: localStorage.getItem('modulo4_completed'),
                 modulo5: localStorage.getItem('modulo5_completed')
             });
-        });
-
-        // Función helper para debugging
-        function resetProgress() {
-            if (confirm('⚠️ ¿Estás seguro de que quieres reiniciar todo el progreso del curso?')) {
-                localStorage.removeItem('modulo1_completed');
-                localStorage.removeItem('modulo2_completed');
-                localStorage.removeItem('modulo3_completed');
-                localStorage.removeItem('modulo4_completed');
-                localStorage.removeItem('modulo5_completed');
-                localStorage.removeItem('current_module');
-                localStorage.removeItem('module1Progress');
-                localStorage.removeItem('module2Progress');
-                localStorage.removeItem('module3Progress');
-                localStorage.removeItem('module4Progress');
-                localStorage.removeItem('module5Progress');
-                location.reload();
-            }
-        }
-
-        // Atajo de teclado para reset (solo desarrollo)
-        document.addEventListener('keydown', function(e) {
-            // Ctrl+Shift+R para reset
-            if (e.ctrlKey && e.shiftKey && e.key === 'R') {
-                e.preventDefault();
-                resetProgress();
-            }
         });
     </script>
 </body>
