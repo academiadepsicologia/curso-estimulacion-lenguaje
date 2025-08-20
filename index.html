@@ -618,9 +618,9 @@
                 <a href="#modulos">Contenido</a>
                 <a href="#testimonios">Testimonios</a>
                 <a href="#precio">Precio</a>
-                <a href="dashboard/index.html" class="btn-login">Ingresar</a>
+                <a href="dashboard/index.html" class="btn-login" onclick="openLogin(event)">Ingresar</a>
             </nav>
-            <button class="mobile-menu-btn" onclick="openLogin()">☰</button>
+            <button class="mobile-menu-btn" onclick="openLogin(event)">☰</button>
         </div>
     </header>
     
@@ -772,7 +772,6 @@
             </div>
         </div>
     </section>
-    
     <!-- Pricing Section -->
     <section class="pricing" id="precio">
         <div class="container">
@@ -913,7 +912,20 @@
         }
 
         // Login Modal
-        function openLogin() {
+        function openLogin(event) {
+            if (event) {
+                event.preventDefault();
+            }
+            
+            // Verificar si ya está logueado
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (isLoggedIn === 'true') {
+                // Si ya está logueado, ir directo al dashboard
+                window.location.href = 'dashboard/index.html';
+                return;
+            }
+            
+            // Si no está logueado, mostrar modal
             document.getElementById('loginModal').classList.add('active');
         }
 
@@ -928,18 +940,25 @@
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
             
-            // Simple validation for demo
+            // Verificar si el usuario existe (tiene compra)
+            const isPurchased = localStorage.getItem('isPurchased');
+            
             if (email && password) {
-                // Store login state
-                localStorage.setItem('isLoggedIn', 'true');
-                localStorage.setItem('userEmail', email);
-                
-                // Redirect to dashboard
-                window.location.href = 'dashboard/index.html';
+                if (isPurchased === 'true') {
+                    // Usuario con compra previa
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('userEmail', email);
+                    window.location.href = 'dashboard/index.html';
+                } else {
+                    // Usuario sin compra
+                    alert('No se encontró una cuenta con estos datos. Por favor, compra el curso primero.');
+                    closeLogin();
+                    document.getElementById('precio').scrollIntoView({ behavior: 'smooth' });
+                }
             }
         }
 
-        // Process Purchase - FUNCIÓN COMPLETAMENTE CORREGIDA
+        // Process Purchase - FUNCIÓN CORREGIDA Y COMPLETA
         function processPurchase() {
             // In a real application, this would integrate with a payment processor
             alert('¡Excelente decisión! Serás redirigido al proceso de pago seguro...');
@@ -956,11 +975,7 @@
                         localStorage.setItem('isPurchased', 'true');
                         
                         // INICIALIZAR CORRECTAMENTE EL PROGRESO DEL CURSO
-                        // Primer módulo desbloqueado (true), resto bloqueados (false)
-                        const initialProgress = [false, false, false, false, false];
-                        localStorage.setItem('courseProgress', JSON.stringify(initialProgress));
-                        
-                        // Guardar módulos completados individualmente para mejor control
+                        // Todos los módulos bloqueados inicialmente excepto el primero
                         localStorage.setItem('modulo1_completed', 'false');
                         localStorage.setItem('modulo2_completed', 'false');
                         localStorage.setItem('modulo3_completed', 'false');
@@ -969,6 +984,14 @@
                         
                         // Establecer módulo actual
                         localStorage.setItem('current_module', '1');
+                        
+                        // Limpiar cualquier progreso anterior
+                        localStorage.removeItem('courseProgress');
+                        localStorage.removeItem('module1Progress');
+                        localStorage.removeItem('module2Progress');
+                        localStorage.removeItem('module3Progress');
+                        localStorage.removeItem('module4Progress');
+                        localStorage.removeItem('module5Progress');
                         
                         alert('¡Compra exitosa! Te llevaremos a tu curso...');
                         
@@ -996,6 +1019,7 @@
         // Add countdown timer for offer
         function initCountdown() {
             const countdownElement = document.createElement('div');
+            countdownElement.id = 'offerCountdown';
             countdownElement.style.cssText = `
                 position: fixed;
                 bottom: 20px;
@@ -1022,22 +1046,29 @@
             document.head.appendChild(style);
             
             // Set countdown time (24 hours from now)
-            const endTime = new Date().getTime() + (24 * 60 * 60 * 1000);
+            let endTime = localStorage.getItem('offerEndTime');
+            if (!endTime) {
+                endTime = new Date().getTime() + (24 * 60 * 60 * 1000);
+                localStorage.setItem('offerEndTime', endTime);
+            } else {
+                endTime = parseInt(endTime);
+            }
             
             function updateCountdown() {
                 const now = new Date().getTime();
                 const distance = endTime - now;
                 
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                
-                countdownElement.innerHTML = `
-                    ⏰ Oferta termina en: ${hours}h ${minutes}m ${seconds}s
-                `;
-                
-                if (distance < 0) {
+                if (distance > 0) {
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    
+                    countdownElement.innerHTML = `
+                        ⏰ Oferta termina en: ${hours}h ${minutes}m ${seconds}s
+                    `;
+                } else {
                     countdownElement.innerHTML = '⏰ Oferta expirada';
+                    localStorage.removeItem('offerEndTime');
                 }
             }
             
@@ -1100,6 +1131,107 @@
         }
         
         addTrustBadges();
+
+        // Check if user is returning
+        function checkReturningUser() {
+            const hasVisited = localStorage.getItem('hasVisited');
+            const isPurchased = localStorage.getItem('isPurchased');
+            
+            if (hasVisited && !isPurchased) {
+                // Show special offer for returning visitors
+                setTimeout(() => {
+                    const specialOffer = document.createElement('div');
+                    specialOffer.style.cssText = `
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background: white;
+                        padding: 30px;
+                        border-radius: 20px;
+                        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                        z-index: 10000;
+                        max-width: 400px;
+                        text-align: center;
+                    `;
+                    specialOffer.innerHTML = `
+                        <h3 style="color: #667eea; margin-bottom: 15px;">¡Esperamos tu regreso!</h3>
+                        <p style="color: #666; margin-bottom: 20px;">Sabemos que estás pensando en el curso. Aquí está tu última oportunidad con 50% de descuento.</p>
+                        <button onclick="document.getElementById('precio').scrollIntoView({ behavior: 'smooth' }); this.parentElement.remove();" 
+                                style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                                       color: white; 
+                                       border: none; 
+                                       padding: 15px 30px; 
+                                       border-radius: 50px; 
+                                       cursor: pointer; 
+                                       font-size: 1.1rem; 
+                                       font-weight: bold;">
+                            Aprovechar Oferta
+                        </button>
+                        <button onclick="this.parentElement.remove();" 
+                                style="background: none; 
+                                       border: none; 
+                                       color: #999; 
+                                       margin-top: 10px; 
+                                       cursor: pointer; 
+                                       display: block; 
+                                       width: 100%;">
+                            Tal vez después
+                        </button>
+                    `;
+                    document.body.appendChild(specialOffer);
+                }, 5000);
+            }
+            
+            localStorage.setItem('hasVisited', 'true');
+        }
+
+        checkReturningUser();
+
+        // Auto-save form data
+        function autoSaveFormData() {
+            const emailInput = document.getElementById('loginEmail');
+            
+            if (emailInput) {
+                // Load saved email if exists
+                const savedEmail = localStorage.getItem('savedEmail');
+                if (savedEmail) {
+                    emailInput.value = savedEmail;
+                }
+                
+                // Save email on change
+                emailInput.addEventListener('input', function() {
+                    localStorage.setItem('savedEmail', this.value);
+                });
+            }
+        }
+
+        autoSaveFormData();
+
+        // Mobile menu functionality
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLogin();
+            }
+        });
+
+        // Close modal on click outside
+        document.getElementById('loginModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLogin();
+            }
+        });
+
+        console.log('🧠 Academia de Psicología - Curso de Estimulación del Lenguaje');
+        console.log('✅ Sistema inicializado correctamente');
+        console.log('📚 5 módulos disponibles');
+        console.log('🎯 Listo para transformar el lenguaje de tu hijo');
     </script>
 </body>
 </html>
