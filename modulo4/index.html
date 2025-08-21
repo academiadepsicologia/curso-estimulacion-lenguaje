@@ -648,7 +648,20 @@
             }
 
             .calendar-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(7, 1fr);
+                gap: 5px;
+            }
+            
+            .calendar-day {
+                padding: 4px;
+            }
+            
+            .day-number {
+                font-size: 0.9em;
+            }
+            
+            .day-activity {
+                font-size: 0.5em;
             }
 
             .navigation {
@@ -875,7 +888,7 @@
                 <div class="calendar-container">
                     <h3 style="color: #667eea; text-align: center; margin-bottom: 20px;">📅 Calendario de Actividades Terapéuticas</h3>
                     
-                    <div class="calendar-grid">
+                    <div class="calendar-grid" id="calendar-grid">
                         <div class="calendar-header">Lun</div>
                         <div class="calendar-header">Mar</div>
                         <div class="calendar-header">Mié</div>
@@ -884,8 +897,7 @@
                         <div class="calendar-header">Sáb</div>
                         <div class="calendar-header">Dom</div>
                         
-                        <!-- Días del calendario -->
-                        <div id="calendar-days"></div>
+                        <!-- Los días se agregarán aquí directamente -->
                     </div>
 
                     <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 10px;">
@@ -1644,10 +1656,12 @@
         }
 
         function generateCalendar() {
-            const calendarDays = document.getElementById('calendar-days');
-            if (!calendarDays) return;
+            const calendarGrid = document.getElementById('calendar-grid');
+            if (!calendarGrid) return;
             
-            calendarDays.innerHTML = '';
+            // Limpiar solo los días, mantener los encabezados
+            const existingDays = calendarGrid.querySelectorAll('.calendar-day');
+            existingDays.forEach(day => day.remove());
             
             // Generar 21 días + algunos días vacíos para completar la grid
             for (let i = 1; i <= 21; i++) {
@@ -1661,7 +1675,7 @@
                     <div class="day-activity">${dayData.title}</div>
                 `;
                 
-                calendarDays.appendChild(dayElement);
+                calendarGrid.appendChild(dayElement);
             }
             
             // Agregar días vacíos para completar la última semana
@@ -1671,7 +1685,7 @@
                     const emptyDay = document.createElement('div');
                     emptyDay.className = 'calendar-day';
                     emptyDay.style.opacity = '0.3';
-                    calendarDays.appendChild(emptyDay);
+                    calendarGrid.appendChild(emptyDay);
                 }
             }
         }
