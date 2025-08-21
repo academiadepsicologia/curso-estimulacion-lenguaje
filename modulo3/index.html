@@ -110,378 +110,12 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .educational-context {
-            background: linear-gradient(135deg, #e8f5e8 0%, #f0f8ff 100%);
-            padding: 2rem;
-            border-radius: 15px;
-            margin: 2rem 0;
-            border-left: 5px solid #28a745;
-        }
-
-        .educational-context h3 {
-            color: #155724;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .educational-context p {
-            color: #155724;
-            font-size: 1.1rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .educational-context ul {
-            color: #155724;
-            margin-left: 1.5rem;
-        }
-
-        .educational-context li {
-            margin-bottom: 0.5rem;
-        }
-
-        .age-selector {
-            background: linear-gradient(135deg, #f093fb20 0%, #f5576c20 100%);
-            padding: 2rem;
-            border-radius: 15px;
-            margin: 2rem 0;
-            border: 2px solid #f093fb;
-        }
-
-        .age-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .age-btn {
-            background: white;
-            color: #764ba2;
-            padding: 1rem 2rem;
-            border: 2px solid #764ba2;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            min-width: 120px;
-        }
-
-        .age-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.3);
-        }
-
-        .age-btn.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-color: transparent;
-        }
-
         .content-section {
             background: white;
             padding: 2rem;
             border-radius: 15px;
             margin-bottom: 2rem;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            color: #2c3e50;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .activity-instructions {
-            background: #ffffff;
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin: 1rem 0;
-            border: 2px solid #667eea;
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
-        }
-
-        .activity-instructions h4 {
-            color: #2c3e50;
-            margin-bottom: 1rem;
-            font-weight: bold;
-        }
-
-        .activity-instructions .steps {
-            counter-reset: step-counter;
-        }
-
-        .activity-instructions .step {
-            counter-increment: step-counter;
-            margin-bottom: 1rem;
-            padding: 1rem;
-            background: #f8f9fa;
-            border-radius: 8px;
-            position: relative;
-            padding-left: 3rem;
-            border-left: 3px solid #28a745;
-            color: #2c3e50;
-        }
-
-        .activity-instructions .step::before {
-            content: counter(step-counter);
-            position: absolute;
-            left: 0.8rem;
-            top: 1rem;
-            background: #28a745;
-            color: white;
-            width: 1.5rem;
-            height: 1.5rem;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .activity-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .activity-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border: 3px solid transparent;
-            animation: subtlePulse 3s ease-in-out infinite;
-        }
-
-        @keyframes subtlePulse {
-            0%, 100% { 
-                transform: scale(1);
-                box-shadow: 0 5px 15px rgba(118, 75, 162, 0.2);
-            }
-            50% { 
-                transform: scale(1.02);
-                box-shadow: 0 8px 25px rgba(118, 75, 162, 0.3);
-            }
-        }
-
-        .activity-card:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(118, 75, 162, 0.5);
-            border-color: #ffd700;
-            animation: none;
-        }
-
-        .activity-card::before {
-            content: '👆 Haz clic para aprender';
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(255, 255, 255, 0.95);
-            color: #2c3e50;
-            font-size: 0.7rem;
-            padding: 0.3rem 0.6rem;
-            border-radius: 20px;
-            font-weight: bold;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 2;
-        }
-
-        .activity-card:hover::before {
-            opacity: 1;
-        }
-
-        .activity-card.completed {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            border-color: #28a745;
-            animation: none;
-        }
-
-        .activity-card.completed::after {
-            content: '✓ Completado';
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(255, 255, 255, 0.95);
-            color: #28a745;
-            font-size: 0.8rem;
-            padding: 0.3rem 0.6rem;
-            border-radius: 20px;
-            font-weight: bold;
-            z-index: 2;
-        }
-
-        .activity-card.completed::before {
-            display: none;
-        }
-
-        .activity-card:active {
-            transform: translateY(-2px) scale(0.98);
-            transition: transform 0.1s ease;
-        }
-
-        .activity-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .activity-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .activity-description {
-            font-size: 0.95rem;
-            opacity: 0.95;
-            margin-bottom: 1rem;
-        }
-
-        .home-activity-badge {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-top: 0.5rem;
-            display: inline-block;
-        }
-
-        .activity-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 10000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .activity-modal.show {
-            display: flex;
-            animation: modalFadeIn 0.3s ease;
-        }
-
-        .activity-modal-content {
-            background: white;
-            border-radius: 15px;
-            max-width: 900px;
-            max-height: 90vh;
-            width: 100%;
-            overflow-y: auto;
-            position: relative;
-            animation: modalSlideIn 0.3s ease;
-        }
-
-        .activity-modal-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 15px 15px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .activity-modal-close {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s ease;
-        }
-
-        .activity-modal-close:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .activity-modal-body {
-            padding: 2rem;
-        }
-
-        @keyframes modalFadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes modalSlideIn {
-            from { 
-                transform: scale(0.8) translateY(-50px); 
-                opacity: 0; 
-            }
-            to { 
-                transform: scale(1) translateY(0); 
-                opacity: 1; 
-            }
-        }
-
-        .game-container {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 15px;
-            margin: 2rem 0;
-            border: 3px solid #667eea;
-        }
-
-        .demo-label {
-            background: #ffc107;
-            color: #212529;
-            padding: 0.5rem 1rem;
-            border-radius: 10px;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            display: inline-block;
-        }
-
-        .game-area {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            margin: 1rem 0;
-            min-height: 300px;
-            position: relative;
-        }
-
-        .interactive-element {
-            display: inline-block;
-            padding: 1rem;
-            margin: 0.5rem;
-            background: linear-gradient(135deg, #ffd93d 0%, #ffb300 100%);
-            color: #333;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .interactive-element:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(255, 183, 0, 0.4);
         }
 
         .btn {
@@ -507,151 +141,6 @@
             background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
         }
 
-        .btn-warning {
-            background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
-        }
-
-        .btn-info {
-            background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
-        }
-
-        .alert {
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-        }
-
-        .alert-info {
-            background: #d1ecf1;
-            border: 1px solid #bee5eb;
-            color: #0c5460;
-        }
-
-        .alert-success {
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-        }
-
-        .alert-warning {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            color: #856404;
-        }
-
-        .quiz-container {
-            background: #f0f8ff;
-            padding: 2rem;
-            border-radius: 15px;
-            margin: 2rem 0;
-            border: 2px solid #4a90e2;
-        }
-
-        .quiz-question {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin: 1rem 0;
-        }
-
-        .quiz-options {
-            display: grid;
-            gap: 0.5rem;
-            margin: 1rem 0;
-        }
-
-        .quiz-option {
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 8px;
-            border: 2px solid transparent;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .quiz-option:hover {
-            background: #e9ecef;
-            border-color: #4a90e2;
-        }
-
-        .quiz-option.selected {
-            background: #d1ecf1;
-            border-color: #0c5460;
-        }
-
-        .quiz-option.correct {
-            background: #d4edda;
-            border-color: #28a745;
-        }
-
-        .quiz-option.incorrect {
-            background: #f8d7da;
-            border-color: #dc3545;
-        }
-
-        .feedback-box {
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-            display: none;
-        }
-
-        .feedback-box.show {
-            display: block;
-            animation: slideIn 0.3s ease;
-        }
-
-        .feedback-correct {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .feedback-incorrect {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .achievement-badge {
-            display: inline-block;
-            background: #ffd700;
-            color: #333;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            margin: 0.5rem;
-            font-weight: 600;
-            opacity: 0.3;
-            transition: all 0.3s ease;
-        }
-
-        .achievement-badge.unlocked {
-            opacity: 1;
-            animation: bounce 0.5s ease;
-        }
-
-        .timer {
-            background: #fff;
-            padding: 1rem;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #667eea;
-            margin: 1rem 0;
-        }
-
-        .score-display {
-            background: linear-gradient(135deg, #ffd93d 0%, #ffb300 100%);
-            color: #333;
-            padding: 1rem;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin: 1rem 0;
-        }
-
         .module-navigation {
             display: flex;
             justify-content: space-between;
@@ -662,32 +151,20 @@
             margin-top: 2rem;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
+        .alert-warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
         }
 
         .hidden {
             display: none;
-        }
-
-        .age-specific-content {
-            display: none;
-        }
-
-        .age-specific-content.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         @media (max-width: 768px) {
@@ -695,25 +172,9 @@
                 font-size: 2rem;
             }
             
-            .age-buttons {
-                flex-direction: column;
-            }
-            
-            .activity-grid {
-                grid-template-columns: 1fr;
-            }
-            
             .module-navigation {
                 flex-direction: column;
                 gap: 1rem;
-            }
-
-            .activity-modal {
-                padding: 1rem;
-            }
-
-            .activity-modal-content {
-                max-height: 95vh;
             }
         }
     </style>
@@ -729,7 +190,6 @@
                 <a href="../dashboard/index.html">← Dashboard</a>
                 <a href="../modulo2/index.html">Módulo 2</a>
                 <a href="#" onclick="showProgress()">Mi Progreso</a>
-                <a href="#" onclick="showHelp()">Ayuda</a>
                 <a href="#" onclick="logout()">Salir</a>
             </div>
         </div>
@@ -741,14 +201,7 @@
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
-            <p><span id="progressText">0% completado</span> • <span id="activitiesCompleted">0 de 12 actividades</span></p>
-            <div id="achievementsList" style="margin-top: 1rem;">
-                <span class="achievement-badge" id="badge1">🎯 Primera Actividad</span>
-                <span class="achievement-badge" id="badge2">🎮 5 Juegos</span>
-                <span class="achievement-badge" id="badge3">🎵 Maestro Musical</span>
-                <span class="achievement-badge" id="badge4">📚 Contador de Cuentos</span>
-                <span class="achievement-badge" id="badge5">🏆 Módulo Completo</span>
-            </div>
+            <p><span id="progressText">0% completado</span></p>
         </div>
 
         <div class="module-header">
@@ -756,568 +209,199 @@
             <p>Aprende técnicas profesionales para desarrollar el lenguaje de tu hijo en casa</p>
         </div>
 
-        <div class="educational-context">
-            <h3>
-                <span>🏠</span>
-                ¿Cómo usar este módulo?
-            </h3>
-            <p><strong>Este módulo te enseña actividades para recrear en casa con tu hijo.</strong></p>
-            <p>Los juegos interactivos que verás aquí son <strong>ejemplos demostrativos</strong> para que:</p>
-            <ul>
-                <li><strong>Aprendas la metodología:</strong> Cómo estructurar cada actividad paso a paso</li>
-                <li><strong>Veas el objetivo:</strong> Qué habilidades específicas desarrolla cada juego</li>
-                <li><strong>Entiendas la adaptación:</strong> Cómo ajustar la dificultad según la edad</li>
-                <li><strong>Practiques la técnica:</strong> Qué decir y cómo interactuar con tu hijo</li>
+        <div class="content-section">
+            <h2>📚 Contenido del Módulo</h2>
+            <p>En este módulo aprenderás:</p>
+            <ul style="margin-left: 2rem; margin-top: 1rem;">
+                <li>Juegos por edades (3-5 años)</li>
+                <li>Cuentos interactivos</li>
+                <li>Canciones educativas</li>
+                <li>Actividades diarias</li>
             </ul>
-            <p><strong>💡 Tu objetivo:</strong> Convertirte en el mejor estimulador del lenguaje de tu hijo, usando estas técnicas científicamente respaldadas en la vida diaria.</p>
-        </div>
-
-        <div class="module-header" style="padding: 2rem; margin-bottom: 1rem;">
-            <div class="age-selector">
-                <h3>📌 Selecciona la edad de tu hijo para ver actividades personalizadas:</h3>
-                <div class="age-buttons">
-                    <button class="age-btn" onclick="selectAge(3)">3 años</button>
-                    <button class="age-btn" onclick="selectAge(4)">4 años</button>
-                    <button class="age-btn" onclick="selectAge(5)">5 años</button>
-                </div>
-                <p id="ageMessage" style="margin-top: 1rem; display: none; text-align: center; font-weight: bold; color: #667eea;">
-                    ✨ Actividades adaptadas para <span id="selectedAge"></span> años
-                </p>
-            </div>
-        </div>
-
-        <div id="content-age-3" class="age-specific-content">
-            <div class="content-section" data-section="vocab-3">
-                <h2 class="section-title">
-                    <span>🎯</span>
-                    Juegos de Vocabulario (3 años)
-                </h2>
-                
-                <div class="alert alert-info">
-                    <strong>🧠 Base científica:</strong> A los 3 años, los niños aprenden mejor a través de la repetición y asociación visual. Pueden aprender 5-10 palabras nuevas por día a través del juego estructurado.
-                </div>
-
-                <div class="activity-grid">
-                    <div class="activity-card" onclick="startVocabGame3()" data-activity="vocab-game-3">
-                        <div class="activity-icon">🖼️</div>
-                        <div class="activity-title">Veo-Veo de Colores</div>
-                        <div class="activity-description">Aprende la técnica para enseñar vocabulario usando colores y objetos cotidianos</div>
-                        <div class="home-activity-badge">🏠 PARA RECREAR EN CASA</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="content-age-4" class="age-specific-content">
-            <div class="content-section">
-                <h2 class="section-title">Actividades para 4 años</h2>
-                <p>Contenido específico para esta edad</p>
-            </div>
-        </div>
-
-        <div id="content-age-5" class="age-specific-content">
-            <div class="content-section">
-                <h2 class="section-title">Actividades para 5 años</h2>
-                <p>Contenido específico para esta edad</p>
-            </div>
+            
+            <button class="btn btn-success" onclick="completeActivity()" style="margin-top: 2rem;">
+                ✅ Marcar como Completado
+            </button>
         </div>
 
         <div class="content-section">
-            <h2 class="section-title">
-                <span>🏆</span>
-                Evaluación Final del Módulo
-            </h2>
+            <h2>🏆 Evaluación Final</h2>
             
             <div class="alert alert-warning">
-                <strong>📝 Importante:</strong> Completa al menos 8 actividades antes de realizar la evaluación final.
+                <strong>📝 Importante:</strong> Completa el contenido antes de realizar la evaluación.
             </div>
 
-            <button class="btn btn-success" onclick="startFinalQuiz()" id="finalQuizBtn" disabled>
-                Comenzar Evaluación Final
+            <button class="btn btn-success" onclick="startQuiz()" id="quizBtn">
+                Comenzar Evaluación
             </button>
 
-            <div id="finalQuizContainer" class="quiz-container hidden">
-                <h3>🏆 Evaluación Final</h3>
-                <div class="timer">Tiempo: <span id="quizTimer">05:00</span></div>
-                <div class="quiz-question" id="finalQuestion"></div>
-                <div class="feedback-box" id="finalFeedback"></div>
+            <div id="quizContainer" class="hidden" style="margin-top: 2rem;">
+                <div id="questionContainer"></div>
+                <div id="quizResult" class="hidden" style="margin-top: 1rem; padding: 1rem; background: #d4edda; border-radius: 8px;">
+                </div>
             </div>
         </div>
 
         <div class="module-navigation">
             <a href="../modulo2/index.html" class="btn">← Módulo 2</a>
             <div>
-                <button class="btn btn-success" onclick="generateCertificate()" id="certificateBtn" style="display: none;">🏆 Certificado</button>
-                <a href="../modulo4/index.html" class="btn" id="nextModuleBtn" style="display: none;">Módulo 4 →</a>
+                <button class="btn btn-success" onclick="generateCertificate()" id="certificateBtn" style="display: none;">
+                    🏆 Certificado
+                </button>
+                <a href="../modulo4/index.html" class="btn" id="nextModuleBtn" style="display: none;">
+                    Módulo 4 →
+                </a>
             </div>
         </div>
     </div>
 
     <script>
-        let selectedAge = null;
-        let completedActivities = new Set();
-        let totalActivities = 12;
-        let currentScore = 0;
-        let quizTimer = null;
-        let achievements = new Set();
+        let moduleCompleted = false;
+        let quizCompleted = false;
+        let currentQuestion = 0;
+        let correctAnswers = 0;
 
-        window.addEventListener('DOMContentLoaded', function() {
-            console.log('🎮 Iniciando Módulo 3: Actividades y Juegos');
-            loadSavedProgress();
-            checkModuleAccess();
-        });
+        const quizQuestions = [
+            {
+                question: "¿Cuál es la mejor manera de enseñar colores a un niño de 3 años?",
+                options: [
+                    "Solo con libros",
+                    "Con objetos reales y juego",
+                    "Memorizando listas",
+                    "Viendo TV"
+                ],
+                correct: 1
+            },
+            {
+                question: "¿Cuántas palabras nuevas puede aprender un niño de 3 años por día?",
+                options: [
+                    "1-2 palabras",
+                    "5-10 palabras",
+                    "20-30 palabras",
+                    "No hay límite"
+                ],
+                correct: 1
+            }
+        ];
 
-        function checkModuleAccess() {
-            const modulo2Completed = localStorage.getItem('modulo2_completed') === 'true';
-            if (!modulo2Completed) {
-                console.log('Módulo 2 no completado, pero permitiendo acceso para desarrollo');
+        function completeActivity() {
+            moduleCompleted = true;
+            updateProgress();
+            alert('✅ ¡Contenido completado! Ahora puedes realizar la evaluación.');
+        }
+
+        function updateProgress() {
+            let progress = 0;
+            if (moduleCompleted) progress += 50;
+            if (quizCompleted) progress += 50;
+            
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            
+            progressFill.style.width = progress + '%';
+            progressText.textContent = progress + '% completado';
+            
+            if (progress === 100) {
+                completeModule();
             }
         }
 
-        function selectAge(age) {
-            selectedAge = age;
-            
-            document.querySelectorAll('.age-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            document.getElementById('ageMessage').style.display = 'block';
-            document.getElementById('selectedAge').textContent = age;
-            
-            document.querySelectorAll('.age-specific-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            const ageContent = document.getElementById(`content-age-${age}`);
-            if (ageContent) {
-                ageContent.classList.add('active');
+        function startQuiz() {
+            if (!moduleCompleted) {
+                alert('⚠️ Primero debes completar el contenido del módulo');
+                return;
             }
             
-            localStorage.setItem('module3SelectedAge', age);
-            totalActivities = age === 3 ? 8 : age === 4 ? 10 : 12updateProgress();
-           showNotification(`✅ Actividades adaptadas para ${age} años cargadas`, 'success');
-       }
+            document.getElementById('quizContainer').classList.remove('hidden');
+            currentQuestion = 0;
+            correctAnswers = 0;
+            showQuestion();
+        }
 
-       function startVocabGame3() {
-           if (!checkAgeSelected()) return;
-           markActivityComplete('vocab-game-3');
-           showNotification('✅ Actividad de vocabulario completada', 'success');
-       }
+        function showQuestion() {
+            if (currentQuestion >= quizQuestions.length) {
+                showQuizResult();
+                return;
+            }
+            
+            const q = quizQuestions[currentQuestion];
+            const container = document.getElementById('questionContainer');
+            
+            container.innerHTML = `
+                <h3>Pregunta ${currentQuestion + 1} de ${quizQuestions.length}</h3>
+                <p style="margin: 1rem 0; font-size: 1.1rem;">${q.question}</p>
+                <div style="display: grid; gap: 0.5rem;">
+                    ${q.options.map((opt, idx) => `
+                        <button class="btn" onclick="answerQuestion(${idx})" style="text-align: left;">
+                            ${opt}
+                        </button>
+                    `).join('')}
+                </div>
+            `;
+        }
 
-       function checkAgeSelected() {
-           if (!selectedAge) {
-               showNotification('⚠️ Por favor, selecciona primero la edad de tu hijo', 'warning');
-               return false;
-           }
-           return true;
-       }
+        function answerQuestion(index) {
+            const q = quizQuestions[currentQuestion];
+            if (index === q.correct) {
+                correctAnswers++;
+            }
+            currentQuestion++;
+            showQuestion();
+        }
 
-       function markActivityComplete(activityId) {
-           const card = document.querySelector(`[data-activity="${activityId}"]`);
-           if (card && !card.classList.contains('completed')) {
-               card.classList.add('completed');
-               completedActivities.add(activityId);
-               updateProgress();
-               checkAchievements();
-               saveProgress();
-           }
-       }
+        function showQuizResult() {
+            const percentage = (correctAnswers / quizQuestions.length) * 100;
+            const resultDiv = document.getElementById('quizResult');
+            
+            resultDiv.innerHTML = `
+                <h3>🎉 Evaluación Completada</h3>
+                <p>Resultado: ${correctAnswers}/${quizQuestions.length} respuestas correctas (${percentage}%)</p>
+                ${percentage >= 80 ? '<p>✅ ¡Excelente! Has aprobado el módulo.</p>' : '<p>📚 Necesitas repasar el contenido.</p>'}
+            `;
+            
+            resultDiv.classList.remove('hidden');
+            document.getElementById('questionContainer').classList.add('hidden');
+            
+            if (percentage >= 80) {
+                quizCompleted = true;
+                updateProgress();
+            }
+        }
 
-       function updateProgress() {
-           const progress = (completedActivities.size / totalActivities) * 100;
-           
-           const progressFill = document.getElementById('progressFill');
-           const progressText = document.getElementById('progressText');
-           const activitiesText = document.getElementById('activitiesCompleted');
-           
-           if (progressFill) {
-               progressFill.style.width = progress + '%';
-           }
-           if (progressText) {
-               progressText.textContent = Math.round(progress) + '% completado';
-           }
-           if (activitiesText) {
-               activitiesText.textContent = `${completedActivities.size} de ${totalActivities} actividades`;
-           }
-           
-           if (completedActivities.size >= 8) {
-               const finalBtn = document.getElementById('finalQuizBtn');
-               if (finalBtn) {
-                   finalBtn.disabled = false;
-                   finalBtn.textContent = '🏆 Comenzar Evaluación Final (Desbloqueado)';
-               }
-           }
-           
-           if (completedActivities.size >= totalActivities) {
-               completeModule();
-           }
-       }
+        function completeModule() {
+            localStorage.setItem('modulo3_completed', 'true');
+            document.getElementById('certificateBtn').style.display = 'inline-block';
+            document.getElementById('nextModuleBtn').style.display = 'inline-block';
+            alert('🎉 ¡Felicitaciones! Has completado el Módulo 3');
+        }
 
-       function checkAchievements() {
-           const completed = completedActivities.size;
-           
-           if (completed >= 1 && !achievements.has('first')) {
-               achievements.add('first');
-               document.getElementById('badge1').classList.add('unlocked');
-               showNotification('🎯 ¡Logro desbloqueado: Primera Actividad!', 'success');
-           }
-           
-           if (completed >= 5 && !achievements.has('games')) {
-               achievements.add('games');
-               document.getElementById('badge2').classList.add('unlocked');
-               showNotification('🎮 ¡Logro desbloqueado: 5 Juegos Completados!', 'success');
-           }
-           
-           if (completed >= totalActivities && !achievements.has('complete')) {
-               achievements.add('complete');
-               document.getElementById('badge5').classList.add('unlocked');
-               showNotification('🏆 ¡Logro desbloqueado: Módulo Completo!', 'success');
-           }
-       }
+        function generateCertificate() {
+            const userName = prompt('¿Cuál es tu nombre para el certificado?') || 'Estudiante';
+            alert(`🏆 Certificado generado para ${userName}\n\nMódulo 3: Actividades y Juegos\nCompletado exitosamente`);
+        }
 
-       function startFinalQuiz() {
-           if (!checkAgeSelected()) {
-               showNotification('⚠️ Selecciona la edad de tu hijo primero', 'warning');
-               return;
-           }
-           
-           if (completedActivities.size < 8) {
-               showNotification('⚠️ Completa al menos 8 actividades primero', 'warning');
-               return;
-           }
-           
-           document.getElementById('finalQuizContainer').classList.remove('hidden');
-           initializeFinalQuiz();
-           startQuizTimer();
-       }
+        function showProgress() {
+            let progress = 0;
+            if (moduleCompleted) progress += 50;
+            if (quizCompleted) progress += 50;
+            alert(`📊 Tu progreso: ${progress}%\n${moduleCompleted ? '✅' : '⏳'} Contenido\n${quizCompleted ? '✅' : '⏳'} Evaluación`);
+        }
 
-       function initializeFinalQuiz() {
-           const questions = getFinalQuizQuestions();
-           window.finalQuizQuestions = questions;
-           window.finalQuizAnswers = [];
-           window.currentFinalQuestion = 0;
-           
-           loadFinalQuestion();
-       }
+        function logout() {
+            if (confirm('¿Estás seguro que quieres salir?')) {
+                window.location.href = '../dashboard/index.html';
+            }
+        }
 
-       function getFinalQuizQuestions() {
-           const questions = {
-               3: [
-                   {
-                       question: "¿Cuál es la mejor manera de enseñar colores a un niño de 3 años?",
-                       options: [
-                           "Solo con libros",
-                           "Con objetos reales y juego", 
-                           "Memorizando listas",
-                           "Viendo TV"
-                       ],
-                       correct: 1,
-                       explanation: "Los niños de 3 años aprenden mejor con objetos reales y participación activa"
-                   },
-                   {
-                       question: "¿Cómo debe hacer un padre el sonido 'MUU' de la vaca?",
-                       options: [
-                           "Muy bajito",
-                           "Normal",
-                           "Exagerado y claro",
-                           "No importa cómo"
-                       ],
-                       correct: 2,
-                       explanation: "Los sonidos exagerados ayudan a los niños a distinguir y reproducir mejor los sonidos"
-                   },
-                   {
-                       question: "¿Cuántas palabras nuevas puede aprender un niño de 3 años por día?",
-                       options: [
-                           "1-2 palabras",
-                           "5-10 palabras",
-                           "20-30 palabras",
-                           "No hay límite"
-                       ],
-                       correct: 1,
-                       explanation: "Los niños de 3 años pueden aprender entre 5-10 palabras nuevas por día con estimulación adecuada"
-                   }
-               ],
-               4: [
-                   {
-                       question: "¿Cuál es la estructura básica que debe tener una oración para niños de 4 años?",
-                       options: [
-                           "Solo verbo",
-                           "Sujeto + verbo + objeto",
-                           "Muy complicada",
-                           "No importa"
-                       ],
-                       correct: 1,
-                       explanation: "La estructura sujeto-verbo-objeto es la base del lenguaje a los 4 años"
-                   }
-               ],
-               5: [
-                   {
-                       question: "¿Cuál es la estructura narrativa que debe enseñar a un niño de 5 años?",
-                       options: [
-                           "Solo final",
-                           "Inicio-problema-solución-final",
-                           "Sin estructura",
-                           "Solo personajes"
-                       ],
-                       correct: 1,
-                       explanation: "Esta estructura desarrolla pensamiento lógico y habilidades narrativas"
-                   }
-               ]
-           };
-           
-           return questions[selectedAge] || questions[3];
-       }
-
-       function loadFinalQuestion() {
-           const question = window.finalQuizQuestions[window.currentFinalQuestion];
-           const container = document.getElementById('finalQuestion');
-           
-           container.innerHTML = `
-               <p style="font-size: 1.2rem; font-weight: bold; margin-bottom: 1rem;">
-                   Pregunta ${window.currentFinalQuestion + 1} de ${window.finalQuizQuestions.length}
-               </p>
-               <p style="font-size: 1.1rem; margin: 1rem 0; background: #f8f9fa; padding: 1rem; border-radius: 10px;">
-                   ${question.question}
-               </p>
-               <div class="quiz-options">
-                   ${question.options.map((opt, idx) => `
-                       <div class="quiz-option" onclick="selectFinalAnswer(${idx})">
-                           ${opt}
-                       </div>
-                   `).join('')}
-               </div>
-           `;
-       }
-
-       function selectFinalAnswer(index) {
-           window.finalQuizAnswers[window.currentFinalQuestion] = index;
-           
-           const options = document.querySelectorAll('.quiz-option');
-           const question = window.finalQuizQuestions[window.currentFinalQuestion];
-           
-           options.forEach(opt => opt.classList.remove('selected', 'correct', 'incorrect'));
-           
-           if (index === question.correct) {
-               options[index].classList.add('correct');
-               updateScore(10);
-           } else {
-               options[index].classList.add('incorrect');
-               options[question.correct].classList.add('correct');
-           }
-           
-           const explanation = document.createElement('div');
-           explanation.style.cssText = 'background: #e7f3ff; padding: 1rem; border-radius: 8px; margin: 1rem 0;';
-           explanation.innerHTML = `<strong>💡 Explicación:</strong> ${question.explanation}`;
-           document.getElementById('finalQuestion').appendChild(explanation);
-           
-           setTimeout(() => {
-               window.currentFinalQuestion++;
-               if (window.currentFinalQuestion < window.finalQuizQuestions.length) {
-                   loadFinalQuestion();
-               } else {
-                   submitFinalQuiz();
-               }
-           }, 3000);
-       }
-
-       function startQuizTimer() {
-           let timeLeft = 300;
-           
-           quizTimer = setInterval(() => {
-               timeLeft--;
-               const minutes = Math.floor(timeLeft / 60);
-               const seconds = timeLeft % 60;
-               
-               const display = document.getElementById('quizTimer');
-               if (display) {
-                   display.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                   
-                   if (timeLeft <= 60) {
-                       display.style.color = '#dc3545';
-                   }
-               }
-               
-               if (timeLeft <= 0) {
-                   clearInterval(quizTimer);
-                   submitFinalQuiz();
-               }
-           }, 1000);
-       }
-
-       function submitFinalQuiz() {
-           clearInterval(quizTimer);
-           
-           let correct = 0;
-           window.finalQuizQuestions.forEach((q, idx) => {
-               if (window.finalQuizAnswers[idx] === q.correct) {
-                   correct++;
-               }
-           });
-           
-           const percentage = (correct / window.finalQuizQuestions.length) * 100;
-           
-           const feedback = document.getElementById('finalFeedback');
-           feedback.className = 'feedback-box show';
-           
-           if (percentage >= 80) {
-               feedback.classList.add('feedback-correct');
-               feedback.innerHTML = `
-                   <h3>🎉 ¡EXCELENTE!</h3>
-                   <p><strong>Puntuación:</strong> ${correct}/${window.finalQuizQuestions.length} (${Math.round(percentage)}%)</p>
-                   <p>Has dominado las técnicas de estimulación del lenguaje para ${selectedAge} años.</p>
-               `;
-               completeModule();
-           } else {
-               feedback.classList.add('feedback-incorrect');
-               feedback.innerHTML = `
-                   <h3>📚 Necesitas Repasar</h3>
-                   <p><strong>Puntuación:</strong> ${correct}/${window.finalQuizQuestions.length} (${Math.round(percentage)}%)</p>
-                   <p>Te recomendamos repasar las actividades antes de continuar.</p>
-               `;
-           }
-       }
-
-       function completeModule() {
-           document.getElementById('certificateBtn').style.display = 'inline-block';
-           document.getElementById('nextModuleBtn').style.display = 'inline-block';
-           
-           localStorage.setItem('modulo3_completed', 'true');
-           
-           showNotification('🎉 ¡FELICITACIONES! Has completado el Módulo 3', 'success', 10000);
-       }
-
-       function generateCertificate() {
-           const userName = prompt('¿Cuál es tu nombre para el certificado?') || 'Estudiante';
-           const currentDate = new Date().toLocaleDateString('es-ES');
-           
-           alert(`
-🏆 CERTIFICADO DE COMPLETACIÓN 🏆
-
-${userName.toUpperCase()}
-
-Ha completado exitosamente el MÓDULO 3:
-"Actividades y Juegos"
-
-Fecha: ${currentDate}
-
-¡Felicitaciones!
-           `);
-       }
-
-       function updateScore(points) {
-           currentScore += points;
-       }
-
-       function showProgress() {
-           const progress = (completedActivities.size / totalActivities) * 100;
-           alert(`
-📊 TU PROGRESO:
-Progreso: ${Math.round(progress)}%
-Actividades: ${completedActivities.size}/${totalActivities}
-Puntuación: ${currentScore} puntos
-           `);
-       }
-
-       function showHelp() {
-           alert(`
-📖 GUÍA DEL MÓDULO 3
-
-1. Selecciona la edad de tu hijo
-2. Completa las actividades
-3. Realiza la evaluación final
-4. Obtén tu certificado
-
-¿Necesitas ayuda? Contacta al instructor.
-           `);
-       }
-
-       function saveProgress() {
-           const progress = {
-               selectedAge: selectedAge,
-               completedActivities: Array.from(completedActivities),
-               achievements: Array.from(achievements),
-               currentScore: currentScore
-           };
-           
-           localStorage.setItem('module3Progress', JSON.stringify(progress));
-       }
-
-       function loadSavedProgress() {
-           try {
-               const saved = localStorage.getItem('module3Progress');
-               if (saved) {
-                   const progress = JSON.parse(saved);
-                   
-                   if (progress.selectedAge) {
-                       selectedAge = progress.selectedAge;
-                       setTimeout(() => {
-                           const btn = document.querySelector(`.age-btn:nth-child(${selectedAge - 2})`);
-                           if (btn) btn.click();
-                       }, 500);
-                   }
-                   
-                   if (progress.completedActivities) {
-                       progress.completedActivities.forEach(activity => {
-                           completedActivities.add(activity);
-                       });
-                   }
-                   
-                   if (progress.achievements) {
-                       progress.achievements.forEach(achievement => {
-                           achievements.add(achievement);
-                       });
-                   }
-                   
-                   if (progress.currentScore) {
-                       currentScore = progress.currentScore;
-                   }
-                   
-                   setTimeout(() => updateProgress(), 1000);
-               }
-           } catch (error) {
-               console.error('Error cargando progreso:', error);
-           }
-       }
-
-       function logout() {
-           if (confirm('¿Estás seguro que quieres salir?')) {
-               saveProgress();
-               window.location.href = '../dashboard/index.html';
-           }
-       }
-
-       function showNotification(message, type = 'info', duration = 4000) {
-           const existingNotifications = document.querySelectorAll('.notification-custom');
-           existingNotifications.forEach(notif => notif.remove());
-           
-           const notification = document.createElement('div');
-           notification.className = `alert alert-${type} notification-custom`;
-           notification.style.cssText = `
-               position: fixed;
-               top: 80px;
-               right: 20px;
-               z-index: 9999;
-               min-width: 300px;
-               animation: slideIn 0.3s ease;
-           `;
-           notification.innerHTML = message;
-           document.body.appendChild(notification);
-           
-           setTimeout(() => {
-               notification.remove();
-           }, duration);
-       }
-
-       setInterval(() => {
-           if (completedActivities.size > 0) {
-               saveProgress();
-           }
-       }, 30000);
-
-       window.addEventListener('beforeunload', () => {
-           saveProgress();
-       });
-   </script>
+        // Verificar estado al cargar
+        window.addEventListener('DOMContentLoaded', function() {
+            const isCompleted = localStorage.getItem('modulo3_completed') === 'true';
+            if (isCompleted) {
+                moduleCompleted = true;
+                quizCompleted = true;
+                updateProgress();
+            }
+        });
+    </script>
 </body>
 </html>
