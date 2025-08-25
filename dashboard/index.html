@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curso de Estimulación del Lenguaje Infantil - Academia de Psicología</title>
+    <title>Mi Curso - Dashboard - Academia de Psicología</title>
     
     <style>
         * {
@@ -14,149 +14,9 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        /* Header */
-        .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-
-        .nav-links a:hover {
-            opacity: 0.8;
-        }
-
-        .btn-login {
-            background: rgba(255,255,255,0.9);
-            color: #667eea;
-            padding: 0.5rem 1.5rem;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: 2px solid rgba(255,255,255,0.9);
-        }
-
-        .btn-login:hover {
-            background: white;
-            color: #667eea;
-            transform: scale(1.05);
-        }
-
-        /* Mobile Menu Button */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 120px 2rem 80px;
-            text-align: center;
-            color: white;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.95;
-            animation: fadeInUp 1s ease 0.2s;
-            animation-fill-mode: both;
-        }
-
-        .cta-button {
-            background: white;
-            color: #667eea;
-            padding: 1rem 3rem;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            animation: fadeInUp 1s ease 0.4s;
-            animation-fill-mode: both;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-
-        .price-tag {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            margin-top: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .original-price {
-            text-decoration: line-through;
-            opacity: 0.7;
-            margin-right: 1rem;
-        }
-
-        .current-price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #4caf50;
-        }
-
-        /* Benefits Section */
-        .benefits {
-            padding: 80px 2rem;
-            background: #f8f9fa;
+            min-height: 100vh;
+            padding: 20px;
         }
 
         .container {
@@ -164,103 +24,115 @@
             margin: 0 auto;
         }
 
-        .section-title {
+        .header {
             text-align: center;
-            font-size: 2.5rem;
-            color: #333;
-            margin-bottom: 3rem;
+            color: white;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease;
         }
 
-        .benefits-grid {
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .user-info {
+            background: rgba(255,255,255,0.15);
+            padding: 15px 25px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .logout-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            margin-left: 20px;
+            transition: background 0.3s;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .modules-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
-        .benefit-card {
+        .module-card {
             background: white;
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .benefit-card:hover {
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .module-card:hover {
             transform: translateY(-5px);
         }
 
-        .benefit-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+        .module-card.locked {
+            opacity: 0.7;
+            background: #f5f5f5;
         }
 
-        .benefit-title {
-            font-size: 1.3rem;
-            color: #333;
-            margin-bottom: 1rem;
+        .module-card.locked::after {
+            content: '🔒';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
         }
 
-        /* Problems Section */
-        .problems {
-            padding: 80px 2rem;
-            background: white;
+        .module-card.completed {
+            border: 3px solid #4caf50;
         }
 
-        .problem-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .problem-item {
-            display: flex;
-            align-items: start;
-            gap: 1rem;
-        }
-
-        .problem-icon {
-            color: #e74c3c;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .solution-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .module-card.completed::after {
+            content: '✓';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: #4caf50;
             color: white;
-            padding: 3rem;
-            border-radius: 20px;
-            text-align: center;
-            margin-top: 3rem;
-        }
-
-        /* Modules Section */
-        .modules {
-            padding: 80px 2rem;
-            background: #f8f9fa;
-        }
-
-        .modules-timeline {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .module-item {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            position: relative;
-            padding-left: 4rem;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: bold;
         }
 
         .module-number {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             width: 40px;
             height: 40px;
@@ -271,967 +143,505 @@
             font-weight: bold;
         }
 
-        /* Testimonials */
-        .testimonials {
-            padding: 80px 2rem;
-            background: white;
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .testimonial-card {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 15px;
-            position: relative;
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 1rem;
-            color: #555;
-        }
-
-        .testimonial-author {
-            font-weight: bold;
+        .module-title {
+            font-size: 1.3rem;
             color: #333;
+            margin-bottom: 10px;
         }
 
-        .testimonial-role {
+        .module-description {
             color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .module-topics {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .module-topics h4 {
+            color: #764ba2;
+            margin-bottom: 10px;
             font-size: 0.9rem;
         }
 
-        .quote-icon {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 3rem;
-            color: #667eea;
-            opacity: 0.2;
-        }
-
-        /* Pricing Section */
-        .pricing {
-            padding: 80px 2rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-        }
-
-        .pricing-card {
-            background: white;
-            color: #333;
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-
-        .price-amount {
-            font-size: 4rem;
-            font-weight: bold;
-            color: #667eea;
-            margin: 1rem 0;
-        }
-
-        .price-currency {
-            font-size: 2rem;
-            vertical-align: super;
-        }
-
-        .price-features {
-            text-align: left;
-            margin: 2rem 0;
-        }
-
-        .price-features li {
-            padding: 0.5rem 0;
+        .module-topics ul {
             list-style: none;
+            padding-left: 0;
         }
 
-        .price-features li:before {
-            content: '✓';
-            color: #4caf50;
-            font-weight: bold;
-            margin-right: 0.5rem;
+        .module-topics li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.85rem;
         }
 
-        /* Guarantee */
-        .guarantee {
-            padding: 80px 2rem;
-            background: #f8f9fa;
-            text-align: center;
-        }
-
-        .guarantee-badge {
-            background: white;
-            display: inline-block;
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .guarantee-days {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #4caf50;
-        }
-
-        /* FAQ */
-        .faq {
-            padding: 80px 2rem;
-            background: white;
-        }
-
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background: #f8f9fa;
-            margin-bottom: 1rem;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .faq-question {
-            padding: 1.5rem;
-            cursor: pointer;
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.3s;
-        }
-
-        .faq-question:hover {
-            background: #e9ecef;
-        }
-
-        .faq-answer {
-            padding: 0 1.5rem;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 500px;
-            padding: 1.5rem;
-        }
-
-        .faq-icon {
-            transition: transform 0.3s;
-        }
-
-        .faq-item.active .faq-icon {
-            transform: rotate(180deg);
-        }
-
-        /* Footer */
-        .footer {
-            background: #333;
-            color: white;
-            padding: 3rem 2rem;
-            text-align: center;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-            opacity: 0.8;
-            transition: opacity 0.3s;
-        }
-
-        .footer-links a:hover {
-            opacity: 1;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Login Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            max-width: 400px;
-            width: 90%;
-            animation: slideIn 0.3s ease;
-        }
-
-        .modal-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .modal-header h2 {
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #666;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
-
-        .btn-submit {
-            width: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .btn-submit:hover {
-            transform: scale(1.02);
-        }
-
-        .close-modal {
+        .module-topics li:before {
+            content: '→';
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
+            left: 0;
+            color: #667eea;
+        }
+
+        .module-duration {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
-            color: #999;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
-        @keyframes slideIn {
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .progress-overview {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #4caf50, #81c784);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: width 1s ease;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #764ba2;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        @keyframes fadeInDown {
             from {
-                transform: translateY(-50px);
                 opacity: 0;
+                transform: translateY(-20px);
             }
             to {
-                transform: translateY(0);
                 opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
+            body {
+                padding: 15px;
             }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .price-amount {
-                font-size: 3rem;
-            }
-            
-            .section-title {
+
+            .header h1 {
                 font-size: 1.8rem;
             }
             
-            .module-item {
-                padding-left: 3rem;
-            }
-            
-            .footer-links {
-                flex-direction: column;
-                gap: 1rem;
+            .modules-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="nav-container">
-            <a href="#" class="logo">🧠 Academia de Psicología</a>
-            <nav class="nav-links">
-                <a href="#beneficios">Beneficios</a>
-                <a href="#modulos">Contenido</a>
-                <a href="#testimonios">Testimonios</a>
-                <a href="#precio">Precio</a>
-                <a href="dashboard/index.html" class="btn-login" onclick="openLogin(event)">Ingresar</a>
-            </nav>
-            <button class="mobile-menu-btn" onclick="openLogin(event)">☰</button>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 Mi Curso de Estimulación del Lenguaje</h1>
+            <p>Desarrolla el potencial comunicativo de tu hijo</p>
+            <div class="user-info">
+                <span id="userName">👤 Estudiante</span> | 
+                <span id="currentDate"></span>
+                <a href="../index.html" class="logout-btn" onclick="logout()">← Salir</a>
+            </div>
         </div>
-    </header>
-    
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>Transforma el Lenguaje de Tu Hijo en Solo 30 Días</h1>
-        <p>El método científico que usan los terapeutas del lenguaje, ahora disponible para padres</p>
-        <a href="#precio" class="cta-button">¡Quiero Inscribirme Ahora!</a>
-        <div class="price-tag">
-            <span class="original-price">$97 USD</span>
-            <span class="current-price">$47 USD</span>
-            <span>- Oferta por tiempo limitado</span>
-        </div>
-    </section>
 
-    <!-- Benefits Section -->
-    <section class="benefits" id="beneficios">
-        <div class="container">
-            <h2 class="section-title">¿Qué Lograrás con Este Curso?</h2>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">🎯</div>
-                    <h3 class="benefit-title">Resultados en 30 Días</h3>
-                    <p>Verás mejoras notables en el vocabulario y expresión de tu hijo en el primer mes</p>
+        <div class="progress-overview">
+            <h2 style="margin-bottom: 15px;">Tu Progreso General</h2>
+            <div class="progress-bar">
+                <div class="progress-fill" id="mainProgress">0%</div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="completedModules">0</div>
+                    <div class="stat-label">Módulos Completados</div>
                 </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">👩‍⚕️</div>
-                    <h3 class="benefit-title">Técnicas Profesionales</h3>
-                    <p>Aprenderás las mismas estrategias que usan los terapeutas del lenguaje</p>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalHours">0</div>
+                    <div class="stat-label">Horas de Estudio</div>
                 </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">⏰</div>
-                    <h3 class="benefit-title">Solo 15 Minutos al Día</h3>
-                    <p>Ejercicios prácticos que puedes hacer en tu rutina diaria sin esfuerzo extra</p>
+                <div class="stat-card">
+                    <div class="stat-number" id="currentStreak">0</div>
+                    <div class="stat-label">Días Consecutivos</div>
                 </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">📱</div>
-                    <h3 class="benefit-title">Acceso de Por Vida</h3>
-                    <p>Estudia a tu ritmo, desde cualquier dispositivo, cuando quieras</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">🎓</div>
-                    <h3 class="benefit-title">Certificado Incluido</h3>
-                    <p>Recibe un certificado de completación avalado por profesionales</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">💬</div>
-                    <h3 class="benefit-title">Soporte Continuo</h3>
-                    <p>Acceso a nuestra comunidad de padres y respuestas a tus dudas</p>
+                <div class="stat-card">
+                    <div class="stat-number" id="certificates">0</div>
+                    <div class="stat-label">Certificados</div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Problems Section -->
-    <section class="problems">
-        <div class="container">
-            <h2 class="section-title">¿Tu Hijo Presenta Alguna de Estas Situaciones?</h2>
-            <div class="problem-list">
-                <div class="problem-item">
-                    <span class="problem-icon">⚠️</span>
-                    <p>Tiene 3 años y solo dice pocas palabras</p>
-                </div>
-                <div class="problem-item">
-                    <span class="problem-icon">⚠️</span>
-                    <p>Le cuesta formar oraciones completas</p>
-                </div>
-                <div class="problem-item">
-                    <span class="problem-icon">⚠️</span>
-                    <p>Se frustra porque no puede expresarse</p>
-                </div>
-                <div class="problem-item">
-                    <span class="problem-icon">⚠️</span>
-                    <p>Usa gestos en lugar de palabras</p>
-                </div>
-                <div class="problem-item">
-                    <span class="problem-icon">⚠️</span>
-                    <p>Tiene dificultades para pronunciar</p>
-                </div>
-                <div class="problem-item">
-                    <span class="problem-icon">⚠️</span>
-                    <p>Otros niños de su edad hablan más</p>
-                </div>
-            </div>
-            <div class="solution-box">
-                <h3>🎯 La Solución Está en Tus Manos</h3>
-                <p>No necesitas esperar más. Con las técnicas correctas, puedes ayudar a tu hijo desde casa, de forma natural y divertida.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Modules Section -->
-    <section class="modules" id="modulos">
-        <div class="container">
-            <h2 class="section-title">Contenido del Curso</h2>
-            <div class="modules-timeline">
-                <div class="module-item">
-                    <div class="module-number">1</div>
-                    <h3>Fundamentos del Desarrollo del Lenguaje</h3>
-                    <p>Comprende las etapas normales del desarrollo, señales de alerta y cuándo preocuparte realmente.</p>
-                </div>
-                <div class="module-item">
-                    <div class="module-number">2</div>
-                    <h3>Técnicas de Estimulación Profesional</h3>
-                    <p>Aprende las 5 técnicas más efectivas que usan los terapeutas: modelado, expansión, preguntas abiertas y más.</p>
-                </div>
-                <div class="module-item">
-                    <div class="module-number">3</div>
-                    <h3>Actividades y Juegos por Edad</h3>
-                    <p>Descubre juegos específicos para 3, 4 y 5 años que desarrollan el lenguaje mientras se divierten.</p>
-                </div>
-                <div class="module-item">
-                    <div class="module-number">4</div>
-                    <h3>Soluciones a Problemas Comunes</h3>
-                    <p>Maneja tartamudez, problemas de pronunciación y retrasos del lenguaje con estrategias probadas.</p>
-                </div>
-                <div class="module-item">
-                    <div class="module-number">5</div>
-                    <h3>Plan Personalizado de 30 Días</h3>
-                    <p>Crea un programa específico para tu hijo con objetivos claros y medibles.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="testimonials" id="testimonios">
-        <div class="container">
-            <h2 class="section-title">Lo Que Dicen Otros Padres</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <span class="quote-icon">"</span>
-                    <p class="testimonial-text">Mi hijo de 3 años pasó de decir palabras sueltas a formar oraciones completas en solo 3 semanas. ¡Increíble!</p>
-                    <p class="testimonial-author">María González</p>
-                    <p class="testimonial-role">Mamá de Diego, 3 años</p>
-                </div>
-                <div class="testimonial-card">
-                    <span class="quote-icon">"</span>
-                    <p class="testimonial-text">Las técnicas son súper fáciles de aplicar. Solo 15 minutos al día y ya veo cambios enormes en mi hija.</p>
-                    <p class="testimonial-author">Carlos Rodríguez</p>
-                    <p class="testimonial-role">Papá de Sofía, 4 años</p>
-                </div>
-                <div class="testimonial-card">
-                    <span class="quote-icon">"</span>
-                    <p class="testimonial-text">Estaba preocupada porque mi hijo no hablaba como otros niños. Este curso me dio las herramientas exactas que necesitaba.</p>
-                    <p class="testimonial-author">Ana Martínez</p>
-                    <p class="testimonial-role">Mamá de Lucas, 5 años</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Pricing Section -->
-    <section class="pricing" id="precio">
-        <div class="container">
-            <h2 class="section-title" style="color: white;">Invierte en el Futuro de Tu Hijo</h2>
-            <div class="pricing-card">
-                <h3>Acceso Completo de Por Vida</h3>
-                <div class="price-amount">
-                    <span class="price-currency">$</span>47
-                </div>
-                <p style="text-decoration: line-through; color: #999;">Precio regular: $97 USD</p>
-                <p style="color: #4caf50; font-weight: bold;">¡Ahorra 50% HOY!</p>
-                <ul class="price-features">
-                    <li>5 módulos completos con videos y ejercicios</li>
-                    <li>Recursos descargables y guías PDF</li>
-                    <li>Actualizaciones gratuitas de por vida</li>
-                    <li>Certificado de completación</li>
-                    <li>Garantía de 30 días</li>
-                    <li>Soporte por email</li>
-                </ul>
-                <button class="cta-button" style="width: 100%;" onclick="processPurchase()">
-                    Comprar Ahora - $47 USD
-                </button>
-                <p style="margin-top: 1rem; color: #666; font-size: 0.9rem;">
-                    Pago seguro procesado por Stripe
+        <div class="modules-grid">
+            <!-- Módulo 1 -->
+            <div class="module-card" id="module1">
+                <div class="module-number">1</div>
+                <h3 class="module-title">Fundamentos del Desarrollo del Lenguaje</h3>
+                <p class="module-description">
+                    Comprende cómo se desarrolla el lenguaje en los niños y identifica las señales importantes.
                 </p>
+                <div class="module-topics">
+                    <h4>📚 Aprenderás:</h4>
+                    <ul>
+                        <li>Etapas del desarrollo (0-6 años)</li>
+                        <li>Señales de alerta por edad</li>
+                        <li>Mitos vs realidades</li>
+                        <li>Cuándo buscar ayuda</li>
+                    </ul>
+                </div>
+                <div class="module-duration">
+                    ⏱️ Duración: 45 minutos
+                </div>
+                <button class="btn" onclick="startModule(1)">Comenzar Módulo</button>
             </div>
-        </div>
-    </section>
 
-    <!-- Guarantee -->
-    <section class="guarantee">
-        <div class="container">
-            <h2 class="section-title">Garantía de Satisfacción</h2>
-            <div class="guarantee-badge">
-                <div class="guarantee-days">30 DÍAS</div>
-                <h3>100% Garantía de Devolución</h3>
-                <p>Si no ves resultados en 30 días, te devolvemos tu dinero. Sin preguntas.</p>
+            <!-- Módulo 2 -->
+            <div class="module-card locked" id="module2">
+                <div class="module-number">2</div>
+                <h3 class="module-title">Técnicas de Estimulación</h3>
+                <p class="module-description">
+                    Aprende técnicas prácticas para estimular el lenguaje en casa.
+                </p>
+                <div class="module-topics">
+                    <h4>📚 Aprenderás:</h4>
+                    <ul>
+                        <li>Modelado lingüístico</li>
+                        <li>Expansión del lenguaje</li>
+                        <li>Preguntas abiertas</li>
+                        <li>Ambientes ricos</li>
+                    </ul>
+                </div>
+                <div class="module-duration">
+                    ⏱️ Duración: 60 minutos
+                </div>
+                <button class="btn" disabled onclick="startModule(2)">🔒 Bloqueado</button>
             </div>
-        </div>
-    </section>
 
-    <!-- FAQ -->
-    <section class="faq">
-        <div class="container">
-            <h2 class="section-title">Preguntas Frecuentes</h2>
-            <div class="faq-container">
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        ¿Para qué edades es este curso?
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>El curso está diseñado para niños de 3 a 6 años, con ejercicios específicos para cada edad. Si tu hijo tiene 2 años y medio o 7 años, también puede beneficiarse del contenido.</p>
-                    </div>
+            <!-- Módulo 3 -->
+            <div class="module-card locked" id="module3">
+                <div class="module-number">3</div>
+                <h3 class="module-title">Actividades y Juegos</h3>
+                <p class="module-description">
+                    Descubre actividades lúdicas para cada edad.
+                </p>
+                <div class="module-topics">
+                    <h4>📚 Aprenderás:</h4>
+                    <ul>
+                        <li>Juegos por edades</li>
+                        <li>Cuentos interactivos</li>
+                        <li>Canciones educativas</li>
+                        <li>Actividades diarias</li>
+                    </ul>
                 </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        ¿Cuánto tiempo debo dedicar al día?
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Solo necesitas 15 minutos al día. Las técnicas están diseñadas para integrarse en tu rutina diaria: durante las comidas, el baño o el juego.</p>
-                    </div>
+                <div class="module-duration">
+                    ⏱️ Duración: 50 minutos
                 </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        ¿Necesito conocimientos previos?
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>No. El curso está diseñado para padres sin experiencia. Todo se explica paso a paso con ejemplos prácticos y videos demostrativos.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        ¿Cuándo veré resultados?
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>La mayoría de padres reportan mejoras notables en las primeras 2-3 semanas. Los resultados dependen de la consistencia y la edad del niño.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        ¿Reemplaza esto a un terapeuta?
-                        <span class="faq-icon">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Este curso es un complemento excelente a la terapia o una primera intervención. Si tu hijo tiene necesidades especiales, siempre consulta con un profesional.</p>
-                    </div>
-                </div>
+                <button class="btn" disabled onclick="startModule(3)">🔒 Bloqueado</button>
             </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-links">
-                <a href="#">Términos y Condiciones</a>
-                <a href="#">Política de Privacidad</a>
-                <a href="#">Contacto</a>
+            <!-- Módulo 4 -->
+            <div class="module-card locked" id="module4">
+                <div class="module-number">4</div>
+                <h3 class="module-title">Dificultades Comunes</h3>
+                <p class="module-description">
+                    Identifica y maneja las dificultades más comunes.
+                </p>
+                <div class="module-topics">
+                    <h4>📚 Aprenderás:</h4>
+                    <ul>
+                        <li>Tartamudez del desarrollo</li>
+                        <li>Problemas de pronunciación</li>
+                        <li>Retraso del lenguaje</li>
+                        <li>Plan de 21 días</li>
+                    </ul>
+                </div>
+                <div class="module-duration">
+                    ⏱️ Duración: 55 minutos
+                </div>
+                <button class="btn" disabled onclick="startModule(4)">🔒 Bloqueado</button>
             </div>
-            <p>&copy; 2024 Academia de Psicología. Todos los derechos reservados.</p>
-        </div>
-    </footer>
 
-    <!-- Login Modal -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content" style="position: relative;">
-            <span class="close-modal" onclick="closeLogin()">×</span>
-            <div class="modal-header">
-                <h2>Acceso al Curso</h2>
-                <p>Ingresa tus datos para continuar</p>
+            <!-- Módulo 5 -->
+            <div class="module-card locked" id="module5">
+                <div class="module-number">5</div>
+                <h3 class="module-title">Plan Personalizado</h3>
+                <p class="module-description">
+                    Crea un plan adaptado a tu hijo.
+                </p>
+                <div class="module-topics">
+                    <h4>📚 Aprenderás:</h4>
+                    <ul>
+                        <li>Evaluación inicial</li>
+                        <li>Establecer objetivos</li>
+                        <li>Cronograma de actividades</li>
+                        <li>Seguimiento del progreso</li>
+                    </ul>
+                </div>
+                <div class="module-duration">
+                    ⏱️ Duración: 40 minutos
+                </div>
+                <button class="btn" disabled onclick="startModule(5)">🔒 Bloqueado</button>
             </div>
-            <form onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label>Correo Electrónico</label>
-                    <input type="email" id="loginEmail" required placeholder="tu@email.com">
+
+            <!-- Certificado Final -->
+            <div class="module-card locked" id="certificate-card">
+                <div class="module-number">🏆</div>
+                <h3 class="module-title">Certificado de Completación</h3>
+                <p class="module-description">
+                    ¡Felicitaciones! Has completado todo el curso.
+                </p>
+                <div class="module-topics" style="text-align: center;">
+                    <h4>🎓 Logros:</h4>
+                    <p>✅ 5 Módulos<br>
+                    ✅ +4 Horas<br>
+                    ✅ Certificado</p>
                 </div>
-                <div class="form-group">
-                    <label>Contraseña</label>
-                    <input type="password" id="loginPassword" required placeholder="••••••••">
-                </div>
-                <button type="submit" class="btn-submit">Ingresar al Curso</button>
-            </form>
-            <p style="text-align: center; margin-top: 1rem; color: #666;">
-                ¿No tienes cuenta? <a href="#precio" onclick="closeLogin()" style="color: #667eea;">Compra el curso aquí</a>
-            </p>
+                <button class="btn" disabled onclick="getCertificate()">🔒 Bloqueado</button>
+            </div>
         </div>
     </div>
-
     <script>
-        // FAQ Toggle
-        function toggleFaq(element) {
-            const faqItem = element.parentElement;
-            faqItem.classList.toggle('active');
-        }
-
-        // Login Modal
-        function openLogin(event) {
-            if (event) {
-                event.preventDefault();
-            }
-            
-            // Verificar si ya está logueado
-            const isLoggedIn = localStorage.getItem('isLoggedIn');
-            if (isLoggedIn === 'true') {
-                // Si ya está logueado, ir directo al dashboard
-                window.location.href = 'dashboard/index.html';
-                return;
-            }
-            
-            // Si no está logueado, mostrar modal
-            document.getElementById('loginModal').classList.add('active');
-        }
-
-        function closeLogin() {
-            document.getElementById('loginModal').classList.remove('active');
-        }
-
-        // Handle Login
-        function handleLogin(event) {
-            event.preventDefault();
-            
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            
-            // Verificar si el usuario existe (tiene compra)
-            const isPurchased = localStorage.getItem('isPurchased');
-            
-            if (email && password) {
-                if (isPurchased === 'true') {
-                    // Usuario con compra previa
-                    localStorage.setItem('isLoggedIn', 'true');
-                    localStorage.setItem('userEmail', email);
-                    window.location.href = 'dashboard/index.html';
-                } else {
-                    // Usuario sin compra
-                    alert('No se encontró una cuenta con estos datos. Por favor, compra el curso primero.');
-                    closeLogin();
-                    document.getElementById('precio').scrollIntoView({ behavior: 'smooth' });
-                }
-            }
-        }
-
-        // Process Purchase - FUNCIÓN CORREGIDA Y COMPLETA
-        function processPurchase() {
-            // In a real application, this would integrate with a payment processor
-            alert('¡Excelente decisión! Serás redirigido al proceso de pago seguro...');
-            
-            // Simulate payment process
-            setTimeout(() => {
-                const userEmail = prompt('Ingresa tu email para crear tu cuenta:');
-                if (userEmail) {
-                    const password = prompt('Crea una contraseña para tu cuenta:');
-                    if (password) {
-                        // Store user data
-                        localStorage.setItem('isLoggedIn', 'true');
-                        localStorage.setItem('userEmail', userEmail);
-                        localStorage.setItem('isPurchased', 'true');
-                        
-                        // INICIALIZAR CORRECTAMENTE EL PROGRESO DEL CURSO
-                        // Todos los módulos bloqueados inicialmente excepto el primero
-                        localStorage.setItem('modulo1_completed', 'false');
-                        localStorage.setItem('modulo2_completed', 'false');
-                        localStorage.setItem('modulo3_completed', 'false');
-                        localStorage.setItem('modulo4_completed', 'false');
-                        localStorage.setItem('modulo5_completed', 'false');
-                        
-                        // Establecer módulo actual
-                        localStorage.setItem('current_module', '1');
-                        
-                        // Limpiar cualquier progreso anterior
-                        localStorage.removeItem('courseProgress');
-                        localStorage.removeItem('module1Progress');
-                        localStorage.removeItem('module2Progress');
-                        localStorage.removeItem('module3Progress');
-                        localStorage.removeItem('module4Progress');
-                        localStorage.removeItem('module5Progress');
-                        
-                        alert('¡Compra exitosa! Te llevaremos a tu curso...');
-                        
-                        // Redirect to dashboard
-                        window.location.href = 'dashboard/index.html';
-                    }
-                }
-            }, 1000);
-        }
-
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
+        // Initialize date
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('es-ES', {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'short'
         });
 
-        // Add countdown timer for offer
-        function initCountdown() {
-            const countdownElement = document.createElement('div');
-            countdownElement.id = 'offerCountdown';
-            countdownElement.style.cssText = `
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                background: linear-gradient(135deg, #e74c3c, #c0392b);
-                color: white;
-                padding: 15px 20px;
-                border-radius: 10px;
-                box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-                z-index: 999;
-                font-weight: bold;
-                animation: pulse 2s infinite;
-            `;
+        // Initialize user
+        const userEmail = localStorage.getItem('userEmail');
+        if (userEmail) {
+            document.getElementById('userName').textContent = '👤 ' + userEmail.split('@')[0];
+        }
+
+        // FUNCIÓN CORREGIDA PARA MANEJAR EL PROGRESO
+        function updateUI() {
+            let completedCount = 0;
             
-            // Add pulse animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes pulse {
-                    0% { transform: scale(1); }
-                    50% { transform: scale(1.05); }
-                    100% { transform: scale(1); }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            // Set countdown time (24 hours from now)
-            let endTime = localStorage.getItem('offerEndTime');
-            if (!endTime) {
-                endTime = new Date().getTime() + (24 * 60 * 60 * 1000);
-                localStorage.setItem('offerEndTime', endTime);
-            } else {
-                endTime = parseInt(endTime);
-            }
-            
-            function updateCountdown() {
-                const now = new Date().getTime();
-                const distance = endTime - now;
+            // Verificar cada módulo individualmente
+            for (let i = 1; i <= 5; i++) {
+                const moduleCard = document.getElementById(`module${i}`);
+                const btn = moduleCard.querySelector('.btn');
+                const isCompleted = localStorage.getItem(`modulo${i}_completed`) === 'true';
                 
-                if (distance > 0) {
-                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                if (isCompleted) {
+                    // Módulo completado
+                    moduleCard.classList.add('completed');
+                    moduleCard.classList.remove('locked');
+                    btn.textContent = '✓ Completado';
+                    btn.disabled = false;
+                    btn.onclick = () => startModule(i);
+                    completedCount++;
                     
-                    countdownElement.innerHTML = `
-                        ⏰ Oferta termina en: ${hours}h ${minutes}m ${seconds}s
-                    `;
-                } else {
-                    countdownElement.innerHTML = '⏰ Oferta expirada';
-                    localStorage.removeItem('offerEndTime');
-                }
-            }
-            
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
-            
-            document.body.appendChild(countdownElement);
-        }
-
-        // Initialize countdown on page load
-        window.addEventListener('load', initCountdown);
-
-        // Add scroll animations
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.benefit-card, .module-item, .testimonial-card');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animation = 'fadeInUp 0.6s ease';
-                        entry.target.style.opacity = '1';
+                    // Desbloquear el siguiente módulo si existe
+                    if (i < 5) {
+                        const nextModule = document.getElementById(`module${i + 1}`);
+                        if (nextModule) {
+                            nextModule.classList.remove('locked');
+                            const nextBtn = nextModule.querySelector('.btn');
+                            nextBtn.disabled = false;
+                            nextBtn.textContent = 'Comenzar Módulo';
+                            nextBtn.onclick = () => startModule(i + 1);
+                        }
                     }
-                });
-            });
-            
-            elements.forEach(element => {
-                element.style.opacity = '0';
-                observer.observe(element);
-            });
-        }
-
-        animateOnScroll();
-
-        // Add trust badges
-        function addTrustBadges() {
-            const trustSection = document.createElement('section');
-            trustSection.style.cssText = `
-                padding: 40px 20px;
-                background: #f8f9fa;
-                text-align: center;
-            `;
-            
-            trustSection.innerHTML = `
-                <div style="max-width: 1200px; margin: 0 auto;">
-                    <p style="color: #666; margin-bottom: 20px;">Compra 100% Segura</p>
-                    <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
-                        <span style="font-size: 2rem;">🔒 SSL Seguro</span>
-                        <span style="font-size: 2rem;">💳 Pago Protegido</span>
-                        <span style="font-size: 2rem;">✅ Garantía 30 Días</span>
-                        <span style="font-size: 2rem;">📧 Soporte 24/7</span>
-                    </div>
-                </div>
-            `;
-            
-            // Insert after pricing section
-            const pricingSection = document.querySelector('.pricing');
-            if (pricingSection && pricingSection.nextSibling) {
-                pricingSection.parentNode.insertBefore(trustSection, pricingSection.nextSibling);
-            }
-        }
-        
-        addTrustBadges();
-
-        // Check if user is returning
-        function checkReturningUser() {
-            const hasVisited = localStorage.getItem('hasVisited');
-            const isPurchased = localStorage.getItem('isPurchased');
-            
-            if (hasVisited && !isPurchased) {
-                // Show special offer for returning visitors
-                setTimeout(() => {
-                    const specialOffer = document.createElement('div');
-                    specialOffer.style.cssText = `
-                        position: fixed;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        background: white;
-                        padding: 30px;
-                        border-radius: 20px;
-                        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-                        z-index: 10000;
-                        max-width: 400px;
-                        text-align: center;
-                    `;
-                    specialOffer.innerHTML = `
-                        <h3 style="color: #667eea; margin-bottom: 15px;">¡Esperamos tu regreso!</h3>
-                        <p style="color: #666; margin-bottom: 20px;">Sabemos que estás pensando en el curso. Aquí está tu última oportunidad con 50% de descuento.</p>
-                        <button onclick="document.getElementById('precio').scrollIntoView({ behavior: 'smooth' }); this.parentElement.remove();" 
-                                style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-                                       color: white; 
-                                       border: none; 
-                                       padding: 15px 30px; 
-                                       border-radius: 50px; 
-                                       cursor: pointer; 
-                                       font-size: 1.1rem; 
-                                       font-weight: bold;">
-                            Aprovechar Oferta
-                        </button>
-                        <button onclick="this.parentElement.remove();" 
-                                style="background: none; 
-                                       border: none; 
-                                       color: #999; 
-                                       margin-top: 10px; 
-                                       cursor: pointer; 
-                                       display: block; 
-                                       width: 100%;">
-                            Tal vez después
-                        </button>
-                    `;
-                    document.body.appendChild(specialOffer);
-                }, 5000);
-            }
-            
-            localStorage.setItem('hasVisited', 'true');
-        }
-
-        checkReturningUser();
-
-        // Auto-save form data
-        function autoSaveFormData() {
-            const emailInput = document.getElementById('loginEmail');
-            
-            if (emailInput) {
-                // Load saved email if exists
-                const savedEmail = localStorage.getItem('savedEmail');
-                if (savedEmail) {
-                    emailInput.value = savedEmail;
+                } else if (i === 1) {
+                    // Primer módulo siempre accesible
+                    moduleCard.classList.remove('locked');
+                    btn.disabled = false;
+                    btn.textContent = 'Comenzar Módulo';
+                } else {
+                    // Verificar si el módulo anterior está completado
+                    const prevCompleted = localStorage.getItem(`modulo${i - 1}_completed`) === 'true';
+                    if (prevCompleted) {
+                        moduleCard.classList.remove('locked');
+                        btn.disabled = false;
+                        btn.textContent = 'Comenzar Módulo';
+                        btn.onclick = () => startModule(i);
+                    } else {
+                        moduleCard.classList.add('locked');
+                        btn.disabled = true;
+                        btn.textContent = '🔒 Bloqueado';
+                    }
                 }
-                
-                // Save email on change
-                emailInput.addEventListener('input', function() {
-                    localStorage.setItem('savedEmail', this.value);
-                });
+            }
+
+            // Update progress bar
+            const progress = (completedCount / 5) * 100;
+            const progressBar = document.getElementById('mainProgress');
+            progressBar.style.width = progress + '%';
+            progressBar.textContent = Math.round(progress) + '%';
+
+            // Update stats
+            document.getElementById('completedModules').textContent = completedCount;
+            document.getElementById('totalHours').textContent = (completedCount * 0.8).toFixed(1);
+            document.getElementById('certificates').textContent = completedCount === 5 ? 1 : 0;
+
+            // Update certificate card
+            if (completedCount === 5) {
+                const certCard = document.getElementById('certificate-card');
+                certCard.classList.remove('locked');
+                const certBtn = certCard.querySelector('.btn');
+                certBtn.disabled = false;
+                certBtn.textContent = '🏆 Descargar Certificado';
             }
         }
 
-        autoSaveFormData();
+        function startModule(moduleNumber) {
+            // Verificar si el módulo anterior está completado (excepto para el módulo 1)
+            if (moduleNumber > 1) {
+                const prevCompleted = localStorage.getItem(`modulo${moduleNumber - 1}_completed`) === 'true';
+                if (!prevCompleted) {
+                    alert(`⚠️ Debes completar el Módulo ${moduleNumber - 1} antes de acceder al Módulo ${moduleNumber}.`);
+                    return;
+                }
+            }
 
-        // Mobile menu functionality
-        function toggleMobileMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            // Guardar el módulo actual
+            localStorage.setItem('current_module', moduleNumber.toString());
+
+            // CORRECCIÓN PRINCIPAL: Ruta unificada para todos los módulos
+            window.location.href = `../modulo${moduleNumber}/index.html`;
         }
 
-        // Close modal on ESC key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeLogin();
+        function getCertificate() {
+            let allCompleted = true;
+            for (let i = 1; i <= 5; i++) {
+                if (localStorage.getItem(`modulo${i}_completed`) !== 'true') {
+                    allCompleted = false;
+                    break;
+                }
             }
-        });
 
-        // Close modal on click outside
-        document.getElementById('loginModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeLogin();
+            if (allCompleted) {
+                alert('🎉 ¡Felicitaciones! Descargando tu certificado...');
+                generateCertificate();
+            } else {
+                alert('Completa todos los módulos para obtener tu certificado');
             }
-        });
+        }
 
-        console.log('🧠 Academia de Psicología - Curso de Estimulación del Lenguaje');
-        console.log('✅ Sistema inicializado correctamente');
-        console.log('📚 5 módulos disponibles');
-        console.log('🎯 Listo para transformar el lenguaje de tu hijo');
+        function generateCertificate() {
+            const userName = prompt('¿Cuál es tu nombre completo para el certificado?') || 'Estudiante';
+            alert(`Certificado generado para: ${userName}\n\n¡Felicitaciones por completar el curso!`);
+            
+            localStorage.setItem('certificate_name', userName);
+            localStorage.setItem('certificate_date', new Date().toISOString());
+        }
+
+        function logout() {
+            if (confirm('¿Estás seguro de que quieres salir?')) {
+                // No borrar el progreso del curso al salir
+                localStorage.removeItem('isLoggedIn');
+                window.location.href = '../index.html';
+            }
+        }
+
+        // Verificar si el usuario está logueado
+        function checkAuth() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (!isLoggedIn) {
+                alert('Debes iniciar sesión para acceder al dashboard');
+                window.location.href = '../index.html';
+            }
+        }
+
+        // Simulate streak
+        function updateStreak() {
+            const lastVisit = localStorage.getItem('lastVisit');
+            const today = new Date().toDateString();
+            let streak = parseInt(localStorage.getItem('streak') || '0');
+
+            if (lastVisit !== today) {
+                const yesterday = new Date(Date.now() - 86400000).toDateString();
+                streak = lastVisit === yesterday ? streak + 1 : 1;
+                localStorage.setItem('streak', streak);
+                localStorage.setItem('lastVisit', today);
+            }
+
+            document.getElementById('currentStreak').textContent = streak;
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+            updateUI();
+            updateStreak();
+            
+            console.log('Dashboard cargado correctamente');
+            console.log('Módulos completados:', {
+                modulo1: localStorage.getItem('modulo1_completed'),
+                modulo2: localStorage.getItem('modulo2_completed'),
+                modulo3: localStorage.getItem('modulo3_completed'),
+                modulo4: localStorage.getItem('modulo4_completed'),
+                modulo5: localStorage.getItem('modulo5_completed')
+            });
+        });
     </script>
 </body>
 </html>
