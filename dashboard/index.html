@@ -61,6 +61,8 @@
             transition: background 0.3s;
             display: inline-block;
             margin-top: 10px;
+            cursor: pointer;
+            border: none;
         }
 
         .logout-btn:hover {
@@ -310,7 +312,7 @@
             <div class="user-info">
                 <span id="userName">👤 Estudiante</span> | 
                 <span id="currentDate"></span>
-                <a href="../index.html" class="logout-btn" onclick="logout()">← Salir</a>
+                <button class="logout-btn" onclick="logout()">← Salir</button>
             </div>
         </div>
 
@@ -469,7 +471,63 @@
     </div>
 
     <script>
-        // Inicializar fecha
+        // Función para iniciar módulos - Enlaces temporales
+        function startModule(moduleNumber) {
+            // Por ahora solo mostrar un mensaje
+            alert(`Módulo ${moduleNumber} - En construcción\n\nEste módulo estará disponible próximamente.\nPor ahora puedes ver el Módulo 3 y 5 que están completos.`);
+            
+            // Para testing, permitir acceso directo a módulos existentes
+            if (moduleNumber === 3) {
+                window.location.href = './modulo3/index.html';
+            } else if (moduleNumber === 5) {
+                window.location.href = './modulo5/index.html';
+            }
+        }
+
+        // Verificar autenticación
+        function checkAuth() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (!isLoggedIn) {
+                alert('Debes iniciar sesión para acceder al dashboard');
+                window.location.href = './index.html';
+                return false;
+            }
+            return true;
+        }
+
+        // Función de logout
+        function logout() {
+            if (confirm('¿Estás seguro de que quieres salir?')) {
+                localStorage.removeItem('isLoggedIn');
+                window.location.href = './index.html';
+            }
+        }
+
+        // Actualizar interfaz
+        function updateUI() {
+            // Por ahora, mostrar progreso simulado
+            const completedCount = 0;
+            
+            // Actualizar barra de progreso
+            const progress = (completedCount / 5) * 100;
+            const progressBar = document.getElementById('mainProgress');
+            if (progressBar) {
+                progressBar.style.width = progress + '%';
+                progressBar.textContent = Math.round(progress) + '%';
+            }
+
+            // Actualizar estadísticas
+            document.getElementById('completedModules').textContent = completedCount;
+            document.getElementById('totalHours').textContent = (completedCount * 0.8).toFixed(1);
+            document.getElementById('certificates').textContent = completedCount === 5 ? 1 : 0;
+        }
+
+        // Función de certificado (placeholder)
+        function getCertificate() {
+            alert('Completa todos los módulos para obtener tu certificado');
+        }
+
+        // Inicialización
         document.addEventListener('DOMContentLoaded', function() {
             // Configurar fecha
             document.getElementById('currentDate').textContent = new Date().toLocaleDateString('es-ES', {
@@ -482,243 +540,11 @@
             const userEmail = localStorage.getItem('userEmail') || 'estudiante@curso.com';
             document.getElementById('userName').textContent = '👤 ' + userEmail.split('@')[0];
 
-            // Verificar autenticación y actualizar UI
-            checkAuth();
-            updateUI();
-            updateStreak();
+            // Verificar autenticación
+            if (checkAuth()) {
+                updateUI();
+            }
         });
-
-        // Verificar autenticación
-        function checkAuth() {
-            const isLoggedIn = localStorage.getItem('isLoggedIn');
-            if (!isLoggedIn) {
-                alert('Debes iniciar sesión para acceder al dashboard');
-                window.location.href = '../index.html';
-                return false;
-            }
-            return true;
-        }
-
-        // Función para iniciar módulos - RUTAS CORREGIDAS
-        function startModule(moduleNumber) {
-            // Verificar si el módulo anterior está completado (excepto para el módulo 1)
-            if (moduleNumber > 1) {
-                const prevCompleted = localStorage.getItem(`modulo${moduleNumber - 1}_completed`) === 'true';
-                if (!prevCompleted) {
-                    alert(`⚠️ Debes completar el Módulo ${moduleNumber - 1} antes de acceder al Módulo ${moduleNumber}.`);
-                    return;
-                }
-            }
-
-            // Guardar el módulo actual
-            localStorage.setItem('current_module', moduleNumber.toString());
-
-            // Navegar al módulo con rutas corregidas
-            let moduleUrl = '';
-            switch(moduleNumber) {
-                case 1:
-                    moduleUrl = '../modulo1/index.html';  // Cambiado de ./modulo1/index.html
-                    break;
-                case 2:
-                    moduleUrl = '../modulo2/index.html';  // Cambiado de ./modulo2/index.html
-                    break;
-                case 3:
-                    moduleUrl = '../modulo3/index.html';  // Cambiado de ./modulo3/index.html
-                    break;
-                case 4:
-                    moduleUrl = '../modulo4/index.html';  // Cambiado de ./modulo4/index.html
-                    break;
-                case 5:
-                    moduleUrl = '../modulo5/index.html';  // Cambiado de ./modulo5/index.html
-                    break;
-                default:
-                    alert('Módulo no encontrado');
-                    return;
-            }
-
-            try {
-                window.location.href = moduleUrl;
-            } catch (error) {
-                console.error('Error navegando al módulo:', error);
-                alert('Error al acceder al módulo. Por favor, intenta de nuevo.');
-            }
-        }
-
-        // Actualizar interfaz
-        function updateUI() {
-            let completedCount = 0;
-            
-            // Verificar cada módulo individualmente
-            for (let i = 1; i <= 5; i++) {
-                const moduleCard = document.getElementById(`module${i}`);
-                if (!moduleCard) continue;
-                
-                const btn = moduleCard.querySelector('.btn');
-                const isCompleted = localStorage.getItem(`modulo${i}_completed`) === 'true';
-                
-                if (isCompleted) {
-                    // Módulo completado
-                    moduleCard.classList.add('completed');
-                    moduleCard.classList.remove('locked');
-                    if (btn) {
-                        btn.textContent = '✓ Completado';
-                        btn.disabled = false;
-                        btn.onclick = () => startModule(i);
-                    }
-                    completedCount++;
-                    
-                    // Desbloquear el siguiente módulo si existe
-                    if (i < 5) {
-                        const nextModule = document.getElementById(`module${i + 1}`);
-                        if (nextModule) {
-                            nextModule.classList.remove('locked');
-                            const nextBtn = nextModule.querySelector('.btn');
-                            if (nextBtn) {
-                                nextBtn.disabled = false;
-                                nextBtn.textContent = 'Comenzar Módulo';
-                                nextBtn.onclick = () => startModule(i + 1);
-                            }
-                        }
-                    }
-                } else if (i === 1) {
-                    // Primer módulo siempre accesible
-                    moduleCard.classList.remove('locked');
-                    if (btn) {
-                        btn.disabled = false;
-                        btn.textContent = 'Comenzar Módulo';
-                        btn.onclick = () => startModule(1);
-                    }
-                } else {
-                    // Verificar si el módulo anterior está completado
-                    const prevCompleted = localStorage.getItem(`modulo${i - 1}_completed`) === 'true';
-                    if (prevCompleted) {
-                        moduleCard.classList.remove('locked');
-                        if (btn) {
-                            btn.disabled = false;
-                            btn.textContent = 'Comenzar Módulo';
-                            btn.onclick = () => startModule(i);
-                        }
-                    } else {
-                        moduleCard.classList.add('locked');
-                        if (btn) {
-                            btn.disabled = true;
-                            btn.textContent = '🔒 Bloqueado';
-                        }
-                    }
-                }
-            }
-
-            // Actualizar barra de progreso
-            const progress = (completedCount / 5) * 100;
-            const progressBar = document.getElementById('mainProgress');
-            if (progressBar) {
-                progressBar.style.width = progress + '%';
-                progressBar.textContent = Math.round(progress) + '%';
-            }
-
-            // Actualizar estadísticas
-            const completedModulesEl = document.getElementById('completedModules');
-            const totalHoursEl = document.getElementById('totalHours');
-            const certificatesEl = document.getElementById('certificates');
-            
-            if (completedModulesEl) completedModulesEl.textContent = completedCount;
-            if (totalHoursEl) totalHoursEl.textContent = (completedCount * 0.8).toFixed(1);
-            if (certificatesEl) certificatesEl.textContent = completedCount === 5 ? 1 : 0;
-
-            // Actualizar certificado
-            if (completedCount === 5) {
-                const certCard = document.getElementById('certificate-card');
-                if (certCard) {
-                    certCard.classList.remove('locked');
-                    const certBtn = certCard.querySelector('.btn');
-                    if (certBtn) {
-                        certBtn.disabled = false;
-                        certBtn.textContent = '🏆 Descargar Certificado';
-                        certBtn.onclick = getCertificate;
-                    }
-                }
-            }
-        }
-
-        function getCertificate() {
-            let allCompleted = true;
-            for (let i = 1; i <= 5; i++) {
-                if (localStorage.getItem(`modulo${i}_completed`) !== 'true') {
-                    allCompleted = false;
-                    break;
-                }
-            }
-
-            if (allCompleted) {
-                generateCertificate();
-            } else {
-                alert('Completa todos los módulos para obtener tu certificado');
-            }
-        }
-
-        function generateCertificate() {
-            const userName = prompt('¿Cuál es tu nombre completo para el certificado?') || 'Estudiante';
-            
-            const certificate = `🏆 CERTIFICADO DE COMPLETACIÓN 🏆
-
-CURSO DE ESTIMULACIÓN DEL LENGUAJE INFANTIL
-
-Se certifica que: ${userName.toUpperCase()}
-
-Ha completado exitosamente los 5 módulos del curso:
-✅ Módulo 1: Fundamentos del Desarrollo
-✅ Módulo 2: Técnicas de Estimulación
-✅ Módulo 3: Actividades y Juegos
-✅ Módulo 4: Dificultades Comunes
-✅ Módulo 5: Plan Personalizado
-
-Fecha: ${new Date().toLocaleDateString('es-ES')}
-ID Certificado: CERT-${Date.now()}
-
-¡Felicitaciones por su dedicación al desarrollo infantil!`;
-            
-            // Crear y descargar el archivo
-            const blob = new Blob([certificate], { type: 'text/plain;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `Certificado_${userName.replace(/\s/g, '_')}.txt`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            
-            alert('🎉 Certificado descargado exitosamente');
-            
-            localStorage.setItem('certificate_name', userName);
-            localStorage.setItem('certificate_date', new Date().toISOString());
-        }
-
-        function logout() {
-            if (confirm('¿Estás seguro de que quieres salir?')) {
-                localStorage.removeItem('isLoggedIn');
-                window.location.href = '../index.html';
-            }
-        }
-
-        // Simular racha
-        function updateStreak() {
-            const lastVisit = localStorage.getItem('lastVisit');
-            const today = new Date().toDateString();
-            let streak = parseInt(localStorage.getItem('streak') || '0');
-
-            if (lastVisit !== today) {
-                const yesterday = new Date(Date.now() - 86400000).toDateString();
-                streak = lastVisit === yesterday ? streak + 1 : 1;
-                localStorage.setItem('streak', streak);
-                localStorage.setItem('lastVisit', today);
-            }
-
-            const streakEl = document.getElementById('currentStreak');
-            if (streakEl) {
-                streakEl.textContent = streak;
-            }
-        }
     </script>
 </body>
 </html>
