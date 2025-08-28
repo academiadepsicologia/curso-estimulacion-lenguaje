@@ -338,6 +338,7 @@
                 </div>
             </div>
         </div>
+
         <div class="modules-grid">
             <!-- Módulo 1 -->
             <div class="module-card" id="module1">
@@ -466,27 +467,70 @@
             </div>
         </div>
     </div>
+
     <script>
-        // Initialize date
+        // Inicializar fecha
         document.getElementById('currentDate').textContent = new Date().toLocaleDateString('es-ES', {
             weekday: 'long',
             day: 'numeric',
             month: 'short'
         });
 
-        // Initialize user
-        const userEmail = localStorage.getItem('userEmail');
+        // Inicializar usuario
+        const userEmail = localStorage.getItem('userEmail') || 'usuario@correo.com';
         if (userEmail) {
             document.getElementById('userName').textContent = '👤 ' + userEmail.split('@')[0];
         }
 
-        // FUNCIÓN CORREGIDA PARA MANEJAR EL PROGRESO
+        // Función para iniciar módulos
+        function startModule(moduleNumber) {
+            // Verificar si el módulo anterior está completado (excepto para el módulo 1)
+            if (moduleNumber > 1) {
+                const prevCompleted = localStorage.getItem(`modulo${moduleNumber - 1}_completed`) === 'true';
+                if (!prevCompleted) {
+                    alert(`⚠️ Debes completar el Módulo ${moduleNumber - 1} antes de acceder al Módulo ${moduleNumber}.`);
+                    return;
+                }
+            }
+
+            // Guardar el módulo actual
+            localStorage.setItem('current_module', moduleNumber.toString());
+
+            // Navegar al módulo
+            let moduleUrl = '';
+            switch(moduleNumber) {
+                case 1:
+                    moduleUrl = './modulo1/index.html';
+                    break;
+                case 2:
+                    moduleUrl = './modulo2/index.html';
+                    break;
+                case 3:
+                    moduleUrl = './modulo3/index.html';
+                    break;
+                case 4:
+                    moduleUrl = './modulo4/index.html';
+                    break;
+                case 5:
+                    moduleUrl = './modulo5/index.html';
+                    break;
+                default:
+                    alert('Módulo no encontrado');
+                    return;
+            }
+
+            window.location.href = moduleUrl;
+        }
+
+        // Actualizar interfaz
         function updateUI() {
             let completedCount = 0;
             
             // Verificar cada módulo individualmente
             for (let i = 1; i <= 5; i++) {
                 const moduleCard = document.getElementById(`module${i}`);
+                if (!moduleCard) continue;
+                
                 const btn = moduleCard.querySelector('.btn');
                 const isCompleted = localStorage.getItem(`modulo${i}_completed`) === 'true';
                 
@@ -531,42 +575,33 @@
                 }
             }
 
-            // Update progress bar
+            // Actualizar barra de progreso
             const progress = (completedCount / 5) * 100;
             const progressBar = document.getElementById('mainProgress');
-            progressBar.style.width = progress + '%';
-            progressBar.textContent = Math.round(progress) + '%';
+            if (progressBar) {
+                progressBar.style.width = progress + '%';
+                progressBar.textContent = Math.round(progress) + '%';
+            }
 
-            // Update stats
-            document.getElementById('completedModules').textContent = completedCount;
-            document.getElementById('totalHours').textContent = (completedCount * 0.8).toFixed(1);
-            document.getElementById('certificates').textContent = completedCount === 5 ? 1 : 0;
+            // Actualizar estadísticas
+            const completedModulesEl = document.getElementById('completedModules');
+            const totalHoursEl = document.getElementById('totalHours');
+            const certificatesEl = document.getElementById('certificates');
+            
+            if (completedModulesEl) completedModulesEl.textContent = completedCount;
+            if (totalHoursEl) totalHoursEl.textContent = (completedCount * 0.8).toFixed(1);
+            if (certificatesEl) certificatesEl.textContent = completedCount === 5 ? 1 : 0;
 
-            // Update certificate card
+            // Actualizar certificado
             if (completedCount === 5) {
                 const certCard = document.getElementById('certificate-card');
-                certCard.classList.remove('locked');
-                const certBtn = certCard.querySelector('.btn');
-                certBtn.disabled = false;
-                certBtn.textContent = '🏆 Descargar Certificado';
-            }
-        }
-
-        function startModule(moduleNumber) {
-            // Verificar si el módulo anterior está completado (excepto para el módulo 1)
-            if (moduleNumber > 1) {
-                const prevCompleted = localStorage.getItem(`modulo${moduleNumber - 1}_completed`) === 'true';
-                if (!prevCompleted) {
-                    alert(`⚠️ Debes completar el Módulo ${moduleNumber - 1} antes de acceder al Módulo ${moduleNumber}.`);
-                    return;
+                if (certCard) {
+                    certCard.classList.remove('locked');
+                    const certBtn = certCard.querySelector('.btn');
+                    certBtn.disabled = false;
+                    certBtn.textContent = '🏆 Descargar Certificado';
                 }
             }
-
-            // Guardar el módulo actual
-            localStorage.setItem('current_module', moduleNumber.toString());
-
-            // CORRECCIÓN PRINCIPAL: Ruta unificada para todos los módulos
-            window.location.href = `../modulo${moduleNumber}/index.html`;
         }
 
         function getCertificate() {
@@ -579,7 +614,6 @@
             }
 
             if (allCompleted) {
-                alert('🎉 ¡Felicitaciones! Descargando tu certificado...');
                 generateCertificate();
             } else {
                 alert('Completa todos los módulos para obtener tu certificado');
@@ -588,7 +622,39 @@
 
         function generateCertificate() {
             const userName = prompt('¿Cuál es tu nombre completo para el certificado?') || 'Estudiante';
-            alert(`Certificado generado para: ${userName}\n\n¡Felicitaciones por completar el curso!`);
+            
+            const certificate = `
+🏆 CERTIFICADO DE COMPLETACIÓN 🏆
+
+CURSO DE ESTIMULACIÓN DEL LENGUAJE INFANTIL
+
+Se certifica que: ${userName.toUpperCase()}
+
+Ha completado exitosamente los 5 módulos del curso:
+✅ Módulo 1: Fundamentos del Desarrollo
+✅ Módulo 2: Técnicas de Estimulación
+✅ Módulo 3: Actividades y Juegos
+✅ Módulo 4: Dificultades Comunes
+✅ Módulo 5: Plan Personalizado
+
+Fecha: ${new Date().toLocaleDateString('es-ES')}
+ID Certificado: CERT-${Date.now()}
+
+¡Felicitaciones por su dedicación al desarrollo infantil!
+            `;
+            
+            // Crear y descargar el archivo
+            const blob = new Blob([certificate], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Certificado_${userName.replace(/\s/g, '_')}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert('🎉 Certificado descargado exitosamente');
             
             localStorage.setItem('certificate_name', userName);
             localStorage.setItem('certificate_date', new Date().toISOString());
@@ -596,13 +662,12 @@
 
         function logout() {
             if (confirm('¿Estás seguro de que quieres salir?')) {
-                // No borrar el progreso del curso al salir
                 localStorage.removeItem('isLoggedIn');
                 window.location.href = '../index.html';
             }
         }
 
-        // Verificar si el usuario está logueado
+        // Verificar autenticación
         function checkAuth() {
             const isLoggedIn = localStorage.getItem('isLoggedIn');
             if (!isLoggedIn) {
@@ -611,7 +676,7 @@
             }
         }
 
-        // Simulate streak
+        // Simular racha
         function updateStreak() {
             const lastVisit = localStorage.getItem('lastVisit');
             const today = new Date().toDateString();
@@ -624,23 +689,19 @@
                 localStorage.setItem('lastVisit', today);
             }
 
-            document.getElementById('currentStreak').textContent = streak;
+            const streakEl = document.getElementById('currentStreak');
+            if (streakEl) {
+                streakEl.textContent = streak;
+            }
         }
 
-        // Initialize on load
+        // Inicializar al cargar
         document.addEventListener('DOMContentLoaded', function() {
             checkAuth();
             updateUI();
             updateStreak();
             
             console.log('Dashboard cargado correctamente');
-            console.log('Módulos completados:', {
-                modulo1: localStorage.getItem('modulo1_completed'),
-                modulo2: localStorage.getItem('modulo2_completed'),
-                modulo3: localStorage.getItem('modulo3_completed'),
-                modulo4: localStorage.getItem('modulo4_completed'),
-                modulo5: localStorage.getItem('modulo5_completed')
-            });
         });
     </script>
 </body>
