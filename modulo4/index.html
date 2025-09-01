@@ -1,0 +1,2894 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 4 - Dificultades Comunes y Plan de 21 Días</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            padding-top: 80px; /* Espacio para el header fijo */
+        }
+
+        /* Estilos para el header de navegación */
+        .top-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.2);
+            height: 10px;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            height: 100%;
+            width: 0%;
+            transition: width 0.8s ease;
+            border-radius: 5px;
+        }
+
+        .progress-text {
+            font-size: 0.9em;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .intro-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .intro-section h2 {
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .age-selector {
+            background: linear-gradient(135deg, #00cec9 0%, #55a3ff 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .age-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .age-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .age-btn:hover,
+        .age-btn.active {
+            background: white;
+            color: #00cec9;
+            border-color: white;
+            transform: scale(1.05);
+        }
+
+        .section-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 15px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Estilos para evaluación de habilidades */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .skill-item {
+            background: #f8f9fa;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            transition: all 0.2s ease;
+        }
+
+        .skill-item:hover {
+            background: #e9ecef;
+            transform: translateX(3px);
+        }
+
+        .skill-item label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 0.95em;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .skill-item input[type="checkbox"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+            accent-color: #667eea;
+        }
+
+        .skill-item.completed {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+
+        .skill-item.completed label {
+            color: #155724;
+            font-weight: 500;
+        }
+
+        .difficulty-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+
+        .difficulty-title {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .difficulty-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .strategies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .strategy-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .strategy-title {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .strategy-steps {
+            list-style: none;
+            padding: 0;
+        }
+
+        .strategy-steps li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .strategy-steps li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+        }
+
+        .interactive-exercise {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .exercise-title {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .exercise-content {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .interactive-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+            font-size: 0.9em;
+        }
+
+        .interactive-btn:hover,
+        .interactive-btn.selected {
+            background: white;
+            color: #0984e3;
+            transform: scale(1.05);
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #e17055;
+        }
+
+        .example-title {
+            color: #d63031;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .example-content {
+            color: #2d3436;
+            line-height: 1.5;
+        }
+
+        .dialogue {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .dialogue .parent {
+            color: #0984e3;
+            font-weight: bold;
+        }
+
+        .dialogue .child {
+            color: #e17055;
+            font-weight: bold;
+        }
+
+        .calendar-container {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .calendar-header {
+            text-align: center;
+            font-weight: bold;
+            color: #667eea;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 8px;
+            border: 2px solid transparent;
+        }
+
+        .calendar-day:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar-day.therapy-day {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .calendar-day.completed {
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            color: white;
+        }
+
+        .calendar-day.current {
+            border-color: #fd79a8;
+            animation: pulse-border 2s infinite;
+        }
+
+        @keyframes pulse-border {
+            0%, 100% { border-color: #fd79a8; }
+            50% { border-color: #e84393; }
+        }
+
+        .day-number {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 4px;
+        }
+
+        .day-activity {
+            font-size: 0.65em;
+            text-align: center;
+            line-height: 1.1;
+            opacity: 0.9;
+        }
+
+        .day-objectives {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .day-objectives h4 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+
+        .day-objectives ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .day-objectives li {
+            padding: 3px 0;
+            font-size: 0.85em;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .day-objectives li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+        }
+
+        .day-difficulty {
+            background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.75em;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .sound-exercise {
+            background: linear-gradient(135deg, #e17055 0%, #d63031 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .sound-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .sound-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .breathing-exercise {
+            background: linear-gradient(135deg, #81ecec 0%, #00cec9 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .breathing-circle {
+            width: 100px;
+            height: 100px;
+            border: 3px solid white;
+            border-radius: 50%;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 4s ease-in-out;
+            cursor: pointer;
+        }
+
+        .breathing-circle.inhale {
+            transform: scale(1.5);
+        }
+
+        .breathing-circle.exhale {
+            transform: scale(1);
+        }
+
+        .skills-checklist {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        .skill-checkbox {
+            width: 20px;
+            height: 20px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 40px;
+            background: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .bonus-badge {
+            background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            display: inline-block;
+            margin-left: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Modal para actividades diarias */
+        .activity-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .activity-modal.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .activity-modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 700px;
+            max-height: 90vh;
+            width: 100%;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .activity-modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .activity-modal-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .activity-modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .activity-modal-body {
+            padding: 2rem;
+        }
+
+        .modal-day-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        .modal-activity-title {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .modal-activity-preview {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .modal-objectives {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #667eea;
+        }
+
+        .modal-objectives h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .modal-objectives ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-objectives li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 25px;
+            color: #2c3e50;
+        }
+
+        .modal-objectives li::before {
+            content: "🎯";
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+        }
+
+        .modal-materials {
+            background: linear-gradient(135deg, #e8f5e8 0%, #f0f8ff 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #27ae60;
+        }
+
+        .modal-materials h4 {
+            color: #27ae60;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .modal-difficulty {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .modal-difficulty-badge {
+            background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 120px; /* Más espacio para header móvil */
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .header, .content {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .age-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .age-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .section-tabs {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .strategies-grid,
+            .days-detail {
+                grid-template-columns: 1fr;
+            }
+
+            .calendar-grid {
+                grid-template-columns: repeat(7, 1fr);
+                gap: 5px;
+            }
+            
+            .calendar-day {
+                padding: 4px;
+            }
+            
+            .day-number {
+                font-size: 0.9em;
+            }
+            
+            .day-activity {
+                font-size: 0.5em;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px;
+            }
+
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .activity-modal-content {
+                margin: 1rem;
+                max-height: 95vh;
+            }
+
+            .activity-modal-header {
+                padding: 1.5rem;
+            }
+
+            .activity-modal-body {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="top-header">
+        <div class="nav-container">
+            <div class="logo">🚨 Módulo 4: Dificultades Comunes</div>
+            <div class="nav-links">
+                <a href="../dashboard/index.html">← Dashboard</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="header">
+            <div class="progress-text">Tu Progreso en el Módulo 4</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-text" id="progressText">
+                0% completado • 0 de 4 secciones
+            </div>
+            
+            <h1>🚨 Dificultades Comunes y Soluciones</h1>
+            <div class="subtitle">
+                Identifica problemas + Plan terapéutico de 21 días con actividades específicas por edad
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="intro-section">
+                <h2>🎯 Módulo Especializado en Dificultades</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
+                    <div>🔍 Detectar señales específicas por edad</div>
+                    <div>🗣️ Manejar tartamudez evolutiva</div>
+                    <div>🔤 Corregir problemas de pronunciación</div>
+                    <div>⚡ Acelerar desarrollo del lenguaje</div>
+                    <div>📅 Plan terapéutico de 21 días</div>
+                    <div>🏠 Técnicas para aplicar en casa</div>
+                </div>
+            </div>
+
+            <div class="age-selector">
+                <h3>📌 Personaliza para la edad de tu hijo</h3>
+                <p>El contenido se adaptará automáticamente con información específica para cada edad:</p>
+                <div class="age-buttons">
+                    <button class="age-btn" data-age="3">👶 3 años</button>
+                    <button class="age-btn" data-age="4">👦 4 años</button>
+                    <button class="age-btn" data-age="5">👧 5 años</button>
+                </div>
+            </div>
+
+            <div class="section-tabs">
+                <button class="tab-btn active" data-tab="tartamudez">🗣️ Tartamudez</button>
+                <button class="tab-btn" data-tab="pronunciacion">🔤 Pronunciación</button>
+                <button class="tab-btn" data-tab="retraso">⚡ Retraso del Lenguaje</button>
+                <button class="tab-btn" data-tab="plan21">📅 Plan 21 Días</button>
+            </div>
+
+            <!-- SECCIÓN TARTAMUDEZ -->
+            <div class="tab-content active" id="tartamudez">
+                <div class="difficulty-section">
+                    <div class="difficulty-title">
+                        <span>🗣️</span>
+                        <span id="tartamudez-title">Tartamudez: Selecciona la edad arriba</span>
+                    </div>
+                    <div class="difficulty-description" id="tartamudez-description">
+                        Selecciona la edad de tu hijo arriba para ver información específica sobre tartamudez.
+                    </div>
+                    
+                    <div class="interactive-exercise">
+                        <div class="exercise-title">
+                            <span>🎯</span>
+                            <span>Simulador: ¿Cómo Responder Correctamente?</span>
+                        </div>
+                        <div class="exercise-content" id="tartamudez-simulator">
+                            <p><strong>SITUACIÓN REAL:</strong> Tu hijo dice "Yo-yo-yo quiero ga-ga-galletas"</p>
+                            <p>¿Cuál es la respuesta correcta?</p>
+                            <button class="interactive-btn" onclick="checkTartamudezAnswer('wrong')">
+                                "Respira hondo y habla más despacio, amor"
+                            </button>
+                            <button class="interactive-btn" onclick="checkTartamudezAnswer('right')">
+                                "Ah, quieres galletas. Vamos a buscarlas juntos"
+                            </button>
+                            <div id="tartamudez-feedback" style="margin-top: 15px; display: none;"></div>
+                        </div>
+                    </div>
+
+                    <div class="breathing-exercise">
+                        <div class="exercise-title">
+                            <span>🫁</span>
+                            <span>Ejercicio de Respiración para Fluidez</span>
+                        </div>
+                        <p>Practica junto a tu hijo este ejercicio de respiración para mejorar la fluidez:</p>
+                        <div class="breathing-circle" id="breathingCircle" onclick="startBreathingExercise()">
+                            <span id="breathingText">Iniciar</span>
+                        </div>
+                        <p style="font-size: 0.9em; opacity: 0.8;">Haz clic en el círculo para comenzar</p>
+                    </div>
+
+                    <div class="strategies-grid" id="tartamudez-strategies">
+                        <div class="strategy-card">
+                            <div class="strategy-title">
+                                <span>⚠️</span>
+                                <span>Selecciona una edad</span>
+                            </div>
+                            <p>Usa los botones de edad arriba para ver estrategias específicas para tartamudez.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN PRONUNCIACIÓN -->
+            <div class="tab-content" id="pronunciacion">
+                <div class="difficulty-section">
+                    <div class="difficulty-title">
+                        <span>🔤</span>
+                        <span id="pronunciacion-title">Pronunciación: Desarrollo por Edad</span>
+                    </div>
+                    <div class="difficulty-description" id="pronunciacion-description">
+                        Selecciona la edad de tu hijo arriba para ver objetivos específicos de pronunciación.
+                    </div>
+
+                    <div class="interactive-exercise">
+                        <div class="exercise-title">
+                            <span>🎮</span>
+                            <span>Safari de Sonidos Interactivo</span>
+                        </div>
+                        <div class="exercise-content">
+                            <p>Haz clic en cada animal para practicar los sonidos:</p>
+                            <div class="sound-exercise">
+                                <button class="sound-btn" onclick="playAnimalSound('perro')">
+                                    🐕 Perro (P-B): "GUAU-GUAU"
+                                </button>
+                                <button class="sound-btn" onclick="playAnimalSound('gato')">
+                                    🐱 Gato (M): "MIAU"
+                                </button>
+                                <button class="sound-btn" onclick="playAnimalSound('vaca')">
+                                    🐄 Vaca (M-U): "MUUU"
+                                </button>
+                                <button class="sound-btn" onclick="playAnimalSound('pato')">
+                                    🦆 Pato (K): "CUAC-CUAC"
+                                </button>
+                                <button class="sound-btn" onclick="playAnimalSound('caballo')">
+                                    🐴 Caballo (T-D): "IIIH-AAA"
+                                </button>
+                                <div id="sound-feedback" style="margin-top: 15px; color: white;">
+                                    👆 Selecciona un animal para practicar sonidos específicos
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="strategies-grid" id="pronunciacion-strategies">
+                        <div class="strategy-card">
+                            <div class="strategy-title">
+                                <span>⚠️</span>
+                                <span>Selecciona una edad</span>
+                            </div>
+                            <p>Usa los botones de edad arriba para ver objetivos específicos de pronunciación.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN RETRASO DEL LENGUAJE -->
+            <div class="tab-content" id="retraso">
+                <div class="difficulty-section">
+                    <div class="difficulty-title">
+                        <span>⚡</span>
+                        <span id="retraso-title">Retraso del Lenguaje: Intervención por Edad</span>
+                    </div>
+                    <div class="difficulty-description" id="retraso-description">
+                        Selecciona la edad de tu hijo arriba para ver estrategias específicas de intervención.
+                    </div>
+
+                    <div class="interactive-exercise">
+                        <div class="exercise-title">
+                            <span>📊</span>
+                            <span>Evaluación Rápida de Habilidades</span>
+                        </div>
+                        <div class="exercise-content">
+                            <p>Marca las habilidades que tu hijo YA domina:</p>
+                            
+                            <!-- Checklist para 3 años -->
+                            <div class="skills-checklist age-specific-content" id="skills-3" style="display: none;">
+                                <h4 style="color: #667eea; margin-bottom: 15px;">✅ Habilidades esperadas a los 3 años:</h4>
+                                <div class="skills-grid">
+                                    <!-- Se llenará dinámicamente -->
+                                </div>
+                            </div>
+                            
+                            <!-- Checklist para 4 años -->
+                            <div class="skills-checklist age-specific-content" id="skills-4" style="display: none;">
+                                <h4 style="color: #667eea; margin-bottom: 15px;">✅ Habilidades esperadas a los 4 años:</h4>
+                                <div class="skills-grid">
+                                    <!-- Se llenará dinámicamente -->
+                                </div>
+                            </div>
+                            
+                            <!-- Checklist para 5 años -->
+                            <div class="skills-checklist age-specific-content" id="skills-5" style="display: none;">
+                                <h4 style="color: #667eea; margin-bottom: 15px;">✅ Habilidades esperadas a los 5 años:</h4>
+                                <div class="skills-grid">
+                                    <!-- Se llenará dinámicamente -->
+                                </div>
+                            </div>
+                            
+                            <!-- Mensaje cuando no hay edad seleccionada -->
+                            <div class="skill-item" id="no-age-selected">
+                                <span>⚠️ Selecciona la edad de tu hijo arriba para ver la evaluación específica.</span>
+                            </div>
+                            
+                            <button class="interactive-btn" onclick="evaluateSkills()" style="margin-top: 15px; display: none;" id="evaluate-btn">
+                                📊 Evaluar Resultados
+                            </button>
+                            <div id="evaluation-results" style="margin-top: 15px; display: none;"></div>
+                        </div>
+                    </div>
+
+                    <div class="strategies-grid" id="retraso-strategies">
+                        <div class="strategy-card">
+                            <div class="strategy-title">
+                                <span>⚠️</span>
+                                <span>Selecciona una edad</span>
+                            </div>
+                            <p>Usa los botones de edad arriba para ver estrategias específicas para retraso del lenguaje.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN PLAN 21 DÍAS -->
+            <div class="tab-content" id="plan21">
+                <div class="interactive-exercise">
+                    <div class="exercise-title">
+                        <span>🎯</span>
+                        <span>Plan Terapéutico de 21 Días</span>
+                    </div>
+                    <div class="exercise-content">
+                        <p><strong>📋 Instrucciones:</strong> Dedica 15-20 minutos diarios. Las actividades están organizadas por semanas temáticas y se adaptan automáticamente a la edad seleccionada.</p>
+                        <p style="margin-top: 10px;"><strong>🎯 Objetivo:</strong> Programa estructurado diseñado por terapeutas del lenguaje con actividades diarias específicas para trabajar dificultades comunes.</p>
+                    </div>
+                </div>
+
+                <div class="calendar-container">
+                    <h3 style="color: #667eea; text-align: center; margin-bottom: 20px;">📅 Calendario de Actividades Terapéuticas</h3>
+                    
+                    <div class="calendar-grid" id="calendar-grid">
+                        <div class="calendar-header">Lun</div>
+                        <div class="calendar-header">Mar</div>
+                        <div class="calendar-header">Mié</div>
+                        <div class="calendar-header">Jue</div>
+                        <div class="calendar-header">Vie</div>
+                        <div class="calendar-header">Sáb</div>
+                        <div class="calendar-header">Dom</div>
+                        
+                        <!-- Los días se agregarán aquí directamente -->
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                        <p style="color: #667eea; margin-bottom: 10px;"><strong>Leyenda:</strong></p>
+                        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <div style="width: 20px; height: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%;"></div>
+                                <span style="font-size: 0.9em;">Día de actividad terapéutica</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <div style="width: 20px; height: 20px; background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); border-radius: 50%;"></div>
+                                <span style="font-size: 0.9em;">Actividad completada</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <div style="width: 20px; height: 20px; background: #f8f9fa; border: 2px solid #fd79a8; border-radius: 50%;"></div>
+                                <span style="font-size: 0.9em;">Día actual</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+        <!-- Botón de completar módulo -->
+        <div style="text-align: center; padding: 2rem; background: white; margin: 2rem 0; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+            <h3 style="color: #667eea; margin-bottom: 1rem;">🎯 ¿Completaste todas las secciones?</h3>
+            <p style="margin-bottom: 2rem; color: #666;">Una vez que hayas revisado todas las secciones y aplicado las técnicas, marca el módulo como completado.</p>
+            <button id="completeModuleBtn" class="nav-btn" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; border: none; padding: 15px 30px; border-radius: 25px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: transform 0.3s ease;" onclick="completeModule()">
+                ✅ Completar Módulo 4
+            </button>
+        </div>
+
+        <div class="navigation">
+            <a href="../modulo3/index.html" class="nav-btn">
+                ← Módulo 3: Actividades
+            </a>
+            <span>Módulo 4 de 5</span>
+            <a href="../modulo5/index.html" class="nav-btn">
+                Módulo 5: Plan Personalizado →
+            </a>
+        </div>
+    </div>
+
+    <!-- Modal para actividades diarias -->
+    <div class="activity-modal" id="activityModal">
+        <div class="activity-modal-content">
+            <div class="activity-modal-header">
+                <h3 id="modalTitle">Actividad del Día</h3>
+                <button class="activity-modal-close" onclick="closeActivityModal()">×</button>
+            </div>
+            <div class="activity-modal-body">
+                <div class="modal-day-number" id="modalDayNumber">1</div>
+                <div class="modal-activity-title" id="modalActivityTitle">Título de la Actividad</div>
+                <div class="modal-activity-preview" id="modalActivityPreview">Descripción de la actividad...</div>
+                
+                <div class="modal-objectives" id="modalObjectives">
+                    <h4>🎯 Habilidades a desarrollar:</h4>
+                    <ul id="modalObjectivesList">
+                        <!-- Se llenará dinámicamente -->
+                    </ul>
+                </div>
+                
+                <div class="modal-materials" id="modalMaterials">
+                    <h4>🧰 Materiales necesarios:</h4>
+                    <p id="modalMaterialsList">Lista de materiales...</p>
+                </div>
+                
+                <div class="modal-difficulty">
+                    <div class="modal-difficulty-badge" id="modalDifficultyBadge">Nivel</div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #eee;">
+                    <button class="nav-btn" onclick="markDayCompleted()" id="completeActivityBtn" style="background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%); margin: 0;">
+                        ✅ Marcar como Completado
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para actividades diarias -->
+    <div class="activity-modal" id="activityModal">
+        <div class="activity-modal-content">
+            <div class="activity-modal-header">
+                <h3 id="modalTitle">Actividad del Día</h3>
+                <button class="activity-modal-close" onclick="closeActivityModal()">×</button>
+            </div>
+            <div class="activity-modal-body">
+                <div class="modal-day-number" id="modalDayNumber">1</div>
+                <div class="modal-activity-title" id="modalActivityTitle">Título de la Actividad</div>
+                <div class="modal-activity-preview" id="modalActivityPreview">Descripción de la actividad...</div>
+                
+                <div class="modal-section">
+                    <h4>🎯 Objetivos</h4>
+                    <ul id="modalObjectivesList">
+                        <li>Objetivo 1</li>
+                        <li>Objetivo 2</li>
+                    </ul>
+                </div>
+                
+                <div class="modal-section">
+                    <h4>🧰 Materiales</h4>
+                    <p id="modalMaterialsList">Lista de materiales necesarios</p>
+                </div>
+                
+                <div class="modal-difficulty">
+                    <div class="modal-difficulty-badge" id="modalDifficultyBadge">Nivel</div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #eee;">
+                    <button class="nav-btn" onclick="markDayCompleted()" id="completeActivityBtn" style="background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%); margin: 0;">
+                        ✅ Marcar como Completado
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Datos específicos por edad
+        const ageData = {
+            3: {
+                tartamudez: {
+                    title: "🗣️ Tartamudez a los 3 años: Normal vs Preocupante",
+                    description: "A los 3 años, la tartamudez evolutiva es completamente normal. El cerebro del niño está desarrollándose rápidamente y a menudo piensa más rápido de lo que puede hablar.",
+                    strategies: [
+                        {
+                            title: "✅ Señales NORMALES a los 3 años",
+                            color: "#00b894",
+                            steps: [
+                                "Repite palabras completas: 'mamá-mamá-mamá quiero agua'",
+                                "Vacilaciones al inicio: 'eh... eh... yo quiero salir'",
+                                "Ocurre cuando está emocionado, cansado o apurado",
+                                "No hay tensión visible en cara o cuello",
+                                "Dura episodios cortos (menos de 3 meses seguidos)",
+                                "El niño no se da cuenta de que tartamudea"
+                            ]
+                        },
+                        {
+                            title: "🚨 Señales de ALERTA",
+                            color: "#e17055",
+                            steps: [
+                                "Bloqueos en sonidos individuales: 'p-p-p-papá'",
+                                "Tensión visible en músculos faciales",
+                                "Movimientos secundarios (parpadeo, golpes con pie)",
+                                "Evita hablar o muestra frustración evidente",
+                                "Tartamudez persiste más de 6 meses",
+                                "Empeora en lugar de mejorar"
+                            ]
+                        },
+                        {
+                            title: "💡 Técnicas Específicas para 3 años",
+                            color: "#667eea",
+                            steps: [
+                                "Habla 25% más despacio: Modela un ritmo calmado",
+                                "Haz pausas de 2 segundos entre tus oraciones",
+                                "Reduce preguntas: Máximo 2 preguntas por conversación",
+                                "Comenta en lugar de preguntar: 'Veo que juegas con el auto'",
+                                "Tiempo especial: 10 minutos diarios de juego sin presión verbal",
+                                "Nunca digas 'respira' o 'habla despacio'"
+                            ]
+                        }
+                    ]
+                },
+                pronunciacion: {
+                    title: "🔤 Pronunciación a los 3 años: Desarrollo Normal",
+                    description: "A los 3 años, los niños deben ser comprendidos por desconocidos el 75% del tiempo y dominar sonidos básicos.",
+                    strategies: [
+                        {
+                            title: "✅ Sonidos que DEBE dominar a los 3 años",
+                            color: "#00b894",
+                            steps: [
+                                "Consonantes básicas: m, p, b, t, d, k, g, n, f, h",
+                                "Todas las vocales: a, e, i, o, u",
+                                "Combinaciones simples: ma, pa, ta, no",
+                                "Meta: 75% inteligible para extraños",
+                                "Puede omitir sonidos finales ocasionalmente"
+                            ]
+                        },
+                        {
+                            title: "⏳ Sonidos que puede fallar (NORMAL)",
+                            color: "#fdcb6e",
+                            steps: [
+                                "s, l, r, ch (normales hasta los 4-5 años)",
+                                "Grupos consonánticos: pl, br, tr",
+                                "Puede decir 'toche' por 'coche'",
+                                "Puede omitir la 's' final: 'gato' por 'gatos'",
+                                "Sustituciones como 't' por 'k': 'tasa' por 'casa'"
+                            ]
+                        },
+                        {
+                            title: "🏠 Ejercicios Diarios para Casa",
+                            color: "#667eea",
+                            steps: [
+                                "Espejo mágico: 5 min frente al espejo haciendo muecas",
+                                "Sopla y juega: Burbujas, plumas, papel para fortalecer músculos",
+                                "Canciones con sonidos: 'Pin pon es un muñeco' (sonidos P)",
+                                "Imitación exagerada: Modela sonidos claramente sin corregir",
+                                "Lectura interactiva: Libros con onomatopeyas",
+                                "Safari de sonidos: Imitar animales diariamente"
+                            ]
+                        }
+                    ]
+                },
+                retraso: {
+                    title: "⚡ Retraso del Lenguaje a los 3 años",
+                    description: "A los 3 años, un niño debe tener al menos 1000 palabras y formar oraciones de 3-4 palabras. La intervención temprana es crucial.",
+                    skills: [
+                        "Dice frases de 3-4 palabras ('Quiero más agua')",
+                        "Vocabulario de al menos 1000 palabras",
+                        "Hace preguntas simples ('¿Qué es eso?')",
+                        "Cuenta hasta 3",
+                        "Nombra colores básicos (rojo, azul, amarillo)",
+                        "Se entiende el 75% de lo que dice",
+                        "Usa 'yo', 'tú', 'mío'",
+                        "Describe acciones simples ('papá come')",
+                        "Sigue instrucciones de 2 pasos"
+                    ],
+                    strategies: [
+                        {
+                            title: "🚀 Plan de Estimulación Intensiva",
+                            color: "#e17055",
+                            steps: [
+                                "Narración constante: Describe todo lo que haces",
+                                "Expansión obligatoria: Si dice 'agua', tú dices 'agua fría'",
+                                "Preguntas de elección: '¿Quieres manzana o plátano?'",
+                                "Tiempo sin pantallas: Interacción humana exclusiva",
+                                "3 libros diarios con participación activa",
+                                "Bombardeo lingüístico durante rutinas"
+                            ]
+                        },
+                        {
+                            title: "📈 Técnicas de Recuperación Rápida",
+                            color: "#00b894",
+                            steps: [
+                                "Rutinas convertidas en terapia:",
+                                "Baño: 'Agua CALIENTE, jabón SUAVE, burbujas GRANDES'",
+                                "Comida: 'Manzana ROJA, plátano AMARILLO, está DULCE'",
+                                "Paseos: 'Carro AZUL, árbol ALTO, perro PEQUEÑO'",
+                                "Repetición sistemática de nuevas palabras",
+                                "Celebrar cada intento de comunicación"
+                            ]
+                        }
+                    ]
+                }
+            },
+            4: {
+                tartamudez: {
+                    title: "🗣️ Tartamudez a los 4 años: Desarrollo vs Intervención",
+                    description: "A los 4 años, los niños deben formar oraciones complejas con mayor fluidez. Si la tartamudez persiste después de los 6 meses o aumenta en intensidad, puede requerir intervención profesional.",
+                    strategies: [
+                        {
+                            title: "🎯 Evaluación a los 4 años",
+                            color: "#667eea",
+                            steps: [
+                                "Debe formar oraciones de 5-6 palabras fluidamente",
+                                "Vocabulario expresivo de 1500+ palabras",
+                                "Puede contar experiencias simples",
+                                "Usa tiempos verbales (pasado, futuro) correctamente",
+                                "La comunicación debe ser 90% fluida"
+                            ]
+                        },
+                        {
+                            title: "🚨 SEÑALES DE ALERTA a los 4 años",
+                            color: "#e17055",
+                            steps: [
+                                "Bloqueos en sonidos individuales: 'p-p-p-papá'",
+                                "Tensión visible en músculos faciales",
+                                "Movimientos secundarios (parpadeo, golpes con pie)",
+                                "Evita hablar o muestra frustración evidente",
+                                "Tartamudez persiste más de 6 meses",
+                                "Empeora en lugar de mejorar gradualmente"
+                            ]
+                        },
+                        {
+                            title: "🛠️ Técnicas Avanzadas para 4 años",
+                            color: "#00b894",
+                            steps: [
+                                "Habla suave: Usa 'inicio suave' en palabras con vocal",
+                                "Turnos estructurados: 'Primero hablas tú, después yo'",
+                                "Actividades de respiración: Soplar burbujas, velas",
+                                "Narración compartida: Contar cuentos por turnos",
+                                "Validación emocional: 'Entiendo que es difícil hablar'",
+                                "Coordinación con maestros para consistencia"
+                            ]
+                        }
+                    ]
+                },
+                pronunciacion: {
+                    title: "🔤 Pronunciación a los 4 años: Refinamiento",
+                    description: "A los 4 años, la inteligibilidad debe ser del 85% y se agregan sonidos más complejos.",
+                    strategies: [
+                        {
+                            title: "✅ Nuevos sonidos a los 4 años",
+                            color: "#00b894",
+                            steps: [
+                                "Se agregan: s, l, ch, j, ñ, y",
+                                "Domina todos los sonidos de los 3 años",
+                                "Inteligibilidad: 85% con desconocidos",
+                                "Puede formar grupos simples: pl, bl",
+                                "Aún pueden fallar: r, rr, grupos complejos"
+                            ]
+                        },
+                        {
+                            title: "🎪 Trabalenguas Graduales",
+                            color: "#fdcb6e",
+                            steps: [
+                                "Nivel 1 (sonido S): 'Sana, sana, colita de rana'",
+                                "Nivel 2 (sonido L): 'La Luna llena luce linda'",
+                                "Nivel 3 (sonido CH): 'Chato chico come chocolate'",
+                                "Nivel 4 (sonido LL): 'La llama llama a la lluvia'",
+                                "Progresión gradual sin presión"
+                            ]
+                        },
+                        {
+                            title: "🔧 Técnicas Específicas para 4 años",
+                            color: "#667eea",
+                            steps: [
+                                "Modelado sin corrección: Repite correctamente sin criticar",
+                                "Juegos de rimas: 'Casa, masa, pasa' para conciencia fonológica",
+                                "Cuentos con sonidos específicos: Historias ricas en sonidos",
+                                "Ejercicios oro-faciales: Movimientos de lengua y labios",
+                                "Grabaciones de progreso: Registra avances semanalmente",
+                                "Teatro de sonidos: Dramatizar palabras difíciles"
+                            ]
+                        }
+                    ]
+                },
+                retraso: {
+                    title: "⚡ Retraso del Lenguaje a los 4 años",
+                    description: "A los 4 años con retraso, la intervención debe ser más estructurada y sistemática, enfocándose en habilidades específicas que faltan.",
+                    skills: [
+                        "Forma oraciones de 5-6 palabras",
+                        "Vocabulario de al menos 1500 palabras",
+                        "Hace preguntas con '¿por qué?'",
+                        "Cuenta hasta 10",
+                        "Usa verbos en pasado correctamente",
+                        "Puede contar una historia simple",
+                        "Sigue instrucciones de 3 pasos",
+                        "Describe objetos con 2-3 características",
+                        "Usa conectores simples ('y', 'pero')"
+                    ],
+                    strategies: [
+                        {
+                            title: "🎪 Programa Intensivo 4 años",
+                            color: "#e17055",
+                            steps: [
+                                "Sesiones estructuradas: 30 min diarios de actividades dirigidas",
+                                "Objetivo semanal: 25 palabras nuevas por semana",
+                                "Construcción de oraciones: Plantillas fijas 'Yo veo + objeto + color'",
+                                "Juegos de roles: Situaciones sociales estructuradas",
+                                "Coordinación escolar: Trabajo conjunto con maestros",
+                                "Registro diario de progreso con metas específicas"
+                            ]
+                        },
+                        {
+                            title: "📚 Técnicas Avanzadas de Estimulación",
+                            color: "#00b894",
+                            steps: [
+                                "Narrativa estructurada: Inicio-desarrollo-final",
+                                "Vocabulario temático: 5 palabras nuevas por tema",
+                                "Preguntas en escalera: Simples → complejas",
+                                "Expansión sistemática: Agregar 1 palabra por frase",
+                                "Teatro familiar: Representar cuentos conocidos",
+                                "Diario de palabras: Registrar nuevas adquisiciones"
+                            ]
+                        }
+                    ]
+                }
+            },
+            5: {
+                tartamudez: {
+                    title: "🗣️ Tartamudez a los 5 años: Intervención Temprana",
+                    description: "A los 5 años, si la tartamudez persiste, es fundamental buscar ayuda profesional. La intervención temprana tiene tasas de éxito del 80-90%.",
+                    strategies: [
+                        {
+                            title: "⚠️ Momento Crítico para Intervención",
+                            color: "#e17055",
+                            steps: [
+                                "Evaluación profesional inmediata si persiste",
+                                "Tartamudez presente por más de 12 meses",
+                                "Impacto en la interacción social o autoestima",
+                                "Preparación para el entorno escolar",
+                                "Historia familiar de tartamudez requiere atención"
+                            ]
+                        },
+                        {
+                            title: "🎯 Estrategias específicas para 5 años",
+                            color: "#667eea",
+                            steps: [
+                                "Conciencia sin ansiedad: 'A veces las palabras se atascan'",
+                                "Técnicas de fluidez: Habla pausada y suave",
+                                "Fortalecimiento emocional: 'Eres valiente cuando hablas'",
+                                "Práctica estructurada: 15 minutos diarios de conversación",
+                                "Preparación escolar: Coordinación con maestros",
+                                "Autoestima: Enfoque en fortalezas comunicativas"
+                            ]
+                        },
+                        {
+                            title: "🏥 Cuándo Buscar Ayuda Profesional",
+                            color: "#fd79a8",
+                            steps: [
+                                "Tartamudez persiste más de 12 meses",
+                                "El niño evita hablar o se frustra visiblemente",
+                                "Hay historia familiar de tartamudez",
+                                "Otros problemas del habla o lenguaje",
+                                "Impacto en interacción social o autoestima",
+                                "Comportamientos secundarios evidentes"
+                            ]
+                        }
+                    ]
+                },
+                pronunciacion: {
+                    title: "🔤 Pronunciación a los 5 años: Preparación Escolar",
+                    description: "A los 5 años, debe ser 90% inteligible y manejar grupos consonánticos simples para estar preparado para el aprendizaje de la lectoescritura.",
+                    strategies: [
+                        {
+                            title: "🎓 Metas para 5 años",
+                            color: "#667eea",
+                            steps: [
+                                "Grupos consonánticos: pl, bl, cl, gl, fl",
+                                "Sonidos complejos: ch, ll, ñ completamente dominados",
+                                "Preparación para R: vibración lingual básica",
+                                "90% inteligibilidad con extraños",
+                                "Conciencia fonológica desarrollada",
+                                "Puede separar palabras en sílabas"
+                            ]
+                        },
+                        {
+                            title: "📚 Técnicas Pre-lectoras",
+                            color: "#00b894",
+                            steps: [
+                                "Análisis silábico: Separar palabras en sílabas",
+                                "Sonido inicial: '¿Con qué sonido empieza casa?'",
+                                "Rimas complejas: Crear familias de palabras",
+                                "Deletreo fonético: Sonidos de cada letra",
+                                "Precisión articulatoria: Movimientos exactos",
+                                "Metalenguaje: Hablar sobre el lenguaje"
+                            ]
+                        },
+                        {
+                            title: "🎯 Preparación Académica",
+                            color: "#fdcb6e",
+                            steps: [
+                                "Dictado de sonidos: Reconocer y escribir letras",
+                                "Lectura labial: Observar movimientos al hablar",
+                                "Discriminación auditiva fina: Sonidos similares",
+                                "Velocidad articulatoria: Habla clara y rápida",
+                                "Autorregulación: Detectar sus propios errores",
+                                "Comunicación escolar: Participar en clase"
+                            ]
+                        }
+                    ]
+                },
+                retraso: {
+                    title: "⚡ Retraso del Lenguaje a los 5 años",
+                    description: "A los 5 años, el retraso del lenguaje puede impactar significativamente el rendimiento escolar. La intervención debe ser intensiva y profesional.",
+                    skills: [
+                        "Forma oraciones de 6+ palabras",
+                        "Vocabulario de al menos 2000 palabras",
+                        "Cuenta historias con inicio-desarrollo-final",
+                        "Usa todos los tiempos verbales",
+                        "Hace preguntas complejas",
+                        "Describe eventos pasados detalladamente",
+                        "Sigue instrucciones de 4+ pasos",
+                        "Usa lenguaje abstracto básico",
+                        "Participa en conversaciones grupales"
+                    ],
+                    strategies: [
+                        {
+                            title: "⚠️ Intervención Urgente Pre-escolar",
+                            color: "#e17055",
+                            steps: [
+                                "Evaluación profesional inmediata",
+                                "Programa diario: 2 sesiones de 30 min estructuradas",
+                                "Vocabulario académico: Palabras de matemáticas, ciencias",
+                                "Habilidades narrativas: Contar y recontar historias",
+                                "Preparación para lectoescritura",
+                                "Colaboración: Fonoaudiólogo + psicólogo + maestro"
+                            ]
+                        },
+                        {
+                            title: "🎓 Preparación Escolar Intensiva",
+                            color: "#667eea",
+                            steps: [
+                                "Vocabulario académico: Términos escolares específicos",
+                                "Narración estructurada: Historias con secuencia lógica",
+                                "Habilidades conversacionales: Turnos, temas, preguntas",
+                                "Comprensión de instrucciones: Seguir reglas escolares",
+                                "Expresión de necesidades: Comunicar en el aula",
+                                "Socialización verbal: Hacer amigos a través del lenguaje"
+                            ]
+                        }
+                    ]
+                }
+            }
+        };
+
+        // Plan de 21 días
+        const plan21Dias = [
+            {
+                number: 1,
+                title: "Conexión Visual y Atención",
+                preview: "Establece la base fundamental: contacto visual sostenido y atención conjunta.",
+                objectives: ["Contacto Visual", "Atención Conjunta", "Imitación"],
+                materials: "🧰 Espejo grande, juguetes coloridos, música suave",
+                difficulty: "Básico"
+            },
+            {
+                number: 2,
+                title: "Exploración Sensorial",
+                preview: "Estimula vocabulario a través de texturas, formas y materiales diversos.",
+                objectives: ["Vocabulario Táctil", "Descripción", "Categorización"],
+                materials: "🧰 Objetos texturas, caja sorpresa, tarjetas",
+                difficulty: "Básico"
+            },
+            {
+                number: 3,
+                title: "Respiración y Fluidez",
+                preview: "Ejercicios respiratorios específicos para mejorar el control del aire.",
+                objectives: ["Control Respiratorio", "Fluidez", "Coordinación"],
+                materials: "🧰 Burbujas, plumas, velas, silbatos",
+                difficulty: "Básico"
+            },
+            {
+                number: 4,
+                title: "Sonidos y Articulación",
+                preview: "Safari de sonidos de animales para trabajar puntos de articulación.",
+                objectives: ["Articulación", "Imitación", "Onomatopeyas"],
+                materials: "🧰 Imágenes animales, sonidos, espejo",
+                difficulty: "Básico"
+            },
+            {
+                number: 5,
+                title: "Comprensión de Instrucciones",
+                preview: "Desarrollo de comprensión auditiva através de instrucciones graduales.",
+                objectives: ["Comprensión", "Secuenciación", "Memoria Auditiva"],
+                materials: "🧰 Objetos familiares, tarjetas secuencias",
+                difficulty: "Básico"
+            },
+            {
+                number: 6,
+                title: "Expresión Corporal",
+                preview: "Integración de movimiento y lenguaje para fortalecer conexiones.",
+                objectives: ["Coordinación", "Ritmo", "Expresión"],
+                materials: "🧰 Música, pañuelos, instrumentos",
+                difficulty: "Básico"
+            },
+            {
+                number: 7,
+                title: "Evaluación Semanal",
+                preview: "Revisión y consolidación de logros de la primera semana.",
+                objectives: ["Autoevaluación", "Consolidación", "Motivación"],
+                materials: "🧰 Cuaderno progreso, stickers",
+                difficulty: "Evaluación"
+            },
+            {
+                number: 8,
+                title: "Narración Básica",
+                preview: "Construcción de historias simples: inicio, desarrollo, final.",
+                objectives: ["Narrativa", "Secuenciación", "Creatividad"],
+                materials: "🧰 Libros imágenes, tarjetas secuencias",
+                difficulty: "Intermedio"
+            },
+            {
+                number: 9,
+                title: "Preguntas y Respuestas",
+                preview: "Desarrollo de habilidades conversacionales básicas.",
+                objectives: ["Conversación", "Turnos", "Comprensión"],
+                materials: "🧰 Tarjetas preguntas, fotos familiares",
+                difficulty: "Intermedio"
+            },
+            {
+                number: 10,
+                title: "Vocabulario Temático",
+                preview: "Expansión sistemática por categorías: colores, formas, emociones.",
+                objectives: ["Vocabulario", "Categorización", "Asociación"],
+                materials: "🧰 Objetos coloridos, formas, tarjetas",
+                difficulty: "Intermedio"
+            },
+            {
+                number: 11,
+                title: "Juegos de Memoria",
+                preview: "Fortalecimiento de memoria auditiva y visual através de juegos.",
+                objectives: ["Memoria", "Atención", "Concentración"],
+                materials: "🧰 Cartas memoria, objetos, sonidos",
+                difficulty: "Intermedio"
+            },
+            {
+                number: 12,
+                title: "Rimas y Ritmos",
+                preview: "Desarrollo de conciencia fonológica através de rimas y canciones.",
+                objectives: ["Conciencia Fonológica", "Ritmo", "Rimas"],
+                materials: "🧰 Instrumentos, libros rimas",
+                difficulty: "Intermedio"
+            },
+            {
+                number: 13,
+                title: "Emociones y Expresión",
+                preview: "Identificación y verbalización de emociones básicas.",
+                objectives: ["Vocabulario Emocional", "Autoconocimiento", "Empatía"],
+                materials: "🧰 Caritas emociones, espejo, cuentos",
+                difficulty: "Intermedio"
+            },
+            {
+                number: 14,
+                title: "Evaluación Intermedia",
+                preview: "Evaluación completa del progreso y ajuste del plan final.",
+                objectives: ["Autoevaluación", "Planificación", "Motivación"],
+                materials: "🧰 Lista verificación, cuaderno",
+                difficulty: "Evaluación"
+            },
+            {
+                number: 15,
+                title: "Teatro y Dramatización",
+                preview: "Uso de dramatización para desarrollar expresión oral y confianza.",
+                objectives: ["Expresión Oral", "Confianza", "Creatividad"],
+                materials: "🧰 Disfraces, títeres, escenario",
+                difficulty: "Avanzado"
+            },
+            {
+                number: 16,
+                title: "Construcción de Frases",
+                preview: "Técnicas específicas para alargar oraciones naturalmente.",
+                objectives: ["Sintaxis", "Gramática", "Fluidez"],
+                materials: "🧰 Tarjetas palabras, plantillas",
+                difficulty: "Avanzado"
+            },
+            {
+                number: 17,
+                title: "Conversación Guiada",
+                preview: "Práctica de conversaciones estructuradas sobre temas específicos.",
+                objectives: ["Pragmática", "Turnos", "Temas"],
+                materials: "🧰 Láminas conversación, cronómetro",
+                difficulty: "Avanzado"
+            },
+            {
+                number: 18,
+                title: "Solución de Problemas",
+                preview: "Uso del lenguaje para resolver problemas y expresar soluciones.",
+                objectives: ["Razonamiento", "Expresión", "Lógica"],
+                materials: "🧰 Puzzles, situaciones problema",
+                difficulty: "Avanzado"
+            },
+            {
+                number: 19,
+                title: "Preparación Social",
+                preview: "Habilidades comunicativas para diferentes contextos sociales.",
+                objectives: ["Pragmática", "Cortesía", "Adaptación"],
+                materials: "🧰 Situaciones sociales, juegos rol",
+                difficulty: "Avanzado"
+            },
+            {
+                number: 20,
+                title: "Integración de Habilidades",
+                preview: "Combinación de todas las habilidades trabajadas en actividades complejas.",
+                objectives: ["Integración", "Fluidez", "Confianza"],
+                materials: "🧰 Actividades complejas, proyectos",
+                difficulty: "Avanzado"
+            },
+            {
+                number: 21,
+                title: "Evaluación Final y Celebración",
+                preview: "Evaluación completa del progreso y celebración de logros.",
+                objectives: ["Evaluación", "Celebración", "Planificación Futura"],
+                materials: "🧰 Certificado, registro final",
+                difficulty: "Evaluación"
+            }
+        ];
+
+        // Variables globales
+        let currentAge = null;
+        let completedSections = 0;
+        let breathingInterval = null;
+        let isBreathing = false;
+        let completedDays = new Set();
+        let currentModalDay = null;
+
+        // Funciones de prueba para debugging
+        window.testModule4 = function() {
+            console.log('=== PRUEBA MÓDULO 4 ===');
+            console.log('currentAge:', currentAge);
+            console.log('Botones edad:', document.querySelectorAll('.age-btn').length);
+            console.log('Botones tab:', document.querySelectorAll('.tab-btn').length);
+            console.log('Contenidos tab:', document.querySelectorAll('.tab-content').length);
+            
+            // Probar selección de edad
+            console.log('Probando selección de edad 4...');
+            selectAge(4);
+            
+            // Probar cambio de tab
+            console.log('Probando cambio a tab retraso...');
+            showTab('retraso');
+        };
+
+        window.testSkillsEvaluation = function() {
+            console.log('=== PRUEBA EVALUACIÓN DE HABILIDADES ===');
+            console.log('currentAge:', currentAge);
+            
+            if (!currentAge) {
+                console.log('Seleccionando edad 4 para prueba...');
+                selectAge(4);
+            }
+            
+            console.log('Cambiando a tab retraso...');
+            showTab('retraso');
+            
+            console.log('Llamando updateSkillsChecklist...');
+            updateSkillsChecklist();
+            
+            console.log('Elementos skills encontrados:');
+            const skillsContainer = document.getElementById(`skills-${currentAge}`);
+            console.log('Container:', skillsContainer);
+            
+            if (skillsContainer) {
+                const checkboxes = skillsContainer.querySelectorAll('input[type="checkbox"]');
+                console.log('Checkboxes encontrados:', checkboxes.length);
+            }
+        };
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM cargado, inicializando módulo 4...');
+            initializeModule();
+            setupEventListeners();
+            loadProgress();
+            generateCalendar();
+            
+            // Hacer funciones disponibles globalmente para debugging
+            window.selectAge = selectAge;
+            window.showTab = showTab;
+            window.updateSkillsChecklist = updateSkillsChecklist;
+            window.evaluateSkills = evaluateSkills;
+            
+            console.log('Módulo 4 inicializado. Usa testModule4() o testSkillsEvaluation() para probar.');
+        });
+
+        function initializeModule() {
+            updateProgress();
+        }
+
+        function setupEventListeners() {
+            console.log('Configurando event listeners...');
+            
+            // Botones de edad
+            const ageButtons = document.querySelectorAll('.age-btn');
+            console.log('Botones de edad encontrados:', ageButtons.length);
+            
+            ageButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    console.log('Clic en edad:', this.dataset.age);
+                    selectAge(parseInt(this.dataset.age));
+                });
+            });
+
+            // Tabs
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            console.log('Tabs encontrados:', tabButtons.length);
+            
+            tabButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    console.log('Clic en tab:', this.dataset.tab);
+                    showTab(this.dataset.tab);
+                });
+            });
+        }
+
+        function selectAge(age) {
+            console.log('Seleccionando edad:', age);
+            currentAge = age;
+            
+            // Actualizar botones de edad
+            document.querySelectorAll('.age-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            const activeBtn = document.querySelector(`[data-age="${age}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+                console.log('Botón activado para edad:', age);
+            } else {
+                console.error('No se encontró botón para edad:', age);
+            }
+            
+            // Actualizar contenido específico por edad
+            console.log('Actualizando contenido para edad:', age);
+            updateTartamudezContent();
+            updatePronunciacionContent();
+            updateRetrasoContent();
+            updateSkillsChecklist();
+            
+            // Actualizar progreso
+            updateProgress();
+        }
+
+        function showTab(tabName) {
+            console.log('Mostrando tab:', tabName);
+            
+            // Actualizar botones de tab
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            const activeTabBtn = document.querySelector(`[data-tab="${tabName}"]`);
+            if (activeTabBtn) {
+                activeTabBtn.classList.add('active');
+                console.log('Tab button activado:', tabName);
+            } else {
+                console.error('No se encontró tab button:', tabName);
+            }
+            
+            // Mostrar contenido correspondiente
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            const tabContent = document.getElementById(tabName);
+            if (tabContent) {
+                tabContent.classList.add('active');
+                console.log('Tab content mostrado:', tabName);
+            } else {
+                console.error('No se encontró tab content:', tabName);
+            }
+            
+            // Si se cambia al tab de retraso, actualizar checklist de habilidades
+            if (tabName === 'retraso') {
+                console.log('Tab retraso activado, actualizando skills checklist...');
+                updateSkillsChecklist();
+            }
+            
+            // Actualizar progreso
+            updateProgress();
+        }
+
+        function updateTartamudezContent() {
+            if (!currentAge || !ageData[currentAge]) return;
+            
+            const data = ageData[currentAge].tartamudez;
+            
+            document.getElementById('tartamudez-title').textContent = data.title;
+            document.getElementById('tartamudez-description').textContent = data.description;
+            
+            const strategiesGrid = document.getElementById('tartamudez-strategies');
+            strategiesGrid.innerHTML = '';
+            
+            data.strategies.forEach(strategy => {
+                const strategyCard = document.createElement('div');
+                strategyCard.className = 'strategy-card';
+                strategyCard.style.background = `linear-gradient(135deg, ${strategy.color} 0%, ${strategy.color}dd 100%)`;
+                
+                strategyCard.innerHTML = `
+                    <div class="strategy-title">${strategy.title}</div>
+                    <ul class="strategy-steps">
+                        ${strategy.steps.map(step => `<li>${step}</li>`).join('')}
+                    </ul>
+                `;
+                
+                strategiesGrid.appendChild(strategyCard);
+            });
+        }
+
+        function updatePronunciacionContent() {
+            if (!currentAge || !ageData[currentAge]) return;
+            
+            const data = ageData[currentAge].pronunciacion;
+            
+            document.getElementById('pronunciacion-title').textContent = data.title;
+            document.getElementById('pronunciacion-description').textContent = data.description;
+            
+            const strategiesGrid = document.getElementById('pronunciacion-strategies');
+            strategiesGrid.innerHTML = '';
+            
+            data.strategies.forEach(strategy => {
+                const strategyCard = document.createElement('div');
+                strategyCard.className = 'strategy-card';
+                strategyCard.style.background = `linear-gradient(135deg, ${strategy.color} 0%, ${strategy.color}dd 100%)`;
+                
+                strategyCard.innerHTML = `
+                    <div class="strategy-title">${strategy.title}</div>
+                    <ul class="strategy-steps">
+                        ${strategy.steps.map(step => `<li>${step}</li>`).join('')}
+                    </ul>
+                `;
+                
+                strategiesGrid.appendChild(strategyCard);
+            });
+        }
+
+        function updateRetrasoContent() {
+            if (!currentAge || !ageData[currentAge]) return;
+            
+            const data = ageData[currentAge].retraso;
+            
+            document.getElementById('retraso-title').textContent = data.title;
+            document.getElementById('retraso-description').textContent = data.description;
+            
+            const strategiesGrid = document.getElementById('retraso-strategies');
+            strategiesGrid.innerHTML = '';
+            
+            data.strategies.forEach(strategy => {
+                const strategyCard = document.createElement('div');
+                strategyCard.className = 'strategy-card';
+                strategyCard.style.background = `linear-gradient(135deg, ${strategy.color} 0%, ${strategy.color}dd 100%)`;
+                
+                strategyCard.innerHTML = `
+                    <div class="strategy-title">${strategy.title}</div>
+                    <ul class="strategy-steps">
+                        ${strategy.steps.map(step => `<li>${step}</li>`).join('')}
+                    </ul>
+                `;
+                
+                strategiesGrid.appendChild(strategyCard);
+            });
+        }
+
+        function updateSkillsChecklist() {
+            if (!currentAge || !ageData[currentAge]) return;
+            
+            const data = ageData[currentAge].retraso;
+            const checklist = document.getElementById('skills-checklist');
+            
+            checklist.innerHTML = '';
+            
+            data.skills.forEach((skill, index) => {
+                const skillItem = document.createElement('div');
+                skillItem.className = 'skill-item';
+                skillItem.innerHTML = `
+                    <input type="checkbox" class="skill-checkbox" id="skill-${index}" data-skill="${index}">
+                    <label for="skill-${index}" style="color: white;">${skill}</label>
+                `;
+                checklist.appendChild(skillItem);
+            });
+        }
+
+        function generateCalendar() {
+            const calendarGrid = document.getElementById('calendar-grid');
+            if (!calendarGrid) return;
+            
+            // Limpiar solo los días, mantener los encabezados
+            const existingDays = calendarGrid.querySelectorAll('.calendar-day');
+            existingDays.forEach(day => day.remove());
+            
+            // Generar 21 días + algunos días vacíos para completar la grid
+            for (let i = 1; i <= 21; i++) {
+                const dayData = plan21Dias[i-1];
+                const dayElement = document.createElement('div');
+                
+                // Verificar si el día está completado
+                if (completedDays.has(i)) {
+                    dayElement.className = 'calendar-day completed';
+                } else {
+                dayElement.className = 'calendar-day therapy-day';
+                }
+                
+                dayElement.onclick = () => scrollToDayDetail(i);
+                
+                dayElement.innerHTML = `
+                    <div class="day-number">${i}</div>
+                    <div class="day-activity">${dayData.title}</div>
+                `;
+                
+                calendarGrid.appendChild(dayElement);
+            }
+            
+            // Agregar días vacíos para completar la última semana
+            const remainingDays = 7 - (21 % 7);
+            if (remainingDays < 7) {
+                for (let i = 0; i < remainingDays; i++) {
+                    const emptyDay = document.createElement('div');
+                    emptyDay.className = 'calendar-day';
+                    emptyDay.style.opacity = '0.3';
+                    calendarGrid.appendChild(emptyDay);
+                }
+            }
+        }
+
+        function generateDaysDetail() {
+            const daysDetail = document.getElementById('days-detail');
+            if (!daysDetail) return;
+            
+            daysDetail.innerHTML = '';
+            
+            plan21Dias.forEach(day => {
+                const dayCard = document.createElement('div');
+                dayCard.className = 'day-card';
+                dayCard.id = `day-${day.number}`;
+                
+                dayCard.innerHTML = `
+                    <div class="day-card-number">${day.number}</div>
+                    <div class="day-title">${day.title}</div>
+                    <div class="day-preview">${day.preview}</div>
+                    <div class="day-objectives">
+                        <h4>🎯 Habilidades a desarrollar:</h4>
+                        <ul>
+                            ${day.objectives.map(obj => `<li>${obj}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div style="margin: 10px 0;">
+                        ${day.materials}
+                    </div>
+                    <div class="day-difficulty">${day.difficulty}</div>
+                `;
+                
+                daysDetail.appendChild(dayCard);
+            });
+        }
+
+        function scrollToDayDetail(dayNumber) {
+            openActivityModal(dayNumber);
+        }
+
+        function openActivityModal(dayNumber) {
+            const dayData = plan21Dias[dayNumber - 1];
+            if (!dayData) return;
+            
+            currentModalDay = dayNumber;
+            
+            // Actualizar contenido del modal
+            document.getElementById('modalDayNumber').textContent = dayNumber;
+            document.getElementById('modalActivityTitle').textContent = dayData.title;
+            document.getElementById('modalActivityPreview').textContent = dayData.preview;
+            document.getElementById('modalMaterialsList').textContent = dayData.materials;
+            document.getElementById('modalDifficultyBadge').textContent = dayData.difficulty;
+            
+            // Actualizar objetivos
+            const objectivesList = document.getElementById('modalObjectivesList');
+            objectivesList.innerHTML = '';
+            dayData.objectives.forEach(objective => {
+                const li = document.createElement('li');
+                li.textContent = objective;
+                objectivesList.appendChild(li);
+            });
+            
+            // Actualizar título del modal
+            document.getElementById('modalTitle').textContent = `Día ${dayNumber} - ${dayData.title}`;
+            
+            // Actualizar botón de completado
+            const completeBtn = document.getElementById('completeActivityBtn');
+            if (completedDays.has(dayNumber)) {
+                completeBtn.innerHTML = '✅ Completado';
+                completeBtn.style.background = 'linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%)';
+                completeBtn.disabled = true;
+            } else {
+                completeBtn.innerHTML = '✅ Marcar como Completado';
+                completeBtn.style.background = 'linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)';
+                completeBtn.disabled = false;
+            }
+            
+            // Mostrar modal
+            document.getElementById('activityModal').classList.add('show');
+            
+            // Prevenir scroll del body
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeActivityModal() {
+            document.getElementById('activityModal').classList.remove('show');
+            
+            // Restaurar scroll del body
+            document.body.style.overflow = 'auto';
+        }
+
+        // Cerrar modal al hacer clic fuera del contenido
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('activityModal');
+            const modalContent = modal.querySelector('.activity-modal-content');
+            
+            if (event.target === modal && !modalContent.contains(event.target)) {
+                closeActivityModal();
+            }
+        });
+
+        // Cerrar modal con tecla Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeActivityModal();
+            }
+        });
+
+        function markDayCompleted() {
+            if (!currentModalDay) return;
+            
+            completedDays.add(currentModalDay);
+            
+            // Actualizar calendario
+            updateCalendarDay(currentModalDay);
+            
+            // Actualizar botón
+            const completeBtn = document.getElementById('completeActivityBtn');
+            completeBtn.innerHTML = '✅ Completado';
+            completeBtn.style.background = 'linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%)';
+            completeBtn.disabled = true;
+            
+            // Guardar progreso
+            saveProgress();
+            
+            // Mostrar notificación
+            alert(`🎉 ¡Día ${currentModalDay} completado! Excelente progreso.`);
+            
+            // Cerrar modal después de 1 segundo
+                setTimeout(() => {
+                closeActivityModal();
+            }, 1000);
+        }
+
+        function updateCalendarDay(dayNumber) {
+            const calendarGrid = document.getElementById('calendar-grid');
+            const dayElements = calendarGrid.querySelectorAll('.calendar-day');
+            
+            // Los primeros 7 elementos son los headers, así que el día 1 está en el índice 7
+            const dayElement = dayElements[dayNumber + 6]; // +6 porque hay 7 headers (índice 0-6)
+            
+            if (dayElement) {
+                dayElement.classList.remove('therapy-day');
+                dayElement.classList.add('completed');
+            }
+        }
+
+        function saveProgress() {
+            const progressData = {
+                completedDays: Array.from(completedDays),
+                currentAge: currentAge,
+                completedSections: completedSections,
+                lastUpdate: new Date().toISOString()
+            };
+            
+            localStorage.setItem('module4Progress', JSON.stringify(progressData));
+        }
+
+        function loadProgress() {
+            try {
+                const saved = localStorage.getItem('module4Progress');
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    if (data.completedDays) {
+                        completedDays = new Set(data.completedDays);
+                    }
+                    if (data.currentAge) {
+                        currentAge = data.currentAge;
+                    }
+                    if (data.completedSections) {
+                        completedSections = data.completedSections;
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading progress:', error);
+            }
+        }
+
+        function checkTartamudezAnswer(answer) {
+            const feedback = document.getElementById('tartamudez-feedback');
+            feedback.style.display = 'block';
+            
+            if (answer === 'right') {
+                feedback.innerHTML = `
+                    <div style="background: rgba(0, 200, 83, 0.2); padding: 15px; border-radius: 8px; border-left: 4px solid #00c853;">
+                        <strong>✅ ¡CORRECTO!</strong><br>
+                        <strong>¿Por qué funciona?</strong> Respondes al mensaje, no a CÓMO habla. Hablas despacio como modelo natural sin presionar.
+                    </div>
+                `;
+            } else {
+                feedback.innerHTML = `
+                    <div style="background: rgba(244, 67, 54, 0.2); padding: 15px; border-radius: 8px; border-left: 4px solid #f44336;">
+                        <strong>❌ INCORRECTO</strong><br>
+                        <strong>¿Por qué está mal?</strong> Le das más atención a CÓMO habla que a QUÉ dice. Esto aumenta la ansiedad.
+                    </div>
+                `;
+            }
+        }
+
+        function startBreathingExercise() {
+            const circle = document.getElementById('breathingCircle');
+            const text = document.getElementById('breathingText');
+            
+            if (isBreathing) {
+                clearInterval(breathingInterval);
+                isBreathing = false;
+                circle.classList.remove('inhale', 'exhale');
+                text.textContent = 'Iniciar';
+                return;
+            }
+            
+            isBreathing = true;
+            let phase = 'inhale';
+            
+            function breathingCycle() {
+                if (phase === 'inhale') {
+                    circle.classList.remove('exhale');
+                    circle.classList.add('inhale');
+                    text.textContent = 'Inspira...';
+                    phase = 'exhale';
+                } else {
+                    circle.classList.remove('inhale');
+                    circle.classList.add('exhale');
+                    text.textContent = 'Exhala...';
+                    phase = 'inhale';
+                }
+            }
+            
+            breathingCycle();
+            breathingInterval = setInterval(breathingCycle, 4000);
+            
+            // Parar automáticamente después de 1 minuto
+            setTimeout(() => {
+                if (isBreathing) {
+                    clearInterval(breathingInterval);
+                    isBreathing = false;
+                    circle.classList.remove('inhale', 'exhale');
+                    text.textContent = 'Completado ✓';
+                }
+            }, 60000);
+        }
+
+        function playAnimalSound(animal) {
+            const feedback = document.getElementById('sound-feedback');
+            const sounds = {
+                perro: {
+                    sound: 'GUAU-GUAU',
+                    instruction: 'Exagera los labios al pronunciar las letras P y B. Haz que tu hijo te mire mientras lo haces.',
+                    target: 'Fortalece músculos labiales para sonidos P-B'
+                },
+                gato: {
+                    sound: 'MIAU',
+                    instruction: 'Cierra bien los labios en la M. Mantén el sonido "Mmmm" por 3 segundos.',
+                    target: 'Desarrolla control de sonidos nasales M-N'
+                },
+                vaca: {
+                    sound: 'MUUU',
+                    instruction: 'Alarga el sonido "Mmmm" y luego abre para "UUU". Siente la vibración en los labios.',
+                    target: 'Combina consonantes nasales con vocales'
+                },
+                pato: {
+                    sound: 'CUAC-CUAC',
+                    instruction: 'Sonido fuerte al final con la K. Siente como la lengua toca el paladar.',
+                    target: 'Fortalece sonidos velares K-G'
+                },
+                caballo: {
+                    sound: 'IIIH-AAA',
+                    instruction: 'Lengua arriba para el sonido fuerte. Alterna entre agudo y grave.',
+                    target: 'Ejercita músculos linguales T-D'
+                }
+            };
+            
+            const animalData = sounds[animal];
+            feedback.innerHTML = `
+                <div style="text-align: left;">
+                    <strong>🔊 ${animalData.sound}</strong><br>
+                    <strong>📋 Instrucción:</strong> ${animalData.instruction}<br>
+                    <strong>🎯 Objetivo:</strong> ${animalData.target}
+                </div>
+            `;
+        }
+
+        function evaluateSkills() {
+            if (!currentAge) {
+                alert('Por favor, selecciona la edad de tu hijo primero.');
+                return;
+            }
+            
+            const checkedSkills = document.querySelectorAll('.skill-checkbox:checked').length;
+            const totalSkills = ageData[currentAge].retraso.skills.length;
+            const percentage = (checkedSkills / totalSkills) * 100;
+            
+            const results = document.getElementById('evaluation-results');
+            results.style.display = 'block';
+            
+            let evaluation, color, recommendations;
+            
+            if (percentage >= 80) {
+                evaluation = 'Desarrollo Normal';
+                color = '#00c853';
+                recommendations = `¡Excelente! Tu hijo está desarrollándose normalmente para su edad. Continúa con las actividades de estimulación diarias.`;
+            } else if (percentage >= 60) {
+                evaluation = 'Desarrollo Ligeramente Retrasado';
+                color = '#ff9800';
+                recommendations = `Tu hijo necesita estimulación adicional. Dedica 20-30 minutos diarios a actividades específicas del plan de 21 días.`;
+            } else {
+                evaluation = 'Retraso Significativo';
+                color = '#f44336';
+                recommendations = `Es recomendable consultar con un fonoaudiólogo. Mientras tanto, implementa el plan intensivo de estimulación.`;
+            }
+            
+            results.innerHTML = `
+                <div style="background: rgba(255,255,255,0.9); color: #333; padding: 15px; border-radius: 8px; border-left: 4px solid ${color};">
+                    <strong>📊 Resultado: ${evaluation}</strong><br>
+                    <strong>📈 Puntuación:</strong> ${checkedSkills}/${totalSkills} habilidades (${percentage.toFixed(0)}%)<br><br>
+                    <strong>💡 Recomendaciones:</strong><br>
+                    ${recommendations}
+                </div>
+            `;
+        }
+
+        function updateCalendarDay(dayNumber) {
+            const dayElement = document.querySelector(`.calendar-day[onclick*="${dayNumber}"]`);
+            if (dayElement && completedDays.has(dayNumber)) {
+                dayElement.classList.add('completed');
+                dayElement.style.background = 'linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)';
+                dayElement.style.color = 'white';
+                dayElement.querySelector('.day-number').innerHTML = `${dayNumber} ✅`;
+            }
+        }
+
+        function markDayCompleted() {
+            if (!currentModalDay) return;
+            
+            completedDays.add(currentModalDay);
+            
+            // Actualizar calendario
+            updateCalendarDay(currentModalDay);
+            
+            // Actualizar botón
+            const completeBtn = document.getElementById('completeActivityBtn');
+            completeBtn.innerHTML = '✅ Completado';
+            completeBtn.style.background = 'linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%)';
+            completeBtn.disabled = true;
+            
+            // Guardar progreso
+            saveProgress();
+            
+            // Mostrar notificación
+            showNotification('¡Actividad completada! 🎉', 'success');
+        }
+
+        function saveProgress() {
+            const progressData = {
+                completedDays: Array.from(completedDays),
+                lastUpdated: new Date().toISOString()
+            };
+            localStorage.setItem('modulo4Progress', JSON.stringify(progressData));
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('modulo4Progress');
+            if (saved) {
+                const progressData = JSON.parse(saved);
+                completedDays = new Set(progressData.completedDays || []);
+                
+                // Actualizar calendario con días completados
+                completedDays.forEach(day => updateCalendarDay(day));
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#27ae60' : '#3498db'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                z-index: 10001;
+                font-weight: 600;
+                animation: slideInRight 0.3s ease;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 3000);
+        }
+
+        function checkTartamudezAnswer(answer) {
+            const feedback = document.getElementById('tartamudez-feedback');
+            
+            if (answer === 'right') {
+                feedback.innerHTML = `
+                    <div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 8px; border-left: 4px solid #28a745;">
+                        <strong>✅ ¡CORRECTO!</strong><br>
+                        Esta es la respuesta perfecta. Te enfocas en el MENSAJE, no en cómo lo dice. 
+                        Esto reduce la ansiedad y permite que el niño se sienta escuchado y comprendido.
+                    </div>
+                `;
+            } else {
+                feedback.innerHTML = `
+                    <div style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 8px; border-left: 4px solid #dc3545;">
+                        <strong>❌ Evita esta respuesta</strong><br>
+                        Aunque bien intencionada, esta respuesta hace que el niño se enfoque en SU MANERA DE HABLAR 
+                        en lugar del mensaje. Puede aumentar la ansiedad y empeorar la tartamudez.
+                    </div>
+                `;
+            }
+            
+            feedback.style.display = 'block';
+            updateProgress();
+        }
+
+        function startBreathingExercise() {
+            const circle = document.getElementById('breathingCircle');
+            const text = document.getElementById('breathingText');
+            
+            if (isBreathing) {
+                clearInterval(breathingInterval);
+                isBreathing = false;
+                circle.style.transform = 'scale(1)';
+                circle.style.background = 'linear-gradient(135deg, #74b9ff 0%, #0984e3 100%)';
+                text.textContent = 'Iniciar';
+                return;
+            }
+            
+            isBreathing = true;
+            let phase = 'inhale';
+            let count = 0;
+            
+            breathingInterval = setInterval(() => {
+                if (phase === 'inhale') {
+                    circle.style.transform = 'scale(1.3)';
+                    circle.style.background = 'linear-gradient(135deg, #00b894 0%, #00a085 100%)';
+                    text.textContent = `Inhala ${4-count}`;
+                    count++;
+                    
+                    if (count >= 4) {
+                        phase = 'exhale';
+                        count = 0;
+                    }
+                } else {
+                    circle.style.transform = 'scale(1)';
+                    circle.style.background = 'linear-gradient(135deg, #fdcb6e 0%, #e17055 100%)';
+                    text.textContent = `Exhala ${4-count}`;
+                    count++;
+                    
+                    if (count >= 4) {
+                        phase = 'inhale';
+                        count = 0;
+                    }
+                }
+            }, 1000);
+        }
+
+        function checkSkills(age) {
+            const checkboxes = document.querySelectorAll(`#skills-${age} input[type="checkbox"]`);
+            const checkedSkills = Array.from(checkboxes).filter(cb => cb.checked).length;
+            const totalSkills = checkboxes.length;
+            
+            if (checkedSkills === 0) {
+                alert('Por favor, marca al menos una habilidad para evaluar.');
+                return;
+            }
+            
+            const percentage = (checkedSkills / totalSkills) * 100;
+            
+            const results = document.getElementById('evaluation-results');
+            results.style.display = 'block';
+            
+            let evaluation, color, recommendations;
+            
+            if (percentage >= 80) {
+                evaluation = 'Desarrollo Normal';
+                color = '#00c853';
+                recommendations = `¡Excelente! Tu hijo está desarrollándose normalmente para su edad. Continúa con las actividades de estimulación diarias.`;
+            } else if (percentage >= 60) {
+                evaluation = 'Desarrollo Ligeramente Retrasado';
+                color = '#ff9800';
+                recommendations = `Tu hijo necesita estimulación adicional. Dedica 20-30 minutos diarios a actividades específicas del plan de 21 días.`;
+            } else {
+                evaluation = 'Retraso Significativo';
+                color = '#f44336';
+                recommendations = `Es recomendable consultar con un fonoaudiólogo. Mientras tanto, implementa el plan intensivo de estimulación.`;
+            }
+            
+            results.innerHTML = `
+                <div style="background: rgba(255,255,255,0.9); color: #333; padding: 15px; border-radius: 8px; border-left: 4px solid ${color};">
+                    <strong>📊 Resultado: ${evaluation}</strong><br>
+                    <strong>📈 Puntuación:</strong> ${checkedSkills}/${totalSkills} habilidades (${percentage.toFixed(0)}%)<br><br>
+                    <strong>💡 Recomendaciones:</strong><br>
+                    ${recommendations}
+                </div>
+            `;
+            
+            updateProgress();
+        }
+
+        function updateSkillsChecklist() {
+            console.log('updateSkillsChecklist llamada, currentAge:', currentAge);
+            console.log('ageData[currentAge]:', ageData[currentAge]);
+            
+            if (!currentAge || !ageData[currentAge]) {
+                console.log('No hay edad seleccionada o no hay datos para la edad');
+                // Mostrar mensaje de seleccionar edad
+                document.getElementById('no-age-selected').style.display = 'block';
+                document.getElementById('evaluate-btn').style.display = 'none';
+                
+                // Ocultar todos los checklists
+                document.querySelectorAll('.skills-checklist').forEach(checklist => {
+                    checklist.style.display = 'none';
+                });
+                return;
+            }
+            
+            // Ocultar mensaje de seleccionar edad
+            document.getElementById('no-age-selected').style.display = 'none';
+            document.getElementById('evaluate-btn').style.display = 'inline-block';
+            
+            const data = ageData[currentAge].retraso;
+            console.log('data.retraso:', data);
+            console.log('data.skills:', data.skills);
+            
+            if (!data || !data.skills) {
+                console.error('No hay datos de skills para la edad', currentAge);
+                return;
+            }
+            
+            // Ocultar todos los checklists
+            document.querySelectorAll('.skills-checklist').forEach(checklist => {
+                checklist.style.display = 'none';
+            });
+            
+            // Mostrar checklist para la edad actual
+            const skillsContainer = document.getElementById(`skills-${currentAge}`);
+            console.log('skillsContainer:', skillsContainer);
+            
+            if (!skillsContainer) {
+                console.error('No se encontró skillsContainer para edad', currentAge);
+                return;
+            }
+            
+            skillsContainer.style.display = 'block';
+            const skillsGrid = skillsContainer.querySelector('.skills-grid');
+            console.log('skillsGrid:', skillsGrid);
+            
+            if (!skillsGrid) {
+                console.error('No se encontró skillsGrid');
+                return;
+            }
+            
+            skillsGrid.innerHTML = '';
+            
+            console.log('Creando', data.skills.length, 'elementos de habilidades');
+            data.skills.forEach((skill, index) => {
+                const skillItem = document.createElement('div');
+                skillItem.className = 'skill-item';
+                skillItem.innerHTML = `
+                    <label>
+                        <input type="checkbox" id="skill-${currentAge}-${index}" onchange="updateSkillStatus(this)">
+                        <span>${skill}</span>
+                    </label>
+                `;
+                skillsGrid.appendChild(skillItem);
+                console.log('Agregada habilidad:', skill);
+            });
+        }
+
+        function updateSkillStatus(checkbox) {
+            const skillItem = checkbox.closest('.skill-item');
+            if (checkbox.checked) {
+                skillItem.classList.add('completed');
+            } else {
+                skillItem.classList.remove('completed');
+            }
+        }
+
+        function evaluateSkills() {
+            console.log('evaluateSkills llamada, currentAge:', currentAge);
+            
+            if (!currentAge) {
+                alert('Por favor, selecciona la edad de tu hijo primero.');
+                return;
+            }
+            
+            const checkboxes = document.querySelectorAll(`#skills-${currentAge} input[type="checkbox"]`);
+            console.log('Checkboxes encontrados:', checkboxes.length);
+            
+            const checkedSkills = Array.from(checkboxes).filter(cb => cb.checked).length;
+            const totalSkills = checkboxes.length;
+            
+            console.log('Habilidades marcadas:', checkedSkills, 'de', totalSkills);
+            
+            if (totalSkills === 0) {
+                alert('No se encontraron habilidades para evaluar. Selecciona una edad válida.');
+                return;
+            }
+            
+            const percentage = (checkedSkills / totalSkills) * 100;
+            
+            const results = document.getElementById('evaluation-results');
+            results.style.display = 'block';
+            
+            let evaluation, color, recommendations;
+            
+            if (percentage >= 80) {
+                evaluation = 'Desarrollo Normal';
+                color = '#28a745';
+                recommendations = `¡Excelente! Tu hijo de ${currentAge} años está desarrollándose normalmente. Continúa con actividades de estimulación regulares para mantener el progreso.`;
+            } else if (percentage >= 60) {
+                evaluation = 'Desarrollo Ligeramente Retrasado';
+                color = '#fd7e14';
+                recommendations = `Tu hijo necesita estimulación adicional. Dedica 20-30 minutos diarios a las actividades del plan de 21 días, enfocándote en las áreas no dominadas.`;
+            } else if (percentage >= 40) {
+                evaluation = 'Retraso Moderado';
+                color = '#dc3545';
+                recommendations = `Se recomienda consultar con un fonoaudiólogo. Mientras tanto, implementa el plan intensivo de estimulación diaria y considera actividades estructuradas.`;
+            } else {
+                evaluation = 'Retraso Significativo';
+                color = '#6f42c1';
+                recommendations = `Es importante buscar evaluación profesional inmediata. Un fonoaudiólogo puede crear un plan personalizado. Implementa actividades intensivas diarias.`;
+            }
+            
+            results.innerHTML = `
+                <div style="background: rgba(255,255,255,0.95); color: #2c3e50; padding: 20px; border-radius: 12px; border-left: 5px solid ${color}; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                        <div style="width: 12px; height: 12px; background: ${color}; border-radius: 50%;"></div>
+                        <strong style="font-size: 1.1em;">📊 ${evaluation}</strong>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                        <strong>📈 Puntuación:</strong> ${checkedSkills}/${totalSkills} habilidades (${percentage.toFixed(0)}%)
+                    </div>
+                    <div style="line-height: 1.6;">
+                        <strong>💡 Recomendaciones personalizadas:</strong><br>
+                        ${recommendations}
+                    </div>
+                    ${percentage < 80 ? `
+                        <div style="margin-top: 15px; padding: 12px; background: #e3f2fd; border-radius: 8px; border-left: 3px solid #2196f3;">
+                            <strong>🎯 Próximos pasos:</strong> Revisa el plan de 21 días y enfócate en las habilidades no marcadas.
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            // Scroll hacia los resultados
+            results.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            updateProgress();
+        }
+
+        function updateProgress() {
+            let progress = 0;
+            completedSections = 0;
+            
+            // Verificar si se seleccionó edad
+            if (currentAge) {
+                progress += 25;
+                completedSections++;
+            }
+            
+            // Verificar qué tabs están activos/visitados
+            const activeTab = document.querySelector('.tab-btn.active').dataset.tab;
+            if (activeTab && currentAge) {
+                progress += 25;
+                if (completedSections === 1) completedSections++;
+            }
+            
+            // Si se completó la evaluación de habilidades
+            const evaluationResults = document.getElementById('evaluation-results');
+            if (evaluationResults && evaluationResults.style.display === 'block') {
+                progress += 25;
+                if (completedSections === 2) completedSections++;
+            }
+            
+            // Si se usó algún ejercicio interactivo
+            const tartamudezFeedback = document.getElementById('tartamudez-feedback');
+            if (tartamudezFeedback && tartamudezFeedback.style.display === 'block') {
+                progress += 25;
+                if (completedSections === 3) completedSections++;
+            }
+            
+            // Actualizar barra de progreso
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            
+            if (progressBar) {
+                progressBar.style.width = progress + '%';
+            }
+            
+            if (progressText) {
+                progressText.textContent = `${progress}% completado • ${completedSections} de 4 secciones`;
+            }
+        }
+
+        // Función para completar el módulo
+        function completeModule() {
+            // Marcar el módulo como completado en localStorage
+            localStorage.setItem('modulo4_completed', 'true');
+            
+            // Mostrar mensaje de felicitación
+            alert('🎉 ¡FELICITACIONES! Has completado el Módulo 4: Dificultades Comunes y Soluciones.\n\n✅ Tu progreso ha sido guardado.\n🔓 El Módulo 5 se ha desbloqueado en el Dashboard.\n\n¡Continúa con tu aprendizaje!');
+            
+            // Cambiar el botón para mostrar que está completado
+            const completeBtn = document.getElementById('completeModuleBtn');
+            if (completeBtn) {
+                completeBtn.innerHTML = '✅ Módulo Completado';
+                completeBtn.style.background = 'linear-gradient(135deg, #28a745 0%, #20c997 100%)';
+                completeBtn.disabled = true;
+                completeBtn.style.cursor = 'default';
+                completeBtn.style.opacity = '0.8';
+            }
+            
+            // Ya no redirigir automáticamente - el usuario puede usar el botón del Dashboard cuando quiera
+        }
+
+        // Función para mostrar progreso
+        function showProgress() {
+            const progress = (completedSections / 4) * 100;
+            
+            const progressMessage = `
+📊 TU PROGRESO EN MÓDULO 4:
+
+📈 Progreso general: ${Math.round(progress)}%
+📚 Secciones completadas: ${completedSections} de 4
+👶 Edad seleccionada: ${currentAge ? currentAge + ' años' : 'No seleccionada'}
+
+🎯 Dificultades revisadas:
+   ${currentAge ? '✅ Contenido personalizado cargado' : '⚠️ Selecciona una edad primero'}
+
+${progress === 100 ? '🎉 ¡MÓDULO COMPLETADO! Puedes continuar al siguiente.' : '💪 ¡Sigue revisando! Cada sección cuenta.'}
+            `;
+            
+            alert(progressMessage);
+        }
+
+        // Función logout
+        function logout() {
+            if (confirm('¿Estás seguro que quieres salir? Tu progreso se guardará automáticamente.')) {
+                // Limpiar datos de sesión
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('isPurchased');
+                localStorage.removeItem('currentUser');
+                
+                // Ir a la página principal
+                window.location.href = '../index.html';
+            }
+        }
+    </script>
+</body>
+</html>

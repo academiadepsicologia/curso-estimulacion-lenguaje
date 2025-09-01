@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Curso - Dashboard - Academia de Psicología</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .user-info {
+            background: rgba(255,255,255,0.15);
+            padding: 15px 25px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .logout-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            margin-left: 20px;
+            transition: background 0.3s;
+            display: inline-block;
+            margin-top: 10px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .module-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .module-card.locked {
+            opacity: 0.7;
+            background: #f5f5f5;
+        }
+
+        .module-card.locked::after {
+            content: '🔒';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+        }
+
+        .module-card.completed {
+            border: 3px solid #4caf50;
+        }
+
+
+
+        .module-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .module-title {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .module-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .module-topics {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .module-topics h4 {
+            color: #764ba2;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .module-topics ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .module-topics li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.85rem;
+        }
+
+        .module-topics li:before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+        }
+
+        .module-duration {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .progress-overview {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #4caf50, #81c784);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: width 1s ease;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #764ba2;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .modules-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><a href="../index.html" style="color: white; text-decoration: none;">🧠 Mi Curso de Estimulación del Lenguaje</a></h1>
+            <p>Desarrolla el potencial comunicativo de tu hijo</p>
+            <div class="user-info">
+                <span id="userName">👤 Estudiante</span> | 
+                <span id="currentDate"></span>
+                <button class="logout-btn" onclick="logout()">← Salir</button>
+            </div>
+        </div>
+
+        <div class="progress-overview">
+            <h2 style="margin-bottom: 15px;">Tu Progreso General</h2>
+            <div class="progress-bar">
+                <div class="progress-fill" id="mainProgress">0%</div>
+            </div>
+            
+            
+
+        </div>
+
+        <div class="modules-grid">
+            <!-- Módulo 1 -->
+            <div class="module-card" id="module1">
+                <div class="module-number">1</div>
+                <h3 class="module-title">Fundamentos del Desarrollo del Lenguaje</h3>
+                <p class="module-description">
+                    Comprende cómo se desarrolla el lenguaje en los niños y identifica las señales importantes.
+                </p>
+                <div class="module-topics">
+                    <h4>📚 Aprenderás:</h4>
+                    <ul>
+                        <li>Etapas del desarrollo (0-6 años)</li>
+                        <li>Señales de alerta por edad</li>
+                        <li>Mitos vs realidades</li>
+                        <li>Cuándo buscar ayuda</li>
+                    </ul>
+                </div>
+                <div class="module-duration">
+                    ⏱️ Duración: 45 minutos
+                </div>
+                <button class="btn" onclick="startModule(1)">Comenzar Módulo</button>
+            </div>
+
+            <!-- Módulo 2 -->
+            <div class="module-card locked" id="module2">
+                <div class="module-number">2</div>
+                <h3 class="module-title">Técnicas de Estimulación</h3>
+                <p class="module-description">
+                    Aprende técnicas prácticas para estimular el lenguaje en casa.
+                </p>
+                <div class="module-topics">
+                    <h4>📚 Aprenderás:</h4>
+                    <ul>
+                        <li>Modelado lingüístico</li>
+                        <li>Expansión del lenguaje</li>
+                        <li>Preguntas abiertas</li>
+                        <li>Ambientes ricos</li>
+                    </ul>
+                </div>
+                <div class="module-duration">
+                    ⏱️ Duración: 60 minutos
+                </div>
+                <button class="btn" disabled onclick="startModule(2)">🔒 Bloqueado</button>
+            </div>
+
+            <!-- Módulo 3 -->
+            <div class="module-card locked" id="module3">
+                <div class="module-number">3</div>
+                <h3 class="module-title">Actividades y Juegos</h3>
+                <p class="module-description">
+                    Descubre actividades lúdicas para cada edad.
+                </p>
+                <div class="module-topics">
+                    <h4>📚 Aprenderás:</h4>
+                    <ul>
+                        <li>Juegos por edades</li>
+                        <li>Cuentos interactivos</li>
+                        <li>Canciones educativas</li>
+                        <li>Actividades diarias</li>
+                    </ul>
+                </div>
+                <div class="module-duration">
+                    ⏱️ Duración: 50 minutos
+                </div>
+                <button class="btn" disabled onclick="startModule(3)">🔒 Bloqueado</button>
+            </div>
+
+            <!-- Módulo 4 -->
+            <div class="module-card locked" id="module4">
+                <div class="module-number">4</div>
+                <h3 class="module-title">Dificultades Comunes</h3>
+                <p class="module-description">
+                    Identifica y maneja las dificultades más comunes.
+                </p>
+                <div class="module-topics">
+                    <h4>📚 Aprenderás:</h4>
+                    <ul>
+                        <li>Tartamudez del desarrollo</li>
+                        <li>Problemas de pronunciación</li>
+                        <li>Retraso del lenguaje</li>
+                        <li>Plan de 21 días</li>
+                    </ul>
+                </div>
+                <div class="module-duration">
+                    ⏱️ Duración: 55 minutos
+                </div>
+                <button class="btn" disabled onclick="startModule(4)">🔒 Bloqueado</button>
+            </div>
+
+            <!-- Módulo 5 -->
+            <div class="module-card locked" id="module5">
+                <div class="module-number">5</div>
+                <h3 class="module-title">Plan Personalizado</h3>
+                <p class="module-description">
+                    Crea un plan adaptado a tu hijo.
+                </p>
+                <div class="module-topics">
+                    <h4>📚 Aprenderás:</h4>
+                    <ul>
+                        <li>Evaluación inicial</li>
+                        <li>Establecer objetivos</li>
+                        <li>Cronograma de actividades</li>
+                        <li>Seguimiento del progreso</li>
+                    </ul>
+                </div>
+                <div class="module-duration">
+                    ⏱️ Duración: 40 minutos
+                </div>
+                <button class="btn" disabled onclick="startModule(5)">🔒 Bloqueado</button>
+            </div>
+
+            <!-- Certificado Final -->
+            <div class="module-card locked" id="certificate-card">
+                <div class="module-number">🏆</div>
+                <h3 class="module-title">Certificado de Completación</h3>
+                <p class="module-description">
+                    ¡Felicitaciones! Has completado todo el curso.
+                </p>
+                <div class="module-topics" style="text-align: center;">
+                    <h4>🎓 Logros:</h4>
+                    <p>✅ 5 Módulos<br>
+                    ✅ +4 Horas<br>
+                    ✅ Certificado</p>
+                </div>
+                <button class="btn" disabled onclick="getCertificate()">🔒 Bloqueado</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función para iniciar módulos
+        function startModule(moduleNumber) {
+            // Verificar si el módulo está desbloqueado
+            let isUnlocked = false;
+            
+            if (moduleNumber === 1) {
+                // Módulo 1 siempre desbloqueado
+                isUnlocked = true;
+            } else {
+                // Verificar si el módulo anterior está completado
+                const prevCompleted = localStorage.getItem(`modulo${moduleNumber - 1}_completed`) === 'true';
+                isUnlocked = prevCompleted;
+            }
+            
+            if (!isUnlocked) {
+                alert(`🔒 Debes completar el Módulo ${moduleNumber - 1} para desbloquear el Módulo ${moduleNumber}.`);
+                return;
+            }
+
+            // Guardar el módulo actual
+            localStorage.setItem('current_module', moduleNumber.toString());
+
+            console.log(`🚀 Navegando al Módulo ${moduleNumber}`);
+            
+            // Navegar al módulo
+            window.location.href = `../modulo${moduleNumber}/index.html`;
+        }
+
+        // Verificar autenticación
+        function checkAuth() {
+            // MODO PRUEBAS: Siempre permitir acceso
+            const testMode = true; // Cambiar a false para activar protección real
+            
+            if (testMode) {
+                // En modo pruebas, simular que está logueado
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('isPurchased', 'true');
+                localStorage.setItem('currentUser', 'usuario-prueba');
+                console.log('🧪 DASHBOARD MODO PRUEBAS: Acceso automático concedido');
+                return true;
+            }
+            
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (!isLoggedIn) {
+                alert('Debes iniciar sesión para acceder al dashboard');
+                window.location.href = './index.html';
+                return false;
+            }
+            return true;
+        }
+
+        // Función de logout
+        function logout() {
+            if (confirm('¿Estás seguro de que quieres salir?')) {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('isPurchased');
+                localStorage.removeItem('currentUser');
+                window.location.href = '../index.html';
+            }
+        }
+
+        // Actualizar interfaz
+        function updateUI() {
+            // Obtener progreso real del localStorage
+            const modulo1Completed = localStorage.getItem('modulo1_completed') === 'true';
+            const modulo2Completed = localStorage.getItem('modulo2_completed') === 'true';
+            const modulo3Completed = localStorage.getItem('modulo3_completed') === 'true';
+            const modulo4Completed = localStorage.getItem('modulo4_completed') === 'true';
+            const modulo5Completed = localStorage.getItem('modulo5_completed') === 'true';
+            
+            // Contar módulos completados
+            const completedCount = [modulo1Completed, modulo2Completed, modulo3Completed, modulo4Completed, modulo5Completed].filter(Boolean).length;
+            
+            // Actualizar barra de progreso
+            const progress = (completedCount / 5) * 100;
+            const progressBar = document.getElementById('mainProgress');
+            if (progressBar) {
+                progressBar.style.width = progress + '%';
+                progressBar.textContent = Math.round(progress) + '%';
+            }
+            
+            // Actualizar estado visual de los módulos
+            updateModuleStates();
+            
+            console.log(`📊 Progreso actualizado: ${completedCount}/5 módulos (${Math.round(progress)}%)`);
+        }
+
+        // Actualizar estado visual de los módulos
+        function updateModuleStates() {
+            const modules = document.querySelectorAll('.module-card');
+            
+            modules.forEach((module, index) => {
+                const moduleNumber = index + 1;
+                
+                // Remover clases existentes
+                module.classList.remove('locked', 'completed');
+                
+                // Verificar si está completado
+                const isCompleted = localStorage.getItem(`modulo${moduleNumber}_completed`) === 'true';
+                
+                if (isCompleted) {
+                    module.classList.add('completed');
+                }
+                
+                // Sistema de desbloqueo: Módulo 1 siempre desbloqueado, los demás se desbloquean al completar el anterior
+                let isUnlocked = false;
+                
+                if (moduleNumber === 1) {
+                    // Módulo 1 siempre desbloqueado
+                    isUnlocked = true;
+                } else {
+                    // Verificar si el módulo anterior está completado
+                    const prevCompleted = localStorage.getItem(`modulo${moduleNumber - 1}_completed`) === 'true';
+                    isUnlocked = prevCompleted;
+                }
+                
+                // Actualizar el botón dinámicamente
+                const button = module.querySelector('.btn');
+                if (button) {
+                    if (isUnlocked) {
+                        // Módulo desbloqueado
+                        button.disabled = false;
+                        button.textContent = isCompleted ? 'Revisar Módulo' : 'Comenzar Módulo';
+                        button.style.background = isCompleted ? 'linear-gradient(135deg, #28a745 0%, #20c997 100%)' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                        button.style.cursor = 'pointer';
+                    } else {
+                        // Módulo bloqueado
+                        button.disabled = true;
+                        button.textContent = '🔒 Bloqueado';
+                        button.style.background = '#6c757d';
+                        button.style.cursor = 'not-allowed';
+                    }
+                }
+                
+                if (!isUnlocked) {
+                    module.classList.add('locked');
+                }
+                
+                console.log(`Módulo ${moduleNumber}: ${isCompleted ? 'Completado' : 'Pendiente'}, ${isUnlocked ? 'Desbloqueado' : 'Bloqueado'}`);
+            });
+        }
+
+        // Función de certificado (placeholder)
+        function getCertificate() {
+            alert('Completa todos los módulos para obtener tu certificado');
+        }
+
+        // Función para limpiar progreso (para pruebas)
+        function resetProgress() {
+            localStorage.removeItem('modulo1_completed');
+            localStorage.removeItem('modulo2_completed');
+            localStorage.removeItem('modulo3_completed');
+            localStorage.removeItem('modulo4_completed');
+            localStorage.removeItem('modulo5_completed');
+            localStorage.removeItem('current_module');
+            updateUI();
+            console.log('🔄 Progreso reiniciado');
+        }
+
+        // Función para simular completar módulo (para pruebas)
+        function completeModule(moduleNumber) {
+            localStorage.setItem(`modulo${moduleNumber}_completed`, 'true');
+            updateUI();
+            console.log(`✅ Módulo ${moduleNumber} marcado como completado`);
+        }
+
+        // Función de debug para ver el estado actual
+        window.debugProgress = function() {
+            console.log('=== DEBUG DEL PROGRESO ===');
+            
+            for (let i = 1; i <= 5; i++) {
+                const completed = localStorage.getItem(`modulo${i}_completed`);
+                console.log(`Módulo ${i}: ${completed === 'true' ? '✅ Completado' : '❌ No completado'} (valor: ${completed})`);
+            }
+            
+            console.log('\n=== ESTADO VISUAL ===');
+            const modules = document.querySelectorAll('.module-card');
+            modules.forEach((module, index) => {
+                const moduleNumber = index + 1;
+                const hasLocked = module.classList.contains('locked');
+                const hasCompleted = module.classList.contains('completed');
+                console.log(`Módulo ${moduleNumber}: ${hasLocked ? '🔒 Bloqueado' : '🔓 Desbloqueado'} ${hasCompleted ? '✅ Completado' : ''}`);
+            });
+            
+            console.log('\n=== LOCALSTORAGE COMPLETO ===');
+            for (let key in localStorage) {
+                if (key.includes('modulo') || key.includes('curso')) {
+                    console.log(`${key}: ${localStorage.getItem(key)}`);
+                }
+            }
+        };
+
+        // Función para mostrar diagnóstico en alert (sin consola)
+        window.showDebugInfo = function() {
+            let debugInfo = '🔍 DIAGNÓSTICO DEL SISTEMA\n\n';
+            
+            debugInfo += '📊 ESTADO DE MÓDULOS:\n';
+            for (let i = 1; i <= 5; i++) {
+                const completed = localStorage.getItem(`modulo${i}_completed`);
+                debugInfo += `Módulo ${i}: ${completed === 'true' ? '✅ Completado' : '❌ No completado'}\n`;
+            }
+            
+            debugInfo += '\n🔒 ESTADO VISUAL:\n';
+            const modules = document.querySelectorAll('.module-card');
+            modules.forEach((module, index) => {
+                const moduleNumber = index + 1;
+                const hasLocked = module.classList.contains('locked');
+                const hasCompleted = module.classList.contains('completed');
+                debugInfo += `Módulo ${moduleNumber}: ${hasLocked ? '🔒 Bloqueado' : '🔓 Desbloqueado'} ${hasCompleted ? '✅' : ''}\n`;
+            });
+            
+            debugInfo += '\n💾 DATOS GUARDADOS:\n';
+            let hasData = false;
+            for (let key in localStorage) {
+                if (key.includes('modulo') || key.includes('curso')) {
+                    debugInfo += `${key}: ${localStorage.getItem(key)}\n`;
+                    hasData = true;
+                }
+            }
+            if (!hasData) {
+                debugInfo += 'No hay datos de progreso guardados\n';
+            }
+            
+            alert(debugInfo);
+        };
+
+        // Función para convertir progreso existente al formato correcto
+        window.convertExistingProgress = function() {
+            let convertedModules = [];
+            
+            // Buscar y convertir diferentes formatos de progreso
+            
+            // Formato 1: moduleXProgress con completedSections
+            for (let i = 1; i <= 5; i++) {
+                const moduleProgress = localStorage.getItem(`module${i}Progress`);
+                if (moduleProgress) {
+                    try {
+                        const progress = JSON.parse(moduleProgress);
+                        // Si tiene secciones completadas o porcentaje alto, marcar como completado
+                        if ((progress.completedSections && progress.completedSections.length >= 3) || 
+                            (progress.percentComplete && progress.percentComplete >= 75)) {
+                            localStorage.setItem(`modulo${i}_completed`, 'true');
+                            convertedModules.push(i);
+                        }
+                    } catch (e) {}
+                }
+            }
+            
+            // Formato 2: courseProgress array
+            const courseProgress = localStorage.getItem('courseProgress');
+            if (courseProgress) {
+                try {
+                    const progress = JSON.parse(courseProgress);
+                    if (Array.isArray(progress)) {
+                        for (let i = 0; i < progress.length && i < 5; i++) {
+                            if (progress[i] === true) {
+                                localStorage.setItem(`modulo${i + 1}_completed`, 'true');
+                                if (!convertedModules.includes(i + 1)) {
+                                    convertedModules.push(i + 1);
+                                }
+                            }
+                        }
+                    }
+                } catch (e) {}
+            }
+            
+            // Formato 3: Detectar por datos específicos (como modulo4Progress que viste)
+            // Si hay datos detallados, asumir que está completado
+            const specificProgress = [
+                'module1Progress', 'module2Progress', 'module3Progress', 'module4Progress', 'module5Progress'
+            ];
+            
+            specificProgress.forEach((key, index) => {
+                const data = localStorage.getItem(key);
+                if (data && data.length > 100) { // Si hay datos sustanciales
+                    const moduleNum = index + 1;
+                    localStorage.setItem(`modulo${moduleNum}_completed`, 'true');
+                    if (!convertedModules.includes(moduleNum)) {
+                        convertedModules.push(moduleNum);
+                    }
+                }
+            });
+            
+            // Actualizar UI
+            updateUI();
+            
+            // Mostrar resultado
+            if (convertedModules.length > 0) {
+                const modulesList = convertedModules.map(n => `✅ Módulo ${n}`).join('\n');
+                alert(`🎉 ¡PROGRESO CONVERTIDO EXITOSAMENTE!\n\nMódulos detectados y desbloqueados:\n${modulesList}\n\n📊 Barra de progreso: ${(convertedModules.length / 5 * 100).toFixed(0)}%\n\n¡Ahora puedes acceder a todos tus módulos completados!`);
+            } else {
+                alert('❌ No se detectó progreso previo para convertir.\n\nSi has completado módulos, es posible que estén guardados en un formato diferente.');
+            }
+        };
+
+        // Hacer funciones disponibles globalmente para debugging
+        window.resetProgress = resetProgress;
+        window.completeModule = completeModule;
+        
+        // Función para simular progreso de demo
+        window.simulateProgress = function() {
+            localStorage.setItem('modulo1_completed', 'true');
+            localStorage.setItem('modulo2_completed', 'true');
+            updateUI();
+            console.log('🎯 Progreso de demo simulado: Módulos 1 y 2 completados');
+            alert('✅ Progreso simulado:\n• Módulo 1: Completado\n• Módulo 2: Completado\n• Módulo 3: Desbloqueado\n\n¡Revisa el dashboard!');
+        };
+
+        // Función para detectar progreso existente y convertirlo
+        window.detectExistingProgress = function() {
+            let detectedModules = [];
+            
+            // Buscar diferentes formatos de progreso guardado
+            const formats = [
+                'module1Progress', 'module2Progress', 'module3Progress', 'module4Progress', 'module5Progress',
+                'courseProgress', 'progress_modulo1', 'progress_modulo2', 'progress_modulo3', 'progress_modulo4', 'progress_modulo5'
+            ];
+            
+            // Verificar localStorage para encontrar progreso
+            for (let key of Object.keys(localStorage)) {
+                if (key.includes('module') || key.includes('modulo') || key.includes('progress')) {
+                    console.log(`📊 Encontrado: ${key} = ${localStorage.getItem(key)}`);
+                }
+            }
+            
+            // Detectar módulos completados basándose en diferentes indicadores
+            for (let i = 1; i <= 5; i++) {
+                let isCompleted = false;
+                
+                // Verificar formato actual
+                if (localStorage.getItem(`modulo${i}_completed`) === 'true') {
+                    isCompleted = true;
+                }
+                
+                // Verificar formato de progreso del módulo
+                const moduleProgress = localStorage.getItem(`module${i}Progress`);
+                if (moduleProgress) {
+                    try {
+                        const progress = JSON.parse(moduleProgress);
+                        if (progress.percentComplete === 100 || 
+                            (progress.completedSections && progress.completedSections.length >= 6)) {
+                            isCompleted = true;
+                        }
+                    } catch (e) {}
+                }
+                
+                // Verificar courseProgress array
+                const courseProgress = localStorage.getItem('courseProgress');
+                if (courseProgress) {
+                    try {
+                        const progress = JSON.parse(courseProgress);
+                        if (Array.isArray(progress) && progress[i-1] === true) {
+                            isCompleted = true;
+                        }
+                    } catch (e) {}
+                }
+                
+                if (isCompleted) {
+                    localStorage.setItem(`modulo${i}_completed`, 'true');
+                    detectedModules.push(i);
+                }
+            }
+            
+            updateUI();
+            
+            if (detectedModules.length > 0) {
+                alert(`🔍 Progreso detectado y restaurado:\n\n${detectedModules.map(n => `✅ Módulo ${n}: Completado`).join('\n')}\n\n¡Tu progreso ha sido actualizado!`);
+            } else {
+                alert('❌ No se detectó progreso previo.\n\nSi has completado módulos, usa:\n• completeModule(1)\n• completeModule(2)\n• etc.');
+            }
+            
+            return detectedModules;
+        };
+
+        // Función de arreglo rápido - DESBLOQUEAR TODOS LOS MÓDULOS
+        window.unlockAllModules = function() {
+            // Marcar todos los módulos como completados para pruebas
+            for (let i = 1; i <= 5; i++) {
+                localStorage.setItem(`modulo${i}_completed`, 'true');
+            }
+            updateUI();
+            alert('🔓 TODOS LOS MÓDULOS DESBLOQUEADOS\n\n✅ Módulos 1-5: Completados\n📊 Barra de progreso: 100%\n\n¡Problema solucionado!');
+        };
+
+        // Función para desbloquear solo algunos módulos
+        window.quickFix = function() {
+            localStorage.setItem('modulo1_completed', 'true');
+            localStorage.setItem('modulo2_completed', 'true'); 
+            localStorage.setItem('modulo3_completed', 'true');
+            updateUI();
+            alert('🔧 ARREGLO RÁPIDO APLICADO\n\n✅ Módulos 1-3: Completados\n🔓 Módulo 4: Desbloqueado\n📊 Barra: 60%');
+        };
+
+        // Función para limpiar progreso falso y empezar limpio
+        function initializeCleanProgress() {
+            // Solo mantener el progreso si hay evidencia REAL de completitud
+            // Por ahora, empezar limpio para todos los usuarios
+            const hasRealProgress = localStorage.getItem('curso_started_cleanly') === 'true';
+            
+            if (!hasRealProgress) {
+                // Limpiar cualquier progreso falso
+                for (let i = 1; i <= 5; i++) {
+                    localStorage.removeItem(`modulo${i}_completed`);
+                }
+                
+                // Marcar que el curso empezó limpiamente
+                localStorage.setItem('curso_started_cleanly', 'true');
+                console.log('🧹 Sistema iniciado limpiamente - Progreso en 0%');
+            }
+            
+            return hasRealProgress;
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar sistema limpio
+            initializeCleanProgress();
+            
+            // Configurar fecha
+            document.getElementById('currentDate').textContent = new Date().toLocaleDateString('es-ES', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'short'
+            });
+
+            // Configurar usuario
+            const userEmail = localStorage.getItem('userEmail') || localStorage.getItem('currentUser') || 'estudiante@curso.com';
+            document.getElementById('userName').textContent = '👤 ' + userEmail.split('@')[0];
+
+            // Verificar autenticación
+            if (checkAuth()) {
+                updateUI();
+            }
+            
+            console.log('📊 Dashboard inicializado correctamente');
+            console.log('🎯 Sistema de progreso limpio activado');
+            console.log('💡 Los módulos se desbloquearán al completar el anterior');
+            console.log('🛠️ Funciones disponibles:');
+            console.log('  • debugProgress() - 🔍 VER ESTADO ACTUAL');
+            console.log('  • completeModule(1) - Marcar módulo como completado');
+            console.log('  • resetProgress() - Limpiar progreso');
+            console.log('💡 EJECUTA: debugProgress() para ver qué está pasando');
+        });
+    </script>
+</body>
+</html>

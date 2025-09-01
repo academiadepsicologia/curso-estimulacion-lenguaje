@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de Estimulación del Lenguaje Infantil - Academia de Psicología</title>
+    
+    <!-- Meta tags para SEO -->
+    <meta name="description" content="Curso completo de estimulación del lenguaje infantil. Aprende técnicas profesionales para ayudar a tu hijo a desarrollar el habla y comunicación.">
+    <meta name="keywords" content="estimulación del lenguaje, desarrollo infantil, habla, comunicación, padres">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .btn-login {
+            background: rgba(255,255,255,0.9);
+            color: #667eea;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid rgba(255,255,255,0.9);
+        }
+
+        .btn-login:hover {
+            background: white;
+            color: #667eea;
+            transform: scale(1.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 120px 2rem 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.2s;
+            animation-fill-mode: both;
+        }
+
+        .cta-button {
+            background: white;
+            color: #667eea;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.4s;
+            animation-fill-mode: both;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .price-tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            opacity: 0.7;
+            margin-right: 1rem;
+        }
+
+        .current-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4caf50;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 80px 2rem;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 3rem;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-title {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        /* Modules Section */
+        .modules {
+            padding: 80px 2rem;
+            background: white;
+        }
+
+        .modules-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .module-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            position: relative;
+            padding-left: 4rem;
+        }
+
+        .module-number {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .pricing-card {
+            background: white;
+            color: #333;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .price-amount {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #667eea;
+            margin: 1rem 0;
+        }
+
+        .price-features {
+            text-align: left;
+            margin: 2rem 0;
+        }
+
+        .price-features li {
+            padding: 0.5rem 0;
+            list-style: none;
+        }
+
+        .price-features li:before {
+            content: '✓';
+            color: #4caf50;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 90%;
+            animation: slideIn 0.3s ease;
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .btn-submit:hover {
+            transform: scale(1.02);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .price-amount {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .module-item {
+                padding-left: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="#" class="logo">🧠 Academia de Psicología</a>
+            <nav class="nav-links">
+                <a href="#beneficios">Beneficios</a>
+                <a href="#modulos">Contenido</a>
+                <a href="#precio">Precio</a>
+                <a href="dashboard/index.html" class="btn-login" onclick="openLogin(event)">Ingresar</a>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Transforma el Lenguaje de Tu Hijo en Solo 30 Días</h1>
+        <p>El método científico que usan los terapeutas del lenguaje, ahora disponible para padres</p>
+        <a href="#precio" class="cta-button">¡Quiero Inscribirme Ahora!</a>
+        <div class="price-tag">
+            <span class="original-price">$97 USD</span>
+            <span class="current-price">$47 USD</span>
+            <span>- Oferta por tiempo limitado</span>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="beneficios">
+        <div class="container">
+            <h2 class="section-title">¿Qué Lograrás con Este Curso?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <h3 class="benefit-title">Resultados en 30 Días</h3>
+                    <p>Verás mejoras notables en el vocabulario y expresión de tu hijo en el primer mes</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">👩‍⚕️</div>
+                    <h3 class="benefit-title">Técnicas Profesionales</h3>
+                    <p>Aprenderás las mismas estrategias que usan los terapeutas del lenguaje</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">⏰</div>
+                    <h3 class="benefit-title">Solo 15 Minutos al Día</h3>
+                    <p>Ejercicios prácticos que puedes hacer en tu rutina diaria sin esfuerzo extra</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📱</div>
+                    <h3 class="benefit-title">Acceso de Por Vida</h3>
+                    <p>Estudia a tu ritmo, desde cualquier dispositivo, cuando quieras</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎓</div>
+                    <h3 class="benefit-title">Certificado Incluido</h3>
+                    <p>Recibe un certificado de completación avalado por profesionales</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💬</div>
+                    <h3 class="benefit-title">Soporte Continuo</h3>
+                    <p>Acceso a nuestra comunidad de padres y respuestas a tus dudas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modules Section -->
+    <section class="modules" id="modulos">
+        <div class="container">
+            <h2 class="section-title">Contenido del Curso</h2>
+            <div class="modules-timeline">
+                <div class="module-item">
+                    <div class="module-number">1</div>
+                    <h3>Fundamentos del Desarrollo del Lenguaje</h3>
+                    <p>Comprende las etapas normales del desarrollo, señales de alerta y cuándo preocuparte realmente.</p>
+                </div>
+                <div class="module-item">
+                    <div class="module-number">2</div>
+                    <h3>Técnicas de Estimulación Profesional</h3>
+                    <p>Aprende las 5 técnicas más efectivas que usan los terapeutas: modelado, expansión, preguntas abiertas y más.</p>
+                </div>
+                <div class="module-item">
+                    <div class="module-number">3</div>
+                    <h3>Actividades y Juegos por Edad</h3>
+                    <p>Descubre juegos específicos para 3, 4 y 5 años que desarrollan el lenguaje mientras se divierten.</p>
+                </div>
+                <div class="module-item">
+                    <div class="module-number">4</div>
+                    <h3>Soluciones a Problemas Comunes</h3>
+                    <p>Maneja tartamudez, problemas de pronunciación y retrasos del lenguaje con estrategias probadas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="precio">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Invierte en el Futuro de Tu Hijo</h2>
+            <div class="pricing-card">
+                <h3>Acceso Completo de Por Vida</h3>
+                <div class="price-amount">$47</div>
+                <p style="text-decoration: line-through; color: #999;">Precio regular: $97 USD</p>
+                <p style="color: #4caf50; font-weight: bold;">¡Ahorra 50% HOY!</p>
+                <ul class="price-features">
+                    <li>4 módulos completos con videos y ejercicios</li>
+                    <li>Recursos descargables y guías PDF</li>
+                    <li>Actualizaciones gratuitas de por vida</li>
+                    <li>Certificado de completación</li>
+                    <li>Garantía de 30 días</li>
+                    <li>Soporte por email</li>
+                </ul>
+                <button class="cta-button" style="width: 100%;" onclick="processPurchase()">
+                    Comprar Ahora - $47 USD
+                </button>
+                <p style="margin-top: 1rem; color: #666; font-size: 0.9rem;">
+                    Pago seguro procesado por Stripe
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Academia de Psicología. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content" style="position: relative;">
+            <span class="close-modal" onclick="closeLogin()">×</span>
+            <div class="modal-header">
+                <h2>Acceso al Curso</h2>
+                <p>Ingresa tus datos para continuar</p>
+            </div>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="loginEmail" required placeholder="tu@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="loginPassword" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-submit">Ingresar al Curso</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem; color: #666;">
+                ¿No tienes cuenta? <a href="#precio" onclick="closeLogin()" style="color: #667eea;">Compra el curso aquí</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Login Modal
+        function openLogin(event) {
+            if (event) {
+                event.preventDefault();
+            }
+            
+            // Verificar si ya está logueado
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (isLoggedIn === 'true') {
+                // Si ya está logueado, ir directo al dashboard
+                window.location.href = 'dashboard/index.html';
+                return;
+            }
+            
+            // Si no está logueado, mostrar modal
+            document.getElementById('loginModal').classList.add('active');
+        }
+
+        function closeLogin() {
+            document.getElementById('loginModal').classList.remove('active');
+        }
+
+        // Handle Login
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Credenciales de prueba
+            const validCredentials = [
+                { username: 'admin@curso.com', password: 'admin123' },
+                { username: 'demo@curso.com', password: 'demo123' },
+                { username: 'test@curso.com', password: 'test123' },
+                { username: 'usuario@curso.com', password: '123456' }
+            ];
+            
+            // Verificar credenciales
+            const isValidCredential = validCredentials.some(cred => 
+                cred.username === email && cred.password === password
+            );
+            
+            if (isValidCredential) {
+                // Credenciales válidas - simular compra y login
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('isPurchased', 'true');
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('currentUser', email);
+                
+                alert('¡Acceso concedido! Bienvenido al curso.');
+                window.location.href = 'dashboard/index.html';
+            } else {
+                // Credenciales inválidas
+                alert('Email o contraseña incorrectos. Usa las credenciales de prueba: admin@curso.com / admin123');
+            }
+        }
+
+        // Process Purchase
+        function processPurchase() {
+            alert('¡Excelente decisión! Serás redirigido al proceso de pago seguro...');
+            
+            // Simulate payment process
+            setTimeout(() => {
+                const userEmail = prompt('Ingresa tu email para crear tu cuenta:');
+                if (userEmail) {
+                    const password = prompt('Crea una contraseña para tu cuenta:');
+                    if (password) {
+                        // Store user data
+                        localStorage.setItem('isLoggedIn', 'true');
+                        localStorage.setItem('userEmail', userEmail);
+                        localStorage.setItem('isPurchased', 'true');
+                        
+                        // Inicializar progreso del curso
+                        localStorage.setItem('modulo1_completed', 'false');
+                        localStorage.setItem('modulo2_completed', 'false');
+                        localStorage.setItem('modulo3_completed', 'false');
+                        localStorage.setItem('modulo4_completed', 'false');
+                        localStorage.setItem('current_module', '1');
+                        
+                        alert('¡Compra exitosa! Te llevaremos a tu curso...');
+                        
+                        // Redirect to dashboard
+                        window.location.href = 'dashboard/index.html';
+                    }
+                }
+            }, 1000);
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        console.log('🧠 Academia de Psicología - Curso de Estimulación del Lenguaje');
+        console.log('✅ Página principal cargada correctamente');
+    </script>
+</body>
+</html>
+
